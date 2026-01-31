@@ -17,7 +17,7 @@ https://unsceb.org/financial-statistics
 - **Revenue by Donor**
   - Revenue by Government Donor
     - Year
-    - Govnement Donor
+    - Government Donor
     - Entity
     - Revenue Type
   - Revenue by Non-Government Donor
@@ -48,3 +48,12 @@ https://unsceb.org/financial-statistics
     - Year
     - Entity
     - SDG (only highest level, no subcodes)
+
+In summary, we have the following cross-dimensions:
+- Revenue: Year x Entity x Donor x Revenue Type
+- Expenses: Year x Entity x Country
+- Expenses: Year x Entity x Expense Function
+- Expenses: Year x Entity x SDG
+
+What would be nice and what is lacking is:
+- Expenses: Year x Entity x Country x SDG
