@@ -11,6 +11,7 @@ import {
   Users,
 } from "lucide-react";
 import Image from "next/image";
+import { ContributorsTreemap } from "@/components/ContributorsTreemap";
 import { DataPlaceholder } from "@/components/DataPlaceholder";
 import { ExpandableCard } from "@/components/ExpandableCard";
 import { PageHeader } from "@/components/PageHeader";
@@ -45,30 +46,7 @@ export default function Home() {
           description="The work of the UN System is financially supported by many contributors. Explore who is contributing to the UN System, which organizations they fund, and what type of contributions they make — from assessed and voluntary core contributions to earmarked funding."
         />
         <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 lg:px-16">
-          <div className="grid gap-6 lg:grid-cols-3">
-            <div className="lg:col-span-2">
-              <DataPlaceholder
-                title="Contributors Treemap"
-                description="By contributor type and individual contributor"
-                height="h-80"
-                type="treemap"
-              />
-            </div>
-            <div className="space-y-6">
-              <DataPlaceholder
-                title="Entities Breakdown"
-                description="By revenue type"
-                height="h-36"
-                type="chart"
-              />
-              <DataPlaceholder
-                title="Year Trend"
-                description="Revenue over time"
-                height="h-36"
-                type="chart"
-              />
-            </div>
-          </div>
+          <ContributorsTreemap />
         </section>
 
         {/* Entities Section */}
