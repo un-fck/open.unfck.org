@@ -1,17 +1,33 @@
 """Generate donors-{year}.json with contributions by entity and payment status."""
 
 import json
+import unicodedata
 from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup
-from utils import load_donor_revenue, normalize_rev_type
+from utils import clean_donor_name, load_donor_revenue
 
 # Year range for donor data
 YEARS = range(2013, 2025)  # 2013-2024
 USER_AGENT = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
 
-# Mappings for name normalization
+
+def normalize_name(name: str) -> str:
+    """Normalize country name for comparison: remove accents, asterisks, normalize punctuation, lowercase."""
+    # Strip asterisks (used for footnotes like Kosovo**, Taiwan***)
+    name = name.replace("*", "").strip()
+    # Normalize unicode (NFD decomposition separates base chars from accents)
+    normalized = unicodedata.normalize("NFD", name)
+    # Remove accent marks (combining diacritical marks)
+    ascii_name = "".join(c for c in normalized if unicodedata.category(c) != "Mn")
+    # Normalize apostrophes and quotes to straight apostrophe
+    ascii_name = ascii_name.replace("'", "'").replace("'", "'").replace("`", "'")
+    # Lowercase for comparison
+    return ascii_name.lower()
+
+
+# Mappings for name normalization (scraped UN member list -> standard name)
 STATE_MAPPING = {
     "Bahamas (The)": "Bahamas",
     "Gambia (Republic of The)": "Gambia",
@@ -19,6 +35,14 @@ STATE_MAPPING = {
     "Netherlands (Kingdom of the)": "Netherlands",
     "Venezuela, Bolivarian Republic of": "Venezuela (Bolivarian Republic of)",
     "China (the People's Republic of)": "China",
+}
+
+# Non-country entries to exclude from donor data
+EXCLUDED_DONORS = {
+    "Refunds to donors/Miscellaneous",
+    "JUNIOR PROFESSIONAL OFFICERS PROGRAMME",
+    "Planethood Foundation",
+    "Miscellaneous",
 }
 PAYMENT_STATE_MAPPING = {
     "Cote d'Ivoire": "Côte D'Ivoire",
@@ -74,41 +98,59 @@ print(f"Found {len(member_states)} members, {len(observer_states)} observers, {l
 payment_status = {PAYMENT_STATE_MAPPING.get(k.replace("*", "").strip(), k.replace("*", "").strip()): v 
                   for k, v in payment_status_raw.items()}
 
-# Build state status mapping
+# Build state status mapping using normalized names for lookup
 member_norm = [STATE_MAPPING.get(s, s) for s in member_states]
 observer_norm = [STATE_MAPPING.get(s, s) for s in observer_states]
-state_status = {s: "member" for s in member_norm} | {s: "observer" for s in observer_norm}
 
-# Load all donor data to build complete state status mapping
+# Create lookup dict with normalized keys
+normalized_status = {}
+for s in member_norm:
+    normalized_status[normalize_name(s)] = "member"
+for s in observer_norm:
+    normalized_status[normalize_name(s)] = "observer"
+
+# Load all donor data and determine status using normalized name matching
 df_all = load_donor_revenue(year=None)
 all_donor_names = set(df_all["government_donor"].unique())
+state_status = {}
 for donor in all_donor_names:
-    if donor not in state_status:
+    norm_donor = normalize_name(donor)
+    if norm_donor in normalized_status:
+        state_status[donor] = normalized_status[norm_donor]
+    else:
         state_status[donor] = "nonmember"
 
 # Process each year
 for year in YEARS:
     df = load_donor_revenue(year=year)
-    donor_names = set(df["government_donor"].unique())
+    donor_names = set(df["government_donor"].unique()) - EXCLUDED_DONORS
     
-    # Build contributions by donor for this year
+    # Build contributions by donor for this year (merging by clean name)
     donor_contributions = {}
     for donor in donor_names:
+        clean_name = clean_donor_name(donor)
         ddf = df[df["government_donor"] == donor]
-        contributions = {}
+        
+        # Initialize or get existing entry for this clean name
+        if clean_name not in donor_contributions:
+            donor_contributions[clean_name] = {
+                "status": state_status[donor],
+                "contributions": {}
+            }
+        
+        # Merge contributions
+        contributions = donor_contributions[clean_name]["contributions"]
         for _, row in ddf.iterrows():
             entity, rev_type, amount = row["entity"], row["rev_type"], row["amount"]
             contributions.setdefault(entity, {}).setdefault(rev_type, 0)
             contributions[entity][rev_type] += amount
         
-        entry = {"status": state_status[donor], "contributions": contributions}
         # Only include payment status for latest year
         if year == 2024:
             if donor in payment_status:
-                entry.update(payment_status[donor])
-            elif state_status[donor] in ["member", "observer"]:
-                entry["payment_status"] = "missing"
-        donor_contributions[donor] = entry
+                donor_contributions[clean_name].update(payment_status[donor])
+            elif state_status[donor] in ["member", "observer"] and "payment_status" not in donor_contributions[clean_name]:
+                donor_contributions[clean_name]["payment_status"] = "missing"
     
     output_file = f"public/data/donors-{year}.json"
     with open(output_file, "w") as f:

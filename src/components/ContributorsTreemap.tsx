@@ -177,27 +177,16 @@ export function ContributorsTreemap() {
       )
     : contributors;
 
-  const groups = filteredContributors.reduce(
-    (acc, contributor) => {
-      const contributions = getTotalContributions(contributor.contributions);
-      if (contributions > 0) {
-        if (!acc[contributor.status]) {
-          acc[contributor.status] = [];
-        }
-        acc[contributor.status].push({ value: contributions, data: contributor });
-      }
-      return acc;
-    },
-    {} as Record<string, TreemapItem[]>
-  );
+  // Build a flat list of all contributors with positive contributions
+  const allItems: TreemapItem[] = filteredContributors
+    .map((contributor) => ({
+      value: getTotalContributions(contributor.contributions),
+      data: contributor,
+    }))
+    .filter((item) => item.value > 0)
+    .sort((a, b) => b.value - a.value);
 
-  const sortedGroups = Object.entries(groups).sort(([statusA], [statusB]) => {
-    const orderA = getStatusStyle(statusA).order;
-    const orderB = getStatusStyle(statusB).order;
-    return orderA - orderB;
-  });
-
-  if (sortedGroups.length === 0) {
+  if (allItems.length === 0) {
     return (
       <div className="w-full">
         {/* Filter Controls */}
@@ -241,129 +230,97 @@ export function ContributorsTreemap() {
     );
   }
 
-  const totalContributions = sortedGroups.reduce(
-    (sum, [, items]) => sum + items.reduce((s, item) => s + item.value, 0),
-    0
-  );
+  // Generate rects for all items as a single flat treemap (no grouping by status)
+  const rects = squarify(allItems, 0, 0, 100, 100);
 
-  const MIN_HEIGHT_THRESHOLD = 5;
-  const { regularGroups, smallGroups } = sortedGroups.reduce<{
-    regularGroups: Array<[string, TreemapItem[]]>;
-    smallGroups: Array<[string, TreemapItem[]]>;
-  }>(
-    (acc, [status, groupItems]) => {
-      const groupTotal = groupItems.reduce((sum, item) => sum + item.value, 0);
-      const groupHeight = (groupTotal / totalContributions) * 100;
+  const renderContributor = (rect: Rect & { data: Contributor }, i: number) => {
+    // Color based on individual contributor's status
+    const styles = getStatusStyle(rect.data.status);
+    const stateContributions = getTotalContributions(rect.data.contributions);
+    const breakdown = getContributionBreakdown(rect.data.contributions);
+    const showLabel = rect.width > 3 && rect.height > 2;
+    const isHovered = hoveredState === rect.data.name;
 
-      if (groupHeight < MIN_HEIGHT_THRESHOLD) {
-        acc.smallGroups.push([status, groupItems]);
-      } else {
-        acc.regularGroups.push([status, groupItems]);
-      }
-      return acc;
-    },
-    { regularGroups: [], smallGroups: [] }
-  );
+    const breakdownEntries = Object.entries(breakdown).sort(
+      (a, b) => getContributionTypeOrder(a[0]) - getContributionTypeOrder(b[0])
+    );
+    const total = Object.values(breakdown).reduce((sum, val) => sum + val, 0);
 
-  const groupSpacing = GAP;
-  let currentY = 0;
-
-  const renderStates = (
-    status: string,
-    items: TreemapItem[],
-    x: number,
-    y: number,
-    width: number,
-    height: number
-  ) => {
-    const sortedItems = [...items].sort((a, b) => b.value - a.value);
-    const rects = squarify(sortedItems, x, y, width, height);
-
-    return rects.map((rect, i) => {
-      const styles = getStatusStyle(status);
-      const stateContributions = getTotalContributions(rect.data.contributions);
-      const breakdown = getContributionBreakdown(rect.data.contributions);
-      const showLabel = rect.width > 3 && rect.height > 2;
-      const isHovered = hoveredState === rect.data.name;
-
-      const breakdownEntries = Object.entries(breakdown).sort(
-        (a, b) => getContributionTypeOrder(a[0]) - getContributionTypeOrder(b[0])
-      );
-      const total = Object.values(breakdown).reduce((sum, val) => sum + val, 0);
-
-      return (
-        <Tooltip key={`${rect.data.name}-${i}`} delayDuration={50}>
-          <TooltipTrigger asChild>
-            <div
-              data-state={rect.data.name}
-              className="absolute cursor-pointer"
-              style={{
-                left: `${rect.x}%`,
-                top: `${rect.y}%`,
-                width: `${rect.width}%`,
-                height: `${rect.height}%`,
-                zIndex: isHovered ? 10 : 1,
-              }}
-              onClick={() => setSelectedContributor(rect.data)}
-              onMouseEnter={() => setHoveredState(rect.data.name)}
-              onMouseLeave={() => setHoveredState(null)}
-            >
-              {/* Contribution type breakdown */}
-              <div className="flex h-full w-full flex-col">
-                {breakdownEntries.map(([type, amount], idx) => {
-                  const percentage = (amount / total) * 100;
-                  const opacity = getContributionTypeColor(type);
-                  return (
-                    <div
-                      key={idx}
-                      className={`${styles.bgColor} ${opacity}`}
-                      style={{ height: `${percentage}%` }}
-                    />
-                  );
-                })}
-              </div>
-              {/* Label overlay */}
-              {showLabel && (
-                <div
-                  className={`absolute inset-0 overflow-hidden p-1 ${styles.textColor}`}
-                >
-                  <div className="truncate text-xs font-medium leading-tight">
-                    {getDisplayName(rect.data.name)}
-                  </div>
-                  <div className="truncate text-xs leading-tight opacity-90">
-                    {formatBudget(stateContributions)}
-                  </div>
-                </div>
-              )}
-            </div>
-          </TooltipTrigger>
-          <TooltipContent
-            side="top"
-            sideOffset={8}
-            className="max-w-xs border border-slate-200 bg-white text-slate-800 shadow-lg sm:max-w-sm"
-            hideWhenDetached
-            avoidCollisions={true}
-            collisionPadding={12}
+    return (
+      <Tooltip key={`${rect.data.name}-${i}`} delayDuration={50}>
+        <TooltipTrigger asChild>
+          <div
+            data-state={rect.data.name}
+            className="absolute cursor-pointer"
+            style={{
+              left: `${rect.x}%`,
+              top: `${rect.y}%`,
+              width: `${rect.width}%`,
+              height: `${rect.height}%`,
+              zIndex: isHovered ? 10 : 1,
+            }}
+            onClick={() => setSelectedContributor(rect.data)}
+            onMouseEnter={() => setHoveredState(rect.data.name)}
+            onMouseLeave={() => setHoveredState(null)}
           >
-            <div className="max-w-xs p-1 text-center sm:max-w-sm">
-              <p className="text-xs font-medium leading-tight sm:text-sm">
-                {rect.data.name}
-              </p>
-              <p className="mt-1 text-xs text-slate-500">{styles.label}</p>
-              <p className="mt-1 text-xs font-semibold text-slate-600">
-                {formatBudget(stateContributions)}
-              </p>
-              <p className="mt-1 hidden text-xs text-slate-400 sm:block">
-                Click to view contributor details
-              </p>
-              <p className="mt-1 text-xs text-slate-400 sm:hidden">
-                Tap to view details
-              </p>
+            {/* Contribution type breakdown */}
+            <div className="flex h-full w-full flex-col">
+              {breakdownEntries.map(([type, amount], idx) => {
+                const percentage = (amount / total) * 100;
+                const opacity = getContributionTypeColor(type);
+                return (
+                  <div
+                    key={idx}
+                    className={`${styles.bgColor} ${opacity}`}
+                    style={{ height: `${percentage}%` }}
+                  />
+                );
+              })}
             </div>
-          </TooltipContent>
-        </Tooltip>
-      );
-    });
+            {/* Label overlay */}
+            {showLabel && (
+              <div
+                className={`absolute inset-0 overflow-hidden p-1 ${styles.textColor}`}
+              >
+                <div className="truncate text-xs font-medium leading-tight">
+                  {getDisplayName(rect.data.name)}
+                </div>
+                <div className="truncate text-xs leading-tight opacity-90">
+                  {formatBudget(stateContributions)}
+                </div>
+              </div>
+            )}
+          </div>
+        </TooltipTrigger>
+        <TooltipContent
+          side="top"
+          sideOffset={8}
+          className="max-w-xs border border-slate-200 bg-white text-slate-800 shadow-lg sm:max-w-sm"
+          hideWhenDetached
+          avoidCollisions={true}
+          collisionPadding={12}
+        >
+          <div className="max-w-xs p-1 text-center sm:max-w-sm">
+            <p className="text-xs font-medium leading-tight sm:text-sm">
+              {rect.data.name}
+            </p>
+            <p className="mt-1 flex items-center justify-center gap-1.5 text-xs text-slate-500">
+              <span className={`inline-block h-2 w-2 rounded-full ${styles.bgColor}`} />
+              {styles.label}
+            </p>
+            <p className="mt-1 text-xs font-semibold text-slate-600">
+              {formatBudget(stateContributions)}
+            </p>
+            <p className="mt-1 hidden text-xs text-slate-400 sm:block">
+              Click to view contributor details
+            </p>
+            <p className="mt-1 text-xs text-slate-400 sm:hidden">
+              Tap to view details
+            </p>
+          </div>
+        </TooltipContent>
+      </Tooltip>
+    );
   };
 
   return (
@@ -405,72 +362,10 @@ export function ContributorsTreemap() {
       </div>
 
       <div className="relative h-[650px] w-full bg-gray-100">
-        {regularGroups.slice(0, -1).map(([status, groupItems]) => {
-          const groupTotal = groupItems.reduce(
-            (sum, item) => sum + item.value,
-            0
-          );
-          const groupHeight =
-            (groupTotal / totalContributions) * 100 - groupSpacing;
-          const elements = renderStates(
-            status,
-            groupItems,
-            0,
-            currentY,
-            100,
-            groupHeight
-          );
-          currentY += groupHeight + groupSpacing;
-          return elements;
-        })}
-
-        {regularGroups.length > 0 &&
-          (() => {
-            const lastRowGroups = [...regularGroups.slice(-1), ...smallGroups];
-            const lastRowTotal = lastRowGroups.reduce(
-              (sum, [, items]) =>
-                sum + items.reduce((s, item) => s + item.value, 0),
-              0
-            );
-            const lastRowHeight =
-              (lastRowTotal / totalContributions) * 100 - groupSpacing;
-
-            const groupTreemapItems = lastRowGroups.map(([status, items]) => ({
-              status,
-              value: items.reduce((sum, item) => sum + item.value, 0),
-              items,
-            }));
-
-            const groupRects = squarify(
-              groupTreemapItems.map((g) => ({
-                value: g.value,
-                data: {
-                  name: g.status,
-                  status: g.status as "member" | "observer" | "nonmember",
-                  contributions: {},
-                },
-              })),
-              0,
-              currentY,
-              100,
-              lastRowHeight
-            );
-
-            return groupRects.flatMap((groupRect, idx) => {
-              const { status, items } = groupTreemapItems[idx];
-              return renderStates(
-                status,
-                items,
-                groupRect.x,
-                groupRect.y,
-                groupRect.width,
-                groupRect.height
-              );
-            });
-          })()}
+        {rects.map((rect, i) => renderContributor(rect, i))}
       </div>
 
-      {/* Revenue Type Legend */}
+      {/* Contribution Type Legend */}
       <div className="mt-3 flex flex-wrap items-center gap-4">
         <div className="flex flex-wrap gap-3">
           {CONTRIBUTION_TYPES.filter(t => t.type !== "Other").map(({ type, label, opacity }) => (

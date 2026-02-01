@@ -41,6 +41,11 @@ DONOR_CHAR_FIXES = {
 }
 
 
+def clean_donor_name(name: str) -> str:
+    """Clean donor name for display: strip asterisks used for footnotes."""
+    return name.replace("*", "").strip()
+
+
 def parse_amount(amount_str: str | float) -> float:
     """Parse amount string to float, removing spaces and commas."""
     if isinstance(amount_str, (int, float)):
