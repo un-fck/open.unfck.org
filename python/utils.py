@@ -65,7 +65,7 @@ def normalize_rev_type(rev_type: str) -> str:
 
 def load_donor_revenue(year: int | None = None) -> pd.DataFrame:
     """Load and clean government donor revenue CSV."""
-    df = pd.read_csv("data/budget/government-donor-revenue.csv", encoding="utf-8")
+    df = pd.read_csv("data/government-donor-revenue.csv", encoding="utf-8")
     df["government_donor"] = df["government_donor"].replace(DONOR_CHAR_FIXES)
     df["amount"] = df["amount"].apply(parse_amount)
     df["entity"] = df["entity"].apply(normalize_entity)

@@ -19,6 +19,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { QuoteBlock } from "@/components/QuoteBlock";
 import { ResourceLink } from "@/components/ResourceLink";
 import { SectionBanner } from "@/components/SectionBanner";
+import SDGsGrid from "@/components/SDGsGrid";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -32,10 +33,7 @@ export default function Home() {
         {/* Welcome Section */}
         <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 md:py-16 lg:px-16">
           <p className="max-w-3xl text-base leading-relaxed text-gray-700 md:text-lg">
-            The Transparency Portal at open.un.org provides access to financial
-            information from across the UN System. Explore who contributes,
-            which organizations are funded, where funds are spent, and towards
-            which goals.
+            The Transparency Portal opens up financial data from across the UN System. Explore who contributes, which organizations are funded, where resources are deployed, and which goals they support.
           </p>
         </section>
 
@@ -103,30 +101,7 @@ export default function Home() {
           description="UN funding supports the 2030 Agenda for Sustainable Development. Explore how spending aligns with the 17 Sustainable Development Goals, from ending poverty to climate action."
         />
         <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 lg:px-16">
-          <div className="grid gap-6 lg:grid-cols-3">
-            <div className="lg:col-span-2">
-              <DataPlaceholder
-                title="SDG Treemap"
-                description="Spending by SDG and entity"
-                height="h-80"
-                type="treemap"
-              />
-            </div>
-            <div className="space-y-6">
-              <DataPlaceholder
-                title="Entities"
-                description="By SDG"
-                height="h-36"
-                type="chart"
-              />
-              <DataPlaceholder
-                title="Year Trend"
-                description="By SDG"
-                height="h-36"
-                type="chart"
-              />
-            </div>
-          </div>
+          <SDGsGrid />
         </section>
 
         {/* Background Section */}

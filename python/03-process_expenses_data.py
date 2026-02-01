@@ -8,7 +8,7 @@ from utils import normalize_entity, parse_amount
 YEAR = 2023
 
 
-df_system = pd.read_csv("data/budget/un-system-expenses.csv")
+df_system = pd.read_csv("data/un-system-expenses.csv")
 df_system = df_system[df_system["calendar_year"] == YEAR]
 df_system["amount"] = df_system["amount"].apply(parse_amount)
 df_system["agency"] = df_system["agency"].apply(normalize_entity)
@@ -17,7 +17,7 @@ df_system = (
     .rename(columns={"agency": "entity"})
     .reset_index(drop=True)
 )
-df_secretariat = pd.read_csv("data/budget/un-secretariat-expenses.csv")
+df_secretariat = pd.read_csv("data/un-secretariat-expenses.csv")
 df_secretariat = (
     df_secretariat.groupby("ENTITY")
     .agg({"AMOUNT": "sum"})
