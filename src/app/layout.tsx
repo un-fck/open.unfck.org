@@ -11,13 +11,22 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "United Nations",
-  description: "A modern web application for the United Nations.",
+  title: "UN Transparency Portal",
+  description:
+    "The Transparency Portal at open.un.org provides access to financial information from across the UN System. Explore who contributes, which organizations are funded, where funds are spent, and towards which goals.",
   openGraph: {
-    title: "United Nations",
-    description: "A modern web application for the United Nations.",
+    title: "UN Transparency Portal",
+    description:
+      "Access financial information from across the UN System. Explore contributors, organizations, spending locations, and sustainable development goals.",
     type: "website",
     locale: "en_US",
+    siteName: "United Nations",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "UN Transparency Portal",
+    description:
+      "Access financial information from across the UN System.",
   },
 };
 

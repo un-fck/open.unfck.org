@@ -1,289 +1,536 @@
-import { Github } from "lucide-react";
+import {
+  Banknote,
+  Building2,
+  FileText,
+  Globe,
+  Landmark,
+  Layers,
+  MapPin,
+  Network,
+  Target,
+  Users,
+} from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { DataPlaceholder } from "@/components/DataPlaceholder";
+import { ExpandableCard } from "@/components/ExpandableCard";
+import { PageHeader } from "@/components/PageHeader";
+import { QuoteBlock } from "@/components/QuoteBlock";
+import { ResourceLink } from "@/components/ResourceLink";
+import { SectionBanner } from "@/components/SectionBanner";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <main className="flex min-h-screen justify-center bg-background px-4 sm:px-6">
-        <div className="max-w-2xl py-8 lg:max-w-3xl">
-          {/* Logo */}
-          <Image
-            src={`${basePath}/images/UN_Logo_Stacked_Colour_English.svg`}
-            alt="UN Logo"
-            width={200}
-            height={48}
-            className="mb-12 h-10 w-auto select-none sm:h-12"
-            draggable={false}
-          />
+    <div className="flex min-h-screen flex-col bg-background">
+      {/* Header */}
+      <PageHeader />
 
-          {/* Header */}
-          <header className="mb-5">
-            <h1 className="text-3xl font-bold text-foreground">
-              UN Website Boilerplate
-            </h1>
-          </header>
+      <main className="flex-1">
+        {/* Welcome Section */}
+        <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 md:py-16 lg:px-16">
+          <p className="max-w-3xl text-base leading-relaxed text-gray-700 md:text-lg">
+            The Transparency Portal at open.un.org provides access to financial
+            information from across the UN System. Explore who contributes,
+            which organizations are funded, where funds are spent, and towards
+            which goals.
+          </p>
+        </section>
 
-          {/* Content */}
-          <section>
-            <p className="leading-relaxed">
-              A modern, responsive foundation for United Nations web
-              applications.
-            </p>
-          </section>
-
-          {/* GitHub Link */}
-          <a
-            href="https://github.com/kleinlennart/un-website-boilerplate"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center gap-2 text-un-blue hover:underline"
-          >
-            <Github className="h-5 w-5" />
-            <span>View on GitHub</span>
-          </a>
-
-          {/* Theme Colors Showcase */}
-          <section className="mt-6">
-            <h2 className="mb-6 text-2xl font-bold text-foreground">
-              Theme Colors
-            </h2>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-              <div className="flex flex-col gap-2">
-                <div className="h-20 rounded-lg bg-un-blue" />
-                <div>
-                  <p className="text-sm font-medium text-foreground">UN Blue</p>
-                  <p className="text-xs text-gray-600">#009EDB</p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="h-20 rounded-lg bg-faded-jade" />
-                <div>
-                  <p className="text-sm font-medium text-foreground">
-                    Faded Jade
-                  </p>
-                  <p className="text-xs text-gray-600">#4A7C7E</p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="h-20 rounded-lg bg-camouflage-green" />
-                <div>
-                  <p className="text-sm font-medium text-foreground">
-                    Camouflage Green
-                  </p>
-                  <p className="text-xs text-gray-600">#7D8471</p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="h-20 rounded-lg bg-pale-oyster" />
-                <div>
-                  <p className="text-sm font-medium text-foreground">
-                    Pale Oyster
-                  </p>
-                  <p className="text-xs text-gray-600">#9B8B7A</p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="h-20 rounded-lg bg-au-chico" />
-                <div>
-                  <p className="text-sm font-medium text-foreground">
-                    Au Chico
-                  </p>
-                  <p className="text-xs text-gray-600">#A0665C</p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="h-20 rounded-lg bg-smoky" />
-                <div>
-                  <p className="text-sm font-medium text-foreground">Smoky</p>
-                  <p className="text-xs text-gray-600">#6C5B7B</p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="h-20 rounded-lg bg-shuttle-gray" />
-                <div>
-                  <p className="text-sm font-medium text-foreground">
-                    Shuttle Gray
-                  </p>
-                  <p className="text-xs text-gray-600">#5A6C7D</p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="h-20 rounded-lg bg-trout" />
-                <div>
-                  <p className="text-sm font-medium text-foreground">Trout</p>
-                  <p className="text-xs text-gray-600">#495057</p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="h-20 rounded-lg bg-dusty-gray" />
-                <div>
-                  <p className="text-sm font-medium text-foreground">
-                    Dusty Gray
-                  </p>
-                  <p className="text-xs text-gray-600">#969696</p>
-                </div>
-              </div>
+        {/* Donors Section */}
+        <SectionBanner
+          id="donors"
+          imageSrc="/images/banners/hero-banner-homepage.png"
+          title="Who is contributing?"
+          description="The work of the UN System is financially supported by many contributors. Explore who is contributing to the UN System, which organizations they fund, and what type of contributions they make — from assessed and voluntary core contributions to earmarked funding."
+        />
+        <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 lg:px-16">
+          <div className="grid gap-6 lg:grid-cols-3">
+            <div className="lg:col-span-2">
+              <DataPlaceholder
+                title="Contributors Treemap"
+                description="By contributor type and individual contributor"
+                height="h-80"
+                type="treemap"
+              />
             </div>
-          </section>
-
-          {/* Grayscale Showcase */}
-          <section className="mt-12">
-            <h2 className="mb-2 text-2xl font-bold text-foreground">
-              Grayscale
-            </h2>
-            <a
-              href="https://tailwindcss.com/docs/colors"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mb-6 inline-block text-sm text-un-blue hover:underline"
-            >
-              from Tailwind CSS
-            </a>
-            <div className="space-y-0 overflow-hidden rounded-lg">
-              <div className="bg-black p-6">
-                <p className="font-bold text-white">black</p>
-              </div>
-              <div className="bg-gray-950 p-6">
-                <p className="font-bold text-white">gray-950</p>
-              </div>
-              <div className="bg-gray-900 p-6">
-                <p className="font-bold text-white">gray-900</p>
-              </div>
-              <div className="bg-gray-800 p-6">
-                <p className="font-bold text-white">gray-800</p>
-              </div>
-              <div className="bg-gray-700 p-6">
-                <p className="font-bold text-white">gray-700</p>
-              </div>
-              <div className="bg-gray-600 p-6">
-                <p className="font-bold text-white">gray-600</p>
-              </div>
-              <div className="bg-gray-500 p-6">
-                <p className="font-bold text-white">gray-500</p>
-              </div>
-              <div className="bg-gray-400 p-6">
-                <p className="font-bold text-black">gray-400</p>
-              </div>
-              <div className="bg-gray-300 p-6">
-                <p className="font-bold text-black">gray-300</p>
-              </div>
-              <div className="bg-gray-200 p-6">
-                <p className="font-bold text-black">gray-200</p>
-              </div>
-              <div className="bg-gray-100 p-6">
-                <p className="font-bold text-black">gray-100</p>
-              </div>
-              <div className="bg-gray-50 p-6">
-                <p className="font-bold text-black">gray-50</p>
-              </div>
-              <div className="bg-white p-6">
-                <p className="font-bold text-black">white</p>
-              </div>
+            <div className="space-y-6">
+              <DataPlaceholder
+                title="Entities Breakdown"
+                description="By revenue type"
+                height="h-36"
+                type="chart"
+              />
+              <DataPlaceholder
+                title="Year Trend"
+                description="Revenue over time"
+                height="h-36"
+                type="chart"
+              />
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Components Section Header */}
-          <section className="mt-16">
-            <h2 className="mb-2 text-3xl font-bold text-foreground">
-              Components
-            </h2>
-            <p className="mb-6 text-foreground">
-              Explore the component library with reusable UI elements.
-            </p>
-            <Link
-              href="/component-library"
-              className="inline-flex items-center gap-2 text-un-blue hover:underline"
-            >
-              <span>View Full Component Library</span>
-            </Link>
-          </section>
-
-          {/* Typography Showcase */}
-          <section className="mt-12">
-            <h2 className="mb-2 text-2xl font-bold text-foreground">
-              Typography Scale
-            </h2>
-            <p className="mb-6 text-sm text-gray-600">Roboto Font Family</p>
-            <div className="space-y-4">
-              <div className="border-b border-gray-200 pb-4">
-                <p className="mb-2 text-xs text-gray-600">
-                  text-xs · 0.75rem (12px)
-                </p>
-                <p className="text-xs text-foreground">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
-              </div>
-              <div className="border-b border-gray-200 pb-4">
-                <p className="mb-2 text-xs text-gray-600">
-                  text-sm · 0.875rem (14px)
-                </p>
-                <p className="text-sm text-foreground">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
-              </div>
-              <div className="border-b border-gray-200 pb-4">
-                <p className="mb-2 text-xs text-gray-600">
-                  text-base · 1rem (16px)
-                </p>
-                <p className="text-base text-foreground">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
-              </div>
-              <div className="border-b border-gray-200 pb-4">
-                <p className="mb-2 text-xs text-gray-600">
-                  text-lg · 1.125rem (18px)
-                </p>
-                <p className="text-lg text-foreground">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
-              </div>
-              <div className="border-b border-gray-200 pb-4">
-                <p className="mb-2 text-xs text-gray-600">
-                  text-xl · 1.25rem (20px)
-                </p>
-                <p className="text-xl text-foreground">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
-              </div>
-              <div className="border-b border-gray-200 pb-4">
-                <p className="mb-2 text-xs text-gray-600">
-                  text-2xl · 1.5rem (24px)
-                </p>
-                <p className="text-2xl text-foreground">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
-              </div>
-              <div className="border-b border-gray-200 pb-4">
-                <p className="mb-2 text-xs text-gray-600">
-                  text-3xl · 1.875rem (30px)
-                </p>
-                <p className="text-3xl text-foreground">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
-              </div>
-              <div className="border-b border-gray-200 pb-4">
-                <p className="mb-2 text-xs text-gray-600">
-                  text-4xl · 2.25rem (36px)
-                </p>
-                <p className="text-4xl text-foreground">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
-              </div>
-              <div>
-                <p className="mb-2 text-xs text-gray-600">
-                  text-5xl · 3rem (48px)
-                </p>
-                <p className="text-5xl text-foreground">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
-              </div>
+        {/* Entities Section */}
+        <SectionBanner
+          id="entities"
+          imageSrc="/images/banners/hero-banner-secretariat-expenses.png"
+          title="Which organizations are funded?"
+          description="The UN System comprises specialized agencies, funds, programmes, and the UN Secretariat with its departments, offices, and peacekeeping missions. Explore how funding flows to each organization, their revenue sources, and how they allocate expenses."
+        />
+        <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 lg:px-16">
+          <div className="grid gap-6 lg:grid-cols-3">
+            <div className="lg:col-span-2">
+              <DataPlaceholder
+                title="Entities Treemap"
+                description="By system chart group and entity"
+                height="h-80"
+                type="treemap"
+              />
             </div>
-          </section>
-        </div>
+            <div className="space-y-6">
+              <DataPlaceholder
+                title="Contributors"
+                description="By revenue type"
+                height="h-36"
+                type="chart"
+              />
+              <DataPlaceholder
+                title="Year Trend"
+                description="Revenue/Expenses over time"
+                height="h-36"
+                type="chart"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Countries Section */}
+        <SectionBanner
+          id="countries"
+          imageSrc="/images/banners/hero-banner-system-revenue.png"
+          title="Where are funds spent?"
+          description="UN System organizations implement activities across the world. Explore where funds are spent geographically, from global programmes to country-level operations."
+        />
+        <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 lg:px-16">
+          <div className="grid gap-6 lg:grid-cols-3">
+            <div className="lg:col-span-2">
+              <DataPlaceholder
+                title="World Map"
+                description="Spending by country"
+                height="h-80"
+                type="map"
+              />
+            </div>
+            <div className="space-y-6">
+              <DataPlaceholder
+                title="Entities"
+                description="By country"
+                height="h-36"
+                type="chart"
+              />
+              <DataPlaceholder
+                title="Year Trend"
+                description="By region"
+                height="h-36"
+                type="chart"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* SDGs Section */}
+        <SectionBanner
+          id="sdgs"
+          imageSrc="/images/banners/hero-banner-system-expenses.png"
+          title="Which goals are funds spent towards?"
+          description="UN funding supports the 2030 Agenda for Sustainable Development. Explore how spending aligns with the 17 Sustainable Development Goals, from ending poverty to climate action."
+        />
+        <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 lg:px-16">
+          <div className="grid gap-6 lg:grid-cols-3">
+            <div className="lg:col-span-2">
+              <DataPlaceholder
+                title="SDG Treemap"
+                description="Spending by SDG and entity"
+                height="h-80"
+                type="treemap"
+              />
+            </div>
+            <div className="space-y-6">
+              <DataPlaceholder
+                title="Entities"
+                description="By SDG"
+                height="h-36"
+                type="chart"
+              />
+              <DataPlaceholder
+                title="Year Trend"
+                description="By SDG"
+                height="h-36"
+                type="chart"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Background Section */}
+        <section className="bg-white py-12 md:py-16">
+          <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-16">
+            <h2 className="mb-8 text-2xl font-bold text-gray-900">
+              Background
+            </h2>
+
+            <div className="divide-y divide-gray-200">
+              <ExpandableCard title="Methodology">
+                <div className="space-y-4">
+                  <p>
+                    Data is sourced from the UN Chief Executives Board (CEB)
+                    financial statistics and the UN Secretariat Annual Report.
+                    CEB data comes from audited financial statements aligned
+                    with the Data Standards for UN System-Wide Reporting of
+                    Financial Data. Secretariat entities are integrated as
+                    sub-entities within the UN Secretariat entry.
+                  </p>
+
+                  <h4 className="mt-6 font-medium text-gray-900">Notes</h4>
+                  <ol className="list-inside list-decimal space-y-2 text-sm">
+                    <li>
+                      Under the leadership of the Chief Executives Board for
+                      Coordination (CEB), the UN has made significant
+                      improvements to financial data standardization and
+                      reporting over the past few years. For this reason,
+                      results are not perfectly comparable year-to-year.
+                    </li>
+                    <li>
+                      The number of entities reporting in each period has
+                      increased over the past years, and thus the total reported
+                      revenue has increased too.
+                    </li>
+                    <li>
+                      The classification of UN Grant revenue instruments has
+                      changed over time. For comparability purposes,
+                      &ldquo;voluntary contributions pending earmarking&rdquo;
+                      grants have been categorized as &ldquo;voluntary non-core
+                      (earmarked) contributions&rdquo;.
+                    </li>
+                    <li>
+                      The classification of UN System Functions has changed over
+                      time. For comparability purposes, the previous
+                      &ldquo;normative, treaty-related and knowledge creation
+                      activities&rdquo; and &ldquo;technical cooperation&rdquo;
+                      functions have been aggregated under the new &ldquo;global
+                      agenda and specialised assistance&rdquo; function.
+                    </li>
+                    <li>
+                      The allocation rules for headquarters expenditure to
+                      geographies has been applied inconsistently. For
+                      comparability purposes, we have assigned headquarters
+                      expenses under the &ldquo;global and interregional&rdquo;
+                      category rather than the country in which the expense
+                      occurred.
+                    </li>
+                    <li>
+                      The CEB data set classified all Department of Peacekeeping
+                      Operations (DPO) mission expenditure under the
+                      &ldquo;global and interregional&rdquo; category. We have
+                      approximately allocated these expenses, to the extent
+                      possible, to the country in which each mission occurred
+                      using the percentage of the budget allocated to each
+                      mission as per the DPO.
+                    </li>
+                    <li>
+                      The boundaries and names shown and the designations used
+                      on any map shown do not imply official endorsement or
+                      acceptance by the United Nations.
+                    </li>
+                  </ol>
+                </div>
+              </ExpandableCard>
+
+              <ExpandableCard title="UN Financial Data Standards">
+                <div className="space-y-4">
+                  <div className="flex flex-col gap-6 md:flex-row">
+                    <div className="flex-1 space-y-4">
+                      <p>
+                        The <strong>UN financial data standards</strong>{" "}
+                        prescribe how UN System entities must align their
+                        financial data for system-wide reporting exercises. They
+                        help ensure statistics on system-wide revenues and
+                        expenses can be aligned, disaggregated, and compared.
+                      </p>
+                      <p>
+                        The standards were prepared by an inter-agency working
+                        group, the ad-hoc team on the UN&apos;s future data
+                        cube. They were reviewed and endorsed by the{" "}
+                        <a
+                          href="https://unsdg.un.org"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-un-blue hover:underline"
+                        >
+                          United Nations Sustainable Development Group (UNSDG)
+                        </a>{" "}
+                        and the{" "}
+                        <a
+                          href="https://unsceb.org/high-level-committee-management-hlcm"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-un-blue hover:underline"
+                        >
+                          High-level Committee on Management (HLCM)
+                        </a>{" "}
+                        of the UN Chief Executive Board for Coordination.
+                      </p>
+                    </div>
+                    <div className="hidden shrink-0 md:block md:w-28 lg:w-36">
+                      <Image
+                        src={`${basePath}/images/banners/data-standards.svg`}
+                        alt="UN Data Standards illustration"
+                        width={144}
+                        height={144}
+                        className="h-auto w-full"
+                      />
+                    </div>
+                  </div>
+                  <h4 className="mt-4 font-medium text-gray-900">
+                    The six data standards
+                  </h4>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="flex gap-3">
+                      <Building2 className="mt-0.5 h-5 w-5 shrink-0 text-un-blue" />
+                      <div>
+                        <p className="font-medium text-gray-900">UN Entity</p>
+                        <p className="text-sm">
+                          Determines which UN entities are included in
+                          system-wide financial data reporting.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex gap-3">
+                      <Layers className="mt-0.5 h-5 w-5 shrink-0 text-un-blue" />
+                      <div>
+                        <p className="font-medium text-gray-900">
+                          UN System Function
+                        </p>
+                        <p className="text-sm">
+                          Defines functional areas — Development, Humanitarian,
+                          Peace Operations, and Global Agenda.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex gap-3">
+                      <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-un-blue" />
+                      <div>
+                        <p className="font-medium text-gray-900">
+                          Geographic Location
+                        </p>
+                        <p className="text-sm">
+                          Defines locations (global, regions, countries) for
+                          reporting and expense allocation.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex gap-3">
+                      <Banknote className="mt-0.5 h-5 w-5 shrink-0 text-un-blue" />
+                      <div>
+                        <p className="font-medium text-gray-900">
+                          Financing Instruments
+                        </p>
+                        <p className="text-sm">
+                          Defines grant instruments — Assessed, Voluntary core,
+                          Voluntary non-core, and Other revenue.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex gap-3">
+                      <Target className="mt-0.5 h-5 w-5 shrink-0 text-un-blue" />
+                      <div>
+                        <p className="font-medium text-gray-900">
+                          Sustainable Development Goals
+                        </p>
+                        <p className="text-sm">
+                          Defines how financial information must be reported
+                          against the 17 SDGs.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex gap-3">
+                      <Users className="mt-0.5 h-5 w-5 shrink-0 text-un-blue" />
+                      <div>
+                        <p className="font-medium text-gray-900">
+                          Revenue by Contributor
+                        </p>
+                        <p className="text-sm">
+                          Guides reporting of received contributions and
+                          contributor types.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    <a
+                      href="https://unsdg.un.org/resources/data-standards-united-nations-system-wide-reporting-financial-data"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-un-blue hover:underline"
+                    >
+                      Access the UN Financial Data Standards (UNSDG)
+                    </a>
+                  </p>
+                </div>
+              </ExpandableCard>
+
+              <ExpandableCard title="UN Funding Compact">
+                <div className="space-y-4">
+                  <p>
+                    The <strong>UN Funding Compact</strong> marks a fundamental
+                    shift in how the UN and Member States enable the
+                    transformative, collaborative action needed to help
+                    countries achieve the{" "}
+                    <a
+                      href="https://sdgs.un.org/2030agenda"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-un-blue hover:underline"
+                    >
+                      2030 Agenda
+                    </a>
+                    .
+                  </p>
+                  <p>
+                    At the{" "}
+                    <a
+                      href="https://www.un.org/en/conferences/SDGSummit2023"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-un-blue hover:underline"
+                    >
+                      UN General Assembly Summit on the SDGs
+                    </a>{" "}
+                    in September 2023, world leaders recognized the urgent need
+                    for bold, ambitious, accelerated, just and transformative
+                    action on sustainable development. The Funding Compact sets
+                    out ambitious commitments by Member States and the{" "}
+                    <a
+                      href="https://unsdg.un.org"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-un-blue hover:underline"
+                    >
+                      United Nations Sustainable Development Group
+                    </a>{" "}
+                    to ensure predictable and flexible funding for United
+                    Nations development activities.
+                  </p>
+                  <p>
+                    Achieving the SDGs by 2030 calls for transformative,
+                    collaborative action. However, funding patterns have been
+                    characterized by a decline in core resources relative to
+                    overall funding, unpredictability, and a rising share of
+                    tightly earmarked funds for specific activities.
+                  </p>
+                  <p>
+                    The Funding Compact was called for by Member States in{" "}
+                    <a
+                      href="https://undocs.org/A/RES/72/279"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-un-blue hover:underline"
+                    >
+                      General Assembly resolution 72/279
+                    </a>
+                    , responding to requests for &ldquo;whole of United
+                    Nations&rdquo; approaches through{" "}
+                    <a
+                      href="https://undocs.org/A/RES/71/243"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-un-blue hover:underline"
+                    >
+                      resolution 71/243
+                    </a>
+                    . In return, the UN development system commits to greater
+                    transparency, accountability, and efficiency.
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    <a
+                      href="https://www.un.org/ecosoc/sites/www.un.org.ecosoc/files/files/en/qcpr/SGR2019-Add%201%20-%20Funding%20Compact%20-%20Annex.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-un-blue hover:underline"
+                    >
+                      Access the UN Funding Compact (PDF)
+                    </a>
+                  </p>
+                </div>
+              </ExpandableCard>
+            </div>
+          </div>
+        </section>
+
+        {/* Quote Section */}
+        <QuoteBlock
+          quote="Accountability is an end in itself, because it fosters transparency, improves results, and holds our institutions to agreed standards and commitments. It is also a critical incentive for collaboration and better reporting on system-wide impact."
+          attribution="Secretary-General António Guterres"
+          imageSrc="/images/banners/guterres.png"
+          imageAlt="Secretary-General António Guterres"
+        />
+
+        {/* Resources Section */}
+        <section className="bg-white py-12 md:py-16">
+          <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-16">
+            <h2 className="mb-8 text-2xl font-bold text-gray-900">
+              Further Resources
+            </h2>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <ResourceLink
+                title="UN System Chart"
+                description="Interactive organizational chart of the United Nations System"
+                href="https://www.un.org/en/about-us/un-system"
+                icon={Network}
+              />
+              <ResourceLink
+                title="CEB Financial Statistics"
+                description="Financial data from the UN Chief Executives Board for Coordination"
+                href="https://unsceb.org"
+                icon={Building2}
+              />
+              <ResourceLink
+                title="UN Results"
+                description="Results and achievements of the United Nations"
+                href="https://results.un.org"
+                icon={Target}
+              />
+              <ResourceLink
+                title="UN SDG"
+                description="United Nations Sustainable Development Group"
+                href="https://unsdg.un.org"
+                icon={Globe}
+              />
+              <ResourceLink
+                title="UN Info"
+                description="UN country-level planning and reporting platform"
+                href="https://uninfo.org"
+                icon={FileText}
+              />
+              <ResourceLink
+                title="UN Mandates"
+                description="Database of UN mandates and resolutions"
+                href="https://mandates.un.org"
+                icon={Landmark}
+              />
+            </div>
+          </div>
+        </section>
       </main>
+
+      {/* Footer */}
+      <footer className="border-t border-gray-200 bg-white py-8">
+        <div className="mx-auto max-w-6xl px-6 text-center text-sm text-gray-500 md:px-12 lg:px-16">
+          <p>&copy; {new Date().getFullYear()} United Nations</p>
+        </div>
+      </footer>
     </div>
   );
 }

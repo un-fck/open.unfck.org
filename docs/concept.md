@@ -3,9 +3,8 @@
 Concept for content of new open.un.org website (see [current content](./content.md)):
 
 - Welcome text: "Welcome to the Transparency Gateway – The gateway at open.un.org is designed to facilitate access to transparency information from across the UN System and the UN Secretariat."
-- Image collage: family with UN flag and general assembly
 - Who is contributing?
-  - Image: family + UN logo + GA
+  - Image: [family + UN logo + GA](public/images/banners/hero-banner-homepage.png)
   - Treemap: Level 1 – Contributor Type, Level 2 – Contributor; colours: Revenue Type
   - Areachart/Linechart: Year x [Contributor Type / Contributor / Revenue Type]
   - Sidebar:
@@ -13,7 +12,7 @@ Concept for content of new open.un.org website (see [current content](./content.
     - Barchart/Treemap: Entities; colour: Revenue Type
     - Area chart: Year x Revenue Type
 - Which organizations are funded?
-  - Image: peacekeeper
+  - Image: [peacekeeper](public/images/banners/hero-banner-secretariat-expenses.png)
   - Toggle: Revenue / Expenses
   - Treemap: Level 1 – Systemchart Group, Level 1.5 (Secretariat only) – Priority Area; Level 2 – Entity; colours: Revenue Type
   - Areachart/Linechart: Year x [Systemchart Group / Entity]
@@ -25,14 +24,14 @@ Concept for content of new open.un.org website (see [current content](./content.
     - Barchart/Treemap: Contributors; colour: Revenue Type
     - Area chart: Year x Revenue Type (with Revenue / Expenses toggle)
 - Where are funds spent?
-  - Image: girl/boy + conference with SDG
+  - Image: [girl/boy + conference with SDG](public/images/banners/hero-banner-system-revenue.png)
   - World map: Country (either as area fill or as circles)
   - Linechart: Year x [Region / Country]
   - Sidebar:
     - Link to country page
     - Barchart/Treemap: Entities
 - Which goals are funds spent towards?
-  - Image: child/grandma + SDGs
+  - Image: [child/grandma + SDGs](public/images/banners/hero-banner-system-expenses.png)
   - Toggle: show goals / show expenses per goal
   - Treemap: Level 1 – SDG, Level 2 – Entity
   - Linechart: Year x SDG
