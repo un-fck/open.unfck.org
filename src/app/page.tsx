@@ -13,6 +13,7 @@ import {
 import Image from "next/image";
 import { ContributorsTreemap } from "@/components/ContributorsTreemap";
 import { DataPlaceholder } from "@/components/DataPlaceholder";
+import { EntitiesTreemap } from "@/components/EntitiesTreemap";
 import { ExpandableCard } from "@/components/ExpandableCard";
 import { PageHeader } from "@/components/PageHeader";
 import { QuoteBlock } from "@/components/QuoteBlock";
@@ -57,30 +58,7 @@ export default function Home() {
           description="The UN System comprises specialized agencies, funds, programmes, and the UN Secretariat with its departments, offices, and peacekeeping missions. Explore how funding flows to each organization, their revenue sources, and how they allocate expenses."
         />
         <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 lg:px-16">
-          <div className="grid gap-6 lg:grid-cols-3">
-            <div className="lg:col-span-2">
-              <DataPlaceholder
-                title="Entities Treemap"
-                description="By system chart group and entity"
-                height="h-80"
-                type="treemap"
-              />
-            </div>
-            <div className="space-y-6">
-              <DataPlaceholder
-                title="Contributors"
-                description="By revenue type"
-                height="h-36"
-                type="chart"
-              />
-              <DataPlaceholder
-                title="Year Trend"
-                description="Revenue/Expenses over time"
-                height="h-36"
-                type="chart"
-              />
-            </div>
-          </div>
+          <EntitiesTreemap />
         </section>
 
         {/* Countries Section */}
