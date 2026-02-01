@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
-import { Entity, BudgetEntry } from "@/types";
+import { Entity, BudgetEntry, EntityRevenue } from "@/types";
 import {
   systemGroupingStyles,
   getSystemGroupingStyle,
@@ -22,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 
 interface Rect {
   x: number;
@@ -119,7 +120,9 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export function EntitiesTreemap() {
   const [entities, setEntities] = useState<Entity[]>([]);
-  const [budgetData, setBudgetData] = useState<Record<string, number>>({});
+  const [spendingData, setSpendingData] = useState<Record<string, number>>({});
+  const [revenueData, setRevenueData] = useState<Record<string, EntityRevenue>>({});
+  const [showRevenue, setShowRevenue] = useState(false);
   const [hoveredEntity, setHoveredEntity] = useState<string | null>(null);
   const [selectedEntity, setSelectedEntity] = useState<Entity | null>(null);
   const [loading, setLoading] = useState(true);
@@ -131,19 +134,20 @@ export function EntitiesTreemap() {
   useEffect(() => {
     Promise.all([
       fetch(`${basePath}/data/entities.json`).then((res) => res.json()),
-      fetch(`${basePath}/data/budget.json`).then((res) => res.json()),
+      fetch(`${basePath}/data/entity-spending.json`).then((res) => res.json()),
+      fetch(`${basePath}/data/entity-revenue.json`).then((res) => res.json()),
     ])
-      .then(([entitiesData, budgetArray]: [Entity[], BudgetEntry[]]) => {
+      .then(([entitiesData, spendingArray, revenueObj]: [Entity[], BudgetEntry[], Record<string, EntityRevenue>]) => {
         setEntities(entitiesData);
-        // Convert budget array to lookup object
-        const budgetLookup = budgetArray.reduce(
+        const spendingLookup = spendingArray.reduce(
           (acc: Record<string, number>, entry: BudgetEntry) => {
             acc[entry.entity] = entry.amount;
             return acc;
           },
           {}
         );
-        setBudgetData(budgetLookup);
+        setSpendingData(spendingLookup);
+        setRevenueData(revenueObj);
         setLoading(false);
       })
       .catch((err) => {
@@ -151,6 +155,100 @@ export function EntitiesTreemap() {
         setLoading(false);
       });
   }, []);
+
+  // Synthetic entities for revenue mode (CEB aggregates)
+  const syntheticRevenueEntities: Entity[] = [
+    {
+      entity: "UN",
+      entity_long: "Other UN Secretariat (incl. Political Missions)",
+      entity_combined: "Other UN Secretariat (incl. Political Missions)",
+      entity_description: "Aggregate revenue for the UN Secretariat including Special Political Missions. CEB reports this as a single entity. Excludes UNEP, UNODC, UN-Habitat, and ITC which report separately.",
+      entity_link: "https://unsceb.org",
+      entity_link_is_un_org: 1,
+      system_grouping: "UN Secretariat",
+      category: "CEB Aggregate",
+      un_principal_organ: "General Assembly",
+      un_pillar: null,
+      is_ceb_member: true,
+      head_of_entity_level: null,
+      head_of_entity_title_specific: null,
+      head_of_entity_title_general: null,
+      head_of_entity_name: null,
+      head_of_entity_bio: null,
+      head_of_entity_headshot: null,
+      global_leadership_team_url: null,
+      on_display: "TRUE",
+      foundational_mandate: null,
+      organizational_chart_link: null,
+      budget_financial_reporting_link: null,
+      results_framework_link: null,
+      strategic_plan_link: null,
+      annual_reports_link: null,
+      transparency_portal_link: null,
+      socials_linkedin: null,
+      socials_twitter: null,
+      socials_instagram: null,
+      entity_news_page: null,
+      entity_branding_page: null,
+      entity_data_page: null,
+      entity_logo_page: null,
+      entity_wikipedia_page: null,
+    },
+    {
+      entity: "UN-DPO",
+      entity_long: "Peacekeeping Operations",
+      entity_combined: "Peacekeeping Operations (UN-DPO)",
+      entity_description: "Aggregate revenue for UN Peacekeeping Operations. CEB reports all peacekeeping missions under this single entity.",
+      entity_link: "https://peacekeeping.un.org",
+      entity_link_is_un_org: 1,
+      system_grouping: "Peacekeeping Operations",
+      category: "CEB Aggregate",
+      un_principal_organ: "Security Council",
+      un_pillar: null,
+      is_ceb_member: true,
+      head_of_entity_level: null,
+      head_of_entity_title_specific: null,
+      head_of_entity_title_general: null,
+      head_of_entity_name: null,
+      head_of_entity_bio: null,
+      head_of_entity_headshot: null,
+      global_leadership_team_url: null,
+      on_display: "TRUE",
+      foundational_mandate: null,
+      organizational_chart_link: null,
+      budget_financial_reporting_link: null,
+      results_framework_link: null,
+      strategic_plan_link: null,
+      annual_reports_link: null,
+      transparency_portal_link: null,
+      socials_linkedin: null,
+      socials_twitter: null,
+      socials_instagram: null,
+      entity_news_page: null,
+      entity_branding_page: null,
+      entity_data_page: null,
+      entity_logo_page: null,
+      entity_wikipedia_page: null,
+    },
+  ];
+
+  // Get the appropriate budget data and entities based on toggle
+  const budgetData = showRevenue 
+    ? Object.fromEntries(Object.entries(revenueData).map(([k, v]) => [k, v.total]))
+    : spendingData;
+
+  // In revenue mode, use synthetic entities for UN/UN-DPO, plus regular entities that have revenue
+  const activeEntities = showRevenue
+    ? [
+        ...syntheticRevenueEntities.filter((e) => revenueData[e.entity]),
+        ...entities.filter(
+          (e) =>
+            revenueData[e.entity] &&
+            e.entity !== "UN" &&
+            e.entity !== "UN-DPO"
+        ),
+      ]
+    : entities;
 
   const toggleGroup = (groupKey: string) => {
     setActiveGroups((prev) => {
@@ -169,7 +267,7 @@ export function EntitiesTreemap() {
   };
 
   // Get entities with budget > 0
-  const entitiesWithBudget = entities.filter(
+  const entitiesWithBudget = activeEntities.filter(
     (entity) =>
       entity.entity &&
       entity.system_grouping &&
@@ -294,7 +392,8 @@ export function EntitiesTreemap() {
   // Filter Controls Component
   const FilterControls = () => (
     <div className="mb-3 flex flex-col gap-2">
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:gap-3">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-3">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:gap-3">
         {/* Filter Dropdown */}
         <div className="relative w-full sm:w-[280px]">
           <Select value={getSelectedValue()} onValueChange={handleValueChange}>
@@ -380,6 +479,22 @@ export function EntitiesTreemap() {
             <X className="h-3 w-3" />
           </button>
         )}
+        </div>
+
+        {/* Revenue/Spending Toggle */}
+        <div className="flex h-9 items-center gap-2">
+          <span className={`text-sm ${showRevenue ? "font-medium text-gray-900" : "text-gray-500"}`}>
+            Revenue
+          </span>
+          <Switch
+            checked={!showRevenue}
+            onCheckedChange={(checked) => setShowRevenue(!checked)}
+            aria-label="Toggle between revenue and spending"
+          />
+          <span className={`text-sm ${!showRevenue ? "font-medium text-gray-900" : "text-gray-500"}`}>
+            Spending
+          </span>
+        </div>
       </div>
     </div>
   );
@@ -445,6 +560,27 @@ export function EntitiesTreemap() {
         rect.data.system_grouping || ""
       );
 
+      // Get revenue breakdown for bar chart display
+      const entityRevenue = revenueData[rect.data.entity];
+      const hasRevenueBreakdown = showRevenue && entityRevenue?.by_type;
+      const revenueTypes = hasRevenueBreakdown
+        ? Object.entries(entityRevenue.by_type).sort((a, b) => {
+            const order = ["Assessed", "Voluntary un-earmarked", "Voluntary earmarked", "Other"];
+            return order.indexOf(a[0]) - order.indexOf(b[0]);
+          })
+        : [];
+      const revenueTotal = hasRevenueBreakdown
+        ? Object.values(entityRevenue.by_type).reduce((sum, val) => sum + val, 0)
+        : 0;
+
+      // Get opacity for revenue type (using category color as base)
+      const getRevenueTypeOpacity = (type: string): string => {
+        if (type === "Assessed") return "opacity-100";
+        if (type === "Voluntary un-earmarked") return "opacity-80";
+        if (type === "Voluntary earmarked") return "opacity-60";
+        return "opacity-40";
+      };
+
       return (
         <Tooltip
           key={`${rect.data.entity}-${i}`}
@@ -454,7 +590,7 @@ export function EntitiesTreemap() {
           <TooltipTrigger asChild>
             <div
               data-entity={rect.data.entity}
-              className={`absolute cursor-pointer ${styles.bgColor} ${styles.textColor}`}
+              className={`absolute cursor-pointer ${!hasRevenueBreakdown ? styles.bgColor : ""} ${styles.textColor}`}
               style={{
                 left: `${rect.x}%`,
                 top: `${rect.y}%`,
@@ -467,10 +603,32 @@ export function EntitiesTreemap() {
               onMouseEnter={() => setHoveredEntity(rect.data.entity)}
               onMouseLeave={() => setHoveredEntity(null)}
             >
+              {/* Revenue type breakdown bars (revenue mode only) */}
+              {hasRevenueBreakdown && (
+                <div className="absolute inset-0 flex flex-col">
+                  {revenueTypes.map(([type, amount], idx) => {
+                    const percentage = (amount / revenueTotal) * 100;
+                    return (
+                      <div
+                        key={idx}
+                        className={`${styles.bgColor} ${getRevenueTypeOpacity(type)}`}
+                        style={{ height: `${percentage}%` }}
+                      />
+                    );
+                  })}
+                </div>
+              )}
+              {/* Solid background for spending mode */}
+              {!hasRevenueBreakdown && showRevenue && (
+                <div className={`absolute inset-0 ${styles.bgColor}`} />
+              )}
+              {/* Label overlay */}
               {showLabel && (
-                <div className="h-full overflow-hidden p-1">
+                <div className="relative h-full overflow-hidden p-1">
                   <div className="truncate text-xs font-medium leading-tight">
-                    {rect.data.entity}
+                    {rect.data.entity === "UN" || rect.data.entity === "UN-DPO"
+                      ? rect.data.entity_long
+                      : rect.data.entity}
                   </div>
                   <div className="truncate text-xs leading-tight opacity-70 transition-opacity duration-300">
                     {formatBudget(entityBudget)}
@@ -586,10 +744,29 @@ export function EntitiesTreemap() {
           })()}
       </div>
 
+      {/* Revenue Type Legend (only in revenue mode) */}
+      {showRevenue && (
+        <div className="mt-3 flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap gap-3">
+            {[
+              { type: "Assessed", label: "Assessed", opacity: "opacity-100" },
+              { type: "Voluntary un-earmarked", label: "Voluntary un-earmarked", opacity: "opacity-80" },
+              { type: "Voluntary earmarked", label: "Voluntary earmarked", opacity: "opacity-60" },
+            ].map(({ type, label, opacity }) => (
+              <div key={type} className="flex items-center gap-1.5">
+                <div className={`h-3 w-3 rounded-sm bg-gray-500 ${opacity}`} />
+                <span className="text-xs text-gray-600">{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {selectedEntity && (
         <EntitySidebar
           entity={selectedEntity}
-          budget={budgetData[selectedEntity.entity] || 0}
+          spending={spendingData[selectedEntity.entity] || 0}
+          revenue={revenueData[selectedEntity.entity] || null}
           onClose={() => setSelectedEntity(null)}
         />
       )}

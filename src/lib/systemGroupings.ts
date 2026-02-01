@@ -21,6 +21,13 @@ export const systemGroupingStyles: Record<string, SystemGroupingStyle> = {
     textColor: "text-white",
     order: 2,
   },
+  // Revenue-mode synthetic grouping for UN-DPO aggregate
+  "Peacekeeping Operations": {
+    label: "Peacekeeping Operations",
+    bgColor: "bg-au-chico",
+    textColor: "text-white",
+    order: 2,
+  },
   "Regional Commissions": {
     label: "Regional Commissions",
     bgColor: "bg-smoky",

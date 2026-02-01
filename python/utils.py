@@ -1,3 +1,5 @@
+import pandas as pd
+
 ENTITY_MAPPING = {
     "UN-HABITAT": "UN-Habitat",
     "UNHABITAT": "UN-Habitat",
@@ -32,6 +34,12 @@ ENTITY_MAPPING = {
     "UN-RGID": "UNRGID",
 }
 
+DONOR_CHAR_FIXES = {
+    "C�te d'Ivoire": "Côte D'Ivoire",
+    "T�rkiye": "Türkiye",
+    "Cura�ao": "Curaçao",
+}
+
 
 def parse_amount(amount_str: str) -> float:
     """Parse amount string to float, removing spaces and commas."""
@@ -41,3 +49,29 @@ def parse_amount(amount_str: str) -> float:
 def normalize_entity(entity: str) -> str:
     """Normalize entity code to match entities.json."""
     return ENTITY_MAPPING.get(entity, entity)
+
+
+def normalize_rev_type(rev_type: str) -> str:
+    """Normalize revenue type to shorter, consistent labels."""
+    lower = rev_type.lower()
+    if "assessed" in lower:
+        return "Assessed"
+    if "voluntary core" in lower or "un-earmarked" in lower:
+        return "Voluntary un-earmarked"
+    if "voluntary non-core" in lower or "earmarked" in lower:
+        return "Voluntary earmarked"
+    return "Other"
+
+
+def load_donor_revenue(year: int | None = None) -> pd.DataFrame:
+    """Load and clean government donor revenue CSV."""
+    df = pd.read_csv("data/budget/government-donor-revenue.csv", encoding="utf-8")
+    df["government_donor"] = df["government_donor"].replace(DONOR_CHAR_FIXES)
+    df["amount"] = df["amount"].apply(parse_amount)
+    df["entity"] = df["entity"].apply(normalize_entity)
+    df["rev_type"] = df["rev_type"].apply(normalize_rev_type)
+    # Exclude refunds and miscellaneous
+    df = df[~df["rev_type"].isin(["Other"])]
+    if year:
+        df = df[df["calendar_year"] == year]
+    return df

@@ -48,3 +48,19 @@ export interface BudgetEntry {
   year?: number;
   amount: number;
 }
+
+export interface DonorContribution {
+  donor: string;
+  total: number;
+  Assessed?: number;
+  "Voluntary earmarked"?: number;
+  "Voluntary un-earmarked"?: number;
+  Other?: number;
+}
+
+export interface EntityRevenue {
+  total: number;
+  year: number;
+  by_type: Record<string, number>;
+  by_donor: DonorContribution[];
+}

@@ -2,23 +2,51 @@
 
 import { X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Entity, Impact } from "@/types";
+import { Entity, Impact, EntityRevenue } from "@/types";
 import { getSystemGroupingStyle } from "@/lib/systemGroupings";
 import { formatBudget } from "@/lib/entities";
 
 interface EntitySidebarProps {
   entity: Entity | null;
-  budget: number;
+  spending: number;
+  revenue: EntityRevenue | null;
   onClose: () => void;
 }
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
-export function EntitySidebar({ entity, budget, onClose }: EntitySidebarProps) {
+const getContributionTypeColor = (type: string): string => {
+  if (type === "Assessed") return "bg-un-blue-muted";
+  if (type === "Voluntary un-earmarked") return "bg-un-blue-muted/80";
+  if (type === "Voluntary earmarked") return "bg-un-blue-muted/60";
+  if (type === "Other") return "bg-un-blue-muted/40";
+  return "bg-gray-500";
+};
+
+const getContributionTypeOrder = (type: string): number => {
+  if (type === "Assessed") return 1;
+  if (type === "Voluntary un-earmarked") return 2;
+  if (type === "Voluntary earmarked") return 3;
+  return 4;
+};
+
+const formatBudgetFixed = (amount: number): string => {
+  if (amount >= 1_000_000_000) {
+    return `$${(amount / 1_000_000_000).toFixed(2)}B`;
+  } else if (amount >= 1_000_000) {
+    return `$${(amount / 1_000_000).toFixed(2)}M`;
+  } else if (amount >= 1_000) {
+    return `$${(amount / 1_000).toFixed(2)}K`;
+  }
+  return `$${amount.toFixed(2)}`;
+};
+
+export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySidebarProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [impacts, setImpacts] = useState<Impact[]>([]);
   const [loadingImpacts, setLoadingImpacts] = useState(true);
+  const [showAllDonors, setShowAllDonors] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -28,7 +56,6 @@ export function EntitySidebar({ entity, budget, onClose }: EntitySidebarProps) {
     return () => clearTimeout(timer);
   }, []);
 
-  // Fetch impacts when entity changes
   useEffect(() => {
     if (!entity?.entity) {
       setImpacts([]);
@@ -95,6 +122,22 @@ export function EntitySidebar({ entity, budget, onClose }: EntitySidebarProps) {
   const groupingStyle = getSystemGroupingStyle(entity.system_grouping || "");
   const description = entity.entity_description || entity.entity_long || "";
 
+  // Process revenue breakdown by type
+  const revenueByType = revenue?.by_type
+    ? Object.entries(revenue.by_type).sort(
+        (a, b) => getContributionTypeOrder(a[0]) - getContributionTypeOrder(b[0])
+      )
+    : [];
+
+  // Process revenue breakdown by donor
+  const donorContributions = revenue?.by_donor || [];
+  const displayedDonors = showAllDonors
+    ? donorContributions
+    : donorContributions.slice(0, 10);
+  const maxDonorTotal = donorContributions.length > 0
+    ? Math.max(...donorContributions.map((d) => d.total))
+    : 0;
+
   return (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-end bg-black/50 transition-all duration-300 ease-out ${isVisible && !isClosing ? "opacity-100" : "opacity-0"}`}
@@ -146,17 +189,6 @@ export function EntitySidebar({ entity, budget, onClose }: EntitySidebarProps) {
               </div>
             </div>
 
-            <div className="mt-3">
-              <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
-                Total Revenue (2023)
-              </span>
-              <div className="mt-0.5">
-                <div className="text-base font-semibold text-gray-700">
-                  {formatBudget(budget)}
-                </div>
-              </div>
-            </div>
-
             {description && (
               <div className="mt-3">
                 <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
@@ -171,6 +203,135 @@ export function EntitySidebar({ entity, budget, onClose }: EntitySidebarProps) {
             )}
           </div>
 
+          {/* Financials Section */}
+          <div>
+            <h3 className="mb-3 text-lg font-normal uppercase tracking-wider text-gray-900 sm:text-xl">
+              Financials
+            </h3>
+
+            {/* Total Spending */}
+            <div>
+              <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
+                Total Spending (2023)
+              </span>
+              <div className="mt-0.5">
+                <div className="text-base font-semibold text-gray-700">
+                  {spending > 0 ? formatBudget(spending) : "N/A"}
+                </div>
+              </div>
+            </div>
+
+            {/* Total Revenue */}
+            <div className="mt-3">
+              <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
+                Total Revenue (2024)
+              </span>
+              <div className="mt-0.5">
+                {revenue ? (
+                  <div className="text-base font-semibold text-gray-700">
+                    {formatBudget(revenue.total)}
+                  </div>
+                ) : (
+                  <div className="text-sm italic text-gray-500">
+                    Revenue data not available at sub-entity level
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Revenue by Type */}
+            {revenue && revenueByType.length > 0 && (
+              <div className="mt-4">
+                <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
+                  Revenue by Type
+                </span>
+                <div className="mt-2 space-y-2">
+                  {revenueByType.map(([type, amount]) => (
+                    <div
+                      key={type}
+                      className="flex items-center justify-between gap-2"
+                    >
+                      <div className="flex items-center gap-2">
+                        <div
+                          className={`h-2 w-2 rounded-full ${getContributionTypeColor(type)}`}
+                        />
+                        <span className="text-sm text-gray-600">{type}</span>
+                      </div>
+                      <span className="text-sm font-semibold text-gray-700">
+                        {formatBudget(amount)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Revenue by Donor */}
+            {revenue && donorContributions.length > 0 && (
+              <div className="mt-4">
+                <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
+                  Revenue by Donor
+                </span>
+                <div className="mt-2 space-y-1.5">
+                  {displayedDonors.map((contrib) => {
+                    const typeEntries = Object.entries(contrib)
+                      .filter(([key]) => key !== "donor" && key !== "total")
+                      .sort(
+                        (a, b) =>
+                          getContributionTypeOrder(a[0]) -
+                          getContributionTypeOrder(b[0])
+                      ) as [string, number][];
+                    const normalizedWidth = (contrib.total / maxDonorTotal) * 100;
+
+                    return (
+                      <div
+                        key={contrib.donor}
+                        className="flex items-center gap-2"
+                      >
+                        <span className="w-20 flex-shrink-0 truncate text-left text-xs font-medium text-gray-700">
+                          {contrib.donor.replace(
+                            "United Kingdom of Great Britain and Northern Ireland",
+                            "UK"
+                          ).replace("United States of America", "USA")}
+                        </span>
+                        <div className="flex flex-1 flex-col gap-px">
+                          <div
+                            className="flex h-2 overflow-hidden rounded-sm"
+                            style={{ width: `${normalizedWidth}%` }}
+                          >
+                            {typeEntries.map(([type, amount]) => {
+                              const typePercentage =
+                                (amount / contrib.total) * 100;
+                              return typePercentage > 0 ? (
+                                <div
+                                  key={type}
+                                  className={`${getContributionTypeColor(type)} transition-all`}
+                                  style={{ width: `${typePercentage}%` }}
+                                />
+                              ) : null;
+                            })}
+                          </div>
+                        </div>
+                        <div className="w-20 flex-shrink-0 text-right text-xs text-gray-500">
+                          {formatBudgetFixed(contrib.total)}
+                        </div>
+                      </div>
+                    );
+                  })}
+
+                  {!showAllDonors && donorContributions.length > 10 && (
+                    <button
+                      onClick={() => setShowAllDonors(true)}
+                      className="mt-2 text-xs text-gray-600 underline hover:text-gray-900"
+                    >
+                      Show all {donorContributions.length} donors
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* Impact Section */}
           <div>
             <h3 className="mb-3 text-lg font-normal uppercase tracking-wider text-gray-900 sm:text-xl">
@@ -179,13 +340,13 @@ export function EntitySidebar({ entity, budget, onClose }: EntitySidebarProps) {
             {loadingImpacts ? (
               <p className="text-sm text-gray-500">Loading impacts...</p>
             ) : impacts.length > 0 ? (
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {impacts.map((impact) => (
                   <div
                     key={impact.id}
-                    className="flex items-start gap-2"
+                    className="flex items-start gap-3"
                   >
-                    <div className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-400" />
+                    <div className="mt-1 h-4 w-1 flex-shrink-0 rounded-sm bg-un-blue" />
                     <p className="text-sm leading-relaxed text-gray-700">
                       {impact.impact}
                     </p>

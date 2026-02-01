@@ -135,6 +135,7 @@ export function ContributorsTreemap() {
   const [selectedContributor, setSelectedContributor] =
     useState<Contributor | null>(null);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
     fetch(`${basePath}/data/donors.json`)
@@ -163,7 +164,14 @@ export function ContributorsTreemap() {
     );
   }
 
-  const groups = contributors.reduce(
+  // Filter contributors by search query
+  const filteredContributors = searchQuery.trim()
+    ? contributors.filter((c) =>
+        c.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : contributors;
+
+  const groups = filteredContributors.reduce(
     (acc, contributor) => {
       const contributions = getTotalContributions(contributor.contributions);
       if (contributions > 0) {
@@ -185,8 +193,39 @@ export function ContributorsTreemap() {
 
   if (sortedGroups.length === 0) {
     return (
-      <div className="flex h-[650px] w-full items-center justify-center">
-        <p className="text-lg text-gray-500">No contribution data available</p>
+      <div className="w-full">
+        {/* Search Input */}
+        <div className="mb-3">
+          <div className="relative w-full sm:w-64">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2.5">
+              <svg
+                className="h-3.5 w-3.5 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </div>
+            <input
+              type="text"
+              placeholder="Search contributors..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="block h-9 w-full rounded-none border-0 border-b border-gray-300 bg-transparent py-1.5 pl-8 pr-3 text-sm placeholder-gray-400 focus:border-gray-400 focus:outline-none focus:ring-0"
+            />
+          </div>
+        </div>
+        <div className="flex h-[650px] w-full items-center justify-center bg-gray-100">
+          <p className="text-lg text-gray-500">
+            {searchQuery.trim() ? "No contributors match your search" : "No contribution data available"}
+          </p>
+        </div>
       </div>
     );
   }
@@ -291,6 +330,9 @@ export function ContributorsTreemap() {
             side="top"
             sideOffset={8}
             className="max-w-xs border border-slate-200 bg-white text-slate-800 shadow-lg sm:max-w-sm"
+            hideWhenDetached
+            avoidCollisions={true}
+            collisionPadding={12}
           >
             <div className="max-w-xs p-1 text-center sm:max-w-sm">
               <p className="text-xs font-medium leading-tight sm:text-sm">
@@ -299,6 +341,12 @@ export function ContributorsTreemap() {
               <p className="mt-1 text-xs text-slate-500">{styles.label}</p>
               <p className="mt-1 text-xs font-semibold text-slate-600">
                 {formatBudget(stateContributions)}
+              </p>
+              <p className="mt-1 hidden text-xs text-slate-400 sm:block">
+                Click to view contributor details
+              </p>
+              <p className="mt-1 text-xs text-slate-400 sm:hidden">
+                Tap to view details
               </p>
             </div>
           </TooltipContent>
@@ -309,16 +357,32 @@ export function ContributorsTreemap() {
 
   return (
     <div className="w-full">
-      {/* Legend */}
-      <div className="mb-3 flex flex-wrap items-center gap-x-5 gap-y-2">
-        {CONTRIBUTION_TYPES.map(({ type, label, opacity }) => (
-          <div key={type} className="flex items-center gap-2">
-            <div
-              className={`h-3 w-5 rounded-sm bg-un-blue-muted ${opacity}`}
-            />
-            <span className="text-xs text-gray-600">{label}</span>
+      {/* Search Input */}
+      <div className="mb-3">
+        <div className="relative w-full sm:w-64">
+          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2.5">
+            <svg
+              className="h-3.5 w-3.5 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
           </div>
-        ))}
+          <input
+            type="text"
+            placeholder="Search contributors..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="block h-9 w-full rounded-none border-0 border-b border-gray-300 bg-transparent py-1.5 pl-8 pr-3 text-sm placeholder-gray-400 focus:border-gray-400 focus:outline-none focus:ring-0"
+          />
+        </div>
       </div>
 
       <div className="relative h-[650px] w-full bg-gray-100">
@@ -385,6 +449,18 @@ export function ContributorsTreemap() {
               );
             });
           })()}
+      </div>
+
+      {/* Revenue Type Legend */}
+      <div className="mt-3 flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap gap-3">
+          {CONTRIBUTION_TYPES.filter(t => t.type !== "Other").map(({ type, label, opacity }) => (
+            <div key={type} className="flex items-center gap-1.5">
+              <div className={`h-3 w-3 rounded-sm bg-un-blue-muted ${opacity}`} />
+              <span className="text-xs text-gray-600">{label}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
       {selectedContributor && (

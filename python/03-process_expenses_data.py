@@ -8,7 +8,7 @@ from utils import normalize_entity, parse_amount
 YEAR = 2023
 
 
-df_system = pd.read_csv("data/downloads/budget/un-system-expenses.csv")
+df_system = pd.read_csv("data/budget/un-system-expenses.csv")
 df_system = df_system[df_system["calendar_year"] == YEAR]
 df_system["amount"] = df_system["amount"].apply(parse_amount)
 df_system["agency"] = df_system["agency"].apply(normalize_entity)
@@ -17,7 +17,7 @@ df_system = (
     .rename(columns={"agency": "entity"})
     .reset_index(drop=True)
 )
-df_secretariat = pd.read_csv("data/downloads/budget/un-secretariat-expenses.csv")
+df_secretariat = pd.read_csv("data/budget/un-secretariat-expenses.csv")
 df_secretariat = (
     df_secretariat.groupby("ENTITY")
     .agg({"AMOUNT": "sum"})
@@ -53,7 +53,7 @@ df_combined["source"] = df_combined.apply(
 )
 assert abs(df_combined["amount"].sum() - system_total) < 2e9
 
-entities = json.loads(Path("public/entities.json").read_text())
+entities = json.loads(Path("public/data/entities.json").read_text())
 
 a = set([a["entity"] for a in entities])
 b = set(df_combined["entity"].values)
@@ -62,5 +62,5 @@ print("budget items that are not in entities:", b.difference(a))
 
 df_combined["year"] = YEAR
 df_combined[["entity", "source", "year", "amount"]].to_json(
-    "public/data/spending.json", orient="records", indent=2
+    "public/data/entity-spending.json", orient="records", indent=2
 )
