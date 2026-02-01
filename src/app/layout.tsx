@@ -1,6 +1,7 @@
 import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata, Viewport } from "next";
 import { Roboto } from "next/font/google";
+// Note: @undp/data-viz styles are bundled with the components
 import "./globals.css";
 
 // https://fonts.google.com/specimen/Roboto

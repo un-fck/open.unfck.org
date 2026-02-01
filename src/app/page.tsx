@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { ContributorsTreemap } from "@/components/ContributorsTreemap";
+import { CountryMap } from "@/components/CountryMap";
 import { DataPlaceholder } from "@/components/DataPlaceholder";
 import { EntitiesTreemap } from "@/components/EntitiesTreemap";
 import { ExpandableCard } from "@/components/ExpandableCard";
@@ -67,30 +68,7 @@ export default function Home() {
           description="UN System organizations implement activities across the world. Explore where funds are spent geographically, from global programmes to country-level operations."
         />
         <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 lg:px-16">
-          <div className="grid gap-6 lg:grid-cols-3">
-            <div className="lg:col-span-2">
-              <DataPlaceholder
-                title="World Map"
-                description="Spending by country"
-                height="h-80"
-                type="map"
-              />
-            </div>
-            <div className="space-y-6">
-              <DataPlaceholder
-                title="Entities"
-                description="By country"
-                height="h-36"
-                type="chart"
-              />
-              <DataPlaceholder
-                title="Year Trend"
-                description="By region"
-                height="h-36"
-                type="chart"
-              />
-            </div>
-          </div>
+          <CountryMap />
         </section>
 
         {/* SDGs Section */}
