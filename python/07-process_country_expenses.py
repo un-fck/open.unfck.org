@@ -144,9 +144,13 @@ for iso3, group in df.groupby("iso3"):
     # Get country name
     name = cc.convert(iso3, to="name_short", not_found=iso3)
     
+    # Get region from source data (use the most common region for this country)
+    region = group["region"].mode().iloc[0] if not group["region"].mode().empty else "Unknown"
+    
     country_data.append({
         "iso3": iso3,
         "name": name,
+        "region": region,
         "lat": coords[0],
         "long": coords[1],
         "total": round(total, 2),
