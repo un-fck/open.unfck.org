@@ -34,7 +34,9 @@ export default function Home() {
         {/* Welcome Section */}
         <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 md:py-16 lg:px-16">
           <p className="max-w-3xl text-base leading-relaxed text-gray-700 md:text-lg">
-            The Transparency Portal opens up financial data from across the UN System. Explore who contributes, which organizations are funded, where resources are deployed, and which goals they support.
+            The Transparency Portal opens up financial data from across the UN System.
+            <br />
+            Explore who contributes, which organizations are funded, where resources are deployed, and which goals they support.
           </p>
         </section>
 

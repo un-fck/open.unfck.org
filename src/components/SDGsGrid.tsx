@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import SDGModal from "./SDGModal";
 import SDGExpensesTreemap from "./SDGExpensesTreemap";
+import { YearSlider } from "@/components/YearSlider";
 import {
   Tooltip,
   TooltipContent,
@@ -11,11 +12,16 @@ import {
 } from "@/components/ui/tooltip";
 import { Switch } from "@/components/ui/switch";
 import { formatBudget } from "@/lib/entities";
+import { generateYearRange, YEAR_RANGES } from "@/lib/data";
 import {
   SDG,
   SDGExpensesData,
   SDG_COLORS,
 } from "@/lib/sdgs";
+
+const SDG_YEARS = generateYearRange(YEAR_RANGES.sdgExpenses.min, YEAR_RANGES.sdgExpenses.max);
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export default function SDGsGrid() {
   const [sdgs, setSdgs] = useState<SDG[]>([]);
@@ -27,18 +33,19 @@ export default function SDGsGrid() {
     null
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [selectedYear, setSelectedYear] = useState<number>(YEAR_RANGES.sdgExpenses.default);
 
   useEffect(() => {
-    fetch("/data/sdgs.json")
+    fetch(`${basePath}/data/sdgs.json`)
       .then((res) => res.json())
       .then(setSdgs);
   }, []);
 
   useEffect(() => {
-    fetch("/data/sdg-expenses.json")
+    fetch(`${basePath}/data/sdg-expenses-${selectedYear}.json`)
       .then((res) => res.json())
       .then(setExpensesData);
-  }, []);
+  }, [selectedYear]);
 
   const toggleView = () => {
     if (isAnimating) return;
@@ -132,29 +139,38 @@ export default function SDGsGrid() {
             )}
           </div>
 
-          {/* Goals/Spending Toggle */}
-          <div className="flex h-9 items-center gap-2">
-            <span
-              className={`text-sm ${!showSpending ? "font-medium text-gray-900" : "text-gray-500"}`}
-            >
-              Goals
-            </span>
-            <Switch
-              checked={showSpending}
-              onCheckedChange={(checked) => {
-                if (isAnimating) return;
-                setIsAnimating(true);
-                setDisplaySpending(checked);
-                setTimeout(() => setShowSpending(checked), 400);
-                setTimeout(() => setIsAnimating(false), 800);
-              }}
-              aria-label="Toggle between goals and spending"
+          <div className="flex items-center gap-4">
+            {/* Year Slider */}
+            <YearSlider
+              years={SDG_YEARS}
+              selectedYear={selectedYear}
+              onChange={setSelectedYear}
             />
-            <span
-              className={`text-sm ${showSpending ? "font-medium text-gray-900" : "text-gray-500"}`}
-            >
-              Spending
-            </span>
+
+            {/* Goals/Spending Toggle */}
+            <div className="flex h-9 items-center gap-2">
+              <span
+                className={`text-sm ${!showSpending ? "font-medium text-gray-900" : "text-gray-500"}`}
+              >
+                Goals
+              </span>
+              <Switch
+                checked={showSpending}
+                onCheckedChange={(checked) => {
+                  if (isAnimating) return;
+                  setIsAnimating(true);
+                  setDisplaySpending(checked);
+                  setTimeout(() => setShowSpending(checked), 400);
+                  setTimeout(() => setIsAnimating(false), 800);
+                }}
+                aria-label="Toggle between goals and spending"
+              />
+              <span
+                className={`text-sm ${showSpending ? "font-medium text-gray-900" : "text-gray-500"}`}
+              >
+                Spending
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -169,6 +185,7 @@ export default function SDGsGrid() {
             <SDGExpensesTreemap
               onSDGClick={handleSDGClick}
               searchQuery={searchQuery}
+              year={selectedYear}
             />
           ) : (
             <>

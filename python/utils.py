@@ -41,9 +41,11 @@ DONOR_CHAR_FIXES = {
 }
 
 
-def parse_amount(amount_str: str) -> float:
+def parse_amount(amount_str: str | float) -> float:
     """Parse amount string to float, removing spaces and commas."""
-    return float(amount_str.replace(",", "").replace(" ", "").strip())
+    if isinstance(amount_str, (int, float)):
+        return float(amount_str)
+    return float(str(amount_str).replace(",", "").replace(" ", "").strip())
 
 
 def normalize_entity(entity: str) -> str:

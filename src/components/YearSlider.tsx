@@ -1,0 +1,159 @@
+"use client";
+
+import { useCallback, useRef, useState, useEffect } from "react";
+
+interface YearSliderProps {
+  years: number[];
+  selectedYear: number;
+  onChange: (year: number) => void;
+  disabled?: boolean;
+}
+
+export function YearSlider({
+  years,
+  selectedYear,
+  onChange,
+  disabled = false,
+}: YearSliderProps) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  // Track the visual position during drag (only commits on release)
+  const [dragYear, setDragYear] = useState<number | null>(null);
+
+  const sortedYears = [...years].sort((a, b) => a - b);
+  const minYear = sortedYears[0];
+  const maxYear = sortedYears[sortedYears.length - 1];
+
+  // The displayed year: during drag show dragYear, otherwise selectedYear
+  const displayYear = dragYear ?? selectedYear;
+
+  const getPositionFromYear = (year: number): number => {
+    if (sortedYears.length <= 1) return 50;
+    const index = sortedYears.indexOf(year);
+    if (index === -1) return 50;
+    return (index / (sortedYears.length - 1)) * 100;
+  };
+
+  const getYearFromPosition = useCallback(
+    (clientX: number): number => {
+      if (!trackRef.current || sortedYears.length <= 1) return selectedYear;
+
+      const rect = trackRef.current.getBoundingClientRect();
+      const position = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+      const index = Math.round(position * (sortedYears.length - 1));
+      return sortedYears[index];
+    },
+    [sortedYears, selectedYear]
+  );
+
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      if (disabled) return;
+      e.preventDefault();
+      setIsDragging(true);
+      const year = getYearFromPosition(e.clientX);
+      setDragYear(year);
+    },
+    [disabled, getYearFromPosition]
+  );
+
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (!isDragging || disabled) return;
+      const year = getYearFromPosition(e.clientX);
+      setDragYear(year);
+    },
+    [isDragging, disabled, getYearFromPosition]
+  );
+
+  const handleMouseUp = useCallback(() => {
+    if (isDragging && dragYear !== null && dragYear !== selectedYear) {
+      onChange(dragYear);
+    }
+    setIsDragging(false);
+    setDragYear(null);
+  }, [isDragging, dragYear, selectedYear, onChange]);
+
+  useEffect(() => {
+    if (isDragging) {
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mouseup", handleMouseUp);
+      return () => {
+        window.removeEventListener("mousemove", handleMouseMove);
+        window.removeEventListener("mouseup", handleMouseUp);
+      };
+    }
+  }, [isDragging, handleMouseMove, handleMouseUp]);
+
+  // Touch support
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      if (disabled) return;
+      setIsDragging(true);
+      const touch = e.touches[0];
+      const year = getYearFromPosition(touch.clientX);
+      setDragYear(year);
+    },
+    [disabled, getYearFromPosition]
+  );
+
+  const handleTouchMove = useCallback(
+    (e: TouchEvent) => {
+      if (!isDragging || disabled) return;
+      const touch = e.touches[0];
+      const year = getYearFromPosition(touch.clientX);
+      setDragYear(year);
+    },
+    [isDragging, disabled, getYearFromPosition]
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    if (isDragging && dragYear !== null && dragYear !== selectedYear) {
+      onChange(dragYear);
+    }
+    setIsDragging(false);
+    setDragYear(null);
+  }, [isDragging, dragYear, selectedYear, onChange]);
+
+  useEffect(() => {
+    if (isDragging) {
+      window.addEventListener("touchmove", handleTouchMove);
+      window.addEventListener("touchend", handleTouchEnd);
+      return () => {
+        window.removeEventListener("touchmove", handleTouchMove);
+        window.removeEventListener("touchend", handleTouchEnd);
+      };
+    }
+  }, [isDragging, handleTouchMove, handleTouchEnd]);
+
+  const thumbPosition = getPositionFromYear(displayYear);
+
+  if (sortedYears.length <= 1) {
+    return null;
+  }
+
+  return (
+    <div className="flex h-9 items-center gap-3">
+      <span className="text-xs text-gray-400">{minYear}</span>
+      <div
+        ref={trackRef}
+        className={`relative h-0.5 w-24 cursor-pointer bg-gray-300 sm:w-32 ${
+          disabled ? "cursor-not-allowed opacity-50" : ""
+        }`}
+        onMouseDown={handleMouseDown}
+        onTouchStart={handleTouchStart}
+      >
+        {/* Thumb */}
+        <div
+          className={`absolute top-1/2 h-4 w-0.5 -translate-x-1/2 -translate-y-1/2 ${
+            isDragging ? "bg-un-blue" : "bg-gray-600"
+          } ${disabled ? "" : "hover:bg-un-blue"}`}
+          style={{ left: `${thumbPosition}%` }}
+        />
+      </div>
+      <span className="min-w-[3ch] text-sm font-medium text-gray-900">
+        {displayYear}
+      </span>
+    </div>
+  );
+}

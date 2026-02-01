@@ -1,4 +1,4 @@
-"""Generate country-expenses.json with spending by country and entity breakdown."""
+"""Generate country-expenses-{year}.json with spending by country and entity breakdown."""
 
 import json
 from pathlib import Path
@@ -7,7 +7,8 @@ import country_converter as coco
 import pandas as pd
 from utils import normalize_entity
 
-YEAR = 2023
+# Year range for country expenses
+YEARS = range(2017, 2025)  # 2017-2024
 
 # Initialize country converter
 cc = coco.CountryConverter()
@@ -97,6 +98,9 @@ COUNTRY_CENTROIDS = {
 def get_iso3(country_name: str) -> str | None:
     """Convert country name to ISO3 code using country_converter."""
     result = cc.convert(country_name, to="ISO3", not_found=None)
+    # Handle cases where multiple matches are returned as a list
+    if isinstance(result, list):
+        return result[0] if result else None
     return result if result else None
 
 
@@ -105,70 +109,58 @@ def get_coordinates(iso3: str) -> tuple[float, float] | None:
     return COUNTRY_CENTROIDS.get(iso3)
 
 
-# Load and filter data
-print(f"Loading expenses data for year {YEAR}...")
-df = pd.read_csv("data/expenses-by-country.csv")
-df = df[df["calendar_year"] == YEAR]
-df = df[df["location_type"] == "COU"]  # Only country-level data
+# Load all data
+print("Loading expenses data...")
+df_all = pd.read_csv("data/expenses-by-country.csv")
+df_all = df_all[df_all["location_type"] == "COU"]  # Only country-level data
+df_all["iso3"] = df_all["country/territory"].apply(get_iso3)
+df_all = df_all[df_all["iso3"].notna()]
+df_all["entity"] = df_all["agency"].apply(normalize_entity)
 
-print(f"Found {len(df)} country-level expense records")
 
-# Convert country names to ISO3 codes
-df["iso3"] = df["country/territory"].apply(get_iso3)
-
-# Report unmapped countries
-unmapped = df[df["iso3"].isna()]["country/territory"].unique()
-if len(unmapped) > 0:
-    print(f"Warning: Could not map {len(unmapped)} countries: {list(unmapped)[:10]}...")
-
-# Filter out unmapped countries
-df = df[df["iso3"].notna()]
-
-# Normalize entity names
-df["entity"] = df["agency"].apply(normalize_entity)
-
-# Aggregate by country and entity
-country_data = []
-skipped = []
-for iso3, group in df.groupby("iso3"):
-    coords = get_coordinates(iso3)
-    if coords is None:
-        skipped.append(iso3)
-        continue
+def process_year(year: int) -> None:
+    """Process and output country expenses for a single year."""
+    df = df_all[df_all["calendar_year"] == year]
     
-    total = group["amount"].sum()
-    entities = group.groupby("entity")["amount"].sum().to_dict()
-    # Sort entities by amount descending
-    entities = dict(sorted(entities.items(), key=lambda x: x[1], reverse=True))
+    if len(df) == 0:
+        print(f"{year}: No data available")
+        return
     
-    # Get country name
-    name = cc.convert(iso3, to="name_short", not_found=iso3)
+    # Aggregate by country and entity
+    country_data = []
+    skipped = []
+    for iso3, group in df.groupby("iso3"):
+        coords = get_coordinates(iso3)
+        if coords is None:
+            skipped.append(iso3)
+            continue
+        
+        total = group["amount"].sum()
+        entities = group.groupby("entity")["amount"].sum().to_dict()
+        entities = dict(sorted(entities.items(), key=lambda x: x[1], reverse=True))
+        
+        name = cc.convert(iso3, to="name_short", not_found=iso3)
+        region = group["region"].mode().iloc[0] if not group["region"].mode().empty else "Unknown"
+        
+        country_data.append({
+            "iso3": iso3,
+            "name": name,
+            "region": region,
+            "lat": coords[0],
+            "long": coords[1],
+            "total": round(total, 2),
+            "entities": {k: round(v, 2) for k, v in entities.items()},
+        })
     
-    # Get region from source data (use the most common region for this country)
-    region = group["region"].mode().iloc[0] if not group["region"].mode().empty else "Unknown"
+    # Sort by total spending descending
+    country_data = sorted(country_data, key=lambda x: x["total"], reverse=True)
     
-    country_data.append({
-        "iso3": iso3,
-        "name": name,
-        "region": region,
-        "lat": coords[0],
-        "long": coords[1],
-        "total": round(total, 2),
-        "entities": {k: round(v, 2) for k, v in entities.items()},
-    })
+    total_spending = sum(c["total"] for c in country_data)
+    output_path = Path(f"public/data/country-expenses-{year}.json")
+    output_path.write_text(json.dumps(country_data, indent=2))
+    print(f"{year}: {len(country_data)} countries, ${total_spending/1e9:.1f}B -> {output_path}")
 
-if skipped:
-    print(f"Skipped {len(skipped)} countries without coordinates: {skipped[:10]}")
 
-# Sort by total spending descending
-country_data = sorted(country_data, key=lambda x: x["total"], reverse=True)
-
-print(f"Processed {len(country_data)} countries")
-print(f"Top 5 countries by spending:")
-for entry in country_data[:5]:
-    print(f"  {entry['iso3']} ({entry['name']}): ${entry['total']:,.0f}")
-
-# Write output
-output_path = Path("public/data/country-expenses.json")
-output_path.write_text(json.dumps(country_data, indent=2))
-print(f"Wrote {output_path}")
+# Process all years
+for year in YEARS:
+    process_year(year)

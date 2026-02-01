@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ContributorSidebar } from "@/components/ContributorSidebar";
+import { YearSlider } from "@/components/YearSlider";
 import {
   Tooltip,
   TooltipContent,
@@ -18,6 +19,7 @@ import {
   getStatusStyle,
   getTotalContributions,
 } from "@/lib/contributors";
+import { generateYearRange, YEAR_RANGES } from "@/lib/data";
 
 interface Rect {
   x: number;
@@ -129,6 +131,8 @@ function slice(
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
+const DONOR_YEARS = generateYearRange(YEAR_RANGES.donors.min, YEAR_RANGES.donors.max);
+
 export function ContributorsTreemap() {
   const [contributors, setContributors] = useState<Contributor[]>([]);
   const [hoveredState, setHoveredState] = useState<string | null>(null);
@@ -136,9 +140,11 @@ export function ContributorsTreemap() {
     useState<Contributor | null>(null);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [selectedYear, setSelectedYear] = useState<number>(YEAR_RANGES.donors.default);
 
   useEffect(() => {
-    fetch(`${basePath}/data/donors.json`)
+    setLoading(true);
+    fetch(`${basePath}/data/donors-${selectedYear}.json`)
       .then((res) => res.json())
       .then((data: Record<string, ContributorData>) => {
         const parsed = Object.entries(data).map(([name, info]) => ({
@@ -154,7 +160,7 @@ export function ContributorsTreemap() {
         console.error("Failed to load donors data:", err);
         setLoading(false);
       });
-  }, []);
+  }, [selectedYear]);
 
   if (loading) {
     return (
@@ -194,8 +200,8 @@ export function ContributorsTreemap() {
   if (sortedGroups.length === 0) {
     return (
       <div className="w-full">
-        {/* Search Input */}
-        <div className="mb-3">
+        {/* Filter Controls */}
+        <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div className="relative w-full sm:w-64">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2.5">
               <svg
@@ -220,6 +226,11 @@ export function ContributorsTreemap() {
               className="block h-9 w-full rounded-none border-0 border-b border-gray-300 bg-transparent py-1.5 pl-8 pr-3 text-sm placeholder-gray-400 focus:border-gray-400 focus:outline-none focus:ring-0"
             />
           </div>
+          <YearSlider
+            years={DONOR_YEARS}
+            selectedYear={selectedYear}
+            onChange={setSelectedYear}
+          />
         </div>
         <div className="flex h-[650px] w-full items-center justify-center bg-gray-100">
           <p className="text-lg text-gray-500">
@@ -357,8 +368,9 @@ export function ContributorsTreemap() {
 
   return (
     <div className="w-full">
-      {/* Search Input */}
-      <div className="mb-3">
+      {/* Filter Controls */}
+      <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        {/* Search Input */}
         <div className="relative w-full sm:w-64">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2.5">
             <svg
@@ -383,6 +395,13 @@ export function ContributorsTreemap() {
             className="block h-9 w-full rounded-none border-0 border-b border-gray-300 bg-transparent py-1.5 pl-8 pr-3 text-sm placeholder-gray-400 focus:border-gray-400 focus:outline-none focus:ring-0"
           />
         </div>
+
+        {/* Year Slider */}
+        <YearSlider
+          years={DONOR_YEARS}
+          selectedYear={selectedYear}
+          onChange={setSelectedYear}
+        />
       </div>
 
       <div className="relative h-[650px] w-full bg-gray-100">

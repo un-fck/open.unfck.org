@@ -5,8 +5,10 @@ import { X } from "lucide-react";
 import { HybridMap } from "@undp/data-viz";
 import { CountrySidebar } from "@/components/CountrySidebar";
 import { CountryTreemap } from "@/components/CountryTreemap";
+import { YearSlider } from "@/components/YearSlider";
 import { Switch } from "@/components/ui/switch";
 import { formatBudget } from "@/lib/entities";
+import { generateYearRange, YEAR_RANGES } from "@/lib/data";
 
 interface CountryExpense {
   iso3: string;
@@ -34,6 +36,8 @@ interface HybridMapDataPoint {
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
+const COUNTRY_YEARS = generateYearRange(YEAR_RANGES.countryExpenses.min, YEAR_RANGES.countryExpenses.max);
+
 export function CountryMap() {
   const [countryData, setCountryData] = useState<CountryExpense[]>([]);
   const [selectedCountry, setSelectedCountry] = useState<{
@@ -45,9 +49,11 @@ export function CountryMap() {
   const [loading, setLoading] = useState(true);
   const [showMap, setShowMap] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedYear, setSelectedYear] = useState<number>(YEAR_RANGES.countryExpenses.default);
 
   useEffect(() => {
-    fetch(`${basePath}/data/country-expenses.json`)
+    setLoading(true);
+    fetch(`${basePath}/data/country-expenses-${selectedYear}.json`)
       .then((res) => res.json())
       .then((data: CountryExpense[]) => {
         setCountryData(data);
@@ -57,7 +63,7 @@ export function CountryMap() {
         console.error("Failed to load country data:", err);
         setLoading(false);
       });
-  }, []);
+  }, [selectedYear]);
 
   if (loading) {
     return (
@@ -177,23 +183,32 @@ export function CountryMap() {
             )}
           </div>
 
-          {/* View Toggle */}
-          <div className="flex h-9 items-center gap-2">
-            <span
-              className={`text-sm ${!showMap ? "font-medium text-gray-900" : "text-gray-500"}`}
-            >
-              Budget chart
-            </span>
-            <Switch
-              checked={showMap}
-              onCheckedChange={setShowMap}
-              aria-label="Toggle between budget chart and map"
+          <div className="flex items-center gap-4">
+            {/* Year Slider */}
+            <YearSlider
+              years={COUNTRY_YEARS}
+              selectedYear={selectedYear}
+              onChange={setSelectedYear}
             />
-            <span
-              className={`text-sm ${showMap ? "font-medium text-gray-900" : "text-gray-500"}`}
-            >
-              Map
-            </span>
+
+            {/* View Toggle */}
+            <div className="flex h-9 items-center gap-2">
+              <span
+                className={`text-sm ${!showMap ? "font-medium text-gray-900" : "text-gray-500"}`}
+              >
+                Budget chart
+              </span>
+              <Switch
+                checked={showMap}
+                onCheckedChange={setShowMap}
+                aria-label="Toggle between budget chart and map"
+              />
+              <span
+                className={`text-sm ${showMap ? "font-medium text-gray-900" : "text-gray-500"}`}
+              >
+                Map
+              </span>
+            </div>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-"""Generate donors.json with contributions by entity and payment status."""
+"""Generate donors-{year}.json with contributions by entity and payment status."""
 
 import json
 from datetime import datetime
@@ -7,7 +7,8 @@ import requests
 from bs4 import BeautifulSoup
 from utils import load_donor_revenue, normalize_rev_type
 
-YEAR = 2024
+# Year range for donor data
+YEARS = range(2013, 2025)  # 2013-2024
 USER_AGENT = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
 
 # Mappings for name normalization
@@ -78,33 +79,44 @@ member_norm = [STATE_MAPPING.get(s, s) for s in member_states]
 observer_norm = [STATE_MAPPING.get(s, s) for s in observer_states]
 state_status = {s: "member" for s in member_norm} | {s: "observer" for s in observer_norm}
 
-# Load donor data
-df = load_donor_revenue(year=YEAR)
-donor_names = set(df["government_donor"].unique())
-for donor in donor_names:
+# Load all donor data to build complete state status mapping
+df_all = load_donor_revenue(year=None)
+all_donor_names = set(df_all["government_donor"].unique())
+for donor in all_donor_names:
     if donor not in state_status:
         state_status[donor] = "nonmember"
 
-# Build contributions by donor
-donor_contributions = {}
-for donor in donor_names:
-    ddf = df[df["government_donor"] == donor]
-    contributions = {}
-    for _, row in ddf.iterrows():
-        entity, rev_type, amount = row["entity"], row["rev_type"], row["amount"]
-        contributions.setdefault(entity, {}).setdefault(rev_type, 0)
-        contributions[entity][rev_type] += amount
+# Process each year
+for year in YEARS:
+    df = load_donor_revenue(year=year)
+    donor_names = set(df["government_donor"].unique())
     
-    entry = {"status": state_status[donor], "contributions": contributions}
-    if donor in payment_status:
-        entry.update(payment_status[donor])
-    elif state_status[donor] in ["member", "observer"]:
-        entry["payment_status"] = "missing"
-    donor_contributions[donor] = entry
+    # Build contributions by donor for this year
+    donor_contributions = {}
+    for donor in donor_names:
+        ddf = df[df["government_donor"] == donor]
+        contributions = {}
+        for _, row in ddf.iterrows():
+            entity, rev_type, amount = row["entity"], row["rev_type"], row["amount"]
+            contributions.setdefault(entity, {}).setdefault(rev_type, 0)
+            contributions[entity][rev_type] += amount
+        
+        entry = {"status": state_status[donor], "contributions": contributions}
+        # Only include payment status for latest year
+        if year == 2024:
+            if donor in payment_status:
+                entry.update(payment_status[donor])
+            elif state_status[donor] in ["member", "observer"]:
+                entry["payment_status"] = "missing"
+        donor_contributions[donor] = entry
+    
+    output_file = f"public/data/donors-{year}.json"
+    with open(output_file, "w") as f:
+        json.dump(donor_contributions, f, indent=2)
+    print(f"Wrote {output_file} with {len(donor_contributions)} donors")
 
-print(f"Punctual: {sum(1 for d in donor_contributions.values() if d.get('payment_status') == 'punctual')}")
-print(f"Late: {sum(1 for d in donor_contributions.values() if d.get('payment_status') == 'late')}")
-print(f"Missing: {sum(1 for d in donor_contributions.values() if d.get('payment_status') == 'missing')}")
-
-with open("public/data/donors.json", "w") as f:
-    json.dump(donor_contributions, f, indent=2)
+# Summary for latest year
+df_latest = load_donor_revenue(year=2024)
+print(f"\n2024 stats:")
+print(f"Punctual: {sum(1 for d in payment_status.values() if d.get('payment_status') == 'punctual')}")
+print(f"Late: {sum(1 for d in payment_status.values() if d.get('payment_status') == 'late')}")

@@ -10,6 +10,7 @@ import {
 } from "@/lib/systemGroupings";
 import { formatBudget } from "@/lib/entities";
 import { EntitySidebar } from "@/components/EntitySidebar";
+import { YearSlider } from "@/components/YearSlider";
 import {
   Tooltip,
   TooltipContent,
@@ -23,6 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
+import { generateYearRange, YEAR_RANGES } from "@/lib/data";
 
 interface Rect {
   x: number;
@@ -118,6 +120,9 @@ function slice(
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
+const SPENDING_YEARS = generateYearRange(YEAR_RANGES.entitySpending.min, YEAR_RANGES.entitySpending.max);
+const REVENUE_YEARS = generateYearRange(YEAR_RANGES.entityRevenue.min, YEAR_RANGES.entityRevenue.max);
+
 export function EntitiesTreemap() {
   const [entities, setEntities] = useState<Entity[]>([]);
   const [spendingData, setSpendingData] = useState<Record<string, number>>({});
@@ -130,15 +135,28 @@ export function EntitiesTreemap() {
     new Set(Object.keys(systemGroupingStyles))
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [spendingYear, setSpendingYear] = useState<number>(YEAR_RANGES.entitySpending.default);
+  const [revenueYear, setRevenueYear] = useState<number>(YEAR_RANGES.entityRevenue.default);
 
+  // Current year based on mode
+  const currentYear = showRevenue ? revenueYear : spendingYear;
+  const currentYears = showRevenue ? REVENUE_YEARS : SPENDING_YEARS;
+  const setCurrentYear = showRevenue ? setRevenueYear : setSpendingYear;
+
+  // Load static entities data once
   useEffect(() => {
-    Promise.all([
-      fetch(`${basePath}/data/entities.json`).then((res) => res.json()),
-      fetch(`${basePath}/data/entity-spending.json`).then((res) => res.json()),
-      fetch(`${basePath}/data/entity-revenue.json`).then((res) => res.json()),
-    ])
-      .then(([entitiesData, spendingArray, revenueObj]: [Entity[], BudgetEntry[], Record<string, EntityRevenue>]) => {
-        setEntities(entitiesData);
+    fetch(`${basePath}/data/entities.json`)
+      .then((res) => res.json())
+      .then((data: Entity[]) => setEntities(data))
+      .catch((err) => console.error("Failed to load entities:", err));
+  }, []);
+
+  // Load spending data when spending year changes
+  useEffect(() => {
+    setLoading(true);
+    fetch(`${basePath}/data/entity-spending-${spendingYear}.json`)
+      .then((res) => res.json())
+      .then((spendingArray: BudgetEntry[]) => {
         const spendingLookup = spendingArray.reduce(
           (acc: Record<string, number>, entry: BudgetEntry) => {
             acc[entry.entity] = entry.amount;
@@ -147,14 +165,28 @@ export function EntitiesTreemap() {
           {}
         );
         setSpendingData(spendingLookup);
-        setRevenueData(revenueObj);
-        setLoading(false);
+        if (!showRevenue) setLoading(false);
       })
       .catch((err) => {
-        console.error("Failed to load data:", err);
-        setLoading(false);
+        console.error("Failed to load spending data:", err);
+        if (!showRevenue) setLoading(false);
       });
-  }, []);
+  }, [spendingYear, showRevenue]);
+
+  // Load revenue data when revenue year changes
+  useEffect(() => {
+    setLoading(true);
+    fetch(`${basePath}/data/entity-revenue-${revenueYear}.json`)
+      .then((res) => res.json())
+      .then((revenueObj: Record<string, EntityRevenue>) => {
+        setRevenueData(revenueObj);
+        if (showRevenue) setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to load revenue data:", err);
+        if (showRevenue) setLoading(false);
+      });
+  }, [revenueYear, showRevenue]);
 
   // Synthetic entities for revenue mode (CEB aggregates)
   const syntheticRevenueEntities: Entity[] = [
@@ -481,19 +513,28 @@ export function EntitiesTreemap() {
         )}
         </div>
 
-        {/* Revenue/Spending Toggle */}
-        <div className="flex h-9 items-center gap-2">
-          <span className={`text-sm ${showRevenue ? "font-medium text-gray-900" : "text-gray-500"}`}>
-            Revenue
-          </span>
-          <Switch
-            checked={!showRevenue}
-            onCheckedChange={(checked) => setShowRevenue(!checked)}
-            aria-label="Toggle between revenue and spending"
+        <div className="flex items-center gap-4">
+          {/* Year Slider */}
+          <YearSlider
+            years={currentYears}
+            selectedYear={currentYear}
+            onChange={setCurrentYear}
           />
-          <span className={`text-sm ${!showRevenue ? "font-medium text-gray-900" : "text-gray-500"}`}>
-            Spending
-          </span>
+
+          {/* Revenue/Spending Toggle */}
+          <div className="flex h-9 items-center gap-2">
+            <span className={`text-sm ${showRevenue ? "font-medium text-gray-900" : "text-gray-500"}`}>
+              Revenue
+            </span>
+            <Switch
+              checked={!showRevenue}
+              onCheckedChange={(checked) => setShowRevenue(!checked)}
+              aria-label="Toggle between revenue and spending"
+            />
+            <span className={`text-sm ${!showRevenue ? "font-medium text-gray-900" : "text-gray-500"}`}>
+              Spending
+            </span>
+          </div>
         </div>
       </div>
     </div>

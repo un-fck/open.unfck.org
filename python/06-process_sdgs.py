@@ -87,29 +87,45 @@ for _, row in df.iterrows():
 with open("public/data/sdgs.json", "w") as f:
     json.dump(goals, f, indent=2)
 
-# Process SDG expenses data
+# Process SDG expenses data by year
 df_expenses = pd.read_csv("data/expenses-by-sdg.csv")
 df_expenses["amount_parsed"] = df_expenses["amount"].apply(parse_amount)
+# SDG goal column is string, convert to int for comparison
+df_expenses["SDG goal"] = pd.to_numeric(df_expenses["SDG goal"], errors="coerce")
 
-# Group by SDG and entity
-sdg_expenses = {}
-for sdg_num in range(1, 18):
-    sdg_data = df_expenses[df_expenses["SDG goal"] == sdg_num]
-    entities = {}
-    for _, row in sdg_data.iterrows():
-        entity = row["entity code"]
-        amount = row["amount_parsed"]
-        if entity not in entities:
-            entities[entity] = 0
-        entities[entity] += amount
+# Year range for SDG expenses
+YEARS = range(2018, 2025)  # 2018-2024
 
-    sdg_expenses[str(sdg_num)] = {
-        "total": sum(entities.values()),
-        "entities": entities,
-    }
 
-with open("public/data/sdg-expenses.json", "w") as f:
-    json.dump(sdg_expenses, f, indent=2)
+def process_sdg_year(year: int) -> None:
+    """Process and output SDG expenses for a single year."""
+    df_year = df_expenses[df_expenses["calendar year"] == year]
+    
+    sdg_expenses = {}
+    for sdg_num in range(1, 18):
+        sdg_data = df_year[df_year["SDG goal"] == sdg_num]
+        entities = {}
+        for _, row in sdg_data.iterrows():
+            entity = row["entity code"]
+            amount = row["amount_parsed"]
+            if entity not in entities:
+                entities[entity] = 0
+            entities[entity] += amount
+
+        sdg_expenses[str(sdg_num)] = {
+            "total": sum(entities.values()),
+            "entities": entities,
+        }
+
+    total = sum(s["total"] for s in sdg_expenses.values())
+    output_file = f"public/data/sdg-expenses-{year}.json"
+    with open(output_file, "w") as f:
+        json.dump(sdg_expenses, f, indent=2)
+    print(f"{year}: ${total/1e9:.1f}B across 17 SDGs -> {output_file}")
+
+
+for year in YEARS:
+    process_sdg_year(year)
 
 exit()
 

@@ -11,7 +11,6 @@ import {
   SDGExpensesData,
   SDG_COLORS,
   SDG_SHORT_TITLES,
-  SDG_TITLES,
 } from "@/lib/sdgs";
 
 interface Rect {
@@ -159,24 +158,28 @@ function slice(
   }
 }
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 interface SDGExpensesTreemapProps {
   onSDGClick: (sdgNumber: number) => void;
   searchQuery?: string;
+  year: number;
 }
 
 export default function SDGExpensesTreemap({
   onSDGClick,
   searchQuery = "",
+  year,
 }: SDGExpensesTreemapProps) {
   const [expensesData, setExpensesData] = useState<SDGExpensesData | null>(
     null
   );
 
   useEffect(() => {
-    fetch("/data/sdg-expenses.json")
+    fetch(`${basePath}/data/sdg-expenses-${year}.json`)
       .then((res) => res.json())
       .then(setExpensesData);
-  }, []);
+  }, [year]);
 
   if (!expensesData) return <div>Loading...</div>;
 
@@ -364,9 +367,6 @@ export default function SDGExpensesTreemap({
                   <div className="max-w-xs p-1 text-center sm:max-w-sm">
                     <p className="text-sm font-bold leading-tight sm:text-base">
                       SDG {sdgNumber}: {shortTitle}
-                    </p>
-                    <p className="mt-1 text-xs leading-tight text-slate-600 sm:text-sm">
-                      {SDG_TITLES[sdgNumber]}
                     </p>
                     <p className="mt-1 text-xs font-semibold text-slate-600">
                       {formatBudget(sdgData.total)}
