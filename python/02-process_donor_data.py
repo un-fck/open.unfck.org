@@ -6,7 +6,7 @@ from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup
-from utils import clean_donor_name, load_donor_revenue
+from utils import clean_donor_name, load_donor_revenue, load_non_gov_donor_revenue
 
 # Year range for donor data
 YEARS = range(2013, 2025)  # 2013-2024
@@ -152,10 +152,36 @@ for year in YEARS:
             elif state_status[donor] in ["member", "observer"] and "payment_status" not in donor_contributions[clean_name]:
                 donor_contributions[clean_name]["payment_status"] = "missing"
     
+    gov_count = len(donor_contributions)
+    
+    # Process non-government donors for this year
+    df_non_gov = load_non_gov_donor_revenue(year=year)
+    non_gov_donor_names = set(df_non_gov["donor_name"].unique())
+    
+    for donor in non_gov_donor_names:
+        clean_name = clean_donor_name(donor)
+        ddf = df_non_gov[df_non_gov["donor_name"] == donor]
+        
+        # Initialize or get existing entry for this clean name
+        if clean_name not in donor_contributions:
+            donor_contributions[clean_name] = {
+                "status": "organization",
+                "contributions": {}
+            }
+        
+        # Merge contributions
+        contributions = donor_contributions[clean_name]["contributions"]
+        for _, row in ddf.iterrows():
+            entity, rev_type, amount = row["entity"], row["rev_type"], row["amount"]
+            contributions.setdefault(entity, {}).setdefault(rev_type, 0)
+            contributions[entity][rev_type] += amount
+    
+    non_gov_count = len(donor_contributions) - gov_count
+    
     output_file = f"public/data/donors-{year}.json"
     with open(output_file, "w") as f:
         json.dump(donor_contributions, f, indent=2)
-    print(f"Wrote {output_file} with {len(donor_contributions)} donors")
+    print(f"Wrote {output_file} with {gov_count} gov donors + {non_gov_count} org donors")
 
 # Summary for latest year
 df_latest = load_donor_revenue(year=2024)

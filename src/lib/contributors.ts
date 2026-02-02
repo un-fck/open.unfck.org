@@ -1,12 +1,14 @@
+export type ContributorStatus = "member" | "observer" | "nonmember" | "organization";
+
 export interface Contributor {
   name: string;
-  status: "member" | "observer" | "nonmember";
+  status: ContributorStatus;
   contributions: Record<string, Record<string, number>>;
   payment_status?: "punctual" | "late" | "missing";
 }
 
 export interface ContributorData {
-  status: "member" | "observer" | "nonmember";
+  status: ContributorStatus;
   contributions: Record<string, Record<string, number>>;
   payment_status?: "punctual" | "late" | "missing";
 }
@@ -34,6 +36,13 @@ export const getStatusStyle = (status: string) => {
         label: "Non-Member State",
         order: 3,
       };
+    case "organization":
+      return {
+        bgColor: "bg-faded-jade",
+        textColor: "text-white",
+        label: "Non-Government",
+        order: 4,
+      };
     default:
       return {
         bgColor: "bg-gray-500",
@@ -42,6 +51,10 @@ export const getStatusStyle = (status: string) => {
         order: 999,
       };
   }
+};
+
+export const isGovernmentDonor = (status: ContributorStatus): boolean => {
+  return status === "member" || status === "observer" || status === "nonmember";
 };
 
 export const getTotalContributions = (

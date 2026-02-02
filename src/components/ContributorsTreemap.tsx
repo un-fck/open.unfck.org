@@ -18,6 +18,7 @@ import {
   getDisplayName,
   getStatusStyle,
   getTotalContributions,
+  isGovernmentDonor,
 } from "@/lib/contributors";
 import { generateYearRange, YEAR_RANGES } from "@/lib/data";
 
@@ -49,14 +50,20 @@ const getContributionBreakdown = (
   return breakdown;
 };
 
-const GAP = 0.15;
+const DEFAULT_GAP = 0.15;
+
+interface GapConfig {
+  horizontal: number; // Gap for vertical splits (vertical lines between tiles)
+  vertical: number;   // Gap for horizontal splits (horizontal lines between tiles)
+}
 
 function squarify(
   items: TreemapItem[],
   x: number,
   y: number,
   width: number,
-  height: number
+  height: number,
+  gap: number | GapConfig = DEFAULT_GAP
 ): (Rect & { data: Contributor })[] {
   const total = items.reduce((sum, item) => sum + item.value, 0);
   if (total === 0 || items.length === 0) return [];
@@ -66,7 +73,11 @@ function squarify(
     normalizedValue: (item.value / total) * width * height,
   }));
 
-  return slice(normalized, x, y, width, height);
+  const gapConfig: GapConfig = typeof gap === 'number' 
+    ? { horizontal: gap, vertical: gap } 
+    : gap;
+
+  return slice(normalized, x, y, width, height, gapConfig);
 }
 
 function slice(
@@ -74,7 +85,8 @@ function slice(
   x: number,
   y: number,
   width: number,
-  height: number
+  height: number,
+  gap: GapConfig
 ): (Rect & { data: Contributor })[] {
   if (items.length === 0) return [];
   if (items.length === 1) {
@@ -103,27 +115,33 @@ function slice(
   );
 
   if (width >= height) {
-    const leftWidth = width * (leftSum / total) - GAP / 2;
+    // Vertical split - creates vertical gap lines (use horizontal gap)
+    const g = gap.horizontal;
+    const leftWidth = width * (leftSum / total) - g / 2;
     return [
-      ...slice(leftItems, x, y, leftWidth, height),
+      ...slice(leftItems, x, y, leftWidth, height, gap),
       ...slice(
         rightItems,
-        x + leftWidth + GAP,
+        x + leftWidth + g,
         y,
-        width - leftWidth - GAP,
-        height
+        width - leftWidth - g,
+        height,
+        gap
       ),
     ];
   } else {
-    const leftHeight = height * (leftSum / total) - GAP / 2;
+    // Horizontal split - creates horizontal gap lines (use vertical gap)
+    const g = gap.vertical;
+    const leftHeight = height * (leftSum / total) - g / 2;
     return [
-      ...slice(leftItems, x, y, width, leftHeight),
+      ...slice(leftItems, x, y, width, leftHeight, gap),
       ...slice(
         rightItems,
         x,
-        y + leftHeight + GAP,
+        y + leftHeight + g,
         width,
-        height - leftHeight - GAP
+        height - leftHeight - g,
+        gap
       ),
     ];
   }
@@ -177,14 +195,26 @@ export function ContributorsTreemap() {
       )
     : contributors;
 
-  // Build a flat list of all contributors with positive contributions
-  const allItems: TreemapItem[] = filteredContributors
+  // Split contributors into government and organization groups
+  const govItems: TreemapItem[] = filteredContributors
+    .filter((c) => isGovernmentDonor(c.status))
     .map((contributor) => ({
       value: getTotalContributions(contributor.contributions),
       data: contributor,
     }))
     .filter((item) => item.value > 0)
     .sort((a, b) => b.value - a.value);
+
+  const orgItems: TreemapItem[] = filteredContributors
+    .filter((c) => !isGovernmentDonor(c.status))
+    .map((contributor) => ({
+      value: getTotalContributions(contributor.contributions),
+      data: contributor,
+    }))
+    .filter((item) => item.value > 0)
+    .sort((a, b) => b.value - a.value);
+
+  const allItems = [...govItems, ...orgItems];
 
   if (allItems.length === 0) {
     return (
@@ -230,14 +260,37 @@ export function ContributorsTreemap() {
     );
   }
 
-  // Generate rects for all items as a single flat treemap (no grouping by status)
-  const rects = squarify(allItems, 0, 0, 100, 100);
+  // Calculate totals for proportional heights
+  const govTotal = govItems.reduce((sum, item) => sum + item.value, 0);
+  const orgTotal = orgItems.reduce((sum, item) => sum + item.value, 0);
+  const grandTotal = govTotal + orgTotal;
 
-  const renderContributor = (rect: Rect & { data: Contributor }, i: number) => {
+  // Calculate height percentages (with gap between sections)
+  const sectionGap = 0.5; // Gap between government and organization sections
+  const govHeightPct = grandTotal > 0 ? (govTotal / grandTotal) * (100 - sectionGap) : 0;
+  const orgHeightPct = grandTotal > 0 ? (orgTotal / grandTotal) * (100 - sectionGap) : 0;
+
+  // Generate rects for each group (in their own 0-100 coordinate space)
+  const govRects = govItems.length > 0 ? squarify(govItems, 0, 0, 100, 100, DEFAULT_GAP) : [];
+  // For org section: horizontal gaps (vertical lines) stay normal, 
+  // but vertical gaps (horizontal lines) need scaling since the section height is compressed
+  const orgVerticalGap = orgHeightPct > 0 ? Math.min(DEFAULT_GAP * (100 / orgHeightPct), 1.5) : DEFAULT_GAP;
+  const orgRects = orgItems.length > 0 ? squarify(orgItems, 0, 0, 100, 100, {
+    horizontal: DEFAULT_GAP,  // Vertical lines between tiles - no scaling needed
+    vertical: orgVerticalGap, // Horizontal lines between tiles - scale to compensate for compressed height
+  }) : [];
+
+  const renderContributor = (
+    rect: Rect & { data: Contributor },
+    i: number
+  ) => {
     // Color based on individual contributor's status
     const styles = getStatusStyle(rect.data.status);
     const stateContributions = getTotalContributions(rect.data.contributions);
     const breakdown = getContributionBreakdown(rect.data.contributions);
+    const isOrg = !isGovernmentDonor(rect.data.status);
+    
+    // Determine if label should show based on size
     const showLabel = rect.width > 3 && rect.height > 2;
     const isHovered = hoveredState === rect.data.name;
 
@@ -263,20 +316,24 @@ export function ContributorsTreemap() {
             onMouseEnter={() => setHoveredState(rect.data.name)}
             onMouseLeave={() => setHoveredState(null)}
           >
-            {/* Contribution type breakdown */}
-            <div className="flex h-full w-full flex-col">
-              {breakdownEntries.map(([type, amount], idx) => {
-                const percentage = (amount / total) * 100;
-                const opacity = getContributionTypeColor(type);
-                return (
-                  <div
-                    key={idx}
-                    className={`${styles.bgColor} ${opacity}`}
-                    style={{ height: `${percentage}%` }}
-                  />
-                );
-              })}
-            </div>
+            {/* For organizations: solid color with opacity-60 (matching voluntary earmarked). For government: contribution type breakdown */}
+            {isOrg ? (
+              <div className={`h-full w-full ${styles.bgColor} opacity-60`} />
+            ) : (
+              <div className="flex h-full w-full flex-col">
+                {breakdownEntries.map(([type, amount], idx) => {
+                  const percentage = (amount / total) * 100;
+                  const opacity = getContributionTypeColor(type);
+                  return (
+                    <div
+                      key={idx}
+                      className={`${styles.bgColor} ${opacity}`}
+                      style={{ height: `${percentage}%` }}
+                    />
+                  );
+                })}
+              </div>
+            )}
             {/* Label overlay */}
             {showLabel && (
               <div
@@ -362,11 +419,33 @@ export function ContributorsTreemap() {
       </div>
 
       <div className="relative h-[650px] w-full bg-gray-100">
-        {rects.map((rect, i) => renderContributor(rect, i))}
+        {/* Government donors section */}
+        {govRects.length > 0 && (
+          <div 
+            className="absolute left-0 top-0 w-full"
+            style={{ height: `${govHeightPct}%` }}
+          >
+            {govRects.map((rect, i) => renderContributor(rect, i))}
+          </div>
+        )}
+        
+        {/* Organization donors section */}
+        {orgRects.length > 0 && (
+          <div 
+            className="absolute left-0 w-full"
+            style={{ 
+              top: `${govHeightPct + sectionGap}%`,
+              height: `${orgHeightPct}%` 
+            }}
+          >
+            {orgRects.map((rect, i) => renderContributor(rect, i))}
+          </div>
+        )}
       </div>
 
-      {/* Contribution Type Legend */}
-      <div className="mt-3 flex flex-wrap items-center gap-4">
+      {/* Legend */}
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-4">
+        {/* Contribution Type Legend (applies to government donors) */}
         <div className="flex flex-wrap gap-3">
           {CONTRIBUTION_TYPES.filter(t => t.type !== "Other").map(({ type, label, opacity }) => (
             <div key={type} className="flex items-center gap-1.5">
@@ -374,6 +453,18 @@ export function ContributorsTreemap() {
               <span className="text-xs text-gray-600">{label}</span>
             </div>
           ))}
+        </div>
+        
+        {/* Contributor Type Legend */}
+        <div className="flex flex-wrap gap-3">
+          <div className="flex items-center gap-1.5">
+            <div className="h-3 w-3 rounded-sm bg-un-blue-muted" />
+            <span className="text-xs text-gray-600">Government</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <div className="h-3 w-3 rounded-sm bg-faded-jade opacity-60" />
+            <span className="text-xs text-gray-600">Non-Government</span>
+          </div>
         </div>
       </div>
 
