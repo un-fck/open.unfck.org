@@ -3,6 +3,7 @@ import json
 import pandas as pd
 from pathlib import Path
 from collections import defaultdict
+from utils import normalize_entity
 
 DATA = Path("public/data")
 YEARS = list(range(2011, 2025))
@@ -10,6 +11,7 @@ YEARS = list(range(2011, 2025))
 def load_revenue() -> dict[str, dict[int, float]]:
     """Load revenue from fused CSV, aggregated by entity."""
     df = pd.read_csv("data/ceb/fused/revenue_by_contributor.csv")
+    df["entity"] = df["entity"].apply(normalize_entity)
     agg = df.groupby(["entity", "year"])["amount"].sum().reset_index()
     data = defaultdict(dict)
     for _, row in agg.iterrows():
@@ -19,6 +21,7 @@ def load_revenue() -> dict[str, dict[int, float]]:
 def load_expenses() -> dict[str, dict[int, float]]:
     """Load expenses from CEB clean CSV (not fused, for consistency)."""
     df = pd.read_csv("data/ceb/clean/expenses_sub_agency.csv")
+    df["agency"] = df["agency"].apply(normalize_entity)
     agg = df.groupby(["agency", "calendar_year"])["amount"].sum().reset_index()
     data = defaultdict(dict)
     for _, row in agg.iterrows():

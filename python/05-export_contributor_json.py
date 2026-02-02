@@ -3,6 +3,7 @@ import json
 import pandas as pd
 from pathlib import Path
 from collections import defaultdict
+from utils import normalize_entity
 
 YEARS = list(range(2013, 2025))
 OUT = Path("public/data")
@@ -22,6 +23,7 @@ def rev_category(code: str) -> str:
 
 def load_data():
     fused = pd.read_csv("data/ceb/fused/revenue_by_contributor.csv")
+    fused["entity"] = fused["entity"].apply(normalize_entity)
     fused["rev_cat"] = fused["rev_type"].apply(rev_category)
     
     states = pd.read_csv("data/ceb/member_states.csv")

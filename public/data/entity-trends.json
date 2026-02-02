@@ -32,6 +32,7 @@
     "entitiesByGroup": {
       "UN Secretariat": [
         "ITC",
+        "UN-Habitat",
         "UNEP",
         "UNODC"
       ],
@@ -234,72 +235,72 @@
       {
         "year": 2011,
         "revenue": null,
-        "expenses": 937566156.0
+        "expenses": 1163906420.0
       },
       {
         "year": 2012,
         "revenue": null,
-        "expenses": 820887315.0
+        "expenses": 1001328315.0
       },
       {
         "year": 2013,
-        "revenue": 1033533665.76,
-        "expenses": 938955765.0
+        "revenue": 1240034665.85,
+        "expenses": 1107156765.0
       },
       {
         "year": 2014,
-        "revenue": 1137989027.0,
-        "expenses": 977141233.0
+        "revenue": 1331201027.0,
+        "expenses": 1173224233.0
       },
       {
         "year": 2015,
-        "revenue": 1001768862.1,
-        "expenses": 941276255.0
+        "revenue": 1179227391.16,
+        "expenses": 1108338271.0
       },
       {
         "year": 2016,
-        "revenue": 1129800951.0,
-        "expenses": 894445000.0
+        "revenue": 1356404151.23,
+        "expenses": 1080878318.0
       },
       {
         "year": 2017,
-        "revenue": 1185904360.0,
-        "expenses": 959147566.0
+        "revenue": 1354714105.69,
+        "expenses": 1156630742.0
       },
       {
         "year": 2018,
-        "revenue": 1271006313.0500002,
-        "expenses": 989489696.8
+        "revenue": 1449750086.89,
+        "expenses": 1175237153.96
       },
       {
         "year": 2019,
-        "revenue": 1394878544.98,
-        "expenses": 1086575279.01
+        "revenue": 1579142079.21,
+        "expenses": 1276918789.69
       },
       {
         "year": 2020,
-        "revenue": 1307772231.9,
-        "expenses": 955535095.14
+        "revenue": 1515951155.93,
+        "expenses": 1104924190.0
       },
       {
         "year": 2021,
-        "revenue": 1290428864.0,
-        "expenses": 1127062954.8600001
+        "revenue": 1507718857.0,
+        "expenses": 1313070312.17
       },
       {
         "year": 2022,
-        "revenue": 1504387633.0,
-        "expenses": 1181219176.0
+        "revenue": 1706881332.0,
+        "expenses": 1399340995.0
       },
       {
         "year": 2023,
-        "revenue": 1627796803.0,
-        "expenses": 1270407235.0
+        "revenue": 1858469853.0,
+        "expenses": 1448093001.0
       },
       {
         "year": 2024,
-        "revenue": 1816107426.0,
-        "expenses": 1452806745.0
+        "revenue": 2043471136.0,
+        "expenses": 1641070382.0
       }
     ],
     "Related Organizations": [
@@ -510,7 +511,7 @@
       {
         "year": 2023,
         "revenue": 10107296816.39,
-        "expenses": 9722582199.66
+        "expenses": 9757152937.72
       },
       {
         "year": 2024,
@@ -2312,7 +2313,7 @@
       {
         "year": 2023,
         "revenue": 24914320.75,
-        "expenses": null
+        "expenses": 34570738.06
       },
       {
         "year": 2024,
@@ -2390,6 +2391,150 @@
         "year": 2024,
         "revenue": 6799165959.0,
         "expenses": 7341051634.0
+      }
+    ],
+    "UN-Habitat": [
+      {
+        "year": 2011,
+        "revenue": null,
+        "expenses": 226340264.0
+      },
+      {
+        "year": 2012,
+        "revenue": null,
+        "expenses": 180441000.0
+      },
+      {
+        "year": 2013,
+        "revenue": 206501000.08999997,
+        "expenses": 168201000.0
+      },
+      {
+        "year": 2014,
+        "revenue": 193212000.0,
+        "expenses": 196083000.0
+      },
+      {
+        "year": 2015,
+        "revenue": 177458529.06,
+        "expenses": 167062016.0
+      },
+      {
+        "year": 2016,
+        "revenue": 226603200.22999996,
+        "expenses": 186433318.0
+      },
+      {
+        "year": 2017,
+        "revenue": 168809745.69,
+        "expenses": 197483176.0
+      },
+      {
+        "year": 2018,
+        "revenue": 178743773.83999997,
+        "expenses": 185747457.16
+      },
+      {
+        "year": 2019,
+        "revenue": 184263534.23000002,
+        "expenses": 190343510.68
+      },
+      {
+        "year": 2020,
+        "revenue": 208178924.03,
+        "expenses": 149389094.86
+      },
+      {
+        "year": 2021,
+        "revenue": 217289993.0,
+        "expenses": 186007357.31
+      },
+      {
+        "year": 2022,
+        "revenue": 202493699.0,
+        "expenses": 218121819.0
+      },
+      {
+        "year": 2023,
+        "revenue": 230673050.0,
+        "expenses": 177685766.0
+      },
+      {
+        "year": 2024,
+        "revenue": 227363710.0,
+        "expenses": 188263637.0
+      }
+    ],
+    "UN-Women": [
+      {
+        "year": 2011,
+        "revenue": null,
+        "expenses": 198315000.0
+      },
+      {
+        "year": 2012,
+        "revenue": null,
+        "expenses": 235880070.0
+      },
+      {
+        "year": 2013,
+        "revenue": 288504946.0,
+        "expenses": 264104992.0
+      },
+      {
+        "year": 2014,
+        "revenue": 332888266.0,
+        "expenses": 270537896.0
+      },
+      {
+        "year": 2015,
+        "revenue": 318987801.0,
+        "expenses": 314974000.0
+      },
+      {
+        "year": 2016,
+        "revenue": 334568866.0,
+        "expenses": 339801000.0
+      },
+      {
+        "year": 2017,
+        "revenue": 378516711.0,
+        "expenses": 338615000.0
+      },
+      {
+        "year": 2018,
+        "revenue": 404718138.22,
+        "expenses": 380260000.04
+      },
+      {
+        "year": 2019,
+        "revenue": 527402587.00000006,
+        "expenses": 420889999.98
+      },
+      {
+        "year": 2020,
+        "revenue": 563860898.0,
+        "expenses": 439509965.091
+      },
+      {
+        "year": 2021,
+        "revenue": 681468003.523079,
+        "expenses": 530740641.956924
+      },
+      {
+        "year": 2022,
+        "revenue": 671065432.0,
+        "expenses": 540250889.0
+      },
+      {
+        "year": 2023,
+        "revenue": 619056294.0,
+        "expenses": 546102676.0
+      },
+      {
+        "year": 2024,
+        "revenue": 520495019.99,
+        "expenses": 622770150.4138006
       }
     ],
     "UNAIDS": [
@@ -2966,78 +3111,6 @@
         "year": 2024,
         "revenue": 1740064733.0,
         "expenses": 1528012969.0
-      }
-    ],
-    "UNHABITAT": [
-      {
-        "year": 2011,
-        "revenue": null,
-        "expenses": 226340264.0
-      },
-      {
-        "year": 2012,
-        "revenue": null,
-        "expenses": 180441000.0
-      },
-      {
-        "year": 2013,
-        "revenue": 206501000.08999997,
-        "expenses": 168201000.0
-      },
-      {
-        "year": 2014,
-        "revenue": 193212000.0,
-        "expenses": 196083000.0
-      },
-      {
-        "year": 2015,
-        "revenue": 177458529.06,
-        "expenses": 167062016.0
-      },
-      {
-        "year": 2016,
-        "revenue": 226603200.22999996,
-        "expenses": 186433318.0
-      },
-      {
-        "year": 2017,
-        "revenue": 168809745.69,
-        "expenses": 197483176.0
-      },
-      {
-        "year": 2018,
-        "revenue": 178743773.83999997,
-        "expenses": 185747457.16
-      },
-      {
-        "year": 2019,
-        "revenue": 184263534.23000002,
-        "expenses": 190343510.68
-      },
-      {
-        "year": 2020,
-        "revenue": 208178924.03,
-        "expenses": 149389094.86
-      },
-      {
-        "year": 2021,
-        "revenue": 217289993.0,
-        "expenses": 186007357.31
-      },
-      {
-        "year": 2022,
-        "revenue": 202493699.0,
-        "expenses": 218121819.0
-      },
-      {
-        "year": 2023,
-        "revenue": 230673050.0,
-        "expenses": 177685766.0
-      },
-      {
-        "year": 2024,
-        "revenue": 227363710.0,
-        "expenses": 188263637.0
       }
     ],
     "UNHCR": [
@@ -3902,150 +3975,6 @@
         "year": 2024,
         "revenue": 32876972.0,
         "expenses": 27195265.0
-      }
-    ],
-    "UNWOMEN": [
-      {
-        "year": 2011,
-        "revenue": null,
-        "expenses": 198315000.0
-      },
-      {
-        "year": 2012,
-        "revenue": null,
-        "expenses": 235880070.0
-      },
-      {
-        "year": 2013,
-        "revenue": 288504946.0,
-        "expenses": 264104992.0
-      },
-      {
-        "year": 2014,
-        "revenue": 332888266.0,
-        "expenses": 270537896.0
-      },
-      {
-        "year": 2015,
-        "revenue": 318987801.0,
-        "expenses": 314974000.0
-      },
-      {
-        "year": 2016,
-        "revenue": 334568866.0,
-        "expenses": 339801000.0
-      },
-      {
-        "year": 2017,
-        "revenue": 378516711.0,
-        "expenses": 338615000.0
-      },
-      {
-        "year": 2018,
-        "revenue": 404718138.22,
-        "expenses": 380260000.04
-      },
-      {
-        "year": 2019,
-        "revenue": 527402587.00000006,
-        "expenses": 420889999.98
-      },
-      {
-        "year": 2020,
-        "revenue": 563860898.0,
-        "expenses": 439509965.091
-      },
-      {
-        "year": 2021,
-        "revenue": 681468003.523079,
-        "expenses": 530740641.956924
-      },
-      {
-        "year": 2022,
-        "revenue": 671065432.0,
-        "expenses": 540250889.0
-      },
-      {
-        "year": 2023,
-        "revenue": 619056294.0,
-        "expenses": 546102676.0
-      },
-      {
-        "year": 2024,
-        "revenue": 520495019.99,
-        "expenses": 622770150.4138006
-      }
-    ],
-    "UNWTO": [
-      {
-        "year": 2011,
-        "revenue": null,
-        "expenses": null
-      },
-      {
-        "year": 2012,
-        "revenue": null,
-        "expenses": null
-      },
-      {
-        "year": 2013,
-        "revenue": null,
-        "expenses": null
-      },
-      {
-        "year": 2014,
-        "revenue": null,
-        "expenses": null
-      },
-      {
-        "year": 2015,
-        "revenue": null,
-        "expenses": null
-      },
-      {
-        "year": 2016,
-        "revenue": null,
-        "expenses": null
-      },
-      {
-        "year": 2017,
-        "revenue": null,
-        "expenses": null
-      },
-      {
-        "year": 2018,
-        "revenue": null,
-        "expenses": null
-      },
-      {
-        "year": 2019,
-        "revenue": null,
-        "expenses": null
-      },
-      {
-        "year": 2020,
-        "revenue": null,
-        "expenses": null
-      },
-      {
-        "year": 2021,
-        "revenue": null,
-        "expenses": null
-      },
-      {
-        "year": 2022,
-        "revenue": null,
-        "expenses": null
-      },
-      {
-        "year": 2023,
-        "revenue": null,
-        "expenses": 34570738.06
-      },
-      {
-        "year": 2024,
-        "revenue": null,
-        "expenses": null
       }
     ],
     "UPU": [
