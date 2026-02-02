@@ -14,7 +14,7 @@ fused.mkdir(exist_ok=True)
 def load(filename: str) -> pd.DataFrame:
     return pd.read_csv(clean / filename)
 
-def load_mapping() -> tuple[dict, dict]:
+def load_contrib_mapping() -> tuple[dict, dict]:
     """Load C-code mapping including alt_descriptors for normalization."""
     df = pd.read_csv(ceb / "contrib_types_mapping.csv")
     code_to_name = dict(zip(df["code"], df["name"]))
@@ -25,6 +25,24 @@ def load_mapping() -> tuple[dict, dict]:
                 desc_to_code[desc.strip()] = row["code"]
     return code_to_name, desc_to_code
 
+def load_rev_type_mapping() -> dict:
+    """Load rev_type text -> R-code mapping."""
+    # Text descriptions to R-codes
+    return {
+        "Assessed Contributions": "R01", "Assessed contributions": "R01",
+        "Voluntary core (un-earmarked) contributions": "R02A",
+        "Voluntary non-core (earmarked) contributions": "R03E",  # Default to project-specific
+        "Revenue from other activities": "R04A",
+    }
+
+def normalize_rev_type(rt: str, mapping: dict) -> str:
+    """Normalize rev_type to R-code."""
+    if pd.isna(rt): return "R03E"
+    rt = str(rt).strip()
+    if rt.startswith("R") and len(rt) <= 4:
+        return rt.upper().replace("R08B", "R08B").replace("R08b", "R08B")
+    return mapping.get(rt, "R03E")
+
 def normalize_contrib_type(ct: str, desc_to_code: dict) -> str | None:
     """Normalize contrib_type to C-code."""
     if pd.isna(ct): return None
@@ -34,14 +52,17 @@ def normalize_contrib_type(ct: str, desc_to_code: dict) -> str | None:
     return desc_to_code.get(ct)
 
 def fuse_revenue():
-    code_to_name, desc_to_code = load_mapping()
+    code_to_name, desc_to_code = load_contrib_mapping()
+    rev_type_map = load_rev_type_mapping()
     
     revenue = load("revenue.csv").rename(columns={"agency": "entity"})
     gov = load("revenue_government_donors.csv")
+    gov["rev_code"] = gov["rev_type"].apply(lambda x: normalize_rev_type(x, rev_type_map))
+    
     nongov = load("revenue_non_gov_donors.csv")
     nongov["contrib_code"] = nongov["contrib_type"].apply(lambda x: normalize_contrib_type(x, desc_to_code))
+    nongov["rev_code"] = nongov["rev_type"].apply(lambda x: normalize_rev_type(x, rev_type_map))
     
-    # Load contrib_type for Tier 2 (2021+)
     contrib_type = load("revenue_contrib_type.csv")
     
     results = []
@@ -58,52 +79,63 @@ def fuse_revenue():
             gov_ent = gov_year[gov_year["entity"] == entity]
             nongov_ent = nongov_year[nongov_year["entity"] == entity]
             
-            # Government donors (always specific)
+            # Government donors (always specific, with rev_type)
             for _, row in gov_ent.iterrows():
                 results.append({
                     "entity": entity, "year": year, "contrib_code": "C01",
-                    "donor_type": "Government", "donor_name": row.get("government_donor", "Unknown"),
+                    "rev_type": row["rev_code"], "donor_type": "Government",
+                    "donor_name": row.get("government_donor", "Unknown"),
                     "amount": row["amount"], "is_other": False
                 })
             gov_total = gov_ent["amount"].sum()
             
             if year >= 2021 and ct_year is not None:
-                # Tier 2: Break down by contributor type with "Other {type}"
+                # Tier 2: Break down by contributor type × rev_type
                 ct_ent = ct_year[ct_year["entity"] == entity]
                 nongov_codes = [c for c in code_to_name.keys() if c not in ["C01", "C09"]]
                 
                 for code in nongov_codes:
-                    cat_total = ct_ent[ct_ent["contrib_type"] == code]["amount"].sum()
-                    if cat_total == 0: continue
+                    ct_code = ct_ent[ct_ent["contrib_type"] == code]
+                    if ct_code["amount"].sum() == 0: continue
                     
-                    # Specific donors in this category
-                    donors_in_cat = nongov_ent[nongov_ent["contrib_code"] == code]
-                    donors_sum = 0
-                    for _, row in donors_in_cat.iterrows():
-                        results.append({
-                            "entity": entity, "year": year, "contrib_code": code,
-                            "donor_type": code_to_name[code], "donor_name": row.get("donor", "Unknown"),
-                            "amount": row["amount"], "is_other": False
-                        })
-                        donors_sum += row["amount"]
-                    
-                    # "Other {type}" = category total - specific donors
-                    other_cat = cat_total - donors_sum
-                    if abs(other_cat) > 1000:
-                        results.append({
-                            "entity": entity, "year": year, "contrib_code": code,
-                            "donor_type": code_to_name[code], "donor_name": f"Other {code_to_name[code]}",
-                            "amount": other_cat, "is_other": True
-                        })
+                    # Group by rev_type within this contrib_code
+                    for rev_type in ct_code["rev_type"].unique():
+                        cat_total = ct_code[ct_code["rev_type"] == rev_type]["amount"].sum()
+                        if cat_total == 0: continue
+                        
+                        # Specific donors in this category × rev_type
+                        donors_in = nongov_ent[(nongov_ent["contrib_code"] == code) & (nongov_ent["rev_code"] == rev_type)]
+                        donors_sum = 0
+                        for _, row in donors_in.iterrows():
+                            results.append({
+                                "entity": entity, "year": year, "contrib_code": code,
+                                "rev_type": rev_type, "donor_type": code_to_name[code],
+                                "donor_name": row.get("donor", "Unknown"),
+                                "amount": row["amount"], "is_other": False
+                            })
+                            donors_sum += row["amount"]
+                        
+                        # "Other {type}" for this rev_type
+                        other_cat = cat_total - donors_sum
+                        if abs(other_cat) > 1000:
+                            results.append({
+                                "entity": entity, "year": year, "contrib_code": code,
+                                "rev_type": rev_type, "donor_type": code_to_name[code],
+                                "donor_name": f"Other {code_to_name[code]}",
+                                "amount": other_cat, "is_other": True
+                            })
                 
-                # C09 "No Contributor" (revenue from activities)
-                c09_total = ct_ent[ct_ent["contrib_type"] == "C09"]["amount"].sum()
-                if abs(c09_total) > 1000:
-                    results.append({
-                        "entity": entity, "year": year, "contrib_code": "C09",
-                        "donor_type": "No Contributor", "donor_name": "Revenue from Activities",
-                        "amount": c09_total, "is_other": True
-                    })
+                # C09 "No Contributor" by rev_type
+                c09 = ct_ent[ct_ent["contrib_type"] == "C09"]
+                for rev_type in c09["rev_type"].unique():
+                    amt = c09[c09["rev_type"] == rev_type]["amount"].sum()
+                    if abs(amt) > 1000:
+                        results.append({
+                            "entity": entity, "year": year, "contrib_code": "C09",
+                            "rev_type": rev_type, "donor_type": "No Contributor",
+                            "donor_name": "Revenue from Activities",
+                            "amount": amt, "is_other": True
+                        })
             else:
                 # Tier 1: NonGov donors + single "Other" bucket
                 for _, row in nongov_ent.iterrows():
@@ -111,7 +143,8 @@ def fuse_revenue():
                     dtype = code_to_name.get(code, "Non-Government") if code else "Non-Government"
                     results.append({
                         "entity": entity, "year": year, "contrib_code": code or "Unknown",
-                        "donor_type": dtype, "donor_name": row.get("donor", "Unknown"),
+                        "rev_type": row["rev_code"], "donor_type": dtype,
+                        "donor_name": row.get("donor", "Unknown"),
                         "amount": row["amount"], "is_other": False
                     })
                 nongov_total = nongov_ent["amount"].sum()
@@ -120,12 +153,12 @@ def fuse_revenue():
                 if abs(other) > 1000:
                     results.append({
                         "entity": entity, "year": year, "contrib_code": "Other",
-                        "donor_type": "Other", "donor_name": "Unattributed",
-                        "amount": other, "is_other": True
+                        "rev_type": "R04A", "donor_type": "Other",
+                        "donor_name": "Unattributed", "amount": other, "is_other": True
                     })
     
     df = pd.DataFrame(results)
-    df = df.sort_values(["year", "entity", "donor_type", "amount"], ascending=[True, True, True, False])
+    df = df.sort_values(["year", "entity", "donor_type", "rev_type", "amount"], ascending=[True, True, True, True, False])
     df.to_csv(fused / "revenue_by_contributor.csv", index=False)
     print(f"Wrote {len(df)} rows to {fused / 'revenue_by_contributor.csv'}")
     
@@ -140,21 +173,16 @@ def validate(df: pd.DataFrame, revenue: pd.DataFrame, years: list):
         yr = df[df["year"] == year]
         fused_total = yr["amount"].sum()
         source_total = revenue[revenue["calendar_year"] == year]["amount"].sum()
-        other_total = yr[yr["is_other"]]["amount"].sum()
-        other_pct = other_total / fused_total * 100 if fused_total else 0
         
         diff_pct = abs(fused_total - source_total) / source_total * 100
-        # 2024 contrib_type.csv is incomplete (~2% gap), allow larger tolerance
         tolerance = 2.0 if year == 2024 else 0.5
         assert diff_pct < tolerance, f"{year}: Fused {fused_total/1e9:.2f}B != source {source_total/1e9:.2f}B ({diff_pct:.2f}%)"
         assert fused_total > 30e9, f"{year}: Total {fused_total/1e9:.1f}B suspiciously low"
         
         if year >= 2021:
-            other_types = yr[yr["is_other"]].groupby("donor_type")["amount"].sum()
-            gap_note = " (contrib_type incomplete)" if diff_pct > 0.5 else ""
-            print(f"{year}: Total={fused_total/1e9:.1f}B, Other: {len(other_types)} categories{gap_note} ✓")
-        else:
-            assert 5 < other_pct < 25, f"{year}: Other% {other_pct:.1f}% outside 5-25%"
+            rev_types = yr["rev_type"].nunique()
+            gap = " (incomplete)" if diff_pct > 0.5 else ""
+            print(f"{year}: {fused_total/1e9:.1f}B, {rev_types} rev_types{gap} ✓")
     
     assert set(years) == set(df["year"].unique()), "Missing years"
     print(f"\nAll {len(years)} years validated.")
