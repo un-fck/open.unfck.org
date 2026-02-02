@@ -369,9 +369,9 @@ export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySide
                 {impacts.map((impact) => (
                   <div
                     key={impact.id}
-                    className="flex items-start gap-3"
+                    className="flex items-stretch gap-3 rounded-md bg-gray-50 p-3"
                   >
-                    <div className="mt-1 h-4 w-1 flex-shrink-0 rounded-sm bg-un-blue" />
+                    <div className="w-1.5 flex-shrink-0 rounded-sm bg-un-blue" />
                     <p className="text-sm leading-relaxed text-gray-700">
                       {impact.impact}
                     </p>

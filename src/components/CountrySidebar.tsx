@@ -113,7 +113,6 @@ export function CountrySidebar({ country, onClose }: CountrySidebarProps) {
               <h2 id={sidebarTitleId} className="text-xl font-bold leading-tight text-gray-900 sm:text-2xl lg:text-2xl">
                 {country.name}
               </h2>
-              <p className="mt-1 text-sm text-gray-600">{country.iso3}</p>
             </div>
             <div className="flex items-center gap-2">
               <ShareButton hash={`country=${encodeURIComponent(country.iso3)}`} />
