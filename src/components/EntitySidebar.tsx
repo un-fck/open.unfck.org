@@ -1,6 +1,6 @@
 "use client";
 
-import { X } from "lucide-react";
+import { ExternalLink, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Entity, Impact, EntityRevenue } from "@/types";
 import { getSystemGroupingStyle } from "@/lib/systemGroupings";
@@ -201,6 +201,19 @@ export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySide
                 </div>
               </div>
             )}
+
+            {/* SystemChart Link */}
+            <div className="mt-4">
+              <a
+                href={`https://systemchart.un.org/?entity=${entity.entity?.toLowerCase()}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm text-un-blue hover:underline"
+              >
+                View in UN System Chart
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </div>
           </div>
 
           {/* Financials Section */}
