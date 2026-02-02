@@ -156,7 +156,8 @@ export function ContributorTrendsChart() {
   const getItemColor = React.useCallback((id: string) => colorMap[id], [colorMap]);
 
   // Custom tooltip formatter
-  const formatTooltipValue = (value: number) => {
+  const formatTooltipValue = (value: number | undefined) => {
+    if (value === undefined) return "";
     return formatBudget(value);
   };
 
