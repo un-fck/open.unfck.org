@@ -13,14 +13,14 @@ https://unsceb.org/financial-statistics
     - Revenue Type
     - Revenue Sub-Type
   - Revenue by Entity [same data, just more detailed visualization]
-  - Revenue by Financing Intrument [same data, but with explanations for the Revenue Sub-Type codes]
+  - Revenue by Financing Intrument [same data, but with explanations for the Revenue Sub-Type codes] -- only government donor data!
 - **Revenue by Donor**
   - Revenue by Government Donor
     - Year
     - Government Donor
     - Entity
     - Revenue Type
-  - Revenue by Non-Government Donor
+  - Revenue by Non-Government Donor -- not _all_ non-government donors!
     - Year
     - Donor (e.g. EU, World Bank, MPTF, GEF, GFATM, OCHA, Gates Foundation, Gavi)
     - Entity

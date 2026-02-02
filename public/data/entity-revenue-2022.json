@@ -1,10 +1,10 @@
 {
   "ILO": {
-    "total": 651062150.0,
+    "total": 734014807.0,
     "year": 2022,
     "by_type": {
       "Assessed": 409705974.0,
-      "Voluntary earmarked": 224819299.0,
+      "Voluntary earmarked": 307771956.0,
       "Voluntary un-earmarked": 16536877.0
     },
     "by_donor": [
@@ -26,6 +26,11 @@
         "total": 51780506.0,
         "Assessed": 50368770.0,
         "Voluntary earmarked": 1411736.0
+      },
+      {
+        "donor": "European Union",
+        "total": 50530741.0,
+        "Voluntary earmarked": 50530741.0
       },
       {
         "donor": "Japan",
@@ -52,6 +57,11 @@
         "Assessed": 18574795.0,
         "Voluntary earmarked": 6000152.0,
         "Voluntary un-earmarked": 249252.0
+      },
+      {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 24020022.0,
+        "Voluntary earmarked": 24020022.0
       },
       {
         "donor": "Australia",
@@ -153,6 +163,11 @@
         "Voluntary earmarked": 166180.0
       },
       {
+        "donor": "Private donor",
+        "total": 4918981.0,
+        "Voluntary earmarked": 4918981.0
+      },
+      {
         "donor": "Qatar",
         "total": 4573199.0,
         "Assessed": 1182681.0,
@@ -202,6 +217,11 @@
         "total": 2799771.0,
         "Assessed": 1140742.0,
         "Voluntary earmarked": 1659029.0
+      },
+      {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": 2718648.0,
+        "Voluntary earmarked": 2718648.0
       },
       {
         "donor": "United Arab Emirates",
@@ -295,6 +315,11 @@
         "donor": "Egypt",
         "total": 780066.0,
         "Assessed": 780066.0
+      },
+      {
+        "donor": "World Bank Group",
+        "total": 764265.0,
+        "Voluntary earmarked": 764265.0
       },
       {
         "donor": "Oman",
@@ -1006,14 +1031,19 @@
     ]
   },
   "UNEP": {
-    "total": 589296532.0,
+    "total": 852951148.0,
     "year": 2022,
     "by_type": {
-      "Assessed": 209595824.0,
-      "Voluntary earmarked": 274839156.0,
-      "Voluntary un-earmarked": 104861552.0
+      "Assessed": 210891883.0,
+      "Voluntary earmarked": 534297713.0,
+      "Voluntary un-earmarked": 107761552.0
     },
     "by_donor": [
+      {
+        "donor": "World Bank Group",
+        "total": 198511047.0,
+        "Voluntary earmarked": 198511047.0
+      },
       {
         "donor": "Germany",
         "total": 89480147.0,
@@ -1041,6 +1071,12 @@
         "Assessed": 1700566.0,
         "Voluntary earmarked": 21363094.0,
         "Voluntary un-earmarked": 26550826.0
+      },
+      {
+        "donor": "European Union",
+        "total": 43557617.0,
+        "Assessed": 1296059.0,
+        "Voluntary earmarked": 42261558.0
       },
       {
         "donor": "Japan",
@@ -1076,6 +1112,11 @@
         "Assessed": 15823902.0,
         "Voluntary earmarked": 3719778.0,
         "Voluntary un-earmarked": 7550550.0
+      },
+      {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 18685952.0,
+        "Voluntary earmarked": 18685952.0
       },
       {
         "donor": "Canada",
@@ -1164,6 +1205,11 @@
         "Assessed": 2499801.0,
         "Voluntary earmarked": 401401.0,
         "Voluntary un-earmarked": 79722.0
+      },
+      {
+        "donor": "Private donor",
+        "total": 2900000.0,
+        "Voluntary un-earmarked": 2900000.0
       },
       {
         "donor": "Poland",
@@ -2219,11 +2265,11 @@
     ]
   },
   "FAO": {
-    "total": 1635079963.0,
+    "total": 2342417200.0,
     "year": 2022,
     "by_type": {
       "Assessed": 488537221.0,
-      "Voluntary earmarked": 1102675062.0,
+      "Voluntary earmarked": 1810012299.0,
       "Voluntary un-earmarked": 43867680.0
     },
     "by_donor": [
@@ -2233,6 +2279,21 @@
         "Assessed": 110553356.0,
         "Voluntary earmarked": 368883688.0,
         "Voluntary un-earmarked": 254878.0
+      },
+      {
+        "donor": "European Union",
+        "total": 224791725.0,
+        "Voluntary earmarked": 224791725.0
+      },
+      {
+        "donor": "World Bank Group",
+        "total": 194515657.0,
+        "Voluntary earmarked": 194515657.0
+      },
+      {
+        "donor": "Global Environment Facility",
+        "total": 103846459.0,
+        "Voluntary earmarked": 103846459.0
       },
       {
         "donor": "Japan",
@@ -2247,6 +2308,16 @@
         "Assessed": 29500750.0,
         "Voluntary earmarked": 68692965.0,
         "Voluntary un-earmarked": 70567.0
+      },
+      {
+        "donor": "UN OCHA",
+        "total": 95046532.0,
+        "Voluntary earmarked": 95046532.0
+      },
+      {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 75458115.0,
+        "Voluntary earmarked": 75458115.0
       },
       {
         "donor": "South Sudan",
@@ -2380,6 +2451,11 @@
         "Assessed": 19373.0,
         "Voluntary earmarked": 13605570.0,
         "Voluntary un-earmarked": 64639.0
+      },
+      {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": 13678749.0,
+        "Voluntary earmarked": 13678749.0
       },
       {
         "donor": "Belgium",
@@ -3504,11 +3580,11 @@
     ]
   },
   "WHO": {
-    "total": 2872247372.0,
+    "total": 3874805753.0,
     "year": 2022,
     "by_type": {
       "Assessed": 481406051.0,
-      "Voluntary earmarked": 2208945394.0,
+      "Voluntary earmarked": 3211503775.0,
       "Voluntary un-earmarked": 181895927.0
     },
     "by_donor": [
@@ -3524,6 +3600,21 @@
         "Assessed": 29075778.0,
         "Voluntary earmarked": 646402708.0,
         "Voluntary un-earmarked": 14042126.0
+      },
+      {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": 395686531.0,
+        "Voluntary earmarked": 395686531.0
+      },
+      {
+        "donor": "Gavi Alliance",
+        "total": 202894549.0,
+        "Voluntary earmarked": 202894549.0
+      },
+      {
+        "donor": "European Union",
+        "total": 195099752.0,
+        "Voluntary earmarked": 195099752.0
       },
       {
         "donor": "United Kingdom of Great Britain and Northern Ireland",
@@ -3546,10 +3637,20 @@
         "Voluntary un-earmarked": 2666917.0
       },
       {
+        "donor": "UN OCHA",
+        "total": 90491656.0,
+        "Voluntary earmarked": 90491656.0
+      },
+      {
         "donor": "Iran (Islamic Republic of)",
         "total": 87371819.0,
         "Assessed": 1900197.0,
         "Voluntary earmarked": 85471622.0
+      },
+      {
+        "donor": "World Bank Group",
+        "total": 72516799.0,
+        "Voluntary earmarked": 72516799.0
       },
       {
         "donor": "Japan",
@@ -3582,6 +3683,11 @@
         "total": 52985499.0,
         "Assessed": 3981807.0,
         "Voluntary earmarked": 49003692.0
+      },
+      {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 45869094.0,
+        "Voluntary earmarked": 45869094.0
       },
       {
         "donor": "Nigeria",
@@ -4618,11 +4724,11 @@
     ]
   },
   "UNCCD": {
-    "total": 19236468.0,
+    "total": 19664962.0,
     "year": 2022,
     "by_type": {
-      "Assessed": 8391806.0,
-      "Voluntary earmarked": 10844662.0
+      "Assessed": 8606981.0,
+      "Voluntary earmarked": 11057981.0
     },
     "by_donor": [
       {
@@ -4670,6 +4776,12 @@
         "donor": "Japan",
         "total": 718596.0,
         "Assessed": 718596.0
+      },
+      {
+        "donor": "European Union",
+        "total": 428494.0,
+        "Assessed": 215175.0,
+        "Voluntary earmarked": 213319.0
       },
       {
         "donor": "United Kingdom of Great Britain and Northern Ireland",
@@ -5616,11 +5728,11 @@
     ]
   },
   "UNFCCC": {
-    "total": 66524655.0,
+    "total": 67614080.0,
     "year": 2022,
     "by_type": {
-      "Assessed": 34725715.0,
-      "Voluntary earmarked": 30928409.0,
+      "Assessed": 35618151.0,
+      "Voluntary earmarked": 31125398.0,
       "Voluntary un-earmarked": 870531.0
     },
     "by_donor": [
@@ -5713,6 +5825,12 @@
         "total": 1115288.0,
         "Assessed": 677009.0,
         "Voluntary earmarked": 438279.0
+      },
+      {
+        "donor": "European Union",
+        "total": 1089425.0,
+        "Assessed": 892436.0,
+        "Voluntary earmarked": 196989.0
       },
       {
         "donor": "Canada",
@@ -6631,11 +6749,11 @@
     ]
   },
   "UNESCO": {
-    "total": 486261073.0,
+    "total": 551899042.0,
     "year": 2022,
     "by_type": {
       "Assessed": 269823045.0,
-      "Voluntary earmarked": 203606673.0,
+      "Voluntary earmarked": 269244642.0,
       "Voluntary un-earmarked": 12831355.0
     },
     "by_donor": [
@@ -6651,6 +6769,11 @@
         "Assessed": 11160786.0,
         "Voluntary earmarked": 32404926.0,
         "Voluntary un-earmarked": 1630472.0
+      },
+      {
+        "donor": "European Union",
+        "total": 42192469.0,
+        "Voluntary earmarked": 42192469.0
       },
       {
         "donor": "Japan",
@@ -6716,6 +6839,11 @@
         "Voluntary un-earmarked": 65162.0
       },
       {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 9801994.0,
+        "Voluntary earmarked": 9801994.0
+      },
+      {
         "donor": "Saudi Arabia",
         "total": 9751111.0,
         "Assessed": 4102083.0,
@@ -6741,6 +6869,11 @@
         "Voluntary earmarked": 571863.0
       },
       {
+        "donor": "Private donor",
+        "total": 7610959.0,
+        "Voluntary earmarked": 7610959.0
+      },
+      {
         "donor": "Russian Federation",
         "total": 7219068.0,
         "Assessed": 6465678.0,
@@ -6764,6 +6897,11 @@
         "total": 6118256.0,
         "Assessed": 2221862.0,
         "Voluntary earmarked": 3896394.0
+      },
+      {
+        "donor": "World Bank Group",
+        "total": 5484469.0,
+        "Voluntary earmarked": 5484469.0
       },
       {
         "donor": "Mexico",
@@ -7009,6 +7147,11 @@
         "Assessed": 322441.0,
         "Voluntary earmarked": 75290.0,
         "Voluntary un-earmarked": 163445.0
+      },
+      {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": 548078.0,
+        "Voluntary earmarked": 548078.0
       },
       {
         "donor": "Lebanon",
@@ -8735,11 +8878,11 @@
     ]
   },
   "UN-DPO": {
-    "total": 6680335859.0,
+    "total": 6683197384.0,
     "year": 2022,
     "by_type": {
       "Assessed": 6343524233.0,
-      "Voluntary earmarked": 336811626.0
+      "Voluntary earmarked": 339673151.0
     },
     "by_donor": [
       {
@@ -9051,6 +9194,11 @@
         "donor": "Bahrain",
         "total": 3051235.0,
         "Assessed": 3051235.0
+      },
+      {
+        "donor": "Multi Donor Trust Funds",
+        "total": 2861525.0,
+        "Voluntary earmarked": 2861525.0
       },
       {
         "donor": "Nigeria",
@@ -9728,11 +9876,11 @@
     ]
   },
   "CTBTO": {
-    "total": 133063388.0,
+    "total": 134348474.0,
     "year": 2022,
     "by_type": {
       "Assessed": 129775215.0,
-      "Voluntary earmarked": 3288173.0
+      "Voluntary earmarked": 4573259.0
     },
     "by_donor": [
       {
@@ -9828,6 +9976,11 @@
         "donor": "Switzerland",
         "total": 1547491.0,
         "Assessed": 1547491.0
+      },
+      {
+        "donor": "European Union",
+        "total": 1285086.0,
+        "Voluntary earmarked": 1285086.0
       },
       {
         "donor": "Sweden",
@@ -10663,11 +10816,11 @@
     ]
   },
   "IOM": {
-    "total": 2124316215.0,
+    "total": 2835807669.0,
     "year": 2022,
     "by_type": {
       "Assessed": 58564840.0,
-      "Voluntary earmarked": 2032503197.0,
+      "Voluntary earmarked": 2743994651.0,
       "Voluntary un-earmarked": 33248178.0
     },
     "by_donor": [
@@ -10677,6 +10830,11 @@
         "Assessed": 13438868.0,
         "Voluntary earmarked": 947950916.0,
         "Voluntary un-earmarked": 6000000.0
+      },
+      {
+        "donor": "European Union",
+        "total": 513610541.0,
+        "Voluntary earmarked": 513610541.0
       },
       {
         "donor": "Germany",
@@ -10689,6 +10847,11 @@
         "total": 133403590.0,
         "Assessed": 1670035.0,
         "Voluntary earmarked": 131733555.0
+      },
+      {
+        "donor": "UN OCHA",
+        "total": 110329314.0,
+        "Voluntary earmarked": 110329314.0
       },
       {
         "donor": "United Kingdom of Great Britain and Northern Ireland",
@@ -10708,6 +10871,11 @@
         "total": 79597463.0,
         "Assessed": 5231185.0,
         "Voluntary earmarked": 74366278.0
+      },
+      {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 78282964.0,
+        "Voluntary earmarked": 78282964.0
       },
       {
         "donor": "Italy",
@@ -10839,6 +11007,16 @@
         "Voluntary earmarked": 4953379.0
       },
       {
+        "donor": "World Bank Group",
+        "total": 4540831.0,
+        "Voluntary earmarked": 4540831.0
+      },
+      {
+        "donor": "Gavi Alliance",
+        "total": 3080406.0,
+        "Voluntary earmarked": 3080406.0
+      },
+      {
         "donor": "Argentina",
         "total": 3043703.0,
         "Assessed": 558884.0,
@@ -10885,6 +11063,11 @@
         "Assessed": 213820.0,
         "Voluntary earmarked": 1166597.0,
         "Voluntary un-earmarked": 269526.0
+      },
+      {
+        "donor": "Private donor",
+        "total": 1647398.0,
+        "Voluntary earmarked": 1647398.0
       },
       {
         "donor": "Kuwait",
@@ -11657,11 +11840,11 @@
     ]
   },
   "ISA": {
-    "total": 7808103.0,
+    "total": 8122127.0,
     "year": 2022,
     "by_type": {
-      "Assessed": 7308989.0,
-      "Voluntary un-earmarked": 499114.0
+      "Assessed": 7408989.0,
+      "Voluntary un-earmarked": 713138.0
     },
     "by_donor": [
       {
@@ -11697,6 +11880,12 @@
         "total": 486555.0,
         "Assessed": 327082.0,
         "Voluntary un-earmarked": 159473.0
+      },
+      {
+        "donor": "European Union",
+        "total": 308024.0,
+        "Assessed": 100000.0,
+        "Voluntary un-earmarked": 208024.0
       },
       {
         "donor": "Brazil",
@@ -11984,6 +12173,11 @@
         "donor": "Costa Rica",
         "total": 6132.0,
         "Assessed": 6132.0
+      },
+      {
+        "donor": "Private donor",
+        "total": 6000.0,
+        "Voluntary un-earmarked": 6000.0
       },
       {
         "donor": "Ukraine",
@@ -12513,11 +12707,11 @@
     ]
   },
   "PAHO": {
-    "total": 336980981.0,
+    "total": 358493086.0,
     "year": 2022,
     "by_type": {
       "Assessed": 105274999.0,
-      "Voluntary earmarked": 231705982.0
+      "Voluntary earmarked": 253218087.0
     },
     "by_donor": [
       {
@@ -12537,6 +12731,11 @@
         "total": 33224264.0,
         "Assessed": 11020684.0,
         "Voluntary earmarked": 22203580.0
+      },
+      {
+        "donor": "European Union",
+        "total": 16597616.0,
+        "Voluntary earmarked": 16597616.0
       },
       {
         "donor": "United Kingdom of Great Britain and Northern Ireland",
@@ -12583,6 +12782,16 @@
         "total": 2494535.0,
         "Assessed": 1835136.0,
         "Voluntary earmarked": 659399.0
+      },
+      {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 2414962.0,
+        "Voluntary earmarked": 2414962.0
+      },
+      {
+        "donor": "Gavi Alliance",
+        "total": 1964034.0,
+        "Voluntary earmarked": 1964034.0
       },
       {
         "donor": "Peru",
@@ -12635,6 +12844,11 @@
         "total": 548966.0,
         "Assessed": 450036.0,
         "Voluntary earmarked": 98930.0
+      },
+      {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": 452942.0,
+        "Voluntary earmarked": 452942.0
       },
       {
         "donor": "Uruguay",
@@ -12716,6 +12930,16 @@
         "Assessed": 52488.0
       },
       {
+        "donor": "Private donor",
+        "total": 42201.0,
+        "Voluntary earmarked": 42201.0
+      },
+      {
+        "donor": "UN OCHA",
+        "total": 40350.0,
+        "Voluntary earmarked": 40350.0
+      },
+      {
         "donor": "Barbados",
         "total": 36936.0,
         "Assessed": 36936.0
@@ -12789,11 +13013,11 @@
     ]
   },
   "UNHCR": {
-    "total": 4188164040.0,
+    "total": 5259400233.0,
     "year": 2022,
     "by_type": {
-      "Voluntary earmarked": 3725190219.0,
-      "Voluntary un-earmarked": 462973821.0
+      "Voluntary earmarked": 4674565661.0,
+      "Voluntary un-earmarked": 584834572.0
     },
     "by_donor": [
       {
@@ -12802,10 +13026,21 @@
         "Voluntary earmarked": 2195608503.0
       },
       {
+        "donor": "Private donor",
+        "total": 620229358.0,
+        "Voluntary earmarked": 498368607.0,
+        "Voluntary un-earmarked": 121860751.0
+      },
+      {
         "donor": "Germany",
         "total": 535315019.0,
         "Voluntary earmarked": 512233323.0,
         "Voluntary un-earmarked": 23081696.0
+      },
+      {
+        "donor": "European Union",
+        "total": 318198619.0,
+        "Voluntary earmarked": 318198619.0
       },
       {
         "donor": "Japan",
@@ -12853,6 +13088,16 @@
         "total": 78487288.0,
         "Voluntary earmarked": 68442645.0,
         "Voluntary un-earmarked": 10044643.0
+      },
+      {
+        "donor": "UN OCHA",
+        "total": 70697981.0,
+        "Voluntary earmarked": 70697981.0
+      },
+      {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 61110232.0,
+        "Voluntary earmarked": 61110232.0
       },
       {
         "donor": "Switzerland",
@@ -12975,6 +13220,11 @@
         "donor": "Chad",
         "total": 1236739.0,
         "Voluntary earmarked": 1236739.0
+      },
+      {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": 1000003.0,
+        "Voluntary earmarked": 1000003.0
       },
       {
         "donor": "Jersey",
@@ -13202,13 +13452,18 @@
     ]
   },
   "ITC": {
-    "total": 50442165.0,
+    "total": 116832433.0,
     "year": 2022,
     "by_type": {
-      "Voluntary earmarked": 28710438.0,
+      "Voluntary earmarked": 95100706.0,
       "Voluntary un-earmarked": 21731727.0
     },
     "by_donor": [
+      {
+        "donor": "European Union",
+        "total": 66337723.0,
+        "Voluntary earmarked": 66337723.0
+      },
       {
         "donor": "Sweden",
         "total": 18659847.0,
@@ -13297,6 +13552,11 @@
         "Voluntary earmarked": 56400.0
       },
       {
+        "donor": "World Bank Group",
+        "total": 52545.0,
+        "Voluntary earmarked": 52545.0
+      },
+      {
         "donor": "India",
         "total": 50000.0,
         "Voluntary un-earmarked": 50000.0
@@ -13349,10 +13609,10 @@
     ]
   },
   "UNAIDS": {
-    "total": 213464065.0,
+    "total": 216231820.0,
     "year": 2022,
     "by_type": {
-      "Voluntary earmarked": 52570594.0,
+      "Voluntary earmarked": 55338349.0,
       "Voluntary un-earmarked": 160893471.0
     },
     "by_donor": [
@@ -13431,6 +13691,11 @@
         "Voluntary un-earmarked": 2847380.0
       },
       {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": 2652195.0,
+        "Voluntary earmarked": 2652195.0
+      },
+      {
         "donor": "Spain",
         "total": 1064963.0,
         "Voluntary un-earmarked": 1064963.0
@@ -13467,6 +13732,11 @@
         "donor": "Monaco",
         "total": 160219.0,
         "Voluntary un-earmarked": 160219.0
+      },
+      {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 115560.0,
+        "Voluntary earmarked": 115560.0
       },
       {
         "donor": "Portugal",
@@ -13511,13 +13781,18 @@
     ]
   },
   "UNICRI": {
-    "total": 6981841.0,
+    "total": 10896634.0,
     "year": 2022,
     "by_type": {
-      "Voluntary earmarked": 3719992.0,
+      "Voluntary earmarked": 7634785.0,
       "Voluntary un-earmarked": 3261849.0
     },
     "by_donor": [
+      {
+        "donor": "European Union",
+        "total": 3914793.0,
+        "Voluntary earmarked": 3914793.0
+      },
       {
         "donor": "Italy",
         "total": 3564818.0,
@@ -13557,11 +13832,11 @@
     ]
   },
   "UNICEF": {
-    "total": 5139027092.0,
+    "total": 7592323627.0,
     "year": 2022,
     "by_type": {
-      "Voluntary earmarked": 4614612545.0,
-      "Voluntary un-earmarked": 524414547.0
+      "Voluntary earmarked": 7029229717.0,
+      "Voluntary un-earmarked": 563093910.0
     },
     "by_donor": [
       {
@@ -13577,6 +13852,28 @@
         "Voluntary un-earmarked": 98472918.0
       },
       {
+        "donor": "United States Fund for UNICEF",
+        "total": 703015822.0,
+        "Voluntary earmarked": 664336465.0,
+        "Voluntary un-earmarked": 38679357.0
+      },
+      {
+        "donor": "World Bank Group",
+        "total": 681960668.0,
+        "Voluntary earmarked": 681960662.0,
+        "Voluntary un-earmarked": 6.0
+      },
+      {
+        "donor": "European Union",
+        "total": 376302481.0,
+        "Voluntary earmarked": 376302481.0
+      },
+      {
+        "donor": "Gavi Alliance",
+        "total": 355588298.0,
+        "Voluntary earmarked": 355588298.0
+      },
+      {
         "donor": "Canada",
         "total": 354800847.0,
         "Voluntary earmarked": 342836298.0,
@@ -13587,6 +13884,11 @@
         "total": 294276831.0,
         "Voluntary earmarked": 260144030.0,
         "Voluntary un-earmarked": 34132801.0
+      },
+      {
+        "donor": "UN OCHA",
+        "total": 225417652.0,
+        "Voluntary earmarked": 225417652.0
       },
       {
         "donor": "United Kingdom of Great Britain and Northern Ireland",
@@ -13604,6 +13906,11 @@
         "total": 134596194.0,
         "Voluntary earmarked": 91047148.0,
         "Voluntary un-earmarked": 43549046.0
+      },
+      {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 111011614.0,
+        "Voluntary earmarked": 111011614.0
       },
       {
         "donor": "Denmark",
@@ -14350,13 +14657,18 @@
     ]
   },
   "UN-Habitat": {
-    "total": 59249446.0,
+    "total": 117384395.0,
     "year": 2022,
     "by_type": {
-      "Voluntary earmarked": 51685065.0,
+      "Voluntary earmarked": 109820014.0,
       "Voluntary un-earmarked": 7564381.0
     },
     "by_donor": [
+      {
+        "donor": "European Union",
+        "total": 33167437.0,
+        "Voluntary earmarked": 33167437.0
+      },
       {
         "donor": "Republic of Korea",
         "total": 14838236.0,
@@ -14368,6 +14680,16 @@
         "total": 13629957.0,
         "Voluntary earmarked": 13599946.0,
         "Voluntary un-earmarked": 30011.0
+      },
+      {
+        "donor": "World Bank Group",
+        "total": 12675686.0,
+        "Voluntary earmarked": 12675686.0
+      },
+      {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 11026527.0,
+        "Voluntary earmarked": 11026527.0
       },
       {
         "donor": "Germany",
@@ -14449,6 +14771,11 @@
         "Voluntary earmarked": 990320.0
       },
       {
+        "donor": "UN OCHA",
+        "total": 950554.0,
+        "Voluntary earmarked": 950554.0
+      },
+      {
         "donor": "France",
         "total": 633409.0,
         "Voluntary earmarked": 105063.0,
@@ -14483,6 +14810,11 @@
         "donor": "Russian Federation",
         "total": 346141.0,
         "Voluntary earmarked": 346141.0
+      },
+      {
+        "donor": "Private donor",
+        "total": 314745.0,
+        "Voluntary earmarked": 314745.0
       },
       {
         "donor": "Jordan",
@@ -14670,11 +15002,11 @@
     ]
   },
   "WFP": {
-    "total": 12120051157.0,
+    "total": 13446917193.0,
     "year": 2022,
     "by_type": {
-      "Voluntary earmarked": 11543293893.0,
-      "Voluntary un-earmarked": 576757264.0
+      "Voluntary earmarked": 12859064281.0,
+      "Voluntary un-earmarked": 587852912.0
     },
     "by_donor": [
       {
@@ -14690,6 +15022,11 @@
         "Voluntary un-earmarked": 162811618.0
       },
       {
+        "donor": "European Union",
+        "total": 698153337.0,
+        "Voluntary earmarked": 698153337.0
+      },
+      {
         "donor": "Canada",
         "total": 443306795.0,
         "Voluntary earmarked": 422784653.0,
@@ -14700,6 +15037,11 @@
         "total": 410336472.0,
         "Voluntary earmarked": 365489936.0,
         "Voluntary un-earmarked": 44846536.0
+      },
+      {
+        "donor": "World Bank Group",
+        "total": 306293086.0,
+        "Voluntary earmarked": 306293086.0
       },
       {
         "donor": "Japan",
@@ -14724,6 +15066,11 @@
         "total": 169387232.0,
         "Voluntary earmarked": 124169054.0,
         "Voluntary un-earmarked": 45218178.0
+      },
+      {
+        "donor": "UN OCHA",
+        "total": 169386500.0,
+        "Voluntary earmarked": 169386500.0
       },
       {
         "donor": "Somalia",
@@ -14755,6 +15102,11 @@
         "Voluntary un-earmarked": 76144618.0
       },
       {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 96173640.0,
+        "Voluntary earmarked": 96173640.0
+      },
+      {
         "donor": "United Arab Emirates",
         "total": 87658304.0,
         "Voluntary earmarked": 87658304.0
@@ -14780,6 +15132,12 @@
         "donor": "Haiti",
         "total": 42000000.0,
         "Voluntary earmarked": 42000000.0
+      },
+      {
+        "donor": "Private donor",
+        "total": 37559373.0,
+        "Voluntary earmarked": 26463725.0,
+        "Voluntary un-earmarked": 11095648.0
       },
       {
         "donor": "Ireland",
@@ -14838,6 +15196,11 @@
         "donor": "Burkina Faso",
         "total": 20000000.0,
         "Voluntary earmarked": 20000000.0
+      },
+      {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": 19300100.0,
+        "Voluntary earmarked": 19300100.0
       },
       {
         "donor": "Luxembourg",
@@ -15254,10 +15617,10 @@
     ]
   },
   "UNSSC": {
-    "total": 5018493.0,
+    "total": 5228411.0,
     "year": 2022,
     "by_type": {
-      "Voluntary earmarked": 754987.0,
+      "Voluntary earmarked": 964905.0,
       "Voluntary un-earmarked": 4263506.0
     },
     "by_donor": [
@@ -15279,6 +15642,11 @@
         "Voluntary un-earmarked": 772631.0
       },
       {
+        "donor": "UN OCHA",
+        "total": 200216.0,
+        "Voluntary earmarked": 200216.0
+      },
+      {
         "donor": "France",
         "total": 74800.0,
         "Voluntary earmarked": 74800.0
@@ -15287,17 +15655,28 @@
         "donor": "Switzerland",
         "total": 11000.0,
         "Voluntary earmarked": 11000.0
+      },
+      {
+        "donor": "World Bank Group",
+        "total": 9702.0,
+        "Voluntary earmarked": 9702.0
       }
     ]
   },
   "UNDP": {
-    "total": 3399009923.0,
+    "total": 4665904403.0,
     "year": 2022,
     "by_type": {
-      "Voluntary earmarked": 2788483653.0,
-      "Voluntary un-earmarked": 610526270.0
+      "Voluntary earmarked": 4056309693.0,
+      "Voluntary un-earmarked": 609594710.0
     },
     "by_donor": [
+      {
+        "donor": "Global Environment Facility",
+        "total": 530468366.0,
+        "Voluntary earmarked": 531330462.0,
+        "Voluntary un-earmarked": -862096.0
+      },
       {
         "donor": "Germany",
         "total": 457447964.0,
@@ -15316,6 +15695,12 @@
         "Voluntary earmarked": 295976439.0
       },
       {
+        "donor": "European Union",
+        "total": 290020955.0,
+        "Voluntary earmarked": 290078626.0,
+        "Voluntary un-earmarked": -57671.0
+      },
+      {
         "donor": "Switzerland",
         "total": 242375865.0,
         "Voluntary earmarked": 86333234.0,
@@ -15326,6 +15711,18 @@
         "total": 227278322.0,
         "Voluntary earmarked": 146280158.0,
         "Voluntary un-earmarked": 80998164.0
+      },
+      {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 219842332.0,
+        "Voluntary earmarked": 219839625.0,
+        "Voluntary un-earmarked": 2707.0
+      },
+      {
+        "donor": "World Bank Group",
+        "total": 177604922.0,
+        "Voluntary earmarked": 177604982.0,
+        "Voluntary un-earmarked": -60.0
       },
       {
         "donor": "Democratic Republic of the Congo",
@@ -15457,6 +15854,16 @@
         "Voluntary un-earmarked": 8140756.0
       },
       {
+        "donor": "UN OCHA",
+        "total": 20743870.0,
+        "Voluntary earmarked": 20743870.0
+      },
+      {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": 20390004.0,
+        "Voluntary earmarked": 20390004.0
+      },
+      {
         "donor": "Paraguay",
         "total": 19551076.0,
         "Voluntary earmarked": 19551076.0
@@ -15570,6 +15977,11 @@
         "total": 7799005.0,
         "Voluntary earmarked": 7392478.0,
         "Voluntary un-earmarked": 406527.0
+      },
+      {
+        "donor": "Gavi Alliance",
+        "total": 7795486.0,
+        "Voluntary earmarked": 7795486.0
       },
       {
         "donor": "Kuwait",
@@ -16178,6 +16590,12 @@
         "Voluntary un-earmarked": 30935.0
       },
       {
+        "donor": "Private donor",
+        "total": 28545.0,
+        "Voluntary earmarked": 42985.0,
+        "Voluntary un-earmarked": -14440.0
+      },
+      {
         "donor": "Tokelau",
         "total": 28523.0,
         "Voluntary un-earmarked": 28523.0
@@ -16437,11 +16855,11 @@
     ]
   },
   "UNRWA": {
-    "total": 1000278797.0,
+    "total": 1117915934.0,
     "year": 2022,
     "by_type": {
-      "Voluntary earmarked": 405164697.0,
-      "Voluntary un-earmarked": 595114100.0
+      "Voluntary earmarked": 421396932.0,
+      "Voluntary un-earmarked": 696519002.0
     },
     "by_donor": [
       {
@@ -16455,6 +16873,12 @@
         "total": 188779175.0,
         "Voluntary earmarked": 152021403.0,
         "Voluntary un-earmarked": 36757772.0
+      },
+      {
+        "donor": "European Union",
+        "total": 110078490.0,
+        "Voluntary earmarked": 9560355.0,
+        "Voluntary un-earmarked": 100518135.0
       },
       {
         "donor": "Sweden",
@@ -16590,6 +17014,12 @@
         "Voluntary earmarked": 6356624.0
       },
       {
+        "donor": "Private donor",
+        "total": 6178865.0,
+        "Voluntary earmarked": 5292098.0,
+        "Voluntary un-earmarked": 886767.0
+      },
+      {
         "donor": "India",
         "total": 5000000.0,
         "Voluntary un-earmarked": 5000000.0
@@ -16610,6 +17040,11 @@
         "donor": "Russian Federation",
         "total": 2000000.0,
         "Voluntary un-earmarked": 2000000.0
+      },
+      {
+        "donor": "UN OCHA",
+        "total": 1379782.0,
+        "Voluntary earmarked": 1379782.0
       },
       {
         "donor": "Lebanon",
@@ -16788,11 +17223,11 @@
     ]
   },
   "UNFPA": {
-    "total": 1132974516.0,
+    "total": 1387053056.0,
     "year": 2022,
     "by_type": {
-      "Voluntary earmarked": 743599502.0,
-      "Voluntary un-earmarked": 389375014.0
+      "Voluntary earmarked": 997377517.0,
+      "Voluntary un-earmarked": 389675539.0
     },
     "by_donor": [
       {
@@ -16818,6 +17253,16 @@
         "total": 86184985.0,
         "Voluntary earmarked": 49990569.0,
         "Voluntary un-earmarked": 36194416.0
+      },
+      {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 85029808.0,
+        "Voluntary earmarked": 85029808.0
+      },
+      {
+        "donor": "European Union",
+        "total": 82139874.0,
+        "Voluntary earmarked": 82139874.0
       },
       {
         "donor": "Germany",
@@ -16850,6 +17295,11 @@
         "Voluntary un-earmarked": 16500000.0
       },
       {
+        "donor": "UN OCHA",
+        "total": 47899022.0,
+        "Voluntary earmarked": 47899022.0
+      },
+      {
         "donor": "Luxembourg",
         "total": 39910510.0,
         "Voluntary earmarked": 37884924.0,
@@ -16877,6 +17327,16 @@
         "total": 24727761.0,
         "Voluntary earmarked": 21379547.0,
         "Voluntary un-earmarked": 3348214.0
+      },
+      {
+        "donor": "World Bank Group",
+        "total": 20704365.0,
+        "Voluntary earmarked": 20704365.0
+      },
+      {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": 17947783.0,
+        "Voluntary earmarked": 17947783.0
       },
       {
         "donor": "Sweden",
@@ -17030,6 +17490,12 @@
         "donor": "Timor-Leste",
         "total": 362724.0,
         "Voluntary earmarked": 362724.0
+      },
+      {
+        "donor": "Private donor",
+        "total": 357688.0,
+        "Voluntary earmarked": 57163.0,
+        "Voluntary un-earmarked": 300525.0
       },
       {
         "donor": "Mauritius",
@@ -17358,13 +17824,18 @@
     ]
   },
   "UN-Women": {
-    "total": 433402844.0,
+    "total": 570471997.0,
     "year": 2022,
     "by_type": {
-      "Voluntary earmarked": 215932971.0,
+      "Voluntary earmarked": 353002124.0,
       "Voluntary un-earmarked": 217469873.0
     },
     "by_donor": [
+      {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 75967414.0,
+        "Voluntary earmarked": 75967414.0
+      },
       {
         "donor": "United States of America",
         "total": 63202389.0,
@@ -17376,6 +17847,11 @@
         "total": 58773368.0,
         "Voluntary earmarked": 7437146.0,
         "Voluntary un-earmarked": 51336222.0
+      },
+      {
+        "donor": "European Union",
+        "total": 37785063.0,
+        "Voluntary earmarked": 37785063.0
       },
       {
         "donor": "Australia",
@@ -17412,6 +17888,11 @@
         "total": 31309379.0,
         "Voluntary earmarked": 21071551.0,
         "Voluntary un-earmarked": 10237828.0
+      },
+      {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": 22439565.0,
+        "Voluntary earmarked": 22439565.0
       },
       {
         "donor": "Luxembourg",
@@ -17508,6 +17989,11 @@
         "total": 1047388.0,
         "Voluntary earmarked": 796636.0,
         "Voluntary un-earmarked": 250752.0
+      },
+      {
+        "donor": "UN OCHA",
+        "total": 877111.0,
+        "Voluntary earmarked": 877111.0
       },
       {
         "donor": "Mexico",
@@ -17818,10 +18304,10 @@
     ]
   },
   "IFAD": {
-    "total": 539147678.0,
+    "total": 605151800.0,
     "year": 2022,
     "by_type": {
-      "Voluntary earmarked": 106647505.0,
+      "Voluntary earmarked": 172651627.0,
       "Voluntary un-earmarked": 432500173.0
     },
     "by_donor": [
@@ -17842,6 +18328,11 @@
         "total": 54000000.0,
         "Voluntary earmarked": 10000000.0,
         "Voluntary un-earmarked": 44000000.0
+      },
+      {
+        "donor": "European Union",
+        "total": 50989164.0,
+        "Voluntary earmarked": 50989164.0
       },
       {
         "donor": "Netherlands",
@@ -17895,6 +18386,11 @@
         "total": 16690605.0,
         "Voluntary earmarked": 759428.0,
         "Voluntary un-earmarked": 15931177.0
+      },
+      {
+        "donor": "Global Environment Facility",
+        "total": 13079072.0,
+        "Voluntary earmarked": 13079072.0
       },
       {
         "donor": "Finland",
@@ -17951,6 +18447,11 @@
         "Voluntary un-earmarked": 1940035.0
       },
       {
+        "donor": "World Bank Group",
+        "total": 1273000.0,
+        "Voluntary earmarked": 1273000.0
+      },
+      {
         "donor": "Tunisia",
         "total": 1107231.0,
         "Voluntary un-earmarked": 1107231.0
@@ -17979,6 +18480,11 @@
         "donor": "Democratic Republic of the Congo",
         "total": 700000.0,
         "Voluntary un-earmarked": 700000.0
+      },
+      {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": 662886.0,
+        "Voluntary earmarked": 662886.0
       },
       {
         "donor": "Denmark",
@@ -18198,10 +18704,10 @@
     ]
   },
   "UNODC": {
-    "total": 288906239.0,
+    "total": 343104777.0,
     "year": 2022,
     "by_type": {
-      "Voluntary earmarked": 284287095.0,
+      "Voluntary earmarked": 338485633.0,
       "Voluntary un-earmarked": 4619144.0
     },
     "by_donor": [
@@ -18215,6 +18721,11 @@
         "donor": "Colombia",
         "total": 42697950.0,
         "Voluntary earmarked": 42697950.0
+      },
+      {
+        "donor": "European Union",
+        "total": 42293168.0,
+        "Voluntary earmarked": 42293168.0
       },
       {
         "donor": "Norway",
@@ -18246,6 +18757,11 @@
         "donor": "United Kingdom of Great Britain and Northern Ireland",
         "total": 10771048.0,
         "Voluntary earmarked": 10771048.0
+      },
+      {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 10599443.0,
+        "Voluntary earmarked": 10599443.0
       },
       {
         "donor": "Denmark",
@@ -18307,6 +18823,11 @@
         "donor": "Italy",
         "total": 1431156.0,
         "Voluntary earmarked": 1431156.0
+      },
+      {
+        "donor": "UN OCHA",
+        "total": 1294899.0,
+        "Voluntary earmarked": 1294899.0
       },
       {
         "donor": "United Arab Emirates",
@@ -18436,6 +18957,11 @@
         "Voluntary earmarked": 20683.0
       },
       {
+        "donor": "Private donor",
+        "total": 11028.0,
+        "Voluntary earmarked": 11028.0
+      },
+      {
         "donor": "Slovenia",
         "total": 10753.0,
         "Voluntary earmarked": 10753.0
@@ -18535,11 +19061,11 @@
     ]
   },
   "UN Tourism": {
-    "total": 24621089.457642134,
+    "total": 24627466.447642133,
     "year": 2022,
     "by_type": {
       "Assessed": 14345474.973716,
-      "Voluntary earmarked": 10257818.95676613,
+      "Voluntary earmarked": 10264195.94676613,
       "Voluntary un-earmarked": 17795.52716
     },
     "by_donor": [
@@ -19422,6 +19948,11 @@
         "Assessed": 17795.52716
       },
       {
+        "donor": "World Bank Group",
+        "total": 5616.61,
+        "Voluntary earmarked": 5616.61
+      },
+      {
         "donor": "United States of America",
         "total": 3063.897764,
         "Voluntary earmarked": 3063.897764
@@ -19437,6 +19968,11 @@
         "Voluntary earmarked": 853.0351438
       },
       {
+        "donor": "European Union",
+        "total": 760.38,
+        "Voluntary earmarked": 760.38
+      },
+      {
         "donor": "Canada",
         "total": 22.36421725,
         "Voluntary earmarked": 22.36421725
@@ -19444,11 +19980,11 @@
     ]
   },
   "IMO": {
-    "total": 48871368.23274419,
+    "total": 50960382.672744185,
     "year": 2022,
     "by_type": {
       "Assessed": 40452466.908656,
-      "Voluntary un-earmarked": 8418901.32408818
+      "Voluntary un-earmarked": 10507915.76408818
     },
     "by_donor": [
       {
@@ -19489,6 +20025,11 @@
         "total": 2364441.63647,
         "Assessed": 2267570.397,
         "Voluntary un-earmarked": 96871.23947
+      },
+      {
+        "donor": "European Union",
+        "total": 2089014.44,
+        "Voluntary un-earmarked": 2089014.44
       },
       {
         "donor": "Malta",
@@ -20369,11 +20910,11 @@
     ]
   },
   "ICAO": {
-    "total": 173469333.33889163,
+    "total": 174592534.66889164,
     "year": 2022,
     "by_type": {
       "Assessed": 81940036.13377,
-      "Voluntary earmarked": 91529297.20512164
+      "Voluntary earmarked": 92652498.53512163
     },
     "by_donor": [
       {
@@ -20525,6 +21066,11 @@
         "total": 1325704.27747,
         "Assessed": 172074.4838,
         "Voluntary earmarked": 1153629.79367
+      },
+      {
+        "donor": "European Union",
+        "total": 1123201.33,
+        "Voluntary earmarked": 1123201.33
       },
       {
         "donor": "Singapore",
@@ -21463,11 +22009,11 @@
     ]
   },
   "IAEA": {
-    "total": 678030290.7034096,
+    "total": 684329433.4134096,
     "year": 2022,
     "by_type": {
       "Assessed": 414854860.459208,
-      "Voluntary earmarked": 263175430.2442015
+      "Voluntary earmarked": 269474572.9542015
     },
     "by_donor": [
       {
@@ -21603,6 +22149,11 @@
         "Voluntary earmarked": 983289.6699
       },
       {
+        "donor": "European Union",
+        "total": 4450034.08,
+        "Voluntary earmarked": 4450034.08
+      },
+      {
         "donor": "Norway",
         "total": 4394797.657,
         "Assessed": 3028129.925,
@@ -21679,6 +22230,11 @@
         "total": 1921826.4115000002,
         "Assessed": 45945.6869,
         "Voluntary earmarked": 1875880.7246
+      },
+      {
+        "donor": "Private donor",
+        "total": 1849108.63,
+        "Voluntary earmarked": 1849108.63
       },
       {
         "donor": "Ireland",
@@ -22523,11 +23079,11 @@
     ]
   },
   "WTO": {
-    "total": 226869001.08797202,
+    "total": 226954320.697972,
     "year": 2022,
     "by_type": {
       "Assessed": 212476516.79760998,
-      "Voluntary un-earmarked": 14392484.290362
+      "Voluntary un-earmarked": 14477803.900362
     },
     "by_donor": [
       {
@@ -23034,6 +23590,12 @@
         "Assessed": 86841.82016
       },
       {
+        "donor": "European Union",
+        "total": 85319.61,
+        "Assessed": 0.0,
+        "Voluntary un-earmarked": 85319.61
+      },
+      {
         "donor": "Honduras",
         "total": 84723.72698,
         "Assessed": 84723.72698
@@ -23491,11 +24053,11 @@
     ]
   },
   "WMO": {
-    "total": 86230070.41942629,
+    "total": 93174300.09942628,
     "year": 2022,
     "by_type": {
       "Assessed": 73549377.02764,
-      "Voluntary earmarked": 12680693.3917863
+      "Voluntary earmarked": 19624923.0717863
     },
     "by_donor": [
       {
@@ -23521,6 +24083,11 @@
         "total": 7203488.62423,
         "Assessed": 6207569.881,
         "Voluntary earmarked": 995918.74323
+      },
+      {
+        "donor": "World Bank Group",
+        "total": 5861295.77,
+        "Voluntary earmarked": 5861295.77
       },
       {
         "donor": "United Kingdom of Great Britain and Northern Ireland",
@@ -23578,6 +24145,11 @@
         "total": 1482369.4474499999,
         "Assessed": 831108.3424,
         "Voluntary earmarked": 651261.1050499999
+      },
+      {
+        "donor": "European Union",
+        "total": 1082933.91,
+        "Voluntary earmarked": 1082933.91
       },
       {
         "donor": "Netherlands",
@@ -25478,12 +26050,12 @@
     ]
   },
   "IARC": {
-    "total": 35140958.4676356,
+    "total": 45326829.61763561,
     "year": 2022,
     "by_type": {
       "Assessed": 24419205.5381,
-      "Voluntary earmarked": 10686800.8528556,
-      "Voluntary un-earmarked": 34952.07668
+      "Voluntary earmarked": 20847263.0528556,
+      "Voluntary un-earmarked": 60361.026679999995
     },
     "by_donor": [
       {
@@ -25493,10 +26065,20 @@
         "Voluntary earmarked": 6246298.19
       },
       {
+        "donor": "European Union",
+        "total": 7299108.63,
+        "Voluntary earmarked": 7299108.63
+      },
+      {
         "donor": "France",
         "total": 4291629.3933756,
         "Assessed": 1215513.312,
         "Voluntary earmarked": 3076116.0813756
+      },
+      {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": 2575814.7,
+        "Voluntary earmarked": 2575814.7
       },
       {
         "donor": "United Kingdom of Great Britain and Northern Ireland",
@@ -25628,6 +26210,12 @@
         "Assessed": 642643.2375
       },
       {
+        "donor": "Private donor",
+        "total": 310947.82,
+        "Voluntary earmarked": 285538.87,
+        "Voluntary un-earmarked": 25408.95
+      },
+      {
         "donor": "Luxembourg",
         "total": 60170.39404,
         "Voluntary earmarked": 60170.39404
@@ -25635,13 +26223,19 @@
     ]
   },
   "ITU": {
-    "total": 126937060.66761,
+    "total": 152261295.69761002,
     "year": 2022,
     "by_type": {
-      "Assessed": 118410211.26294,
-      "Voluntary earmarked": 8526849.40467
+      "Assessed": 138259250.26294,
+      "Voluntary earmarked": 14002045.43467
     },
     "by_donor": [
+      {
+        "donor": "Private donor",
+        "total": 24847726.91,
+        "Assessed": 19849039.0,
+        "Voluntary earmarked": 4998687.91
+      },
       {
         "donor": "Japan",
         "total": 10798383.5302,
@@ -25818,6 +26412,11 @@
         "donor": "Thailand",
         "total": 516793.0661,
         "Assessed": 516793.0661
+      },
+      {
+        "donor": "European Union",
+        "total": 476508.12,
+        "Voluntary earmarked": 476508.12
       },
       {
         "donor": "Czechia",
@@ -26627,11 +27226,11 @@
     ]
   },
   "OPCW": {
-    "total": 85640427.0508506,
+    "total": 85722726.3008506,
     "year": 2022,
     "by_type": {
       "Assessed": 72867053.2480376,
-      "Voluntary earmarked": 12773373.802813
+      "Voluntary earmarked": 12855673.052813
     },
     "by_donor": [
       {
@@ -26922,6 +27521,11 @@
         "donor": "Pakistan",
         "total": 83813.63152,
         "Assessed": 83813.63152
+      },
+      {
+        "donor": "European Union",
+        "total": 82299.25,
+        "Voluntary earmarked": 82299.25
       },
       {
         "donor": "Oman",
@@ -27624,11 +28228,11 @@
     ]
   },
   "ICC": {
-    "total": 169425604.900661,
+    "total": 170266668.80066097,
     "year": 2022,
     "by_type": {
       "Assessed": 161477359.959221,
-      "Voluntary earmarked": 7948244.94144
+      "Voluntary earmarked": 8789308.84144
     },
     "by_donor": [
       {
@@ -27786,6 +28390,11 @@
         "total": 1049022.36426,
         "Assessed": 1027515.442,
         "Voluntary earmarked": 21506.92226
+      },
+      {
+        "donor": "European Union",
+        "total": 827954.21,
+        "Voluntary earmarked": 827954.21
       },
       {
         "donor": "Colombia",
@@ -28086,6 +28695,11 @@
         "Assessed": 15142.70501
       },
       {
+        "donor": "Private donor",
+        "total": 13109.69,
+        "Voluntary earmarked": 13109.69
+      },
+      {
         "donor": "Fiji",
         "total": 12594.2492,
         "Assessed": 12594.2492
@@ -28273,13 +28887,23 @@
     ]
   },
   "UNIDO": {
-    "total": 154358947.7953481,
+    "total": 284270779.5053481,
     "year": 2022,
     "by_type": {
       "Assessed": 75535805.1051083,
-      "Voluntary earmarked": 78823142.6902398
+      "Voluntary earmarked": 208734974.4002398
     },
     "by_donor": [
+      {
+        "donor": "Global Environment Facility",
+        "total": 85972773.16,
+        "Voluntary earmarked": 85972773.16
+      },
+      {
+        "donor": "European Union",
+        "total": 38459154.410000004,
+        "Voluntary earmarked": 38459154.410000004
+      },
       {
         "donor": "Japan",
         "total": 23818406.810000002,
@@ -28315,6 +28939,11 @@
         "total": 5488853.035,
         "Assessed": 1126238.552,
         "Voluntary earmarked": 4362614.483
+      },
+      {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 5479904.14,
+        "Voluntary earmarked": 5479904.14
       },
       {
         "donor": "Russian Federation",
@@ -30185,10 +30814,10 @@
     ]
   },
   "UNITAR": {
-    "total": 21617441.0,
+    "total": 24915782.0,
     "year": 2022,
     "by_type": {
-      "Voluntary earmarked": 21284372.0,
+      "Voluntary earmarked": 24582713.0,
       "Voluntary un-earmarked": 333069.0
     },
     "by_donor": [
@@ -30208,10 +30837,25 @@
         "Voluntary earmarked": 2335197.0
       },
       {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 1333188.0,
+        "Voluntary earmarked": 1333188.0
+      },
+      {
         "donor": "Japan",
         "total": 1325713.0,
         "Voluntary earmarked": 1309832.0,
         "Voluntary un-earmarked": 15881.0
+      },
+      {
+        "donor": "Private donor",
+        "total": 1078088.0,
+        "Voluntary earmarked": 1078088.0
+      },
+      {
+        "donor": "European Union",
+        "total": 687065.0,
+        "Voluntary earmarked": 687065.0
       },
       {
         "donor": "Switzerland",
@@ -30244,6 +30888,11 @@
         "donor": "Italy",
         "total": 274021.0,
         "Voluntary earmarked": 274021.0
+      },
+      {
+        "donor": "World Bank Group",
+        "total": 200000.0,
+        "Voluntary earmarked": 200000.0
       },
       {
         "donor": "Ireland",
@@ -30364,10 +31013,10 @@
     ]
   },
   "UNU": {
-    "total": 40715714.0,
+    "total": 41756681.0,
     "year": 2022,
     "by_type": {
-      "Voluntary earmarked": 13444488.0,
+      "Voluntary earmarked": 14485455.0,
       "Voluntary un-earmarked": 27271226.0
     },
     "by_donor": [
@@ -30414,6 +31063,16 @@
         "Voluntary un-earmarked": 662111.0
       },
       {
+        "donor": "European Union",
+        "total": 485607.0,
+        "Voluntary earmarked": 485607.0
+      },
+      {
+        "donor": "Multi Donor Trust Funds",
+        "total": 454716.0,
+        "Voluntary earmarked": 454716.0
+      },
+      {
         "donor": "Liechtenstein",
         "total": 432900.0,
         "Voluntary earmarked": 432900.0
@@ -30442,6 +31101,11 @@
         "donor": "Portugal",
         "total": 112136.0,
         "Voluntary un-earmarked": 112136.0
+      },
+      {
+        "donor": "Private donor",
+        "total": 100644.0,
+        "Voluntary earmarked": 100644.0
       },
       {
         "donor": "Republic of Korea",
@@ -30476,11 +31140,11 @@
     ]
   },
   "UN": {
-    "total": 5462782768.0,
+    "total": 5486419854.0,
     "year": 2022,
     "by_type": {
       "Assessed": 3152068215.0,
-      "Voluntary earmarked": 2186276046.0,
+      "Voluntary earmarked": 2209913132.0,
       "Voluntary un-earmarked": 124438507.0
     },
     "by_donor": [
@@ -30785,6 +31449,11 @@
         "Voluntary un-earmarked": 1674.0
       },
       {
+        "donor": "European Union",
+        "total": 10293936.0,
+        "Voluntary earmarked": 10293936.0
+      },
+      {
         "donor": "Romania",
         "total": 10034503.0,
         "Assessed": 9833915.0,
@@ -30802,6 +31471,11 @@
         "total": 9104617.0,
         "Assessed": 7186322.0,
         "Voluntary earmarked": 1918295.0
+      },
+      {
+        "donor": "Private donor",
+        "total": 9001032.0,
+        "Voluntary earmarked": 9001032.0
       },
       {
         "donor": "Lebanon",
@@ -30883,6 +31557,11 @@
         "total": 4468321.0,
         "Assessed": 4381135.0,
         "Voluntary earmarked": 87186.0
+      },
+      {
+        "donor": "Multi Donor Trust Funds",
+        "total": 4342118.0,
+        "Voluntary earmarked": 4342118.0
       },
       {
         "donor": "Morocco",
@@ -31730,12 +32409,12 @@
     ]
   },
   "ITLOS": {
-    "total": 16306580.404703002,
+    "total": 16423726.304703001,
     "year": 2022,
     "by_type": {
       "Assessed": 12744957.401442999,
       "Voluntary earmarked": 270334.39826,
-      "Voluntary un-earmarked": 3291288.605
+      "Voluntary un-earmarked": 3408434.505
     },
     "by_donor": [
       {
@@ -31850,6 +32529,11 @@
         "donor": "Norway",
         "total": 130042.5985,
         "Assessed": 130042.5985
+      },
+      {
+        "donor": "European Union",
+        "total": 117145.9,
+        "Voluntary un-earmarked": 117145.9
       },
       {
         "donor": "Austria",
@@ -32575,13 +33259,18 @@
     ]
   },
   "UNCDF": {
-    "total": 84574534.0,
+    "total": 191573899.0,
     "year": 2022,
     "by_type": {
-      "Voluntary earmarked": 69844123.0,
+      "Voluntary earmarked": 176843488.0,
       "Voluntary un-earmarked": 14730411.0
     },
     "by_donor": [
+      {
+        "donor": "Multi Partner Trust Fund Office",
+        "total": 87738918.0,
+        "Voluntary earmarked": 87738918.0
+      },
       {
         "donor": "Sweden",
         "total": 43486336.0,
@@ -32593,6 +33282,16 @@
         "total": 22492677.0,
         "Voluntary earmarked": 12867135.0,
         "Voluntary un-earmarked": 9625542.0
+      },
+      {
+        "donor": "European Union",
+        "total": 11200594.0,
+        "Voluntary earmarked": 11200594.0
+      },
+      {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": 7934986.0,
+        "Voluntary earmarked": 7934986.0
       },
       {
         "donor": "Denmark",
@@ -32635,6 +33334,11 @@
         "donor": "Spain",
         "total": 208004.0,
         "Voluntary earmarked": 208004.0
+      },
+      {
+        "donor": "Private donor",
+        "total": 124867.0,
+        "Voluntary earmarked": 124867.0
       },
       {
         "donor": "Austria",
@@ -32681,6 +33385,477 @@
         "donor": "Belgium",
         "total": -618296.0,
         "Voluntary earmarked": -618296.0
+      }
+    ]
+  },
+  "UN-DCO": {
+    "total": 12226390.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 15000.0,
+      "Voluntary un-earmarked": 12211390.0
+    },
+    "by_donor": [
+      {
+        "donor": "Private donor",
+        "total": 10742756.0,
+        "Voluntary un-earmarked": 10742756.0
+      },
+      {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": 1468634.0,
+        "Voluntary un-earmarked": 1468634.0
+      },
+      {
+        "donor": "Multi Donor Trust Funds",
+        "total": 15000.0,
+        "Voluntary earmarked": 15000.0
+      }
+    ]
+  },
+  "UN-OCHA": {
+    "total": 624871823.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 624871823.0
+    },
+    "by_donor": [
+      {
+        "donor": "Multi Donor Trust Funds",
+        "total": 461663169.0,
+        "Voluntary earmarked": 461663169.0
+      },
+      {
+        "donor": "Private donor",
+        "total": 141509607.0,
+        "Voluntary earmarked": 141509607.0
+      },
+      {
+        "donor": "European Union",
+        "total": 21699047.0,
+        "Voluntary earmarked": 21699047.0
+      }
+    ]
+  },
+  "UN-ECA": {
+    "total": 2082789.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 2082789.0
+    },
+    "by_donor": [
+      {
+        "donor": "European Union",
+        "total": 1653723.0,
+        "Voluntary earmarked": 1653723.0
+      },
+      {
+        "donor": "Multi Donor Trust Funds",
+        "total": 505018.0,
+        "Voluntary earmarked": 505018.0
+      },
+      {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": -3929.0,
+        "Voluntary earmarked": -3929.0
+      },
+      {
+        "donor": "Private donor",
+        "total": -13608.0,
+        "Voluntary earmarked": -13608.0
+      },
+      {
+        "donor": "World Bank Group",
+        "total": -58415.0,
+        "Voluntary earmarked": -58415.0
+      }
+    ]
+  },
+  "UN-UNDRR": {
+    "total": 8773779.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 8773779.0
+    },
+    "by_donor": [
+      {
+        "donor": "World Bank Group",
+        "total": 3834998.0,
+        "Voluntary earmarked": 3834998.0
+      },
+      {
+        "donor": "European Union",
+        "total": 2569776.0,
+        "Voluntary earmarked": 2569776.0
+      },
+      {
+        "donor": "Private donor",
+        "total": 2369005.0,
+        "Voluntary earmarked": 2369005.0
+      }
+    ]
+  },
+  "UN-DMSPC": {
+    "total": 431766.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 431766.0
+    },
+    "by_donor": [
+      {
+        "donor": "Private donor",
+        "total": 328353.0,
+        "Voluntary earmarked": 328353.0
+      },
+      {
+        "donor": "European Union",
+        "total": 103413.0,
+        "Voluntary earmarked": 103413.0
+      }
+    ]
+  },
+  "UN-DPPA": {
+    "total": 2225351.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 2225351.0
+    },
+    "by_donor": [
+      {
+        "donor": "European Union",
+        "total": 1179151.0,
+        "Voluntary earmarked": 1179151.0
+      },
+      {
+        "donor": "Multi Donor Trust Funds",
+        "total": 1081847.0,
+        "Voluntary earmarked": 1081847.0
+      },
+      {
+        "donor": "Private donor",
+        "total": -35647.0,
+        "Voluntary earmarked": -35647.0
+      }
+    ]
+  },
+  "UN-ESCAP": {
+    "total": 338481.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 338481.0
+    },
+    "by_donor": [
+      {
+        "donor": "Multi Donor Trust Funds",
+        "total": 538391.0,
+        "Voluntary earmarked": 538391.0
+      },
+      {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": 2435.0,
+        "Voluntary earmarked": 2435.0
+      },
+      {
+        "donor": "Private donor",
+        "total": -202345.0,
+        "Voluntary earmarked": -202345.0
+      }
+    ]
+  },
+  "UN-OHCHR": {
+    "total": 134087863.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 134087863.0
+    },
+    "by_donor": [
+      {
+        "donor": "Private donor",
+        "total": 81760654.0,
+        "Voluntary earmarked": 81760654.0
+      },
+      {
+        "donor": "European Union",
+        "total": 33941019.0,
+        "Voluntary earmarked": 33941019.0
+      },
+      {
+        "donor": "Multi Donor Trust Funds",
+        "total": 18068024.0,
+        "Voluntary earmarked": 18068024.0
+      },
+      {
+        "donor": "World Bank Group",
+        "total": 355385.0,
+        "Voluntary earmarked": 355385.0
+      },
+      {
+        "donor": "UN OCHA",
+        "total": -37219.0,
+        "Voluntary earmarked": -37219.0
+      }
+    ]
+  },
+  "UN-DGACM": {
+    "total": 392488.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 392488.0
+    },
+    "by_donor": [
+      {
+        "donor": "European Union",
+        "total": 392488.0,
+        "Voluntary earmarked": 392488.0
+      }
+    ]
+  },
+  "UN-DGC": {
+    "total": 1943013.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 1943013.0
+    },
+    "by_donor": [
+      {
+        "donor": "Private donor",
+        "total": 1579271.0,
+        "Voluntary earmarked": 1579271.0
+      },
+      {
+        "donor": "Multi Donor Trust Funds",
+        "total": 363742.0,
+        "Voluntary earmarked": 363742.0
+      }
+    ]
+  },
+  "UN-DOS": {
+    "total": 4118292.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 4118292.0
+    },
+    "by_donor": [
+      {
+        "donor": "Multi Donor Trust Funds",
+        "total": 2328580.0,
+        "Voluntary earmarked": 2328580.0
+      },
+      {
+        "donor": "Private donor",
+        "total": 1751059.0,
+        "Voluntary earmarked": 1751059.0
+      },
+      {
+        "donor": "European Union",
+        "total": 38653.0,
+        "Voluntary earmarked": 38653.0
+      }
+    ]
+  },
+  "UN-ECE": {
+    "total": 7795621.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 7795621.0
+    },
+    "by_donor": [
+      {
+        "donor": "European Union",
+        "total": 3914382.0,
+        "Voluntary earmarked": 3914382.0
+      },
+      {
+        "donor": "Multi Donor Trust Funds",
+        "total": 3705125.0,
+        "Voluntary earmarked": 3705125.0
+      },
+      {
+        "donor": "Private donor",
+        "total": 173733.0,
+        "Voluntary earmarked": 173733.0
+      },
+      {
+        "donor": "World Bank Group",
+        "total": 2381.0,
+        "Voluntary earmarked": 2381.0
+      }
+    ]
+  },
+  "UN-ECLAC": {
+    "total": 9758183.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 9758183.0
+    },
+    "by_donor": [
+      {
+        "donor": "European Union",
+        "total": 9571054.0,
+        "Voluntary earmarked": 9571054.0
+      },
+      {
+        "donor": "World Bank Group",
+        "total": 144384.0,
+        "Voluntary earmarked": 144384.0
+      },
+      {
+        "donor": "Private donor",
+        "total": 42745.0,
+        "Voluntary earmarked": 42745.0
+      }
+    ]
+  },
+  "UN-ESCWA": {
+    "total": -54362.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": -54362.0
+    },
+    "by_donor": [
+      {
+        "donor": "World Bank Group",
+        "total": 34623.0,
+        "Voluntary earmarked": 34623.0
+      },
+      {
+        "donor": "Private donor",
+        "total": -88985.0,
+        "Voluntary earmarked": -88985.0
+      }
+    ]
+  },
+  "UN-UNCTAD": {
+    "total": 8525600.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 8525600.0
+    },
+    "by_donor": [
+      {
+        "donor": "European Union",
+        "total": 4534598.0,
+        "Voluntary earmarked": 4534598.0
+      },
+      {
+        "donor": "Multi Donor Trust Funds",
+        "total": 1889195.0,
+        "Voluntary earmarked": 1889195.0
+      },
+      {
+        "donor": "World Bank Group",
+        "total": 1286973.0,
+        "Voluntary earmarked": 1286973.0
+      },
+      {
+        "donor": "Private donor",
+        "total": 814834.0,
+        "Voluntary earmarked": 814834.0
+      }
+    ]
+  },
+  "UN-DESA": {
+    "total": 3085545.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 3085545.0
+    },
+    "by_donor": [
+      {
+        "donor": "European Union",
+        "total": 1355486.0,
+        "Voluntary earmarked": 1355486.0
+      },
+      {
+        "donor": "Private donor",
+        "total": 1004149.0,
+        "Voluntary earmarked": 1004149.0
+      },
+      {
+        "donor": "Multi Donor Trust Funds",
+        "total": 695867.0,
+        "Voluntary earmarked": 695867.0
+      },
+      {
+        "donor": "World Bank Group",
+        "total": 25000.0,
+        "Voluntary earmarked": 25000.0
+      },
+      {
+        "donor": "Bill & Melinda Gates Foundation",
+        "total": 5043.0,
+        "Voluntary earmarked": 5043.0
+      }
+    ]
+  },
+  "UN-OCT": {
+    "total": 4989986.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 4989986.0
+    },
+    "by_donor": [
+      {
+        "donor": "European Union",
+        "total": 4891735.0,
+        "Voluntary earmarked": 4891735.0
+      },
+      {
+        "donor": "Multi Donor Trust Funds",
+        "total": 191788.0,
+        "Voluntary earmarked": 191788.0
+      },
+      {
+        "donor": "Private donor",
+        "total": -93537.0,
+        "Voluntary earmarked": -93537.0
+      }
+    ]
+  },
+  "UN-UNIDIR": {
+    "total": 440577.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 440577.0
+    },
+    "by_donor": [
+      {
+        "donor": "European Union",
+        "total": 527445.0,
+        "Voluntary earmarked": 527445.0
+      },
+      {
+        "donor": "Private donor",
+        "total": -86868.0,
+        "Voluntary earmarked": -86868.0
+      }
+    ]
+  },
+  "UN-UNRISD": {
+    "total": 1568950.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 1568950.0
+    },
+    "by_donor": [
+      {
+        "donor": "Private donor",
+        "total": 1568950.0,
+        "Voluntary earmarked": 1568950.0
+      }
+    ]
+  },
+  "UN-Tech Bank": {
+    "total": 100000.0,
+    "year": 2022,
+    "by_type": {
+      "Voluntary earmarked": 100000.0
+    },
+    "by_donor": [
+      {
+        "donor": "Private donor",
+        "total": 100000.0,
+        "Voluntary earmarked": 100000.0
       }
     ]
   }
