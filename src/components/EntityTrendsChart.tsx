@@ -80,8 +80,7 @@ interface EntityYearData {
 
 interface EntityTrendsData {
   meta: {
-    revenueYears: number[];
-    expensesYears: number[];
+    years: number[];
     systemGroups: string[];
     entitiesByGroup: Record<string, string[]>;
   };
@@ -228,8 +227,7 @@ export function EntityTrendsChart() {
   const compareData = React.useMemo(() => {
     if (!data) return [];
     
-    // Only use expenses years
-    return data.meta.expensesYears.map((year) => {
+    return data.meta.years.map((year) => {
       const point: Record<string, number | string | null> = { year: year.toString() };
       
       Array.from(compareSelected).forEach((id) => {
