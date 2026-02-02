@@ -49,6 +49,9 @@ export default function Home() {
         />
         <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 lg:px-16">
           <ContributorsTreemap />
+          <p className="mt-4 text-xs text-gray-500">
+            See <a href="#methodology" className="underline hover:text-gray-700">methodology</a> for important notes and limitations.
+          </p>
         </section>
 
         {/* Entities Section */}
@@ -60,6 +63,9 @@ export default function Home() {
         />
         <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 lg:px-16">
           <EntitiesTreemap />
+          <p className="mt-4 text-xs text-gray-500">
+            See <a href="#methodology" className="underline hover:text-gray-700">methodology</a> for important notes and limitations.
+          </p>
         </section>
 
         {/* Countries Section */}
@@ -71,6 +77,9 @@ export default function Home() {
         />
         <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 lg:px-16">
           <CountryMap />
+          <p className="mt-4 text-xs text-gray-500">
+            See <a href="#methodology" className="underline hover:text-gray-700">methodology</a> for important notes and limitations.
+          </p>
         </section>
 
         {/* SDGs Section */}
@@ -82,6 +91,9 @@ export default function Home() {
         />
         <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 lg:px-16">
           <SDGsGrid />
+          <p className="mt-4 text-xs text-gray-500">
+            See <a href="#methodology" className="underline hover:text-gray-700">methodology</a> for important notes and limitations.
+          </p>
         </section>
 
         {/* Background Section */}
@@ -92,7 +104,7 @@ export default function Home() {
             </h2>
 
             <div className="divide-y divide-gray-200">
-              <ExpandableCard title="Methodology">
+              <ExpandableCard id="methodology" title="Methodology">
                 <div className="space-y-4">
                   <p>
                     Data is sourced from the UN Chief Executives Board (CEB)
