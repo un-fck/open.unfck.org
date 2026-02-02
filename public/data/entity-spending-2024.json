@@ -1,0 +1,290 @@
+[
+  {
+    "entity": "CTBTO",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 134037685.0
+  },
+  {
+    "entity": "FAO",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 2186386840.0
+  },
+  {
+    "entity": "IAEA",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 778994791.7
+  },
+  {
+    "entity": "IARC",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 55071631.25
+  },
+  {
+    "entity": "ICAO",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 214536170.59
+  },
+  {
+    "entity": "ICC",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 203060819.85
+  },
+  {
+    "entity": "IFAD",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 245195041.0
+  },
+  {
+    "entity": "ILO",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 858209541.0
+  },
+  {
+    "entity": "IMO",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 87073919.6
+  },
+  {
+    "entity": "IOM",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 3672506691.0
+  },
+  {
+    "entity": "IRMCT",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 95155000.0
+  },
+  {
+    "entity": "ISA",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 12694266.0
+  },
+  {
+    "entity": "ITC",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 172302246.0
+  },
+  {
+    "entity": "ITLOS",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 19685035.42
+  },
+  {
+    "entity": "ITU",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 246410344.11999995
+  },
+  {
+    "entity": "OPCW",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 86550647.92
+  },
+  {
+    "entity": "PAHO",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 1120053425.0
+  },
+  {
+    "entity": "UN",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 7600990348.0
+  },
+  {
+    "entity": "UN Tourism",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 33355633.33
+  },
+  {
+    "entity": "UN-DPO",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 7341051634.0
+  },
+  {
+    "entity": "UNAIDS",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 203716004.0
+  },
+  {
+    "entity": "UNCCD",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 40130111.0
+  },
+  {
+    "entity": "UNCDF",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 84896540.0
+  },
+  {
+    "entity": "UNDP",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 5315326809.0
+  },
+  {
+    "entity": "UNEP",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 808063860.0
+  },
+  {
+    "entity": "UNESCO",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 848684009.0
+  },
+  {
+    "entity": "UNFCCC",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 122381813.0
+  },
+  {
+    "entity": "UNFPA",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 1528012969.0
+  },
+  {
+    "entity": "UN-Habitat",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 188263637.0
+  },
+  {
+    "entity": "UNHCR",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 4894644082.0
+  },
+  {
+    "entity": "UNICEF",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 8514715187.0
+  },
+  {
+    "entity": "UNICRI",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 12357569.0
+  },
+  {
+    "entity": "UNIDO",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 324950524.95
+  },
+  {
+    "entity": "UNITAID",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 177041000.0
+  },
+  {
+    "entity": "UNITAR",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 57387688.0
+  },
+  {
+    "entity": "UNODC",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 472440639.0
+  },
+  {
+    "entity": "UNOPS",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 1481769343.0
+  },
+  {
+    "entity": "UNRWA",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 1273233663.0
+  },
+  {
+    "entity": "UNSSC",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 21569087.0
+  },
+  {
+    "entity": "UNU",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 80479703.0
+  },
+  {
+    "entity": "UNV",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 27195265.0
+  },
+  {
+    "entity": "UN-Women",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 622770150.4138006
+  },
+  {
+    "entity": "UPU",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 91055422.86
+  },
+  {
+    "entity": "WFP",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 9158082718.0
+  },
+  {
+    "entity": "WHO",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 3763352772.0
+  },
+  {
+    "entity": "WIPO",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 436827954.47
+  },
+  {
+    "entity": "WMO",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 124774694.85
+  },
+  {
+    "entity": "WTO",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 201589364.08
+  }
+]

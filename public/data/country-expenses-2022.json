@@ -2625,6 +2625,20 @@
     }
   },
   {
+    "iso3": "ESH",
+    "name": "Western Sahara",
+    "region": "Africa",
+    "lat": 24.2155,
+    "long": -12.8858,
+    "total": 69623782.0,
+    "entities": {
+      "UN-DPO": 65469021.0,
+      "UNOPS": 2436038.0,
+      "UNHCR": 1720195.0,
+      "UN": -1472.0
+    }
+  },
+  {
     "iso3": "MAR",
     "name": "Morocco",
     "region": "Africa",

@@ -2395,6 +2395,20 @@
     }
   },
   {
+    "iso3": "ESH",
+    "name": "Western Sahara",
+    "region": "Africa",
+    "lat": 24.2155,
+    "long": -12.8858,
+    "total": 77402595.0,
+    "entities": {
+      "UN-DPO": 71514834.0,
+      "UNOPS": 2989429.0,
+      "UNHCR": 2588688.0,
+      "UN": 309644.0
+    }
+  },
+  {
     "iso3": "MAR",
     "name": "Morocco",
     "region": "Africa",
@@ -4635,6 +4649,17 @@
     }
   },
   {
+    "iso3": "GLP",
+    "name": "Guadeloupe",
+    "region": "Americas",
+    "lat": 16.265,
+    "long": -61.551,
+    "total": 363804.0,
+    "entities": {
+      "UNEP": 363804.0
+    }
+  },
+  {
     "iso3": "TKL",
     "name": "Tokelau",
     "region": "Oceania",
@@ -4692,6 +4717,17 @@
     "entities": {
       "UNDP": 23450.0,
       "ILO": 618.0
+    }
+  },
+  {
+    "iso3": "VAT",
+    "name": "Vatican",
+    "region": "Europe",
+    "lat": 41.9029,
+    "long": 12.4534,
+    "total": 92.0,
+    "entities": {
+      "UN": 92.0
     }
   },
   {

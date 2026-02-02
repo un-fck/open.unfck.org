@@ -2634,6 +2634,19 @@
     }
   },
   {
+    "iso3": "ESH",
+    "name": "Western Sahara",
+    "region": "Africa",
+    "lat": 24.2155,
+    "long": -12.8858,
+    "total": 47822276.45,
+    "entities": {
+      "UN-DPO": 44374721.31,
+      "UNHCR": 2184108.0,
+      "UNOPS": 1263447.14
+    }
+  },
+  {
     "iso3": "CYP",
     "name": "Cyprus",
     "region": "Asia",
@@ -4472,6 +4485,17 @@
     }
   },
   {
+    "iso3": "MAF",
+    "name": "Saint-Martin",
+    "region": "Americas",
+    "lat": 18.0731,
+    "long": -63.0822,
+    "total": 114313.0,
+    "entities": {
+      "PAHO": 114313.0
+    }
+  },
+  {
     "iso3": "CYM",
     "name": "Cayman Islands",
     "region": "Americas",
@@ -4519,6 +4543,17 @@
     }
   },
   {
+    "iso3": "MNP",
+    "name": "Northern Mariana Islands",
+    "region": "Oceania",
+    "lat": 15.0979,
+    "long": 145.6739,
+    "total": 36166.0,
+    "entities": {
+      "WHO": 36166.0
+    }
+  },
+  {
     "iso3": "GUM",
     "name": "Guam",
     "region": "Oceania",
@@ -4540,6 +4575,17 @@
       "UNICEF": 8633.59,
       "WHO": 6961.0,
       "UNODC": 5177.59
+    }
+  },
+  {
+    "iso3": "SPM",
+    "name": "St. Pierre and Miquelon",
+    "region": "Americas",
+    "lat": 46.8852,
+    "long": -56.3159,
+    "total": 20296.35,
+    "entities": {
+      "UN": 20296.35
     }
   },
   {

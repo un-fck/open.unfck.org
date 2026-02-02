@@ -12,6 +12,12 @@
     "amount": 12576285.0
   },
   {
+    "entity": "OAJ",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 10420382.0
+  },
+  {
     "entity": "ASM-AQMT",
     "source": "secretariat",
     "year": 2023,
@@ -76,12 +82,6 @@
     "source": "secretariat",
     "year": 2023,
     "amount": 10786275.0
-  },
-  {
-    "entity": "DCO",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 229044840.0
   },
   {
     "entity": "DESA",
@@ -168,12 +168,6 @@
     "amount": 79800615.0
   },
   {
-    "entity": "EO",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 2964164.0
-  },
-  {
     "entity": "EOSG",
     "source": "secretariat",
     "year": 2023,
@@ -190,6 +184,12 @@
     "source": "secretariat",
     "year": 2023,
     "amount": 60541777.0
+  },
+  {
+    "entity": "EO",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 2964164.0
   },
   {
     "entity": "FAO",
@@ -270,16 +270,16 @@
     "amount": 26422827.0
   },
   {
-    "entity": "IIMM",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 15614557.0
-  },
-  {
     "entity": "ILO",
     "source": "ceb",
     "year": 2023,
     "amount": 851273122.0
+  },
+  {
+    "entity": "IIMM",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 15614557.0
   },
   {
     "entity": "IMO",
@@ -384,12 +384,6 @@
     "amount": 157125599.0
   },
   {
-    "entity": "OAJ",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 10420382.0
-  },
-  {
     "entity": "OCHA",
     "source": "secretariat",
     "year": 2023,
@@ -408,16 +402,16 @@
     "amount": 26248672.0
   },
   {
-    "entity": "ODET",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 197591.0
-  },
-  {
     "entity": "OHCHR",
     "source": "secretariat",
     "year": 2023,
     "amount": 443198164.0
+  },
+  {
+    "entity": "UN-OHRLLS",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 10551265.0
   },
   {
     "entity": "OICT",
@@ -480,12 +474,6 @@
     "amount": 6589071.0
   },
   {
-    "entity": "OSASG-Cyprus",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 2840363.0
-  },
-  {
     "entity": "OSC-SEA",
     "source": "secretariat",
     "year": 2023,
@@ -510,6 +498,144 @@
     "amount": 5971262.0
   },
   {
+    "entity": "ODET",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 197591.0
+  },
+  {
+    "entity": "OSLA",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 145700.0
+  },
+  {
+    "entity": "OTHER",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 938438.0
+  },
+  {
+    "entity": "VRA",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 2569781.0
+  },
+  {
+    "entity": "PAHO",
+    "source": "ceb",
+    "year": 2023,
+    "amount": 1098900000.0
+  },
+  {
+    "entity": "PESG-WS",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 264238.0
+  },
+  {
+    "entity": "PoE-CAR",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 890627.0
+  },
+  {
+    "entity": "POE-DPRK",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 3065752.0
+  },
+  {
+    "entity": "PoE-Haiti",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 1402619.0
+  },
+  {
+    "entity": "PoE-Libya",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 1178303.0
+  },
+  {
+    "entity": "POE-MALI",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 690899.0
+  },
+  {
+    "entity": "POE-SOMALIA",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 1632424.0
+  },
+  {
+    "entity": "PoE-Sudan",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 1011978.0
+  },
+  {
+    "entity": "PoE-Yemen",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 2106053.0
+  },
+  {
+    "entity": "PoE-S.Sudan",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 1024641.0
+  },
+  {
+    "entity": "DCO",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 229044840.0
+  },
+  {
+    "entity": "RSCE",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 43874800.0
+  },
+  {
+    "entity": "RSCSL",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 2639068.0
+  },
+  {
+    "entity": "OSASG-Cyprus",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 2840363.0
+  },
+  {
+    "entity": "SASG-PGENOCIDE",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 2888746.0
+  },
+  {
+    "entity": "SC-RES1540",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 2280122.0
+  },
+  {
+    "entity": "OSESG-SCRES1559",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 299153.0
+  },
+  {
+    "entity": "SC-RES2231",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 1397445.0
+  },
+  {
     "entity": "OSESG-Horn",
     "source": "secretariat",
     "year": 2023,
@@ -522,22 +648,10 @@
     "amount": 1562872.0
   },
   {
-    "entity": "OSESG-SCRES1559",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 299153.0
-  },
-  {
     "entity": "OSESG-Yemen",
     "source": "secretariat",
     "year": 2023,
     "amount": 16087001.0
-  },
-  {
-    "entity": "OSLA",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 145700.0
   },
   {
     "entity": "OSRSG-CAAC",
@@ -556,108 +670,6 @@
     "source": "secretariat",
     "year": 2023,
     "amount": 3248386.0
-  },
-  {
-    "entity": "OTHER",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 938438.0
-  },
-  {
-    "entity": "PAHO",
-    "source": "ceb",
-    "year": 2023,
-    "amount": 1098900000.0
-  },
-  {
-    "entity": "PESG-WS",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 264238.0
-  },
-  {
-    "entity": "POE-DPRK",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 3065752.0
-  },
-  {
-    "entity": "POE-MALI",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 690899.0
-  },
-  {
-    "entity": "POE-SOMALIA",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 1632424.0
-  },
-  {
-    "entity": "PoE-CAR",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 890627.0
-  },
-  {
-    "entity": "PoE-Haiti",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 1402619.0
-  },
-  {
-    "entity": "PoE-Libya",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 1178303.0
-  },
-  {
-    "entity": "PoE-S.Sudan",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 1024641.0
-  },
-  {
-    "entity": "PoE-Sudan",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 1011978.0
-  },
-  {
-    "entity": "PoE-Yemen",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 2106053.0
-  },
-  {
-    "entity": "RSCE",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 43874800.0
-  },
-  {
-    "entity": "RSCSL",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 2639068.0
-  },
-  {
-    "entity": "SASG-PGENOCIDE",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 2888746.0
-  },
-  {
-    "entity": "SC-RES1540",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 2280122.0
-  },
-  {
-    "entity": "SC-RES2231",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 1397445.0
   },
   {
     "entity": "STA",
@@ -684,28 +696,22 @@
     "amount": 84076266.0
   },
   {
-    "entity": "UN Tourism",
-    "source": "ceb",
-    "year": 2023,
-    "amount": 34570738.06
-  },
-  {
     "entity": "UN-Habitat",
-    "source": "ceb",
-    "year": 2023,
-    "amount": 177685766.0
-  },
-  {
-    "entity": "UN-OHRLLS",
     "source": "secretariat",
     "year": 2023,
-    "amount": 10551265.0
+    "amount": 159245282.0
+  },
+  {
+    "entity": "UNRGID",
+    "source": "secretariat",
+    "year": 2023,
+    "amount": 1770389.0
   },
   {
     "entity": "UN-Women",
-    "source": "ceb",
+    "source": "secretariat",
     "year": 2023,
-    "amount": 546102676.0
+    "amount": 10473712.0
   },
   {
     "entity": "UNAIDS",
@@ -783,7 +789,7 @@
     "entity": "UNEP",
     "source": "ceb",
     "year": 2023,
-    "amount": 671941354.0
+    "amount": 692801093.0
   },
   {
     "entity": "UNESCO",
@@ -814,6 +820,12 @@
     "source": "secretariat",
     "year": 2023,
     "amount": 9150471.0
+  },
+  {
+    "entity": "UN-Habitat",
+    "source": "ceb",
+    "year": 2023,
+    "amount": 177685766.0
   },
   {
     "entity": "UNHCR",
@@ -945,7 +957,7 @@
     "entity": "UNODC",
     "source": "ceb",
     "year": 2023,
-    "amount": 439681881.0
+    "amount": 463228582.0
   },
   {
     "entity": "UNOG",
@@ -988,12 +1000,6 @@
     "source": "secretariat",
     "year": 2023,
     "amount": 3244150.0
-  },
-  {
-    "entity": "UNRGID",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 1770389.0
   },
   {
     "entity": "UNRISD",
@@ -1074,6 +1080,18 @@
     "amount": 68380078.0
   },
   {
+    "entity": "UN-Women",
+    "source": "ceb",
+    "year": 2023,
+    "amount": 546102676.0
+  },
+  {
+    "entity": "UN Tourism",
+    "source": "ceb",
+    "year": 2023,
+    "amount": 34570738.06
+  },
+  {
     "entity": "UNYO",
     "source": "secretariat",
     "year": 2023,
@@ -1084,12 +1102,6 @@
     "source": "ceb",
     "year": 2023,
     "amount": 108758261.07
-  },
-  {
-    "entity": "VRA",
-    "source": "secretariat",
-    "year": 2023,
-    "amount": 2569781.0
   },
   {
     "entity": "WFP",
@@ -1119,6 +1131,6 @@
     "entity": "WTO",
     "source": "ceb",
     "year": 2023,
-    "amount": 314202918.54
+    "amount": 314202918.53999996
   }
 ]

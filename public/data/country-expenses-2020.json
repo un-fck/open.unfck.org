@@ -2292,6 +2292,20 @@
     }
   },
   {
+    "iso3": "ESH",
+    "name": "Western Sahara",
+    "region": "Africa",
+    "lat": 24.2155,
+    "long": -12.8858,
+    "total": 68154631.61,
+    "entities": {
+      "UN-DPO": 63350760.16,
+      "UNOPS": 2855830.17,
+      "UNHCR": 1948041.29,
+      "UN": 0.0
+    }
+  },
+  {
     "iso3": "CYP",
     "name": "Cyprus",
     "region": "Asia",
@@ -4624,6 +4638,17 @@
     }
   },
   {
+    "iso3": "MNP",
+    "name": "Northern Mariana Islands",
+    "region": "Oceania",
+    "lat": 15.0979,
+    "long": 145.6739,
+    "total": 37000.0,
+    "entities": {
+      "WHO": 37000.0
+    }
+  },
+  {
     "iso3": "BMU",
     "name": "Bermuda",
     "region": "Americas",
@@ -4669,6 +4694,17 @@
     "entities": {
       "WHO": 4881.0,
       "UNEP": 3592.8
+    }
+  },
+  {
+    "iso3": "NFK",
+    "name": "Norfolk Island",
+    "region": "Oceania",
+    "lat": -29.0408,
+    "long": 167.9547,
+    "total": 2681.77,
+    "entities": {
+      "WMO": 2681.77
     }
   },
   {

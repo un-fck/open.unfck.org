@@ -3611,6 +3611,19 @@
     }
   },
   {
+    "iso3": "ESH",
+    "name": "Western Sahara",
+    "region": "Africa",
+    "lat": 24.2155,
+    "long": -12.8858,
+    "total": 7636496.7,
+    "entities": {
+      "UNOPS": 4835919.35,
+      "UNHCR": 2827630.54,
+      "UN": -27053.19
+    }
+  },
+  {
     "iso3": "DNK",
     "name": "Denmark",
     "region": "Europe",
@@ -4400,6 +4413,17 @@
     }
   },
   {
+    "iso3": "MAF",
+    "name": "Saint-Martin",
+    "region": "Americas",
+    "lat": 18.0731,
+    "long": -63.0822,
+    "total": 77016.0,
+    "entities": {
+      "PAHO": 77016.0
+    }
+  },
+  {
     "iso3": "BMU",
     "name": "Bermuda",
     "region": "Americas",
@@ -4443,6 +4467,17 @@
     "total": 41012.0,
     "entities": {
       "PAHO": 41012.0
+    }
+  },
+  {
+    "iso3": "SPM",
+    "name": "St. Pierre and Miquelon",
+    "region": "Americas",
+    "lat": 46.8852,
+    "long": -56.3159,
+    "total": 38558.74,
+    "entities": {
+      "UN": 38558.74
     }
   },
   {
@@ -4520,6 +4555,17 @@
     "total": 2100.0,
     "entities": {
       "WHO": 2100.0
+    }
+  },
+  {
+    "iso3": "MNP",
+    "name": "Northern Mariana Islands",
+    "region": "Oceania",
+    "lat": 15.0979,
+    "long": 145.6739,
+    "total": 400.0,
+    "entities": {
+      "WHO": 400.0
     }
   }
 ]

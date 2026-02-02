@@ -2762,6 +2762,20 @@
     }
   },
   {
+    "iso3": "ESH",
+    "name": "Western Sahara",
+    "region": "Africa",
+    "lat": 24.2155,
+    "long": -12.8858,
+    "total": 66362935.0,
+    "entities": {
+      "UN-DPO": 62262976.0,
+      "UNOPS": 2590070.0,
+      "UNHCR": 1509799.0,
+      "UN": 90.0
+    }
+  },
+  {
     "iso3": "ARM",
     "name": "Armenia",
     "region": "Asia",
@@ -4824,6 +4838,17 @@
     }
   },
   {
+    "iso3": "MNP",
+    "name": "Northern Mariana Islands",
+    "region": "Oceania",
+    "lat": 15.0979,
+    "long": 145.6739,
+    "total": 32744.0,
+    "entities": {
+      "WHO": 32744.0
+    }
+  },
+  {
     "iso3": "PYF",
     "name": "French Polynesia",
     "region": "Oceania",
@@ -4832,6 +4857,17 @@
     "total": 4823.0,
     "entities": {
       "WHO": 4823.0
+    }
+  },
+  {
+    "iso3": "VAT",
+    "name": "Vatican",
+    "region": "Europe",
+    "lat": 41.9029,
+    "long": 12.4534,
+    "total": -217.0,
+    "entities": {
+      "UN": -217.0
     }
   }
 ]

@@ -2409,6 +2409,19 @@
     }
   },
   {
+    "iso3": "ESH",
+    "name": "Western Sahara",
+    "region": "Africa",
+    "lat": 24.2155,
+    "long": -12.8858,
+    "total": 68434193.48,
+    "entities": {
+      "UN-DPO": 63493145.66,
+      "UNOPS": 2587014.91,
+      "UNHCR": 2354032.91
+    }
+  },
+  {
     "iso3": "LKA",
     "name": "Sri Lanka",
     "region": "Asia",
@@ -4753,6 +4766,28 @@
     "total": 13404.0,
     "entities": {
       "PAHO": 13404.0
+    }
+  },
+  {
+    "iso3": "SPM",
+    "name": "St. Pierre and Miquelon",
+    "region": "Americas",
+    "lat": 46.8852,
+    "long": -56.3159,
+    "total": 8065.88,
+    "entities": {
+      "UN": 8065.88
+    }
+  },
+  {
+    "iso3": "REU",
+    "name": "R\u00e9union",
+    "region": "Africa",
+    "lat": -21.1151,
+    "long": 55.5364,
+    "total": 2300.0,
+    "entities": {
+      "UNEP": 2300.0
     }
   }
 ]

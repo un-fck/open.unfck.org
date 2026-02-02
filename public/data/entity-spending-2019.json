@@ -12,6 +12,12 @@
     "amount": 18222660.0
   },
   {
+    "entity": "OAJ",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 9474200.0
+  },
+  {
     "entity": "ASM-AQMT",
     "source": "secretariat",
     "year": 2019,
@@ -76,12 +82,6 @@
     "source": "secretariat",
     "year": 2019,
     "amount": 11101370.0
-  },
-  {
-    "entity": "DCO",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 157108260.0
   },
   {
     "entity": "DESA",
@@ -168,12 +168,6 @@
     "amount": 72754420.0
   },
   {
-    "entity": "EO",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 3338300.0
-  },
-  {
     "entity": "EOSG",
     "source": "secretariat",
     "year": 2019,
@@ -190,6 +184,12 @@
     "source": "secretariat",
     "year": 2019,
     "amount": 45074310.0
+  },
+  {
+    "entity": "EO",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 3338300.0
   },
   {
     "entity": "FAO",
@@ -270,16 +270,16 @@
     "amount": 9346980.0
   },
   {
-    "entity": "IIMM",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 5123600.0
-  },
-  {
     "entity": "ILO",
     "source": "ceb",
     "year": 2019,
     "amount": 704861145.8
+  },
+  {
+    "entity": "IIMM",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 5123600.0
   },
   {
     "entity": "IMO",
@@ -303,7 +303,7 @@
     "entity": "ITLOS",
     "source": "ceb",
     "year": 2019,
-    "amount": 11875667.41
+    "amount": 11875667.41059154
   },
   {
     "entity": "ITU",
@@ -372,12 +372,6 @@
     "amount": 156110890.0
   },
   {
-    "entity": "OAJ",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 9474200.0
-  },
-  {
     "entity": "OCHA",
     "source": "secretariat",
     "year": 2019,
@@ -396,16 +390,16 @@
     "amount": 24149640.0
   },
   {
-    "entity": "ODET",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 1854630.0
-  },
-  {
     "entity": "OHCHR",
     "source": "secretariat",
     "year": 2019,
     "amount": 301717530.0
+  },
+  {
+    "entity": "UN-OHRLLS",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 7298000.0
   },
   {
     "entity": "OICT",
@@ -468,12 +462,6 @@
     "amount": 5333770.0
   },
   {
-    "entity": "OSASG-Cyprus",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 2116900.0
-  },
-  {
     "entity": "OSESG-FG",
     "source": "secretariat",
     "year": 2019,
@@ -484,6 +472,144 @@
     "source": "secretariat",
     "year": 2019,
     "amount": 5029830.0
+  },
+  {
+    "entity": "ODET",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 1854630.0
+  },
+  {
+    "entity": "OSLA",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 242300.0
+  },
+  {
+    "entity": "OSRSG Migration",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": -77680.0
+  },
+  {
+    "entity": "OTHER",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 212460.0
+  },
+  {
+    "entity": "VRA",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 1130470.0
+  },
+  {
+    "entity": "PAHO",
+    "source": "ceb",
+    "year": 2019,
+    "amount": 1104921000.0
+  },
+  {
+    "entity": "PESG-WS",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 192000.0
+  },
+  {
+    "entity": "PoE-CAR",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 1095900.0
+  },
+  {
+    "entity": "POE-DPRK",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 3103900.0
+  },
+  {
+    "entity": "PoE-Libya",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 1264200.0
+  },
+  {
+    "entity": "POE-MALI",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 991400.0
+  },
+  {
+    "entity": "POE-SOMALIA",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 1655800.0
+  },
+  {
+    "entity": "PoE-Sudan",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 1047200.0
+  },
+  {
+    "entity": "PoE-Yemen",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 1889900.0
+  },
+  {
+    "entity": "PoE-S.Sudan",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 1126600.0
+  },
+  {
+    "entity": "DCO",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 157108260.0
+  },
+  {
+    "entity": "RSCE",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 32031600.0
+  },
+  {
+    "entity": "RSCSL",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 2423000.0
+  },
+  {
+    "entity": "OSASG-Cyprus",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 2116900.0
+  },
+  {
+    "entity": "SASG-PGENOCIDE",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 1832500.0
+  },
+  {
+    "entity": "SC-RES1540",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 2469100.0
+  },
+  {
+    "entity": "OSESG-SCRES1559",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 242200.0
+  },
+  {
+    "entity": "SC-RES2231",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 1634600.0
   },
   {
     "entity": "OSESG-Horn",
@@ -498,28 +624,10 @@
     "amount": 1077100.0
   },
   {
-    "entity": "OSESG-SCRES1559",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 242200.0
-  },
-  {
     "entity": "OSESG-Yemen",
     "source": "secretariat",
     "year": 2019,
     "amount": 16560900.0
-  },
-  {
-    "entity": "OSLA",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 242300.0
-  },
-  {
-    "entity": "OSRSG Migration",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": -77680.0
   },
   {
     "entity": "OSRSG-CAAC",
@@ -538,102 +646,6 @@
     "source": "secretariat",
     "year": 2019,
     "amount": 2807040.0
-  },
-  {
-    "entity": "OTHER",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 212460.0
-  },
-  {
-    "entity": "PAHO",
-    "source": "ceb",
-    "year": 2019,
-    "amount": 1104921000.0
-  },
-  {
-    "entity": "PESG-WS",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 192000.0
-  },
-  {
-    "entity": "POE-DPRK",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 3103900.0
-  },
-  {
-    "entity": "POE-MALI",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 991400.0
-  },
-  {
-    "entity": "POE-SOMALIA",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 1655800.0
-  },
-  {
-    "entity": "PoE-CAR",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 1095900.0
-  },
-  {
-    "entity": "PoE-Libya",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 1264200.0
-  },
-  {
-    "entity": "PoE-S.Sudan",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 1126600.0
-  },
-  {
-    "entity": "PoE-Sudan",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 1047200.0
-  },
-  {
-    "entity": "PoE-Yemen",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 1889900.0
-  },
-  {
-    "entity": "RSCE",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 32031600.0
-  },
-  {
-    "entity": "RSCSL",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 2423000.0
-  },
-  {
-    "entity": "SASG-PGENOCIDE",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 1832500.0
-  },
-  {
-    "entity": "SC-RES1540",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 2469100.0
-  },
-  {
-    "entity": "SC-RES2231",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 1634600.0
   },
   {
     "entity": "STA",
@@ -661,21 +673,21 @@
   },
   {
     "entity": "UN-Habitat",
-    "source": "ceb",
-    "year": 2019,
-    "amount": 190343510.68
-  },
-  {
-    "entity": "UN-OHRLLS",
     "source": "secretariat",
     "year": 2019,
-    "amount": 7298000.0
+    "amount": 175415200.0
+  },
+  {
+    "entity": "UNRGID",
+    "source": "secretariat",
+    "year": 2019,
+    "amount": 1716700.0
   },
   {
     "entity": "UN-Women",
-    "source": "ceb",
+    "source": "secretariat",
     "year": 2019,
-    "amount": 420889999.98
+    "amount": 9525700.0
   },
   {
     "entity": "UNAIDS",
@@ -747,7 +759,7 @@
     "entity": "UNEP",
     "source": "ceb",
     "year": 2019,
-    "amount": 592782116.11
+    "amount": 615871916.11
   },
   {
     "entity": "UNESCO",
@@ -780,6 +792,12 @@
     "amount": 5344000.0
   },
   {
+    "entity": "UN-Habitat",
+    "source": "ceb",
+    "year": 2019,
+    "amount": 190343510.68
+  },
+  {
     "entity": "UNHCR",
     "source": "ceb",
     "year": 2019,
@@ -789,7 +807,7 @@
     "entity": "UNICEF",
     "source": "ceb",
     "year": 2019,
-    "amount": 6202896276.59
+    "amount": 6202896276.5695
   },
   {
     "entity": "UNIDIR",
@@ -897,7 +915,7 @@
     "entity": "UNODC",
     "source": "ceb",
     "year": 2019,
-    "amount": 374841162.9
+    "amount": 397749062.9
   },
   {
     "entity": "UNOG",
@@ -940,12 +958,6 @@
     "source": "secretariat",
     "year": 2019,
     "amount": 2651200.0
-  },
-  {
-    "entity": "UNRGID",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 1716700.0
   },
   {
     "entity": "UNRISD",
@@ -1020,16 +1032,16 @@
     "amount": 68304100.0
   },
   {
+    "entity": "UN-Women",
+    "source": "ceb",
+    "year": 2019,
+    "amount": 420889999.98
+  },
+  {
     "entity": "UPU",
     "source": "ceb",
     "year": 2019,
-    "amount": 81622406.15
-  },
-  {
-    "entity": "VRA",
-    "source": "secretariat",
-    "year": 2019,
-    "amount": 1130470.0
+    "amount": 81622406.149
   },
   {
     "entity": "WFP",

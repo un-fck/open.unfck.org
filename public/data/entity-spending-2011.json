@@ -1,0 +1,206 @@
+[
+  {
+    "entity": "FAO",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 1500342346.0
+  },
+  {
+    "entity": "IAEA",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 522306338.0
+  },
+  {
+    "entity": "ICAO",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 212854153.0
+  },
+  {
+    "entity": "IFAD",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 935562000.0
+  },
+  {
+    "entity": "ILO",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 634617031.0
+  },
+  {
+    "entity": "IMO",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 70976929.0
+  },
+  {
+    "entity": "IOM",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 1309709889.0
+  },
+  {
+    "entity": "ITC",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 86996000.0
+  },
+  {
+    "entity": "ITU",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 207808258.0
+  },
+  {
+    "entity": "PAHO",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 836321196.0
+  },
+  {
+    "entity": "UN",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 4356846000.0
+  },
+  {
+    "entity": "UN Tourism",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 23254811.0
+  },
+  {
+    "entity": "UN-DPO",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 7573730000.0
+  },
+  {
+    "entity": "UNAIDS",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 320801000.0
+  },
+  {
+    "entity": "UNDP",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 5516013890.0
+  },
+  {
+    "entity": "UNEP",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 611372969.0
+  },
+  {
+    "entity": "UNESCO",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 937842181.0
+  },
+  {
+    "entity": "UNFPA",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 824500000.0
+  },
+  {
+    "entity": "UN-Habitat",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 226340264.0
+  },
+  {
+    "entity": "UNHCR",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 2181099628.0
+  },
+  {
+    "entity": "UNICEF",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 3793737000.0
+  },
+  {
+    "entity": "UNIDO",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 245597643.0
+  },
+  {
+    "entity": "UNITAR",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 22351310.0
+  },
+  {
+    "entity": "UNODC",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 239197187.0
+  },
+  {
+    "entity": "UNOPS",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 76042471.0
+  },
+  {
+    "entity": "UNRWA",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 617275000.0
+  },
+  {
+    "entity": "UNU",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 55155000.0
+  },
+  {
+    "entity": "UN-Women",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 198315000.0
+  },
+  {
+    "entity": "UPU",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 56837037.0
+  },
+  {
+    "entity": "WFP",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 4181022630.0
+  },
+  {
+    "entity": "WHO",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 2514503652.0
+  },
+  {
+    "entity": "WIPO",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 340952040.0
+  },
+  {
+    "entity": "WMO",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 83419459.0
+  },
+  {
+    "entity": "WTO",
+    "source": "ceb",
+    "year": 2011,
+    "amount": 230501369.0
+  }
+]

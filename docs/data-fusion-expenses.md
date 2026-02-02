@@ -1,0 +1,73 @@
+# UN Secretariat Expenses Data Fusion
+
+This document explains how CEB and Secretariat expenses data are combined to provide granular breakdowns.
+
+## Data Sources
+
+### CEB Expenses (Primary)
+`data/ceb/clean/expenses_sub_agency.csv` - 49 entities, 2011-2024
+
+The CEB reports aggregate figures where:
+- "UN" includes 70+ secretariat sub-entities
+- "UN-DPO" includes all peacekeeping missions
+
+### Secretariat Expenses (Supplementary)
+`data/un-secretariat-expenses.csv` - 153 sub-entities, 2019-2023
+
+Provides breakdown of UN and UN-DPO into constituent parts (OCHA, DPPA, DSS, peacekeeping missions, etc.).
+
+## Entity Overlap Analysis
+
+Five entities appear in both CEB and Secretariat data:
+
+| Entity | CEB | Sec Assessed | Sec Voluntary | Relationship | Resolution |
+|--------|-----|--------------|---------------|--------------|------------|
+| UNEP | $672M | $21M | $672M | CEB = voluntary only | Add assessed |
+| UNODC | $440M | $24M | $417M | CEB ≈ voluntary | Add assessed |
+| ITC | $159M | $20M | $115M | CEB includes WTO | CEB only |
+| UNHCR | $5,320M | $45M | — | Assessed is 0.8% subset | CEB only |
+| UNRWA | $1,461M | $38M | — | Assessed is 2.6% subset | CEB only |
+
+**Rationale:**
+- UNEP/UNODC: "Secretariat programmes" - CEB reports voluntary only, assessed contributions from UN regular budget are additional
+- UNHCR/UNRWA: "Subsidiary organs" - have autonomous budgets, CEB includes the regular budget subvention
+- ITC: Joint UN/WTO entity - CEB captures the complete picture
+
+## Fusion Methodology
+
+### Tier 1: CEB Only (2011-2018, 2024)
+For years without secretariat data, use CEB entities as-is.
+
+### Tier 2: CEB + Secretariat (2019-2023)
+1. Remove "UN" and "UN-DPO" aggregates from CEB
+2. Add all secretariat sub-entities except overlap entities (ITC, UNHCR, UNRWA)
+3. Add secretariat assessed amounts for UNEP/UNODC (additive to CEB)
+
+## Output
+
+`data/ceb/fused/expenses.csv`:
+
+| Column | Description |
+|--------|-------------|
+| year | Calendar year (2011-2024) |
+| entity | Entity code |
+| amount | Expenses in USD |
+| source | "ceb", "secretariat", or "secretariat_assessed" |
+
+## Validation Results
+
+```
+2011-2018: CEB only, 34-42 entities, $41-53B
+2019-2023: Fused, 179-189 entities, $54-67B
+2024: CEB only, 48 entities, $66B
+```
+
+Note: Fusion years show slightly lower totals than CEB because secretariat data doesn't capture all UN/UN-DPO expenses.
+
+## Pipeline
+
+```
+python/02-fetch_ceb_data.py    → data/ceb/clean/*.csv
+python/06-fuse_ceb_expenses.py → data/ceb/fused/expenses.csv
+python/07-export_expenses_json.py → public/data/*.json
+```

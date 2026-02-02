@@ -1,39 +1,29 @@
-"""Aggregate CEB revenue and expenses data into entity-trends.json."""
-
+"""Generate entity-trends.json from CEB revenue and expenses data."""
 import json
+import pandas as pd
 from pathlib import Path
 from collections import defaultdict
-import pandas as pd
-from utils import normalize_entity, parse_amount
 
-DATA = Path(__file__).parent.parent / "public/data"
-YEARS = list(range(2013, 2025))  # 2013-2024
-
+DATA = Path("public/data")
+YEARS = list(range(2011, 2025))
 
 def load_revenue() -> dict[str, dict[int, float]]:
-    """Load revenue from pre-processed JSON files."""
+    """Load revenue from fused CSV, aggregated by entity."""
+    df = pd.read_csv("data/ceb/fused/revenue_by_contributor.csv")
+    agg = df.groupby(["entity", "year"])["amount"].sum().reset_index()
     data = defaultdict(dict)
-    for y in YEARS:
-        path = DATA / f"entity-revenue-{y}.json"
-        if not path.exists():
-            continue
-        for entity, info in json.loads(path.read_text()).items():
-            data[entity][y] = info.get("total", 0)
+    for _, row in agg.iterrows():
+        data[row["entity"]][row["year"]] = row["amount"]
     return dict(data)
-
 
 def load_expenses() -> dict[str, dict[int, float]]:
-    """Load expenses directly from CEB CSV."""
-    df = pd.read_csv(Path(__file__).parent.parent / "data/un-system-expenses.csv")
-    df["entity"] = df["agency"].apply(normalize_entity)
-    df["amount"] = df["amount"].apply(parse_amount)
-    df = df[df["calendar_year"].isin(YEARS)]
+    """Load expenses from CEB clean CSV (not fused, for consistency)."""
+    df = pd.read_csv("data/ceb/clean/expenses_sub_agency.csv")
+    agg = df.groupby(["agency", "calendar_year"])["amount"].sum().reset_index()
     data = defaultdict(dict)
-    for _, row in df.groupby(["entity", "calendar_year"])["amount"].sum().items():
-        entity, year = _
-        data[entity][year] = row
+    for _, row in agg.iterrows():
+        data[row["agency"]][row["calendar_year"]] = row["amount"]
     return dict(data)
-
 
 def main():
     entities = json.loads((DATA / "entities.json").read_text())
@@ -63,8 +53,13 @@ def main():
     
     out_path = DATA / "entity-trends.json"
     out_path.write_text(json.dumps(output, indent=2))
-    print(f"Wrote {out_path}: {len(output['entities'])} entities, {len(groups)} groups, {YEARS[0]}-{YEARS[-1]}")
-
+    
+    # Summary
+    rev_years = sorted(set(y for d in rev.values() for y in d.keys()))
+    exp_years = sorted(set(y for d in exp.values() for y in d.keys()))
+    print(f"Revenue: {len(rev)} entities, {rev_years[0]}-{rev_years[-1]}")
+    print(f"Expenses: {len(exp)} entities, {exp_years[0]}-{exp_years[-1]}")
+    print(f"Wrote {out_path}: {len(output['entities'])} entities, {len(groups)} groups")
 
 if __name__ == "__main__":
     main()

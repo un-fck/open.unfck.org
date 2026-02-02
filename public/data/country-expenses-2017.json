@@ -3366,6 +3366,19 @@
     }
   },
   {
+    "iso3": "ESH",
+    "name": "Western Sahara",
+    "region": "Africa",
+    "lat": 24.2155,
+    "long": -12.8858,
+    "total": 6156468.99,
+    "entities": {
+      "UNOPS": 4565612.0,
+      "UNHCR": 1783423.24,
+      "UN": -192566.25
+    }
+  },
+  {
     "iso3": "ESP",
     "name": "Spain",
     "region": "Europe",
@@ -3395,6 +3408,17 @@
       "UNDP": 1120063.0,
       "FAO": 243056.37,
       "UNIDO": 16411.44
+    }
+  },
+  {
+    "iso3": "REU",
+    "name": "R\u00e9union",
+    "region": "Africa",
+    "lat": -21.1151,
+    "long": 55.5364,
+    "total": 5450382.99,
+    "entities": {
+      "UNHCR": 5450382.99
     }
   },
   {
@@ -3912,6 +3936,17 @@
     }
   },
   {
+    "iso3": "SHN",
+    "name": "St. Helena",
+    "region": "Africa",
+    "lat": -15.965,
+    "long": -5.7089,
+    "total": 180750.0,
+    "entities": {
+      "WHO": 180750.0
+    }
+  },
+  {
     "iso3": "TKL",
     "name": "Tokelau",
     "region": "Oceania",
@@ -4028,6 +4063,17 @@
     }
   },
   {
+    "iso3": "MNP",
+    "name": "Northern Mariana Islands",
+    "region": "Oceania",
+    "lat": 15.0979,
+    "long": 145.6739,
+    "total": 4707.0,
+    "entities": {
+      "WHO": 4707.0
+    }
+  },
+  {
     "iso3": "GIB",
     "name": "Gibraltar",
     "region": "Europe",
@@ -4047,6 +4093,17 @@
     "total": 697.84,
     "entities": {
       "UN": 697.84
+    }
+  },
+  {
+    "iso3": "SPM",
+    "name": "St. Pierre and Miquelon",
+    "region": "Americas",
+    "lat": 46.8852,
+    "long": -56.3159,
+    "total": -17091.68,
+    "entities": {
+      "UN": -17091.68
     }
   }
 ]

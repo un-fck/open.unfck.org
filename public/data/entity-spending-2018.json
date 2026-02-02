@@ -1,0 +1,254 @@
+[
+  {
+    "entity": "CTBTO",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 127564070.0
+  },
+  {
+    "entity": "FAO",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 1454768694.3
+  },
+  {
+    "entity": "IAEA",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 641027397.3
+  },
+  {
+    "entity": "IARC",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 46483337.9
+  },
+  {
+    "entity": "ICAO",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 229964200.7
+  },
+  {
+    "entity": "ICC",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 176976518.3
+  },
+  {
+    "entity": "IFAD",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 193082000.0
+  },
+  {
+    "entity": "ILO",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 624826077.0
+  },
+  {
+    "entity": "IMO",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 63760456.38
+  },
+  {
+    "entity": "IOM",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 1841571956.0
+  },
+  {
+    "entity": "ITC",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 98687491.0
+  },
+  {
+    "entity": "ITU",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 186793313.1
+  },
+  {
+    "entity": "OPCW",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 84194436.07
+  },
+  {
+    "entity": "PAHO",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 1299479539.0
+  },
+  {
+    "entity": "UN",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 6238507587.54
+  },
+  {
+    "entity": "UN Tourism",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 21123147.58
+  },
+  {
+    "entity": "UN-DPO",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 7987831960.61
+  },
+  {
+    "entity": "UNAIDS",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 184336897.0
+  },
+  {
+    "entity": "UNCDF",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 60853360.76
+  },
+  {
+    "entity": "UNDP",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 5096825461.0
+  },
+  {
+    "entity": "UNEP",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 558532205.8
+  },
+  {
+    "entity": "UNESCO",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 682012889.0
+  },
+  {
+    "entity": "UNFCCC",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 91157673.0
+  },
+  {
+    "entity": "UNFPA",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 1086021579.9
+  },
+  {
+    "entity": "UN-Habitat",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 185747457.16
+  },
+  {
+    "entity": "UNHCR",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 4063979955.08
+  },
+  {
+    "entity": "UNICEF",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 5918587378.0
+  },
+  {
+    "entity": "UNIDO",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 279463696.0
+  },
+  {
+    "entity": "UNITAID",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 216329000.0
+  },
+  {
+    "entity": "UNITAR",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 28584000.0
+  },
+  {
+    "entity": "UNODC",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 332270000.0
+  },
+  {
+    "entity": "UNOPS",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 923666350.35
+  },
+  {
+    "entity": "UNRWA",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 1190222772.0
+  },
+  {
+    "entity": "UNSSC",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 9741572.0
+  },
+  {
+    "entity": "UNU",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 90538190.0
+  },
+  {
+    "entity": "UN-Women",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 380260000.04
+  },
+  {
+    "entity": "UPU",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 75172437.69500001
+  },
+  {
+    "entity": "WFP",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 6789054399.1
+  },
+  {
+    "entity": "WHO",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 2500048502.0
+  },
+  {
+    "entity": "WIPO",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 355663225.04
+  },
+  {
+    "entity": "WMO",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 96634245.19
+  },
+  {
+    "entity": "WTO",
+    "source": "ceb",
+    "year": 2018,
+    "amount": 263483282.68
+  }
+]
