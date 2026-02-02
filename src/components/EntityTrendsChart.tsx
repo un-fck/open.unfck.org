@@ -272,8 +272,8 @@ export function EntityTrendsChart() {
   const getItemColor = React.useCallback((id: string) => colorMap[id], [colorMap]);
 
   // Custom tooltip formatter
-  const formatTooltipValue = (value: number | null | undefined) => {
-    if (value === null || value === undefined) return "N/A";
+  const formatTooltipValue = (value: unknown) => {
+    if (value === null || value === undefined || typeof value !== "number") return "N/A";
     return formatBudget(value);
   };
 
