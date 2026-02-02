@@ -13,6 +13,7 @@ interface ExpandableCardProps {
   title: string;
   children: React.ReactNode;
   defaultOpen?: boolean;
+  variant?: "default" | "filled";
 }
 
 export function ExpandableCard({
@@ -20,6 +21,7 @@ export function ExpandableCard({
   title,
   children,
   defaultOpen = false,
+  variant = "default",
 }: ExpandableCardProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
@@ -49,7 +51,11 @@ export function ExpandableCard({
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
       <CollapsibleTrigger 
         id={id}
-        className="flex w-full items-center justify-between border-b border-gray-200 py-4 text-left transition-colors hover:bg-gray-50"
+        className={`flex w-full items-center justify-between py-4 text-left transition-colors ${
+          variant === "filled" 
+            ? "bg-gray-50 px-4 hover:bg-gray-100" 
+            : "border-b border-gray-200 hover:bg-gray-50"
+        }`}
       >
         <h3 className="text-lg font-medium text-gray-900">{title}</h3>
         <ChevronDown

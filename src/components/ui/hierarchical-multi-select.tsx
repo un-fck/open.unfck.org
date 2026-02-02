@@ -108,8 +108,22 @@ export function HierarchicalMultiSelect({
   return (
     <div className={className}>
       <Popover open={open} onOpenChange={setOpen}>
-        {/* Chips row with "+" trigger */}
+        {/* Chips row with "+" trigger first for stable positioning */}
         <div className="flex flex-wrap items-center gap-1.5">
+          {/* Add chip trigger - first so it doesn't move when items are added */}
+          <PopoverTrigger asChild>
+            <button
+              className={cn(
+                "flex items-center justify-center rounded-full bg-gray-100 py-1 text-xs text-gray-600 transition-colors hover:bg-gray-200 hover:text-gray-800",
+                selectedCount === 0 ? "gap-1 px-2" : "w-[26px]",
+                open && "bg-gray-200"
+              )}
+            >
+              <span>+</span>
+              {selectedCount === 0 && <span>{addLabel}</span>}
+            </button>
+          </PopoverTrigger>
+          
           {/* Selected items as removable chips (serves as legend when getItemColor is provided) */}
           {Array.from(selected).map((id) => {
             const info = getSelectedItemInfo(id);
@@ -134,20 +148,6 @@ export function HierarchicalMultiSelect({
               </button>
             );
           })}
-          
-          {/* Add chip trigger - matches chip height (text-xs line-height + py-1 = ~26px) */}
-          <PopoverTrigger asChild>
-            <button
-              className={cn(
-                "flex items-center justify-center rounded-full bg-gray-100 py-1 text-xs text-gray-600 transition-colors hover:bg-gray-200 hover:text-gray-800",
-                selectedCount === 0 ? "gap-1 px-2" : "w-[26px]",
-                open && "bg-gray-200"
-              )}
-            >
-              <span>+</span>
-              {selectedCount === 0 && <span>{addLabel}</span>}
-            </button>
-          </PopoverTrigger>
         </div>
       <PopoverContent
         className="w-[320px] border-gray-300 bg-white p-0"

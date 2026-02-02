@@ -69,5 +69,6 @@ Trends:
   - Spending (Hierarchy of region; country)
   - Sidebar: compare entities for given country (Hierarchy of all; System Group; Entity)
 - SDGs
-  - Spending (select SDGs)
-  - Sidebar: compare entities for given SDG (Hierarchy of all; System Group; Entity)
+  - ~~Spending (select SDGs)~~
+  - ~~Sidebar: compare entities for given SDG (Hierarchy of all; System Group; Entity)~~
+  - historical data for SDGs is not good, drop timeline chart here

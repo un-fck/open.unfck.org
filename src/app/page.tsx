@@ -16,6 +16,7 @@ import { ContributorTrendsChart } from "@/components/ContributorTrendsChart";
 import { CountryMap } from "@/components/CountryMap";
 import { DataPlaceholder } from "@/components/DataPlaceholder";
 import { EntitiesTreemap } from "@/components/EntitiesTreemap";
+import { EntityTrendsChart } from "@/components/EntityTrendsChart";
 import { ExpandableCard } from "@/components/ExpandableCard";
 import { PageHeader } from "@/components/PageHeader";
 import { QuoteBlock } from "@/components/QuoteBlock";
@@ -50,10 +51,14 @@ export default function Home() {
         />
         <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 lg:px-16">
           <ContributorsTreemap />
-          <ContributorTrendsChart />
-          <p className="mt-6 text-xs text-gray-500">
+          <p className="mt-4 text-xs text-gray-500">
             See <a href="#methodology" className="underline hover:text-gray-700">methodology</a> for important notes and limitations.
           </p>
+          <div className="mt-6">
+          <ExpandableCard title="Explore trends about contributions" variant="filled">
+            <ContributorTrendsChart />
+          </ExpandableCard>
+          </div>
         </section>
 
         {/* Entities Section */}
@@ -68,6 +73,11 @@ export default function Home() {
           <p className="mt-4 text-xs text-gray-500">
             See <a href="#methodology" className="underline hover:text-gray-700">methodology</a> for important notes and limitations.
           </p>
+          <div className="mt-6">
+          <ExpandableCard title="Explore trends about organizations" variant="filled">
+            <EntityTrendsChart />
+          </ExpandableCard>
+          </div>
         </section>
 
         {/* Countries Section */}

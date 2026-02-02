@@ -174,27 +174,26 @@ export function ContributorTrendsChart() {
 
   return (
     <>
-      {/* Charts container - flex row on large screens */}
-      <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:gap-6">
+      {/* Charts container - grid for aligned columns */}
+      <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-6">
         {/* Chart A: Compare contributors (line chart) */}
-        <div className="w-full lg:w-1/2">
-          <div className="space-y-3">
-            {/* Title and chips */}
-            <div className="space-y-2">
-              <h4 className="text-sm font-medium text-gray-700">
-                Compare contributors
-              </h4>
-              <HierarchicalMultiSelect
-                groups={groups}
-                selected={selected}
-                onChange={setSelected}
-                getItemColor={getItemColor}
-                addLabel="Add"
-              />
-            </div>
+        <div className="flex flex-col">
+          {/* Title and chips */}
+          <div className="space-y-2">
+            <h4 className="text-sm font-medium text-gray-700">
+              Compare contributors
+            </h4>
+            <HierarchicalMultiSelect
+              groups={groups}
+              selected={selected}
+              onChange={setSelected}
+              getItemColor={getItemColor}
+              addLabel="Add"
+            />
+          </div>
 
-            {/* Chart */}
-            <div className="h-[280px] w-full">
+          {/* Chart - mt-auto pushes to bottom of grid cell */}
+          <div className="mt-auto pt-3 h-[280px] w-full">
               {loading ? (
                 <div className="flex h-full items-center justify-center text-gray-500">
                   Loading trends...
@@ -207,7 +206,7 @@ export function ContributorTrendsChart() {
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart
                     data={chartData}
-                    margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
+                    margin={{ top: 20, right: 5, left: 5, bottom: 5 }}
                   >
                     <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                     <XAxis
@@ -218,8 +217,8 @@ export function ContributorTrendsChart() {
                     />
                     <YAxis
                       orientation="right"
-                      width={45}
-                      tick={{ fontSize: 12 }}
+                      width={1}
+                      tick={{ fontSize: 11, fill: "#6b7280", dx: -5, dy: -8 }}
                       tickLine={false}
                       axisLine={false}
                       domain={[0, 'auto']}
@@ -228,6 +227,7 @@ export function ContributorTrendsChart() {
                         if (value >= 1e6) return `$${(value / 1e6).toFixed(0)}M`;
                         return `$${value}`;
                       }}
+                      mirror
                     />
                     <Tooltip
                       formatter={formatTooltipValue}
@@ -254,35 +254,33 @@ export function ContributorTrendsChart() {
                 </ResponsiveContainer>
               )}
             </div>
-          </div>
         </div>
 
         {/* Chart B: Revenue types (stacked area chart) */}
-        <div className="w-full lg:w-1/2">
-          <div className="space-y-3">
-            {/* Title and legend */}
-            <div className="space-y-2">
-              <h4 className="text-sm font-medium text-gray-700">
-                Revenue by type
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                <div className="flex items-center gap-1.5 rounded-full bg-gray-100 py-1 px-2 text-xs text-gray-700">
-                  <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: REVENUE_TYPE_COLORS.assessed }} />
-                  <span>Assessed</span>
-                </div>
-                <div className="flex items-center gap-1.5 rounded-full bg-gray-100 py-1 px-2 text-xs text-gray-700">
-                  <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: REVENUE_TYPE_COLORS.voluntary_unearmarked }} />
-                  <span>Voluntary un-earmarked</span>
-                </div>
-                <div className="flex items-center gap-1.5 rounded-full bg-gray-100 py-1 px-2 text-xs text-gray-700">
-                  <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: REVENUE_TYPE_COLORS.voluntary_earmarked }} />
-                  <span>Voluntary earmarked</span>
-                </div>
+        <div className="flex flex-col">
+          {/* Title and legend */}
+          <div className="space-y-2">
+            <h4 className="text-sm font-medium text-gray-700">
+              Revenue by type
+            </h4>
+            <div className="flex flex-wrap gap-2">
+              <div className="flex items-center gap-1.5 rounded-full bg-gray-100 py-1 px-2 text-xs text-gray-700">
+                <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: REVENUE_TYPE_COLORS.assessed }} />
+                <span>Assessed</span>
+              </div>
+              <div className="flex items-center gap-1.5 rounded-full bg-gray-100 py-1 px-2 text-xs text-gray-700">
+                <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: REVENUE_TYPE_COLORS.voluntary_unearmarked }} />
+                <span>Voluntary un-earmarked</span>
+              </div>
+              <div className="flex items-center gap-1.5 rounded-full bg-gray-100 py-1 px-2 text-xs text-gray-700">
+                <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: REVENUE_TYPE_COLORS.voluntary_earmarked }} />
+                <span>Voluntary earmarked</span>
               </div>
             </div>
+          </div>
 
-            {/* Chart */}
-            <div className="h-[280px] w-full">
+          {/* Chart - mt-auto pushes to bottom of grid cell */}
+          <div className="mt-auto pt-3 h-[280px] w-full">
               {loading ? (
                 <div className="flex h-full items-center justify-center text-gray-500">
                   Loading trends...
@@ -291,7 +289,7 @@ export function ContributorTrendsChart() {
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart
                     data={revenueTypeData}
-                    margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
+                    margin={{ top: 20, right: 5, left: 5, bottom: 5 }}
                   >
                     <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                     <XAxis
@@ -302,8 +300,8 @@ export function ContributorTrendsChart() {
                     />
                     <YAxis
                       orientation="right"
-                      width={45}
-                      tick={{ fontSize: 12 }}
+                      width={1}
+                      tick={{ fontSize: 11, fill: "#6b7280", dx: -5, dy: -8 }}
                       tickLine={false}
                       axisLine={false}
                       domain={[0, 'auto']}
@@ -312,6 +310,7 @@ export function ContributorTrendsChart() {
                         if (value >= 1e6) return `$${(value / 1e6).toFixed(0)}M`;
                         return `$${value}`;
                       }}
+                      mirror
                     />
                     <Tooltip
                       formatter={formatTooltipValue}
@@ -348,7 +347,6 @@ export function ContributorTrendsChart() {
                 </ResponsiveContainer>
               )}
             </div>
-          </div>
         </div>
       </div>
     </>
