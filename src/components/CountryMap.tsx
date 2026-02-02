@@ -10,6 +10,7 @@ import { ChartSearchInput } from "@/components/ui/chart-search-input";
 import { Switch } from "@/components/ui/switch";
 import { formatBudget } from "@/lib/entities";
 import { generateYearRange, YEAR_RANGES } from "@/lib/data";
+import { getSortedRegions } from "@/lib/regionGroupings";
 
 interface CountryExpense {
   iso3: string;
@@ -249,7 +250,24 @@ export function CountryMap() {
           />
         </div>
       ) : (
-        <CountryTreemap data={filteredData} onCountryClick={handleTreemapClick} />
+        <>
+          <CountryTreemap data={filteredData} onCountryClick={handleTreemapClick} />
+          
+          {/* Region Legend */}
+          <div className="mt-3 flex flex-wrap gap-3">
+            {getSortedRegions()
+              .filter(([region]) => {
+                // Only show regions that have data in the current filtered set
+                return filteredData.some((c) => c.region === region);
+              })
+              .map(([region, styles]) => (
+                <div key={region} className="flex items-center gap-1.5">
+                  <div className={`h-3 w-3 rounded-sm ${styles.bgColor}`} />
+                  <span className="text-xs text-gray-600">{styles.label}</span>
+                </div>
+              ))}
+          </div>
+        </>
       )}
 
       {selectedCountry && (

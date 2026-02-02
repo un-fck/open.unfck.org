@@ -50,10 +50,10 @@ export default function Home() {
         />
         <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 lg:px-16">
           <ContributorsTreemap />
-          <p className="mt-4 text-xs text-gray-500">
+          <ContributorTrendsChart />
+          <p className="mt-6 text-xs text-gray-500">
             See <a href="#methodology" className="underline hover:text-gray-700">methodology</a> for important notes and limitations.
           </p>
-          <ContributorTrendsChart />
         </section>
 
         {/* Entities Section */}

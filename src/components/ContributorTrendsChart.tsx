@@ -3,6 +3,8 @@
 import * as React from "react";
 import {
   LineChart,
+  AreaChart,
+  Area,
   Line,
   XAxis,
   YAxis,
@@ -11,8 +13,14 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { HierarchicalMultiSelect, HierarchicalGroup } from "@/components/ui/hierarchical-multi-select";
-import { TrendsPanel } from "@/components/TrendsPanel";
 import { formatBudget } from "@/lib/contributors";
+
+// Revenue type colors (matching the treemap opacity pattern)
+const REVENUE_TYPE_COLORS = {
+  assessed: "#009edb",           // UN blue - full opacity
+  voluntary_unearmarked: "#4db8e8", // UN blue - lighter
+  voluntary_earmarked: "#99d6f2",   // UN blue - lightest
+};
 
 // Type for the contributor trends data
 interface ContributorYearData {
@@ -53,22 +61,24 @@ const LINE_COLORS = [
 
 export function ContributorTrendsChart() {
   const [data, setData] = React.useState<ContributorTrendsData | null>(null);
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
   const [selected, setSelected] = React.useState<Set<string>>(new Set(["gov", "non-gov"]));
 
-  const loadData = React.useCallback(async () => {
-    if (data) return; // Already loaded
-    setLoading(true);
-    try {
-      const response = await fetch("/data/contributor-trends.json");
-      const json = await response.json();
-      setData(json);
-    } catch (error) {
-      console.error("Failed to load contributor trends:", error);
-    } finally {
-      setLoading(false);
+  // Load data on mount
+  React.useEffect(() => {
+    async function loadData() {
+      try {
+        const response = await fetch("/data/contributor-trends.json");
+        const json = await response.json();
+        setData(json);
+      } catch (error) {
+        console.error("Failed to load contributor trends:", error);
+      } finally {
+        setLoading(false);
+      }
     }
-  }, [data]);
+    loadData();
+  }, []);
 
   // Build hierarchical groups from loaded data
   const groups: HierarchicalGroup[] = React.useMemo(() => {
@@ -150,88 +160,196 @@ export function ContributorTrendsChart() {
     return formatBudget(value);
   };
 
-  return (
-    <TrendsPanel onOpen={loadData}>
-      {/* Chart container - 45% width on desktop to fit 2 charts side by side */}
-      <div className="w-full lg:w-[calc(50%-1rem)]">
-        <div className="space-y-4">
-          {/* Title and chips */}
-          <div className="space-y-2">
-            <h4 className="text-sm font-medium text-gray-700">
-              Compare contributors
-            </h4>
-            <HierarchicalMultiSelect
-              groups={groups}
-              selected={selected}
-              onChange={setSelected}
-              getItemColor={getItemColor}
-              addLabel="Add"
-            />
-          </div>
+  // Data for stacked area chart (revenue types for all contributors)
+  const revenueTypeData = React.useMemo(() => {
+    if (!data) return [];
+    return data.aggregates.all.map((item) => ({
+      year: item.year.toString(),
+      Assessed: item.assessed,
+      "Voluntary un-earmarked": item.voluntary_unearmarked,
+      "Voluntary earmarked": item.voluntary_earmarked,
+    }));
+  }, [data]);
 
-          {/* Chart */}
-          <div className="h-[300px] w-full">
-          {loading ? (
-            <div className="flex h-full items-center justify-center text-gray-500">
-              Loading trends...
+  return (
+    <>
+      {/* Charts container - flex row on large screens */}
+      <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:gap-6">
+        {/* Chart A: Compare contributors (line chart) */}
+        <div className="w-full lg:w-1/2">
+          <div className="space-y-3">
+            {/* Title and chips */}
+            <div className="space-y-2">
+              <h4 className="text-sm font-medium text-gray-700">
+                Compare contributors
+              </h4>
+              <HierarchicalMultiSelect
+                groups={groups}
+                selected={selected}
+                onChange={setSelected}
+                getItemColor={getItemColor}
+                addLabel="Add"
+              />
             </div>
-          ) : selected.size === 0 ? (
-            <div className="flex h-full items-center justify-center text-gray-500">
-              Select at least one contributor to view trends
+
+            {/* Chart */}
+            <div className="h-[280px] w-full">
+              {loading ? (
+                <div className="flex h-full items-center justify-center text-gray-500">
+                  Loading trends...
+                </div>
+              ) : selected.size === 0 ? (
+                <div className="flex h-full items-center justify-center text-gray-500">
+                  Select at least one contributor to view trends
+                </div>
+              ) : (
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart
+                    data={chartData}
+                    margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <XAxis
+                      dataKey="year"
+                      tick={{ fontSize: 12 }}
+                      tickLine={false}
+                      axisLine={{ stroke: "#e5e7eb" }}
+                    />
+                    <YAxis
+                      orientation="right"
+                      width={45}
+                      tick={{ fontSize: 12 }}
+                      tickLine={false}
+                      axisLine={false}
+                      domain={[0, 'auto']}
+                      tickFormatter={(value) => {
+                        if (value >= 1e9) return `$${(value / 1e9).toFixed(0)}B`;
+                        if (value >= 1e6) return `$${(value / 1e6).toFixed(0)}M`;
+                        return `$${value}`;
+                      }}
+                    />
+                    <Tooltip
+                      formatter={formatTooltipValue}
+                      labelFormatter={(label) => `Year: ${label}`}
+                      contentStyle={{
+                        backgroundColor: "white",
+                        border: "1px solid #e5e7eb",
+                        borderRadius: "4px",
+                        fontSize: "12px",
+                      }}
+                    />
+                    {lines.map((line) => (
+                      <Line
+                        key={line.dataKey}
+                        type="monotone"
+                        dataKey={line.dataKey}
+                        stroke={line.color}
+                        strokeWidth={2}
+                        dot={false}
+                        activeDot={{ r: 4, strokeWidth: 0 }}
+                      />
+                    ))}
+                  </LineChart>
+                </ResponsiveContainer>
+              )}
             </div>
-          ) : (
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart
-                data={chartData}
-                margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                <XAxis
-                  dataKey="year"
-                  tick={{ fontSize: 12 }}
-                  tickLine={false}
-                  axisLine={{ stroke: "#e5e7eb" }}
-                />
-                <YAxis
-                  orientation="right"
-                  tick={{ fontSize: 12 }}
-                  tickLine={false}
-                  axisLine={false}
-                  domain={[0, 'auto']}
-                  tickFormatter={(value) => {
-                    if (value >= 1e9) return `$${(value / 1e9).toFixed(0)}B`;
-                    if (value >= 1e6) return `$${(value / 1e6).toFixed(0)}M`;
-                    return `$${value}`;
-                  }}
-                />
-                <Tooltip
-                  formatter={formatTooltipValue}
-                  labelFormatter={(label) => `Year: ${label}`}
-                  contentStyle={{
-                    backgroundColor: "white",
-                    border: "1px solid #e5e7eb",
-                    borderRadius: "4px",
-                    fontSize: "12px",
-                  }}
-                />
-                {/* Legend is handled by chips in HierarchicalMultiSelect */}
-                {lines.map((line) => (
-                  <Line
-                    key={line.dataKey}
-                    type="monotone"
-                    dataKey={line.dataKey}
-                    stroke={line.color}
-                    strokeWidth={2}
-                    dot={false}
-                    activeDot={{ r: 4, strokeWidth: 0 }}
-                  />
-                ))}
-              </LineChart>
-            </ResponsiveContainer>
-          )}
+          </div>
         </div>
+
+        {/* Chart B: Revenue types (stacked area chart) */}
+        <div className="w-full lg:w-1/2">
+          <div className="space-y-3">
+            {/* Title and legend */}
+            <div className="space-y-2">
+              <h4 className="text-sm font-medium text-gray-700">
+                Revenue by type
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                <div className="flex items-center gap-1.5 rounded-full bg-gray-100 py-1 px-2 text-xs text-gray-700">
+                  <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: REVENUE_TYPE_COLORS.assessed }} />
+                  <span>Assessed</span>
+                </div>
+                <div className="flex items-center gap-1.5 rounded-full bg-gray-100 py-1 px-2 text-xs text-gray-700">
+                  <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: REVENUE_TYPE_COLORS.voluntary_unearmarked }} />
+                  <span>Voluntary un-earmarked</span>
+                </div>
+                <div className="flex items-center gap-1.5 rounded-full bg-gray-100 py-1 px-2 text-xs text-gray-700">
+                  <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: REVENUE_TYPE_COLORS.voluntary_earmarked }} />
+                  <span>Voluntary earmarked</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Chart */}
+            <div className="h-[280px] w-full">
+              {loading ? (
+                <div className="flex h-full items-center justify-center text-gray-500">
+                  Loading trends...
+                </div>
+              ) : (
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart
+                    data={revenueTypeData}
+                    margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <XAxis
+                      dataKey="year"
+                      tick={{ fontSize: 12 }}
+                      tickLine={false}
+                      axisLine={{ stroke: "#e5e7eb" }}
+                    />
+                    <YAxis
+                      orientation="right"
+                      width={45}
+                      tick={{ fontSize: 12 }}
+                      tickLine={false}
+                      axisLine={false}
+                      domain={[0, 'auto']}
+                      tickFormatter={(value) => {
+                        if (value >= 1e9) return `$${(value / 1e9).toFixed(0)}B`;
+                        if (value >= 1e6) return `$${(value / 1e6).toFixed(0)}M`;
+                        return `$${value}`;
+                      }}
+                    />
+                    <Tooltip
+                      formatter={formatTooltipValue}
+                      labelFormatter={(label) => `Year: ${label}`}
+                      contentStyle={{
+                        backgroundColor: "white",
+                        border: "1px solid #e5e7eb",
+                        borderRadius: "4px",
+                        fontSize: "12px",
+                      }}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="Assessed"
+                      stackId="1"
+                      stroke={REVENUE_TYPE_COLORS.assessed}
+                      fill={REVENUE_TYPE_COLORS.assessed}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="Voluntary un-earmarked"
+                      stackId="1"
+                      stroke={REVENUE_TYPE_COLORS.voluntary_unearmarked}
+                      fill={REVENUE_TYPE_COLORS.voluntary_unearmarked}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="Voluntary earmarked"
+                      stackId="1"
+                      stroke={REVENUE_TYPE_COLORS.voluntary_earmarked}
+                      fill={REVENUE_TYPE_COLORS.voluntary_earmarked}
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              )}
+            </div>
+          </div>
         </div>
       </div>
-    </TrendsPanel>
+    </>
   );
 }

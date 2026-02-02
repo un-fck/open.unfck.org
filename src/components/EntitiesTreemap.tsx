@@ -782,9 +782,10 @@ export function EntitiesTreemap() {
           })()}
       </div>
 
-      {/* Revenue Type Legend (only in revenue mode) */}
-      {showRevenue && (
-        <div className="mt-3 flex flex-wrap items-center gap-4">
+      {/* Legend */}
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-4">
+        {/* Revenue Type Legend (only in revenue mode) */}
+        {showRevenue && (
           <div className="flex flex-wrap gap-3">
             {[
               { type: "Assessed", label: "Assessed", opacity: "opacity-100" },
@@ -797,8 +798,27 @@ export function EntitiesTreemap() {
               </div>
             ))}
           </div>
+        )}
+
+        {/* System Grouping Legend */}
+        <div className="flex flex-wrap gap-3">
+          {getSortedSystemGroupings()
+            .filter(([group]) => {
+              // In revenue mode, show "Peacekeeping Operations" instead of "Peacekeeping Operations and Political Missions"
+              if (showRevenue) {
+                return group !== "Peacekeeping Operations and Political Missions" && groupCounts[group] && groupCounts[group] > 0;
+              }
+              // In spending mode, show "Peacekeeping Operations and Political Missions" instead of "Peacekeeping Operations"
+              return group !== "Peacekeeping Operations" && groupCounts[group] && groupCounts[group] > 0;
+            })
+            .map(([group, styles]) => (
+              <div key={group} className="flex items-center gap-1.5">
+                <div className={`h-3 w-3 rounded-sm ${styles.bgColor}`} />
+                <span className="text-xs text-gray-600">{styles.label}</span>
+              </div>
+            ))}
         </div>
-      )}
+      </div>
 
       {selectedEntity && (
         <EntitySidebar
