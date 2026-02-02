@@ -237,7 +237,7 @@ export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySide
             {/* Total Spending */}
             <div>
               <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
-                Total Spending (2023)
+                Total Expenses
               </span>
               <div className="mt-0.5">
                 <div className="text-base font-semibold text-gray-700">

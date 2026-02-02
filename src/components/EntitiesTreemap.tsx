@@ -185,7 +185,7 @@ export function EntitiesTreemap() {
         if (!showRevenue) setLoading(false);
       })
       .catch((err) => {
-        console.error("Failed to load spending data:", err);
+        console.error("Failed to load expenses data:", err);
         if (!showRevenue) setLoading(false);
       });
   }, [spendingYear, showRevenue]);
@@ -526,10 +526,10 @@ export function EntitiesTreemap() {
             <Switch
               checked={!showRevenue}
               onCheckedChange={(checked) => setShowRevenue(!checked)}
-              aria-label="Toggle between revenue and spending"
+              aria-label="Toggle between revenue and expenses"
             />
             <span className={`text-sm ${!showRevenue ? "font-medium text-gray-900" : "text-gray-500"}`}>
-              Spending
+              Expenses
             </span>
           </div>
         </div>
