@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { ContributorsTreemap } from "@/components/ContributorsTreemap";
+import { ContributorTrendsChart } from "@/components/ContributorTrendsChart";
 import { CountryMap } from "@/components/CountryMap";
 import { DataPlaceholder } from "@/components/DataPlaceholder";
 import { EntitiesTreemap } from "@/components/EntitiesTreemap";
@@ -52,6 +53,7 @@ export default function Home() {
           <p className="mt-4 text-xs text-gray-500">
             See <a href="#methodology" className="underline hover:text-gray-700">methodology</a> for important notes and limitations.
           </p>
+          <ContributorTrendsChart />
         </section>
 
         {/* Entities Section */}

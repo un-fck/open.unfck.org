@@ -39,6 +39,6 @@ export const YEAR_RANGES = {
   donors: { min: 2013, max: 2024, default: 2024 },
   entitySpending: { min: 2019, max: 2023, default: 2023 },
   entityRevenue: { min: 2013, max: 2024, default: 2024 },
-  countryExpenses: { min: 2017, max: 2024, default: 2023 },
+  countryExpenses: { min: 2017, max: 2024, default: 2024 },
   sdgExpenses: { min: 2018, max: 2024, default: 2024 },
 } as const;

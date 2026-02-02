@@ -53,3 +53,21 @@ Concept for content of new open.un.org website (see [current content](./content.
   - mandates.un.org
 
 For each treemap, sidebar: select year (synchronized across page)
+
+Trends:
+- Contributors
+  - Contributor (Hierarchy of non/gov type; contributor)
+  - Revenue Type (no select)
+- Entities
+  - Revenue vs Expenses (Hierarchy of all; System Group; Entity)
+  - Sidebar:
+    - compare SDGs for given entity
+    - compare countries for given entity
+    - compare contributors (hierarchy)
+    - compare revenue type
+- Countries
+  - Spending (Hierarchy of region; country)
+  - Sidebar: compare entities for given country (Hierarchy of all; System Group; Entity)
+- SDGs
+  - Spending (select SDGs)
+  - Sidebar: compare entities for given SDG (Hierarchy of all; System Group; Entity)
