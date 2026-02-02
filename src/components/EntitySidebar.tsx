@@ -2,10 +2,11 @@
 
 import { ExternalLink, X } from "lucide-react";
 import { ShareButton } from "@/components/ShareButton";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Entity, Impact, EntityRevenue } from "@/types";
 import { getSystemGroupingStyle } from "@/lib/systemGroupings";
 import { formatBudget } from "@/lib/entities";
+import { useFocusTrap } from "@/hooks/useFocusTrap";
 
 interface EntitySidebarProps {
   entity: Entity | null;
@@ -48,9 +49,11 @@ export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySide
   const [impacts, setImpacts] = useState<Impact[]>([]);
   const [loadingImpacts, setLoadingImpacts] = useState(true);
   const [showAllDonors, setShowAllDonors] = useState(false);
-  const modalRef = useRef<HTMLDivElement>(null);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  
+  // Focus trap for accessibility
+  const focusTrapRef = useFocusTrap(!!entity);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 10);
@@ -139,13 +142,18 @@ export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySide
     ? Math.max(...donorContributions.map((d) => d.total))
     : 0;
 
+  const sidebarTitleId = `entity-sidebar-title`;
+
   return (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-end bg-black/50 transition-all duration-300 ease-out ${isVisible && !isClosing ? "opacity-100" : "opacity-0"}`}
       onClick={handleBackdropClick}
     >
       <div
-        ref={modalRef}
+        ref={focusTrapRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={sidebarTitleId}
         className={`h-full w-full overflow-y-auto bg-white shadow-2xl transition-transform duration-300 ease-out sm:w-2/3 sm:min-w-[400px] md:w-1/2 lg:w-1/3 lg:min-w-[500px] ${isVisible && !isClosing ? "translate-x-0" : "translate-x-full"}`}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
@@ -155,7 +163,7 @@ export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySide
         <div className="sticky top-0 border-b border-gray-300 bg-white px-6 pb-2 pt-4 sm:px-8 sm:pb-3 sm:pt-6">
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1">
-              <h2 className="text-xl font-bold leading-tight text-gray-900 sm:text-2xl lg:text-2xl">
+              <h2 id={sidebarTitleId} className="text-xl font-bold leading-tight text-gray-900 sm:text-2xl lg:text-2xl">
                 {entity.entity}
               </h2>
               <p className="mt-1 text-sm text-gray-600">{entity.entity_long}</p>

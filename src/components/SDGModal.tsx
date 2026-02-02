@@ -1,10 +1,11 @@
 "use client";
 
 import { X } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { formatBudget } from "@/lib/entities";
 import { SDG } from "@/lib/sdgs";
 import { ShareButton } from "@/components/ShareButton";
+import { useFocusTrap } from "@/hooks/useFocusTrap";
 
 interface SDGModalProps {
   sdg: SDG | null;
@@ -21,10 +22,12 @@ export default function SDGModal({
 }: SDGModalProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const modalRef = useRef<HTMLDivElement>(null);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [showAllEntities, setShowAllEntities] = useState(false);
+  
+  // Focus trap for accessibility
+  const focusTrapRef = useFocusTrap(!!sdg);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 10);
@@ -90,13 +93,18 @@ export default function SDGModal({
 
   const totalExpenses = sortedEntities.reduce((sum, e) => sum + e.amount, 0);
 
+  const modalTitleId = `sdg-modal-title-${sdg.number}`;
+
   return (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-end bg-black/50 transition-all duration-300 ease-out ${isVisible && !isClosing ? "opacity-100" : "opacity-0"}`}
       onClick={handleClose}
     >
       <div
-        ref={modalRef}
+        ref={focusTrapRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={modalTitleId}
         className={`h-full w-full overflow-y-auto bg-white shadow-2xl transition-transform duration-300 ease-out sm:w-2/3 sm:min-w-[400px] md:w-1/2 lg:w-1/3 lg:min-w-[500px] ${isVisible && !isClosing ? "translate-x-0" : "translate-x-full"}`}
         onClick={(e) => e.stopPropagation()}
         onTouchStart={onTouchStart}
@@ -113,7 +121,7 @@ export default function SDGModal({
                 >
                   {sdg.number}
                 </div>
-                <h2 className="text-lg font-bold leading-tight text-gray-900 sm:text-xl">
+                <h2 id={modalTitleId} className="text-lg font-bold leading-tight text-gray-900 sm:text-xl">
                   {sdg.shortTitle}
                 </h2>
               </div>

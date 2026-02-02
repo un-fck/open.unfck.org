@@ -59,10 +59,10 @@ export function SectionBanner({
               className="object-cover"
               priority
             />
-            {/* Text overlay - inner container matching content width */}
+            {/* Text overlay - constrained to left half of banner */}
             <div className="absolute inset-0 flex items-center">
               <div className="mx-auto w-full max-w-6xl px-12 lg:px-16">
-                <div className="max-w-md lg:max-w-lg">
+                <div className="max-w-[50%]">
                   <h2 className="group mb-3 text-2xl font-bold text-gray-900 lg:text-3xl">
                     {id ? (
                       <a href={`#${id}`} className="hover:underline">

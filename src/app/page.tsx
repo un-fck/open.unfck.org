@@ -30,7 +30,7 @@ export default function Home() {
       {/* Header */}
       <PageHeader />
 
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* Welcome Section */}
         <section className="mx-auto max-w-6xl px-6 py-12 md:px-12 md:py-16 lg:px-16">
           <p className="max-w-3xl text-base leading-relaxed text-gray-700 md:text-lg">

@@ -310,8 +310,7 @@ export function EntitiesTreemap() {
     });
   };
 
-  const handleReset = () => {
-    setSearchQuery("");
+  const handleResetFilters = () => {
     setActiveGroups(new Set(Object.keys(systemGroupingStyles)));
   };
 
@@ -391,8 +390,8 @@ export function EntitiesTreemap() {
     );
   };
 
-  // Check if reset is needed
-  const isResetNeeded = searchQuery.trim() !== "" || !allGroupsActive;
+  // Check if filter reset is needed (search has its own clear in the input)
+  const isFilterResetNeeded = !allGroupsActive;
 
   // Search function
   const searchEntities = (query: string, entityList: Entity[]) => {
@@ -441,8 +440,8 @@ export function EntitiesTreemap() {
   // Render filter controls inline (not as a function component to avoid focus loss)
   const filterControlsJSX = (
     <div className="mb-3 flex flex-col gap-2">
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-3">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:gap-3">
+      <div className="flex flex-col flex-wrap gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-3">
+        <div className="flex flex-col flex-wrap gap-2 sm:flex-row sm:items-end sm:gap-3">
           {/* Search Input */}
           <ChartSearchInput
             value={searchQuery}
@@ -498,20 +497,20 @@ export function EntitiesTreemap() {
             </Select>
           </div>
 
-          {/* Reset Button */}
-          {isResetNeeded && (
+          {/* Reset Filters Button */}
+          {isFilterResetNeeded && (
             <button
-              onClick={handleReset}
+              onClick={handleResetFilters}
               className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-gray-200 text-gray-600 transition-all duration-200 ease-out hover:bg-gray-400 hover:text-gray-100 focus:bg-gray-400 focus:text-gray-100 focus:outline-none"
-              aria-label="Clear filters and search"
-              title="Clear filters and search"
+              aria-label="Clear filters"
+              title="Clear filters"
             >
               <X className="h-3 w-3" />
             </button>
           )}
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4">
           {/* Year Slider */}
           <YearSlider
             years={currentYears}

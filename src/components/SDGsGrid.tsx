@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { X } from "lucide-react";
 import SDGModal from "./SDGModal";
 import SDGExpensesTreemap from "./SDGExpensesTreemap";
 import { YearSlider } from "@/components/YearSlider";
@@ -84,10 +83,6 @@ export default function SDGsGrid() {
     if (sdg) setSelectedSDG(sdg);
   };
 
-  const handleReset = () => {
-    setSearchQuery("");
-  };
-
   // Filter SDGs based on search query (by SDG number, short title, or entity abbreviation)
   const filterSDGs = (query: string): SDG[] => {
     if (!query.trim()) return sdgs;
@@ -116,33 +111,18 @@ export default function SDGsGrid() {
   };
 
   const filteredSDGs = filterSDGs(searchQuery);
-  const isResetNeeded = searchQuery.trim() !== "";
 
   return (
     <>
       {/* Filter Controls */}
       <div className="mb-3 flex flex-col gap-2">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-3">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:gap-3">
-            {/* Search Input */}
-            <ChartSearchInput
-              value={searchQuery}
-              onChange={setSearchQuery}
-              placeholder="Search by SDG or entity..."
-            />
-
-            {/* Reset Button */}
-            {isResetNeeded && (
-              <button
-                onClick={handleReset}
-                className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-gray-200 text-gray-600 transition-all duration-200 ease-out hover:bg-gray-400 hover:text-gray-100 focus:bg-gray-400 focus:text-gray-100 focus:outline-none"
-                aria-label="Clear search"
-                title="Clear search"
-              >
-                <X className="h-3 w-3" />
-              </button>
-            )}
-          </div>
+          {/* Search Input */}
+          <ChartSearchInput
+            value={searchQuery}
+            onChange={setSearchQuery}
+            placeholder="Search by SDG or entity..."
+          />
 
           <div className="flex items-center gap-4">
             {/* Year Slider */}

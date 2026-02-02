@@ -166,3 +166,21 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
+
+/**
+ * Reduced Motion Support
+ * 
+ * Respects user preferences for reduced motion (accessibility feature).
+ * Users who have enabled "Reduce motion" in their system settings
+ * will see minimal to no animations.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

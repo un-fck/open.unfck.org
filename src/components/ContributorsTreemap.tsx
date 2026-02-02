@@ -383,7 +383,7 @@ export function ContributorsTreemap() {
   return (
     <div className="w-full">
       {/* Filter Controls */}
-      <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mb-3 flex flex-col flex-wrap gap-2 sm:flex-row sm:items-end sm:justify-between">
         <ChartSearchInput
           value={searchQuery}
           onChange={setSearchQuery}

@@ -89,6 +89,7 @@ export function YearSlider({
   const handleTouchStart = useCallback(
     (e: React.TouchEvent) => {
       if (disabled) return;
+      e.preventDefault(); // Prevent page scroll from interfering
       setIsDragging(true);
       const touch = e.touches[0];
       const year = getYearFromPosition(touch.clientX);
@@ -100,6 +101,7 @@ export function YearSlider({
   const handleTouchMove = useCallback(
     (e: TouchEvent) => {
       if (!isDragging || disabled) return;
+      e.preventDefault(); // Prevent page scroll during drag
       const touch = e.touches[0];
       const year = getYearFromPosition(touch.clientX);
       setDragYear(year);
@@ -117,7 +119,8 @@ export function YearSlider({
 
   useEffect(() => {
     if (isDragging) {
-      window.addEventListener("touchmove", handleTouchMove);
+      // Use passive: false to allow preventDefault in touch handlers
+      window.addEventListener("touchmove", handleTouchMove, { passive: false });
       window.addEventListener("touchend", handleTouchEnd);
       return () => {
         window.removeEventListener("touchmove", handleTouchMove);
@@ -125,6 +128,44 @@ export function YearSlider({
       };
     }
   }, [isDragging, handleTouchMove, handleTouchEnd]);
+
+  // Keyboard support
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (disabled) return;
+
+      const currentIndex = sortedYears.indexOf(selectedYear);
+      let newIndex = currentIndex;
+
+      switch (e.key) {
+        case "ArrowLeft":
+        case "ArrowDown":
+          e.preventDefault();
+          newIndex = Math.max(0, currentIndex - 1);
+          break;
+        case "ArrowRight":
+        case "ArrowUp":
+          e.preventDefault();
+          newIndex = Math.min(sortedYears.length - 1, currentIndex + 1);
+          break;
+        case "Home":
+          e.preventDefault();
+          newIndex = 0;
+          break;
+        case "End":
+          e.preventDefault();
+          newIndex = sortedYears.length - 1;
+          break;
+        default:
+          return;
+      }
+
+      if (newIndex !== currentIndex) {
+        onChange(sortedYears[newIndex]);
+      }
+    },
+    [disabled, sortedYears, selectedYear, onChange]
+  );
 
   const thumbPosition = getPositionFromYear(displayYear);
 
@@ -137,19 +178,31 @@ export function YearSlider({
       <span className="text-xs text-gray-400">{minYear}</span>
       <div
         ref={trackRef}
-        className={`relative h-0.5 w-24 cursor-pointer bg-gray-300 sm:w-32 ${
+        role="slider"
+        tabIndex={disabled ? -1 : 0}
+        aria-valuemin={minYear}
+        aria-valuemax={maxYear}
+        aria-valuenow={displayYear}
+        aria-label="Select year"
+        aria-disabled={disabled}
+        className={`relative flex h-9 w-24 cursor-pointer touch-none items-center sm:w-32 focus:outline-none focus-visible:ring-2 focus-visible:ring-un-blue focus-visible:ring-offset-2 ${
           disabled ? "cursor-not-allowed opacity-50" : ""
         }`}
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
+        onKeyDown={handleKeyDown}
       >
-        {/* Thumb */}
+        {/* Visual track line */}
+        <div className="h-0.5 w-full bg-gray-300" />
+        {/* Thumb - larger touch target */}
         <div
-          className={`absolute top-1/2 h-4 w-0.5 -translate-x-1/2 -translate-y-1/2 ${
-            isDragging ? "bg-un-blue" : "bg-gray-600"
-          } ${disabled ? "" : "hover:bg-un-blue"}`}
+          className={`absolute top-1/2 flex h-9 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center`}
           style={{ left: `${thumbPosition}%` }}
-        />
+        >
+          <div
+            className={`h-4 w-0.5 ${isDragging ? "bg-un-blue" : "bg-gray-600"} ${disabled ? "" : "group-hover:bg-un-blue"}`}
+          />
+        </div>
       </div>
       <span className="min-w-[3ch] text-sm font-medium text-gray-900">
         {displayYear}
