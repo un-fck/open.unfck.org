@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
+import { ChartSearchInput } from "@/components/ui/chart-search-input";
 import { Entity, BudgetEntry, EntityRevenue } from "@/types";
 import { useDeepLink } from "@/hooks/useDeepLink";
 import {
@@ -437,96 +438,77 @@ export function EntitiesTreemap() {
     return orderA - orderB;
   });
 
-  // Filter Controls Component
-  const FilterControls = () => (
+  // Render filter controls inline (not as a function component to avoid focus loss)
+  const filterControlsJSX = (
     <div className="mb-3 flex flex-col gap-2">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-3">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:gap-3">
-        {/* Search Input */}
-        <div className="relative w-full sm:w-64">
-          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2.5">
-            <svg
-              className="h-3.5 w-3.5 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </div>
-          <input
-            type="text"
-            placeholder="Search entities..."
+          {/* Search Input */}
+          <ChartSearchInput
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="block h-9 w-full rounded-none border-0 border-b border-gray-300 bg-transparent py-1.5 pl-8 pr-3 text-sm placeholder-gray-400 focus:border-gray-400 focus:outline-none focus:ring-0"
+            onChange={setSearchQuery}
+            placeholder="Search entities..."
           />
-        </div>
 
-        {/* Filter Dropdown */}
-        <div className="relative w-full sm:w-[280px]">
-          <Select value={getSelectedValue()} onValueChange={handleValueChange}>
-            <SelectTrigger
-              className="h-9 w-full rounded-none border-0 border-b border-gray-300 bg-transparent px-0 py-1.5 text-sm transition-all duration-300 ease-out hover:border-gray-400 focus:border-gray-400 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0"
-            >
-              <SelectValue asChild>
-                <span className="flex items-center transition-all duration-300 ease-out">
-                  {getDisplayText()}
-                </span>
-              </SelectValue>
-            </SelectTrigger>
-            <SelectContent
-              className="w-full border-gray-300 bg-white sm:w-[280px]"
-              position="popper"
-              side="bottom"
-              align="start"
-              sideOffset={4}
-            >
-              <SelectItem value="all">
-                <div className="flex items-center gap-2 py-0.5">
-                  <div className="h-4 w-4 flex-shrink-0 rounded bg-un-blue"></div>
-                  <span className="text-sm font-medium">
-                    All Groups ({entitiesWithBudget.length})
+          {/* Filter Dropdown */}
+          <div className="relative w-full sm:w-[280px]">
+            <Select value={getSelectedValue()} onValueChange={handleValueChange}>
+              <SelectTrigger
+                className="h-9 w-full rounded-none border-0 border-b border-gray-300 bg-transparent px-0 py-1.5 text-sm transition-all duration-300 ease-out hover:border-gray-400 focus:border-gray-400 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0"
+              >
+                <SelectValue asChild>
+                  <span className="flex items-center transition-all duration-300 ease-out">
+                    {getDisplayText()}
                   </span>
-                </div>
-              </SelectItem>
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent
+                className="w-full border-gray-300 bg-white sm:w-[280px]"
+                position="popper"
+                side="bottom"
+                align="start"
+                sideOffset={4}
+              >
+                <SelectItem value="all">
+                  <div className="flex items-center gap-2 py-0.5">
+                    <div className="h-4 w-4 flex-shrink-0 rounded bg-un-blue"></div>
+                    <span className="text-sm font-medium">
+                      All Groups ({entitiesWithBudget.length})
+                    </span>
+                  </div>
+                </SelectItem>
 
-              {getSortedSystemGroupings().map(([group, styles]) => {
-                const count = groupCounts[group] || 0;
-                if (count === 0) return null;
-                return (
-                  <SelectItem key={group} value={group}>
-                    <div className="flex items-center gap-2 py-0.5">
-                      <div
-                        className={`${styles.bgColor} h-4 w-4 flex-shrink-0 rounded`}
-                      ></div>
-                      <span className="text-sm font-medium">
-                        {styles.label} ({count})
-                      </span>
-                    </div>
-                  </SelectItem>
-                );
-              })}
-            </SelectContent>
-          </Select>
-        </div>
+                {getSortedSystemGroupings().map(([group, styles]) => {
+                  const count = groupCounts[group] || 0;
+                  if (count === 0) return null;
+                  return (
+                    <SelectItem key={group} value={group}>
+                      <div className="flex items-center gap-2 py-0.5">
+                        <div
+                          className={`${styles.bgColor} h-4 w-4 flex-shrink-0 rounded`}
+                        ></div>
+                        <span className="text-sm font-medium">
+                          {styles.label} ({count})
+                        </span>
+                      </div>
+                    </SelectItem>
+                  );
+                })}
+              </SelectContent>
+            </Select>
+          </div>
 
-        {/* Reset Button */}
-        {isResetNeeded && (
-          <button
-            onClick={handleReset}
-            className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-gray-200 text-gray-600 transition-all duration-200 ease-out hover:bg-gray-400 hover:text-gray-100 focus:bg-gray-400 focus:text-gray-100 focus:outline-none"
-            aria-label="Clear filters and search"
-            title="Clear filters and search"
-          >
-            <X className="h-3 w-3" />
-          </button>
-        )}
+          {/* Reset Button */}
+          {isResetNeeded && (
+            <button
+              onClick={handleReset}
+              className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-gray-200 text-gray-600 transition-all duration-200 ease-out hover:bg-gray-400 hover:text-gray-100 focus:bg-gray-400 focus:text-gray-100 focus:outline-none"
+              aria-label="Clear filters and search"
+              title="Clear filters and search"
+            >
+              <X className="h-3 w-3" />
+            </button>
+          )}
         </div>
 
         <div className="flex items-center gap-4">
@@ -559,7 +541,7 @@ export function EntitiesTreemap() {
   if (sortedGroups.length === 0) {
     return (
       <div className="w-full">
-        <FilterControls />
+        {filterControlsJSX}
         <div className="flex h-[650px] w-full items-center justify-center bg-gray-100">
           <p className="text-lg text-gray-500">
             No entities match the selected filters
@@ -732,7 +714,7 @@ export function EntitiesTreemap() {
 
   return (
     <div className="w-full">
-      <FilterControls />
+      {filterControlsJSX}
 
       {/* Treemap */}
       <div className="relative h-[650px] w-full bg-gray-100">

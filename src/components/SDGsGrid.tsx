@@ -6,6 +6,7 @@ import SDGModal from "./SDGModal";
 import SDGExpensesTreemap from "./SDGExpensesTreemap";
 import { YearSlider } from "@/components/YearSlider";
 import { useDeepLink } from "@/hooks/useDeepLink";
+import { ChartSearchInput } from "@/components/ui/chart-search-input";
 import {
   Tooltip,
   TooltipContent,
@@ -124,30 +125,11 @@ export default function SDGsGrid() {
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-3">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:gap-3">
             {/* Search Input */}
-            <div className="relative w-full sm:w-64">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2.5">
-                <svg
-                  className="h-3.5 w-3.5 text-gray-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </div>
-              <input
-                type="text"
-                placeholder="Search by SDG or entity..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="block h-9 w-full rounded-none border-0 border-b border-gray-300 bg-transparent py-1.5 pl-8 pr-3 text-sm placeholder-gray-400 focus:border-gray-400 focus:outline-none focus:ring-0"
-              />
-            </div>
+            <ChartSearchInput
+              value={searchQuery}
+              onChange={setSearchQuery}
+              placeholder="Search by SDG or entity..."
+            />
 
             {/* Reset Button */}
             {isResetNeeded && (
