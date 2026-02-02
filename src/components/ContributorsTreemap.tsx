@@ -114,8 +114,9 @@ function slice(
     0
   );
 
-  if (width >= height) {
+  if (width > height) {
     // Vertical split - creates vertical gap lines (use horizontal gap)
+    // Only when clearly wider than tall
     const g = gap.horizontal;
     const leftWidth = width * (leftSum / total) - g / 2;
     return [
@@ -131,6 +132,7 @@ function slice(
     ];
   } else {
     // Horizontal split - creates horizontal gap lines (use vertical gap)
+    // Preferred when square or taller than wide - puts largest items at top
     const g = gap.vertical;
     const leftHeight = height * (leftSum / total) - g / 2;
     return [
