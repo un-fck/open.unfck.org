@@ -1,3 +1,6 @@
+"use client";
+
+import { Link as LinkIcon } from "lucide-react";
 import Image from "next/image";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
@@ -31,7 +34,16 @@ export function SectionBanner({
         </div>
         {/* Text below image */}
         <div className="bg-gray-50 px-6 py-6">
-          <h2 className="mb-2 text-xl font-bold text-gray-900">{title}</h2>
+          <h2 className="group mb-2 text-xl font-bold text-gray-900">
+            {id ? (
+              <a href={`#${id}`} className="hover:underline">
+                {title}
+                <LinkIcon className="ml-2 inline h-4 w-4 align-baseline text-gray-400 opacity-0 transition-opacity group-hover:opacity-100" />
+              </a>
+            ) : (
+              title
+            )}
+          </h2>
           <p className="text-sm leading-relaxed text-gray-700">{description}</p>
         </div>
       </div>
@@ -51,8 +63,15 @@ export function SectionBanner({
             <div className="absolute inset-0 flex items-center">
               <div className="mx-auto w-full max-w-6xl px-12 lg:px-16">
                 <div className="max-w-md lg:max-w-lg">
-                  <h2 className="mb-3 text-2xl font-bold text-gray-900 lg:text-3xl">
-                    {title}
+                  <h2 className="group mb-3 text-2xl font-bold text-gray-900 lg:text-3xl">
+                    {id ? (
+                      <a href={`#${id}`} className="hover:underline">
+                        {title}
+                        <LinkIcon className="ml-2 inline h-5 w-5 align-baseline text-gray-400 opacity-0 transition-opacity group-hover:opacity-100" />
+                      </a>
+                    ) : (
+                      title
+                    )}
                   </h2>
                   <p className="text-sm leading-relaxed text-gray-700 lg:text-base">
                     {description}

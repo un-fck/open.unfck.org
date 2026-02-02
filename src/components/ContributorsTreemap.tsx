@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ContributorSidebar } from "@/components/ContributorSidebar";
 import { YearSlider } from "@/components/YearSlider";
+import { useDeepLink } from "@/hooks/useDeepLink";
 import {
   Tooltip,
   TooltipContent,
@@ -161,6 +162,21 @@ export function ContributorsTreemap() {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedYear, setSelectedYear] = useState<number>(YEAR_RANGES.donors.default);
+  const [pendingDeepLink, setPendingDeepLink] = useDeepLink({
+    hashPrefix: "donor",
+    sectionId: "donors",
+  });
+
+  // Open sidebar when data is loaded and there's a pending deep link
+  useEffect(() => {
+    if (!loading && pendingDeepLink && contributors.length > 0) {
+      const contributor = contributors.find(c => c.name === pendingDeepLink);
+      if (contributor) {
+        setSelectedContributor(contributor);
+      }
+      setPendingDeepLink(null);
+    }
+  }, [loading, pendingDeepLink, contributors]);
 
   useEffect(() => {
     setLoading(true);

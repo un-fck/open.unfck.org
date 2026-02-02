@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { X } from "lucide-react";
 import SDGModal from "./SDGModal";
 import SDGExpensesTreemap from "./SDGExpensesTreemap";
 import { YearSlider } from "@/components/YearSlider";
+import { useDeepLink } from "@/hooks/useDeepLink";
 import {
   Tooltip,
   TooltipContent,
@@ -34,6 +35,28 @@ export default function SDGsGrid() {
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedYear, setSelectedYear] = useState<number>(YEAR_RANGES.sdgExpenses.default);
+  
+  const parseSDGNumber = useCallback((value: string) => {
+    const num = parseInt(value, 10);
+    return isNaN(num) ? null : num;
+  }, []);
+  
+  const [pendingDeepLink, setPendingDeepLink] = useDeepLink<number | null>({
+    hashPrefix: "sdg",
+    sectionId: "sdgs",
+    transform: parseSDGNumber,
+  });
+
+  // Open modal when data is loaded and there's a pending deep link
+  useEffect(() => {
+    if (pendingDeepLink && sdgs.length > 0) {
+      const sdg = sdgs.find(s => s.number === pendingDeepLink);
+      if (sdg) {
+        setSelectedSDG(sdg);
+      }
+      setPendingDeepLink(null);
+    }
+  }, [pendingDeepLink, sdgs]);
 
   useEffect(() => {
     fetch(`${basePath}/data/sdgs.json`)

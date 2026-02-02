@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { Entity, BudgetEntry, EntityRevenue } from "@/types";
+import { useDeepLink } from "@/hooks/useDeepLink";
 import {
   systemGroupingStyles,
   getSystemGroupingStyle,
@@ -137,6 +138,21 @@ export function EntitiesTreemap() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [spendingYear, setSpendingYear] = useState<number>(YEAR_RANGES.entitySpending.default);
   const [revenueYear, setRevenueYear] = useState<number>(YEAR_RANGES.entityRevenue.default);
+  const [pendingDeepLink, setPendingDeepLink] = useDeepLink({
+    hashPrefix: "entity",
+    sectionId: "entities",
+  });
+
+  // Open sidebar when data is loaded and there's a pending deep link
+  useEffect(() => {
+    if (!loading && pendingDeepLink && entities.length > 0) {
+      const entity = entities.find(e => e.entity === pendingDeepLink);
+      if (entity) {
+        setSelectedEntity(entity);
+      }
+      setPendingDeepLink(null);
+    }
+  }, [loading, pendingDeepLink, entities]);
 
   // Current year based on mode
   const currentYear = showRevenue ? revenueYear : spendingYear;

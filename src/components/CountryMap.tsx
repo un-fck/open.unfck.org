@@ -6,6 +6,7 @@ import { HybridMap } from "@undp/data-viz";
 import { CountrySidebar } from "@/components/CountrySidebar";
 import { CountryTreemap } from "@/components/CountryTreemap";
 import { YearSlider } from "@/components/YearSlider";
+import { useDeepLink } from "@/hooks/useDeepLink";
 import { Switch } from "@/components/ui/switch";
 import { formatBudget } from "@/lib/entities";
 import { generateYearRange, YEAR_RANGES } from "@/lib/data";
@@ -50,6 +51,26 @@ export function CountryMap() {
   const [showMap, setShowMap] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedYear, setSelectedYear] = useState<number>(YEAR_RANGES.countryExpenses.default);
+  const [pendingDeepLink, setPendingDeepLink] = useDeepLink({
+    hashPrefix: "country",
+    sectionId: "countries",
+  });
+
+  // Open sidebar when data is loaded and there's a pending deep link
+  useEffect(() => {
+    if (!loading && pendingDeepLink && countryData.length > 0) {
+      const country = countryData.find(c => c.iso3 === pendingDeepLink);
+      if (country) {
+        setSelectedCountry({
+          iso3: country.iso3,
+          name: country.name,
+          total: country.total,
+          entities: country.entities,
+        });
+      }
+      setPendingDeepLink(null);
+    }
+  }, [loading, pendingDeepLink, countryData]);
 
   useEffect(() => {
     setLoading(true);
