@@ -114,10 +114,22 @@
     "amount": 33355633.33
   },
   {
+    "entity": "UN Women",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 622770150.4138006
+  },
+  {
     "entity": "UN-DPO",
     "source": "ceb",
     "year": 2024,
     "amount": 7341051634.0
+  },
+  {
+    "entity": "UN-Habitat",
+    "source": "ceb",
+    "year": 2024,
+    "amount": 188263637.0
   },
   {
     "entity": "UNAIDS",
@@ -166,12 +178,6 @@
     "source": "ceb",
     "year": 2024,
     "amount": 1528012969.0
-  },
-  {
-    "entity": "UN-Habitat",
-    "source": "ceb",
-    "year": 2024,
-    "amount": 188263637.0
   },
   {
     "entity": "UNHCR",
@@ -244,12 +250,6 @@
     "source": "ceb",
     "year": 2024,
     "amount": 27195265.0
-  },
-  {
-    "entity": "UN-Women",
-    "source": "ceb",
-    "year": 2024,
-    "amount": 622770150.4138006
   },
   {
     "entity": "UPU",

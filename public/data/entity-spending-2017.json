@@ -84,10 +84,22 @@
     "amount": 27201861.0
   },
   {
+    "entity": "UN Women",
+    "source": "ceb",
+    "year": 2017,
+    "amount": 338615000.0
+  },
+  {
     "entity": "UN-DPO",
     "source": "ceb",
     "year": 2017,
     "amount": 8263932000.0
+  },
+  {
+    "entity": "UN-Habitat",
+    "source": "ceb",
+    "year": 2017,
+    "amount": 197483176.0
   },
   {
     "entity": "UNAIDS",
@@ -130,12 +142,6 @@
     "source": "ceb",
     "year": 2017,
     "amount": 926869317.0
-  },
-  {
-    "entity": "UN-Habitat",
-    "source": "ceb",
-    "year": 2017,
-    "amount": 197483176.0
   },
   {
     "entity": "UNHCR",
@@ -190,12 +196,6 @@
     "source": "ceb",
     "year": 2017,
     "amount": 107838582.0
-  },
-  {
-    "entity": "UN-Women",
-    "source": "ceb",
-    "year": 2017,
-    "amount": 338615000.0
   },
   {
     "entity": "UPU",

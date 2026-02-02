@@ -72,10 +72,22 @@
     "amount": 23898875.0
   },
   {
+    "entity": "UN Women",
+    "source": "ceb",
+    "year": 2012,
+    "amount": 235880070.0
+  },
+  {
     "entity": "UN-DPO",
     "source": "ceb",
     "year": 2012,
     "amount": 7544235000.0
+  },
+  {
+    "entity": "UN-Habitat",
+    "source": "ceb",
+    "year": 2012,
+    "amount": 180441000.0
   },
   {
     "entity": "UNAIDS",
@@ -106,12 +118,6 @@
     "source": "ceb",
     "year": 2012,
     "amount": 810710695.0
-  },
-  {
-    "entity": "UN-Habitat",
-    "source": "ceb",
-    "year": 2012,
-    "amount": 180441000.0
   },
   {
     "entity": "UNHCR",
@@ -160,12 +166,6 @@
     "source": "ceb",
     "year": 2012,
     "amount": 62403000.0
-  },
-  {
-    "entity": "UN-Women",
-    "source": "ceb",
-    "year": 2012,
-    "amount": 235880070.0
   },
   {
     "entity": "UPU",

@@ -63,6 +63,7 @@
         "WMO"
       ],
       "Other Entities": [
+        "UN Women",
         "UNHCR",
         "UNOPS",
         "UNRWA"
@@ -667,72 +668,72 @@
       {
         "year": 2011,
         "revenue": null,
-        "expenses": 2874417099.0
+        "expenses": 3072732099.0
       },
       {
         "year": 2012,
         "revenue": null,
-        "expenses": 3646585707.0
+        "expenses": 3882465777.0
       },
       {
         "year": 2013,
-        "revenue": 5060228371.7,
-        "expenses": 4118327346.0
+        "revenue": 5348733317.7,
+        "expenses": 4382432338.0
       },
       {
         "year": 2014,
-        "revenue": 5071908067.99,
-        "expenses": 5325909751.0
+        "revenue": 5404796333.99,
+        "expenses": 5596447647.0
       },
       {
         "year": 2015,
-        "revenue": 5478346159.510001,
-        "expenses": 5284172603.0
+        "revenue": 5797333960.510001,
+        "expenses": 5599146603.0
       },
       {
         "year": 2016,
-        "revenue": 6038428285.500001,
-        "expenses": 5933559425.0
+        "revenue": 6372997151.500001,
+        "expenses": 6273360425.0
       },
       {
         "year": 2017,
-        "revenue": 6299416581.49,
-        "expenses": 6069139015.0
+        "revenue": 6677933292.49,
+        "expenses": 6407754015.0
       },
       {
         "year": 2018,
-        "revenue": 6576007329.47,
-        "expenses": 6177869077.43
+        "revenue": 6980725467.690001,
+        "expenses": 6558129077.47
       },
       {
         "year": 2019,
-        "revenue": 6395678108.99,
-        "expenses": 6621653030.0
+        "revenue": 6923080695.99,
+        "expenses": 7042543029.98
       },
       {
         "year": 2020,
-        "revenue": 7054389232.650001,
-        "expenses": 6700799195.34241
+        "revenue": 7618250130.650001,
+        "expenses": 7140309160.43341
       },
       {
         "year": 2021,
-        "revenue": 7773461587.18,
-        "expenses": 7044227400.082
+        "revenue": 8454929590.703079,
+        "expenses": 7574968042.038924
       },
       {
         "year": 2022,
-        "revenue": 8456879446.0,
-        "expenses": 7896954701.0
+        "revenue": 9127944878.0,
+        "expenses": 8437205590.0
       },
       {
         "year": 2023,
-        "revenue": 7520788611.0,
-        "expenses": 8019039810.0
+        "revenue": 8139844905.0,
+        "expenses": 8565142486.0
       },
       {
         "year": 2024,
-        "revenue": 7681436933.0,
-        "expenses": 7649647088.0
+        "revenue": 8201931952.99,
+        "expenses": 8272417238.4138
       }
     ],
     "Other Bodies": [
@@ -2321,6 +2322,78 @@
         "expenses": 33355633.33
       }
     ],
+    "UN Women": [
+      {
+        "year": 2011,
+        "revenue": null,
+        "expenses": 198315000.0
+      },
+      {
+        "year": 2012,
+        "revenue": null,
+        "expenses": 235880070.0
+      },
+      {
+        "year": 2013,
+        "revenue": 288504946.0,
+        "expenses": 264104992.0
+      },
+      {
+        "year": 2014,
+        "revenue": 332888266.0,
+        "expenses": 270537896.0
+      },
+      {
+        "year": 2015,
+        "revenue": 318987801.0,
+        "expenses": 314974000.0
+      },
+      {
+        "year": 2016,
+        "revenue": 334568866.0,
+        "expenses": 339801000.0
+      },
+      {
+        "year": 2017,
+        "revenue": 378516711.0,
+        "expenses": 338615000.0
+      },
+      {
+        "year": 2018,
+        "revenue": 404718138.22,
+        "expenses": 380260000.04
+      },
+      {
+        "year": 2019,
+        "revenue": 527402587.00000006,
+        "expenses": 420889999.98
+      },
+      {
+        "year": 2020,
+        "revenue": 563860898.0,
+        "expenses": 439509965.091
+      },
+      {
+        "year": 2021,
+        "revenue": 681468003.523079,
+        "expenses": 530740641.956924
+      },
+      {
+        "year": 2022,
+        "revenue": 671065432.0,
+        "expenses": 540250889.0
+      },
+      {
+        "year": 2023,
+        "revenue": 619056294.0,
+        "expenses": 546102676.0
+      },
+      {
+        "year": 2024,
+        "revenue": 520495019.99,
+        "expenses": 622770150.4138006
+      }
+    ],
     "UN-DPO": [
       {
         "year": 2011,
@@ -2463,78 +2536,6 @@
         "year": 2024,
         "revenue": 227363710.0,
         "expenses": 188263637.0
-      }
-    ],
-    "UN-Women": [
-      {
-        "year": 2011,
-        "revenue": null,
-        "expenses": 198315000.0
-      },
-      {
-        "year": 2012,
-        "revenue": null,
-        "expenses": 235880070.0
-      },
-      {
-        "year": 2013,
-        "revenue": 288504946.0,
-        "expenses": 264104992.0
-      },
-      {
-        "year": 2014,
-        "revenue": 332888266.0,
-        "expenses": 270537896.0
-      },
-      {
-        "year": 2015,
-        "revenue": 318987801.0,
-        "expenses": 314974000.0
-      },
-      {
-        "year": 2016,
-        "revenue": 334568866.0,
-        "expenses": 339801000.0
-      },
-      {
-        "year": 2017,
-        "revenue": 378516711.0,
-        "expenses": 338615000.0
-      },
-      {
-        "year": 2018,
-        "revenue": 404718138.22,
-        "expenses": 380260000.04
-      },
-      {
-        "year": 2019,
-        "revenue": 527402587.00000006,
-        "expenses": 420889999.98
-      },
-      {
-        "year": 2020,
-        "revenue": 563860898.0,
-        "expenses": 439509965.091
-      },
-      {
-        "year": 2021,
-        "revenue": 681468003.523079,
-        "expenses": 530740641.956924
-      },
-      {
-        "year": 2022,
-        "revenue": 671065432.0,
-        "expenses": 540250889.0
-      },
-      {
-        "year": 2023,
-        "revenue": 619056294.0,
-        "expenses": 546102676.0
-      },
-      {
-        "year": 2024,
-        "revenue": 520495019.99,
-        "expenses": 622770150.4138006
       }
     ],
     "UNAIDS": [

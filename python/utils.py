@@ -1,8 +1,6 @@
-import pandas as pd
-
 ENTITY_MAPPING = {
     "UN-HABITAT": "UN-Habitat", "UNHABITAT": "UN-Habitat",
-    "UNWOMEN": "UN-Women", "UNWTO": "UN Tourism",
+    "UNWOMEN": "UN Women", "UN-Women": "UN Women", "UNWTO": "UN Tourism",
     "OHRLLS": "UN-OHRLLS", "POE-CAR": "PoE-CAR", "POE-HAITI": "PoE-Haiti",
     "POE-LIBYA": "PoE-Libya", "POE-SUDAN": "PoE-Sudan", "POE-YEMEN": "PoE-Yemen",
     "POS-SSUDAN": "PoE-S.Sudan", "SRSG-CAAC": "OSRSG-CAAC", "SRSG-SVC": "OSRSG-SVC",

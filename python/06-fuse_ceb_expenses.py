@@ -6,6 +6,7 @@ Tiered approach:
 """
 import pandas as pd
 from pathlib import Path
+from utils import normalize_entity
 
 ceb_dir = Path("data/ceb")
 clean, fused = ceb_dir / "clean", ceb_dir / "fused"
@@ -21,11 +22,13 @@ REPLACE_AGGREGATES = {"UN", "UN-DPO"}
 def load_ceb() -> pd.DataFrame:
     df = pd.read_csv(clean / "expenses_sub_agency.csv")
     df = df.rename(columns={"agency": "entity", "calendar_year": "year"})
+    df["entity"] = df["entity"].apply(normalize_entity)
     return df[["year", "entity", "amount"]].copy()
 
 def load_secretariat() -> pd.DataFrame:
     df = pd.read_csv("data/un-secretariat-expenses.csv")
     df = df.rename(columns={"ENTITY": "entity", "YEAR": "year", "AMOUNT": "amount", "SOURCE_TYPE": "source_type"})
+    df["entity"] = df["entity"].apply(normalize_entity)
     return df[["year", "entity", "amount", "source_type"]].copy()
 
 def fuse_expenses():
