@@ -11,6 +11,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import {
+  CATEGORY_LABELS,
   CONTRIBUTION_TYPES,
   Contributor,
   ContributorData,
@@ -22,7 +23,7 @@ import {
   getTotalContributions,
   isGovernmentDonor,
 } from "@/lib/contributors";
-import { generateYearRange, YEAR_RANGES } from "@/lib/data";
+import { useYearRanges, generateYearRange } from "@/lib/useYearRanges";
 
 interface Rect {
   x: number;
@@ -52,7 +53,7 @@ const getContributionBreakdown = (
   return breakdown;
 };
 
-const DEFAULT_GAP = 0.15;
+const DEFAULT_GAP = 0.4;
 
 interface GapConfig {
   horizontal: number; // Gap for vertical splits (vertical lines between tiles)
@@ -153,16 +154,17 @@ function slice(
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
-const DONOR_YEARS = generateYearRange(YEAR_RANGES.donors.min, YEAR_RANGES.donors.max);
-
 export function ContributorsTreemap() {
+  const yearRanges = useYearRanges();
+  const DONOR_YEARS = generateYearRange(yearRanges.donors.min, yearRanges.donors.max);
+
   const [contributors, setContributors] = useState<Contributor[]>([]);
   const [hoveredState, setHoveredState] = useState<string | null>(null);
   const [selectedContributor, setSelectedContributor] =
     useState<Contributor | null>(null);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [selectedYear, setSelectedYear] = useState<number>(YEAR_RANGES.donors.default);
+  const [selectedYear, setSelectedYear] = useState<number>(yearRanges.donors.default);
   const [pendingDeepLink, setPendingDeepLink] = useDeepLink({
     hashPrefix: "donor",
     sectionId: "donors",
@@ -187,8 +189,10 @@ export function ContributorsTreemap() {
         const parsed = Object.entries(data).map(([name, info]) => ({
           name,
           status: info.status,
+          category: info.category || (isGovernmentDonor(info.status) ? "Government" : "Non-Government"),
           contributions: info.contributions,
           payment_status: info.payment_status,
+          is_other: info.is_other,
         }));
         setContributors(parsed);
         setLoading(false);
@@ -201,7 +205,7 @@ export function ContributorsTreemap() {
 
   if (loading) {
     return (
-      <div className="flex h-[650px] w-full items-center justify-center">
+      <div className="flex h-[780px] w-full items-center justify-center">
         <p className="text-lg text-gray-500">Loading contributors...</p>
       </div>
     );
@@ -224,15 +228,30 @@ export function ContributorsTreemap() {
     .filter((item) => item.value > 0)
     .sort((a, b) => b.value - a.value);
 
-  const orgItems: TreemapItem[] = filteredContributors
-    .filter((c) => !isGovernmentDonor(c.status))
-    .map((contributor) => ({
-      value: getTotalContributions(contributor.contributions),
-      data: contributor,
-    }))
-    .filter((item) => item.value > 0)
-    .sort((a, b) => b.value - a.value);
+  const orgContributors = filteredContributors.filter((c) => !isGovernmentDonor(c.status));
+  
+  // Group non-gov by category
+  const orgByCategory = orgContributors.reduce((acc, c) => {
+    const cat = c.category || "Other";
+    if (!acc[cat]) acc[cat] = [];
+    acc[cat].push(c);
+    return acc;
+  }, {} as Record<string, Contributor[]>);
 
+  // Convert to category items with totals
+  const categoryItems = Object.entries(orgByCategory)
+    .map(([category, contributors]) => {
+      const items: TreemapItem[] = contributors
+        .map((c) => ({ value: getTotalContributions(c.contributions), data: c }))
+        .filter((item) => item.value > 0)
+        .sort((a, b) => b.value - a.value);
+      const total = items.reduce((sum, item) => sum + item.value, 0);
+      return { category, items, total };
+    })
+    .filter((cat) => cat.total > 0)
+    .sort((a, b) => b.total - a.total);
+
+  const orgItems = categoryItems.flatMap((cat) => cat.items);
   const allItems = [...govItems, ...orgItems];
 
   if (allItems.length === 0) {
@@ -251,7 +270,7 @@ export function ContributorsTreemap() {
             onChange={setSelectedYear}
           />
         </div>
-        <div className="flex h-[650px] w-full items-center justify-center bg-gray-100">
+        <div className="flex h-[780px] w-full items-center justify-center bg-gray-100">
           <p className="text-lg text-gray-500">
             {searchQuery.trim() ? "No contributors match your search" : "No contribution data available"}
           </p>
@@ -272,13 +291,27 @@ export function ContributorsTreemap() {
 
   // Generate rects for each group (in their own 0-100 coordinate space)
   const govRects = govItems.length > 0 ? squarify(govItems, 0, 0, 100, 100, DEFAULT_GAP) : [];
-  // For org section: horizontal gaps (vertical lines) stay normal, 
-  // but vertical gaps (horizontal lines) need scaling since the section height is compressed
+  
+  // For org section: layout categories horizontally, then squarify within each
   const orgVerticalGap = orgHeightPct > 0 ? Math.min(DEFAULT_GAP * (100 / orgHeightPct), 1.5) : DEFAULT_GAP;
-  const orgRects = orgItems.length > 0 ? squarify(orgItems, 0, 0, 100, 100, {
-    horizontal: DEFAULT_GAP,  // Vertical lines between tiles - no scaling needed
-    vertical: orgVerticalGap, // Horizontal lines between tiles - scale to compensate for compressed height
-  }) : [];
+  const categoryGap = 0.6;
+  const categoryRects: { category: string; x: number; width: number; rects: (Rect & { data: Contributor })[] }[] = [];
+  
+  if (categoryItems.length > 0) {
+    let xOffset = 0;
+    const totalCatValue = categoryItems.reduce((sum, cat) => sum + cat.total, 0);
+    const availableWidth = 100 - categoryGap * (categoryItems.length - 1);
+    
+    categoryItems.forEach((cat, idx) => {
+      const catWidth = (cat.total / totalCatValue) * availableWidth;
+      const rects = squarify(cat.items, 0, 0, 100, 100, {
+        horizontal: DEFAULT_GAP,
+        vertical: orgVerticalGap,
+      });
+      categoryRects.push({ category: cat.category, x: xOffset, width: catWidth, rects });
+      xOffset += catWidth + (idx < categoryItems.length - 1 ? categoryGap : 0);
+    });
+  }
 
   const renderContributor = (
     rect: Rect & { data: Contributor },
@@ -289,6 +322,7 @@ export function ContributorsTreemap() {
     const stateContributions = getTotalContributions(rect.data.contributions);
     const breakdown = getContributionBreakdown(rect.data.contributions);
     const isOrg = !isGovernmentDonor(rect.data.status);
+    const isOther = rect.data.is_other;
     
     // Determine if label should show based on size
     const showLabel = rect.width > 3 && rect.height > 2;
@@ -364,15 +398,20 @@ export function ContributorsTreemap() {
             <p className="mt-1 flex items-center justify-center gap-1.5 text-xs text-slate-500">
               <span className={`inline-block h-2 w-2 rounded-full ${styles.bgColor}`} />
               {styles.label}
+              {!isGovernmentDonor(rect.data.status) && rect.data.category !== "Non-Government" && (
+                <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-medium text-slate-600">
+                  {CATEGORY_LABELS[rect.data.category] || rect.data.category}
+                </span>
+              )}
             </p>
             <p className="mt-1 text-xs font-semibold text-slate-600">
               {formatBudget(stateContributions)}
             </p>
             <p className="mt-1 hidden text-xs text-slate-400 sm:block">
-              Click to view contributor details
+              Click to view {isOther ? "breakdown" : "contributor details"}
             </p>
             <p className="mt-1 text-xs text-slate-400 sm:hidden">
-              Tap to view details
+              Tap to view {isOther ? "breakdown" : "details"}
             </p>
           </div>
         </TooltipContent>
@@ -398,7 +437,7 @@ export function ContributorsTreemap() {
         />
       </div>
 
-      <div className="relative h-[650px] w-full bg-gray-100">
+      <div className="relative h-[780px] w-full bg-gray-100">
         {/* Government donors section */}
         {govRects.length > 0 && (
           <div 
@@ -409,8 +448,8 @@ export function ContributorsTreemap() {
           </div>
         )}
         
-        {/* Organization donors section */}
-        {orgRects.length > 0 && (
+        {/* Organization donors section - grouped by category */}
+        {categoryRects.length > 0 && (
           <div 
             className="absolute left-0 w-full"
             style={{ 
@@ -418,7 +457,15 @@ export function ContributorsTreemap() {
               height: `${orgHeightPct}%` 
             }}
           >
-            {orgRects.map((rect, i) => renderContributor(rect, i))}
+            {categoryRects.map((cat) => (
+              <div
+                key={cat.category}
+                className="absolute top-0 h-full"
+                style={{ left: `${cat.x}%`, width: `${cat.width}%` }}
+              >
+                {cat.rects.map((rect, i) => renderContributor(rect, i))}
+              </div>
+            ))}
           </div>
         )}
       </div>

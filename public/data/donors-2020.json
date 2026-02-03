@@ -1,6 +1,7 @@
 {
   "European Union": {
     "status": "organization",
+    "category": "European Union",
     "contributions": {
       "CTBTO": {
         "Voluntary earmarked": 1898010.0
@@ -117,6 +118,7 @@
   },
   "United States of America": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 30551466.77
@@ -251,6 +253,7 @@
   },
   "China": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 16672705.04
@@ -394,6 +397,7 @@
   },
   "Japan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 11893948.07,
@@ -557,6 +561,7 @@
   },
   "Germany": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 8457857.4
@@ -723,6 +728,7 @@
   },
   "United Kingdom of Great Britain and Northern Ireland": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 6342714.4
@@ -879,6 +885,7 @@
   },
   "France": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 6148577.3,
@@ -1044,6 +1051,7 @@
   },
   "Italy": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 4594123.99
@@ -1192,6 +1200,7 @@
   },
   "Brazil": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 4094526.69
@@ -1317,6 +1326,7 @@
   },
   "Canada": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 3798569.8600000003,
@@ -1467,6 +1477,7 @@
   },
   "Russian Federation": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 3341057.4699999997
@@ -1588,6 +1599,7 @@
   },
   "Republic of Korea": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 3148278.17
@@ -1742,6 +1754,7 @@
   },
   "Australia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 3069537.09,
@@ -1883,6 +1896,7 @@
   },
   "Spain": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 2979936.08
@@ -2014,6 +2028,7 @@
   },
   "T\u00fcrkiye": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1903358.21
@@ -2118,6 +2133,7 @@
   },
   "Netherlands": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1882992.9300000002,
@@ -2270,6 +2286,7 @@
   },
   "Mexico": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1794749.72
@@ -2393,6 +2410,7 @@
   },
   "Switzerland": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1597897.02,
@@ -2556,6 +2574,7 @@
   },
   "Argentina": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1270714.98
@@ -2661,6 +2680,7 @@
   },
   "Sweden": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1258497.48
@@ -2817,6 +2837,7 @@
   },
   "Belgium": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1140385.8599999999
@@ -2958,6 +2979,7 @@
   },
   "Poland": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1113234.04
@@ -3070,6 +3092,7 @@
   },
   "Norway": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1046710.46
@@ -3227,8 +3250,9 @@
       }
     }
   },
-  "Venezuela (Bolivarian Republic of)": {
-    "status": "organization",
+  "Venezuela, Bolivarian Republic of": {
+    "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1011413.31
@@ -3315,6 +3339,7 @@
   },
   "Austria": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 939460.99,
@@ -3449,6 +3474,7 @@
   },
   "United Arab Emirates": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 855289.95
@@ -3560,6 +3586,7 @@
   },
   "Denmark": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 769760.11
@@ -3687,6 +3714,7 @@
   },
   "Indonesia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 753469.22
@@ -3787,6 +3815,7 @@
   },
   "Israel": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 681516.9
@@ -3878,6 +3907,7 @@
   },
   "Singapore": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 673370.3400000001
@@ -3970,6 +4000,7 @@
   },
   "Finland": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 585127.13
@@ -4110,6 +4141,7 @@
   },
   "Chile": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 564761.85
@@ -4209,8 +4241,9 @@
       }
     }
   },
-  "Iran (Islamic Republic of)": {
-    "status": "member",
+  "Iran, Islamic Republic of": {
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 552544.36
@@ -4298,6 +4331,7 @@
   },
   "Ireland": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 514530.39
@@ -4435,6 +4469,7 @@
   },
   "Greece": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 507742.63
@@ -4528,6 +4563,7 @@
   },
   "Portugal": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 486020.77
@@ -4645,6 +4681,7 @@
   },
   "Malaysia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 473803.28
@@ -4752,6 +4789,7 @@
   },
   "Czechia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 431717.14
@@ -4860,6 +4898,7 @@
   },
   "Thailand": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 426287.18
@@ -4989,6 +5028,7 @@
   },
   "New Zealand": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 404565.32999999996
@@ -5110,6 +5150,7 @@
   },
   "Colombia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 400493.16000000003
@@ -5216,6 +5257,7 @@
   },
   "Qatar": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 390988.8
@@ -5334,6 +5376,7 @@
   },
   "South Africa": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 377413.51
@@ -5443,6 +5486,7 @@
   },
   "Kuwait": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 350261.69
@@ -5553,6 +5597,7 @@
   },
   "Nigeria": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 347546.1
@@ -5667,6 +5712,7 @@
   },
   "Hungary": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 286453.70999999996
@@ -5770,6 +5816,7 @@
   },
   "Philippines": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 285095.91000000003
@@ -5879,6 +5926,7 @@
   },
   "Romania": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 275593.78
@@ -5986,6 +6034,7 @@
   },
   "Egypt": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 257944.09
@@ -6083,6 +6132,7 @@
   },
   "Kazakhstan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 247083.16999999998
@@ -6199,6 +6249,7 @@
   },
   "Slovakia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 211785.78999999998
@@ -6307,6 +6358,7 @@
   },
   "Peru": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 210427.99
@@ -6409,6 +6461,7 @@
   },
   "Algeria": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 191421.74
@@ -6503,6 +6556,7 @@
   },
   "Iraq": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 179203.01
@@ -6591,6 +6645,7 @@
   },
   "Oman": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 160196.53
@@ -6683,6 +6738,7 @@
   },
   "Uruguay": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 120825.98999999999
@@ -6786,6 +6842,7 @@
   },
   "Ecuador": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 111322.86
@@ -6886,6 +6943,7 @@
   },
   "Croatia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 107250.69
@@ -6982,6 +7040,7 @@
   },
   "Viet Nam": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 107250.69
@@ -7080,6 +7139,7 @@
   },
   "Slovenia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 105892.9
@@ -7182,6 +7242,7 @@
   },
   "Lithuania": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 99104.13
@@ -7272,6 +7333,7 @@
   },
   "Luxembourg": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 93674.17
@@ -7399,6 +7461,7 @@
   },
   "Costa Rica": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 85528.84
@@ -7504,6 +7567,7 @@
   },
   "Ukraine": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 78741.08
@@ -7585,6 +7649,7 @@
   },
   "Morocco": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 76025.48000000001
@@ -7691,6 +7756,7 @@
   },
   "Dominican Republic": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 73310.12
@@ -7789,6 +7855,7 @@
   },
   "Bahrain": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 69237.95
@@ -7878,6 +7945,7 @@
   },
   "Azerbaijan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 67880.15
@@ -7972,6 +8040,7 @@
   },
   "Belarus": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 67880.15
@@ -8052,6 +8121,7 @@
   },
   "Latvia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 65164.56
@@ -8142,6 +8212,7 @@
   },
   "Lebanon": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 65164.56
@@ -8228,6 +8299,7 @@
   },
   "Bulgaria": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 63807.990000000005
@@ -8335,6 +8407,7 @@
   },
   "Panama": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 62450.19
@@ -8448,6 +8521,7 @@
   },
   "Sri Lanka": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 61092.39
@@ -8552,6 +8626,7 @@
   },
   "Trinidad and Tobago": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 55661.43
@@ -8646,6 +8721,7 @@
   },
   "Estonia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 54303.630000000005
@@ -8754,6 +8830,7 @@
   },
   "Cyprus": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 50231.47
@@ -8866,6 +8943,7 @@
   },
   "Guatemala": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 50231.47
@@ -8957,6 +9035,7 @@
   },
   "Turkmenistan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 46158.3
@@ -9045,6 +9124,7 @@
   },
   "Uzbekistan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 44800.5
@@ -9126,6 +9206,7 @@
   },
   "Libya": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 42084.91
@@ -9203,6 +9284,7 @@
   },
   "Iceland": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 39370.54
@@ -9312,6 +9394,7 @@
   },
   "Serbia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 39370.54
@@ -9409,6 +9492,7 @@
   },
   "Tunisia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 35298.369999999995
@@ -9513,6 +9597,7 @@
   },
   "Brunei Darussalam": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 35298.369999999995
@@ -9585,6 +9670,7 @@
   },
   "Kenya": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 33940.58
@@ -9686,6 +9772,7 @@
   },
   "Jordan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 28509.61
@@ -9788,6 +9875,7 @@
   },
   "Bahamas": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 24437.45
@@ -9872,6 +9960,7 @@
   },
   "Malta": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 23079.65
@@ -9975,6 +10064,7 @@
   },
   "Paraguay": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 21721.85
@@ -10066,8 +10156,9 @@
       }
     }
   },
-  "Bolivia (Plurinational State of)": {
-    "status": "member",
+  "Bolivia, Plurinational State of": {
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 21721.85
@@ -10166,6 +10257,7 @@
   },
   "Equatorial Guinea": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 21721.85
@@ -10238,6 +10330,7 @@
   },
   "Ghana": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 20364.059999999998
@@ -10342,6 +10435,7 @@
   },
   "Gabon": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 20364.059999999998
@@ -10436,6 +10530,7 @@
   },
   "Botswana": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 19006.48
@@ -10529,8 +10624,9 @@
       }
     }
   },
-  "C\u00f4te d'Ivoire": {
-    "status": "organization",
+  "C\u00f4te D'Ivoire": {
+    "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 17648.690000000002
@@ -10627,6 +10723,7 @@
   },
   "Cameroon": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 17648.690000000002
@@ -10718,6 +10815,7 @@
   },
   "Bosnia and Herzegovina": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 16290.89
@@ -10809,6 +10907,7 @@
   },
   "El Salvador": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 16290.89
@@ -10901,6 +11000,7 @@
   },
   "Monaco": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 14933.09
@@ -11002,6 +11102,7 @@
   },
   "Angola": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 13576.52
@@ -11098,6 +11199,7 @@
   },
   "Papua New Guinea": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 13576.52
@@ -11180,6 +11282,7 @@
   },
   "Democratic Republic of the Congo": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 13576.52
@@ -11272,6 +11375,7 @@
   },
   "United Republic of Tanzania": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 13576.52
@@ -11371,6 +11475,7 @@
   },
   "Myanmar": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 13576.52
@@ -11467,6 +11572,7 @@
   },
   "Bangladesh": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 13576.52
@@ -11576,6 +11682,7 @@
   },
   "Sudan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 13576.52
@@ -11666,6 +11773,7 @@
   },
   "Ethiopia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 13576.52
@@ -11755,6 +11863,7 @@
   },
   "Yemen": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 13576.52
@@ -11834,6 +11943,7 @@
   },
   "Namibia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 12218.720000000001
@@ -11931,6 +12041,7 @@
   },
   "Honduras": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 12218.720000000001
@@ -12028,6 +12139,7 @@
   },
   "Liechtenstein": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 12218.720000000001
@@ -12120,6 +12232,7 @@
   },
   "Zambia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 12218.720000000001
@@ -12219,6 +12332,7 @@
   },
   "Uganda": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 10860.93
@@ -12314,6 +12428,7 @@
   },
   "Albania": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 10860.93
@@ -12406,6 +12521,7 @@
   },
   "Georgia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 10860.93
@@ -12500,6 +12616,7 @@
   },
   "Jamaica": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 10860.93
@@ -12590,6 +12707,7 @@
   },
   "Armenia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 9503.130000000001
@@ -12689,6 +12807,7 @@
   },
   "Barbados": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 9503.130000000001
@@ -12784,6 +12903,7 @@
   },
   "North Macedonia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 9503.130000000001
@@ -12870,6 +12990,7 @@
   },
   "Afghanistan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 9503.130000000001
@@ -12960,6 +13081,7 @@
   },
   "Nepal": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 9503.130000000001
@@ -13049,6 +13171,7 @@
   },
   "Senegal": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 9503.130000000001
@@ -13154,6 +13277,7 @@
   },
   "Cambodia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 8146.56
@@ -13251,6 +13375,7 @@
   },
   "Congo": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 8146.56
@@ -13341,6 +13466,7 @@
   },
   "Nicaragua": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 6788.76
@@ -13437,6 +13563,7 @@
   },
   "Andorra": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 6788.76
@@ -13518,6 +13645,7 @@
   },
   "Suriname": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 6788.76
@@ -13596,6 +13724,7 @@
   },
   "Lao People's Democratic Republic": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 6788.76
@@ -13679,6 +13808,7 @@
   },
   "Mongolia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 6788.76
@@ -13779,6 +13909,7 @@
   },
   "Zimbabwe": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 6788.76
@@ -13867,6 +13998,7 @@
   },
   "Mozambique": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 5429.96
@@ -13961,6 +14093,7 @@
   },
   "Chad": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 5429.96
@@ -14049,6 +14182,7 @@
   },
   "Madagascar": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 5429.96
@@ -14136,6 +14270,7 @@
   },
   "Tajikistan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 5429.96
@@ -14221,6 +14356,7 @@
   },
   "Mali": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 5429.96
@@ -14324,6 +14460,7 @@
   },
   "Montenegro": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 5429.96
@@ -14420,6 +14557,7 @@
   },
   "Maldives": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 5429.96
@@ -14503,6 +14641,7 @@
   },
   "Benin": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 4072.17
@@ -14596,6 +14735,7 @@
   },
   "Republic of Moldova": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 4072.17
@@ -14694,6 +14834,7 @@
   },
   "Rwanda": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 4072.17
@@ -14776,6 +14917,7 @@
   },
   "Burkina Faso": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 4072.17
@@ -14872,6 +15014,7 @@
   },
   "Fiji": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 4072.17
@@ -14967,6 +15110,7 @@
   },
   "Haiti": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 4072.17
@@ -15057,6 +15201,7 @@
   },
   "Guinea": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 4072.17
@@ -15140,6 +15285,7 @@
   },
   "Seychelles": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 2715.6
@@ -15224,6 +15370,7 @@
   },
   "Togo": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 2715.6
@@ -15311,6 +15458,7 @@
   },
   "Antigua and Barbuda": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 2715.6
@@ -15395,6 +15543,7 @@
   },
   "Niger": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 2715.6
@@ -15486,6 +15635,7 @@
   },
   "San Marino": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 2715.6
@@ -15552,6 +15702,7 @@
   },
   "Kyrgyzstan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 2715.6
@@ -15629,6 +15780,7 @@
   },
   "Malawi": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 2715.6
@@ -15727,6 +15879,7 @@
   },
   "Eswatini": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 2715.6
@@ -15806,6 +15959,7 @@
   },
   "Guyana": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 2715.6
@@ -15901,6 +16055,7 @@
   },
   "Mauritania": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 2715.6
@@ -15992,6 +16147,7 @@
   },
   "Timor-Leste": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 2715.6
@@ -16081,6 +16237,7 @@
   },
   "Sierra Leone": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -16171,6 +16328,7 @@
   },
   "Belize": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -16252,6 +16410,7 @@
   },
   "Djibouti": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -16333,6 +16492,7 @@
   },
   "Kiribati": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -16406,6 +16566,7 @@
   },
   "Marshall Islands": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -16475,6 +16636,7 @@
   },
   "Tuvalu": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -16548,6 +16710,7 @@
   },
   "Samoa": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -16633,6 +16796,7 @@
   },
   "Sao Tome and Principe": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -16716,6 +16880,7 @@
   },
   "Palau": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -16775,6 +16940,7 @@
   },
   "Saint Kitts and Nevis": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -16845,7 +17011,8 @@
     }
   },
   "Niue": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -16888,6 +17055,7 @@
   },
   "Comoros": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -16976,6 +17144,7 @@
   },
   "Saint Vincent and the Grenadines": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -17051,6 +17220,7 @@
   },
   "Saint Lucia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -17130,6 +17300,7 @@
   },
   "Solomon Islands": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -17203,6 +17374,7 @@
   },
   "Burundi": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -17285,6 +17457,7 @@
   },
   "Cabo Verde": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -17372,6 +17545,7 @@
   },
   "Central African Republic": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -17454,7 +17628,8 @@
     }
   },
   "Cook Islands": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -17516,6 +17691,7 @@
   },
   "Eritrea": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -17594,6 +17770,7 @@
   },
   "Holy See": {
     "status": "observer",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -17643,6 +17820,7 @@
   },
   "Gambia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -17731,6 +17909,7 @@
   },
   "Grenada": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -17809,6 +17988,7 @@
   },
   "Guinea-Bissau": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -17895,6 +18075,7 @@
   },
   "Lesotho": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -17982,6 +18163,7 @@
   },
   "Liberia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -18074,6 +18256,7 @@
   },
   "Nauru": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -18132,6 +18315,7 @@
   },
   "Vanuatu": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "CTBTO": {
         "Assessed": 1357.8
@@ -18210,8 +18394,148 @@
       }
     }
   },
+  "Unattributed": {
+    "status": "organization",
+    "category": "Other",
+    "contributions": {
+      "CTBTO": {
+        "Other": -2343829.649999976
+      },
+      "FAO": {
+        "Other": 163204581.82999992
+      },
+      "IAEA": {
+        "Other": 13987776.559999889
+      },
+      "IARC": {
+        "Other": 7960754.650000004
+      },
+      "ICAO": {
+        "Other": 28104208.270000037
+      },
+      "ICC": {
+        "Other": 1154051.4399999904
+      },
+      "IFAD": {
+        "Other": 123082922.54999992
+      },
+      "ILO": {
+        "Other": 78851731.87000002
+      },
+      "IMO": {
+        "Other": 17698072.860000003
+      },
+      "IOM": {
+        "Other": 49181756.53000021
+      },
+      "ITC": {
+        "Other": 42465533.0
+      },
+      "ITLOS": {
+        "Other": 317503.2799999953
+      },
+      "ITU": {
+        "Other": 40612413.22999999
+      },
+      "OPCW": {
+        "Other": 4423191.3999999985
+      },
+      "PAHO": {
+        "Other": 958253100.0
+      },
+      "UN": {
+        "Other": 1214936810.6299984
+      },
+      "UN Tourism": {
+        "Other": 4021679.290000002
+      },
+      "UN-DPO": {
+        "Other": 117341545.5899998
+      },
+      "UNAIDS": {
+        "Other": 6969729.0
+      },
+      "UNCDF": {
+        "Other": 14125581.590000018
+      },
+      "UNDP": {
+        "Other": 836857210.56
+      },
+      "UNEP": {
+        "Other": 101245902.17999996
+      },
+      "UNESCO": {
+        "Other": 91417055.0
+      },
+      "UNFCCC": {
+        "Other": 21905318.880000003
+      },
+      "UNFPA": {
+        "Other": 253432014.51000017
+      },
+      "UN-Habitat": {
+        "Other": 77301591.75
+      },
+      "UNHCR": {
+        "Other": 119555677.78000043
+      },
+      "UNICEF": {
+        "Other": 2243143701.9300003
+      },
+      "UNIDO": {
+        "Other": 74639890.91999996
+      },
+      "UNITAID": {
+        "Other": 640000.0
+      },
+      "UNITAR": {
+        "Other": 14241314.420000007
+      },
+      "UNODC": {
+        "Other": 70719454.0
+      },
+      "UNOPS": {
+        "Other": 1180224576.0
+      },
+      "UNRWA": {
+        "Other": 90818924.82000002
+      },
+      "UNSSC": {
+        "Other": 8699014.87
+      },
+      "UNU": {
+        "Other": 59645418.0
+      },
+      "UNV": {
+        "Other": 8685266.710000003
+      },
+      "UN Women": {
+        "Other": 77114053.53999999
+      },
+      "UPU": {
+        "Other": 50926688.5
+      },
+      "WFP": {
+        "Other": 636860521.2
+      },
+      "WHO": {
+        "Other": 819200419.0
+      },
+      "WIPO": {
+        "Other": 499881322.91
+      },
+      "WMO": {
+        "Other": -684031.6500000227
+      },
+      "WTO": {
+        "Other": 10399914.559999991
+      }
+    },
+    "is_other": true
+  },
   "Bill & Melinda Gates Foundation": {
     "status": "organization",
+    "category": "Foundations",
     "contributions": {
       "FAO": {
         "Voluntary earmarked": 12951865.84
@@ -18265,6 +18589,7 @@
   },
   "Saudi Arabia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 5634471.78,
@@ -18378,6 +18703,7 @@
   },
   "India": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4009513.19,
@@ -18495,6 +18821,7 @@
   },
   "Pakistan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 552870.51,
@@ -18600,6 +18927,7 @@
   },
   "Cuba": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 384605.58,
@@ -18689,6 +19017,7 @@
   },
   "Syrian Arab Republic": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 52883.26,
@@ -18764,6 +19093,7 @@
   },
   "Mauritius": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 52883.26,
@@ -18851,6 +19181,7 @@
   },
   "Democratic People's Republic of Korea": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 28845.42,
@@ -18918,6 +19249,7 @@
   },
   "South Sudan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 28845.42,
@@ -18974,7 +19306,8 @@
     }
   },
   "Faroe Islands": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 17307.24
@@ -18989,6 +19322,7 @@
   },
   "Dominica": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4807.58,
@@ -19071,8 +19405,9 @@
       }
     }
   },
-  "Micronesia (Federated States of)": {
-    "status": "member",
+  "Micronesia, Federated States of": {
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4807.58,
@@ -19135,6 +19470,7 @@
   },
   "Bhutan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4807.58,
@@ -19212,6 +19548,7 @@
   },
   "Somalia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4807.58,
@@ -19287,6 +19624,7 @@
   },
   "Tonga": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4807.58,
@@ -19362,7 +19700,8 @@
     }
   },
   "Tokelau": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 2884.55
@@ -19378,8 +19717,9 @@
       }
     }
   },
-  "The Green Climate Fund": {
+  "Green Climate Fund": {
     "status": "organization",
+    "category": "Multilateral - Global Funds",
     "contributions": {
       "FAO": {
         "Voluntary earmarked": 9192449.8
@@ -19404,8 +19744,9 @@
       }
     }
   },
-  "World Bank Group": {
+  "World Bank": {
     "status": "organization",
+    "category": "Multilateral - IFIs",
     "contributions": {
       "FAO": {
         "Voluntary earmarked": 115797100.87
@@ -19468,6 +19809,7 @@
   },
   "UN OCHA": {
     "status": "organization",
+    "category": "Multilateral - UN Orgs",
     "contributions": {
       "FAO": {
         "Voluntary earmarked": 65005369.15
@@ -19512,6 +19854,7 @@
   },
   "UNDP Administered Trust Funds": {
     "status": "organization",
+    "category": "Multilateral - UN Pooled Funds",
     "contributions": {
       "FAO": {
         "Voluntary earmarked": 55180548.44
@@ -19608,10 +19951,12 @@
       "WHO": {
         "Voluntary earmarked": 61340219.0
       }
-    }
+    },
+    "is_other": true
   },
-  "Private Donors": {
+  "Other Private": {
     "status": "organization",
+    "category": "Private Sector",
     "contributions": {
       "IAEA": {
         "Voluntary earmarked": 419865.03
@@ -19659,10 +20004,12 @@
       "WFP": {
         "Voluntary earmarked": 160776.88
       }
-    }
+    },
+    "is_other": true
   },
-  "China, Hong Kong Special Administrative Region": {
-    "status": "organization",
+  "Hong Kong SAR": {
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "ICAO": {
         "Voluntary earmarked": 28694.05
@@ -19696,8 +20043,9 @@
       }
     }
   },
-  "China, Macao Special Administrative Region": {
-    "status": "organization",
+  "Macao SAR": {
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "ICAO": {
         "Voluntary earmarked": 38206.57
@@ -19734,6 +20082,7 @@
   },
   "State of Palestine": {
     "status": "observer",
+    "category": "Government",
     "contributions": {
       "ICC": {
         "Assessed": 26458.9
@@ -19766,6 +20115,7 @@
   },
   "Multi Donor Trust Funds": {
     "status": "organization",
+    "category": "Multilateral - UN Pooled Funds",
     "contributions": {
       "ILO": {
         "Voluntary earmarked": 12290992.1
@@ -19806,10 +20156,12 @@
       "UN Women": {
         "Voluntary earmarked": 46734364.39
       }
-    }
+    },
+    "is_other": true
   },
   "Kosovo": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "IOM": {
         "Voluntary earmarked": 803292.09
@@ -19825,8 +20177,9 @@
       }
     }
   },
-  "The Global Fund": {
+  "Global Fund": {
     "status": "organization",
+    "category": "Multilateral - Global Funds",
     "contributions": {
       "IOM": {
         "Voluntary earmarked": 12122120.07
@@ -19852,7 +20205,8 @@
     }
   },
   "Cura\u00e7ao": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "ITC": {
         "Voluntary earmarked": 616.0
@@ -19875,7 +20229,8 @@
     }
   },
   "Puerto Rico": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "PAHO": {
         "Assessed": 79704.0
@@ -19889,7 +20244,8 @@
     }
   },
   "Sint Maarten (Dutch part)": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "PAHO": {
         "Assessed": 21384.0
@@ -19903,7 +20259,8 @@
     }
   },
   "Aruba": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "PAHO": {
         "Assessed": 21384.0
@@ -19926,7 +20283,8 @@
     }
   },
   "British Virgin Islands": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "PAHO": {
         "Voluntary earmarked": 71500.0
@@ -19946,7 +20304,8 @@
     }
   },
   "Jersey": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "UN": {
         "Voluntary earmarked": 589005.23
@@ -19957,7 +20316,8 @@
     }
   },
   "New Caledonia": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "UN": {
         "Voluntary earmarked": 7873.93
@@ -19974,7 +20334,8 @@
     }
   },
   "Gibraltar": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "UN": {
         "Voluntary earmarked": 660.5
@@ -19982,7 +20343,8 @@
     }
   },
   "Montserrat": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "UN": {
         "Voluntary earmarked": -12727.06
@@ -19999,7 +20361,8 @@
     }
   },
   "American Samoa": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "UNDP": {
         "Voluntary earmarked": 2310.02
@@ -20010,7 +20373,8 @@
     }
   },
   "Anguilla": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "UNEP": {
         "Assessed": 12791.0
@@ -20021,7 +20385,8 @@
     }
   },
   "Cayman Islands": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "UNEP": {
         "Assessed": 7101.0
@@ -20032,7 +20397,8 @@
     }
   },
   "Turks and Caicos Islands": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "UNEP": {
         "Assessed": 0.0
@@ -20040,7 +20406,8 @@
     }
   },
   "\u00c5land Islands": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "UNESCO": {
         "Voluntary earmarked": 6011.0
@@ -20049,6 +20416,7 @@
   },
   "JUNIOR PROFESSIONAL OFFICERS PROGRAMME": {
     "status": "organization",
+    "category": "Other",
     "contributions": {
       "UNFPA": {
         "Voluntary earmarked": 6458271.15
@@ -20057,6 +20425,7 @@
   },
   "Global Partnership for Education": {
     "status": "organization",
+    "category": "Multilateral - Global Funds",
     "contributions": {
       "UNICEF": {
         "Voluntary earmarked": 431467596.9
@@ -20064,15 +20433,17 @@
     }
   },
   "French Polynesia": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "WMO": {
         "Assessed": 15376.24
       }
     }
   },
-  "Taiwan (Chinese Taipei)": {
-    "status": "organization",
+  "Taiwan, Province of China": {
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "WTO": {
         "Assessed": 3721806.34,

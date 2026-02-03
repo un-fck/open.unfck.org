@@ -1,6 +1,106 @@
 {
+  "European Union": {
+    "status": "organization",
+    "category": "European Union",
+    "contributions": {
+      "FAO": {
+        "Voluntary earmarked": 130946690.6
+      },
+      "IAEA": {
+        "Voluntary earmarked": 9811098.21
+      },
+      "ICAO": {
+        "Voluntary earmarked": 4428986.71
+      },
+      "IFAD": {
+        "Voluntary earmarked": 47342000.0
+      },
+      "ILO": {
+        "Voluntary earmarked": 25438451.0
+      },
+      "IOM": {
+        "Voluntary earmarked": 192740753.0
+      },
+      "ITC": {
+        "Voluntary earmarked": 6026128.0
+      },
+      "PAHO": {
+        "Voluntary earmarked": 1425714.0
+      },
+      "UN": {
+        "Voluntary earmarked": 49117829.0
+      },
+      "UNDP": {
+        "Voluntary earmarked": 324321824.0
+      },
+      "UNEP": {
+        "Voluntary earmarked": 51064980.050000004
+      },
+      "UNESCO": {
+        "Voluntary earmarked": 12360103.0
+      },
+      "UNFPA": {
+        "Voluntary earmarked": 20382649.19
+      },
+      "UNHCR": {
+        "Voluntary earmarked": 444725054.0
+      },
+      "UNICEF": {
+        "Voluntary earmarked": 291384457.4
+      },
+      "UNIDO": {
+        "Voluntary earmarked": 26713857.759999994
+      },
+      "UNITAR": {
+        "Voluntary earmarked": 42386.63
+      },
+      "UNODC": {
+        "Voluntary earmarked": 38878000.0
+      },
+      "UNRWA": {
+        "Voluntary earmarked": 159286583.0
+      },
+      "UNU": {
+        "Voluntary earmarked": 416583.0
+      },
+      "UN Women": {
+        "Voluntary earmarked": 8609160.8
+      },
+      "WFP": {
+        "Voluntary earmarked": 890135666.0
+      },
+      "WHO": {
+        "Voluntary earmarked": 47477371.0
+      }
+    }
+  },
+  "Bill & Melinda Gates Foundation": {
+    "status": "organization",
+    "category": "Foundations",
+    "contributions": {
+      "FAO": {
+        "Voluntary earmarked": 6585369.57
+      },
+      "PAHO": {
+        "Voluntary earmarked": 906492.0
+      },
+      "UN": {
+        "Voluntary earmarked": 1395000.0
+      },
+      "UNDP": {
+        "Voluntary earmarked": 2657195.0
+      },
+      "WFP": {
+        "Voluntary un-earmarked": 8317821.0
+      },
+      "WHO": {
+        "Voluntary earmarked": 280034331.0
+      }
+    }
+  },
   "United States of America": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 110547611.0,
@@ -127,6 +227,7 @@
   },
   "Japan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 52347742.72,
@@ -254,6 +355,7 @@
   },
   "Germany": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 34508069.91,
@@ -380,6 +482,7 @@
   },
   "France": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 27028583.46,
@@ -503,6 +606,7 @@
   },
   "United Kingdom of Great Britain and Northern Ireland": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 25028255.69,
@@ -619,6 +723,7 @@
   },
   "China": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 24878472.69,
@@ -742,6 +847,7 @@
   },
   "Italy": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 21496275.98,
@@ -864,6 +970,7 @@
   },
   "Canada": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 14422653.13,
@@ -977,6 +1084,7 @@
   },
   "Spain": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 14364672.62,
@@ -1084,6 +1192,7 @@
   },
   "Brazil": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 14176235.94,
@@ -1173,6 +1282,7 @@
   },
   "Russian Federation": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 11779707.99,
@@ -1271,6 +1381,7 @@
   },
   "Australia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 10020965.69,
@@ -1381,6 +1492,7 @@
   },
   "Republic of Korea": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 9634428.93,
@@ -1506,6 +1618,7 @@
   },
   "Mexico": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 8900010.07,
@@ -1612,6 +1725,7 @@
   },
   "Netherlands": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 7992647.67,
@@ -1732,6 +1846,7 @@
   },
   "T\u00fcrkiye": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 6417510.34,
@@ -1833,6 +1948,7 @@
   },
   "Switzerland": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 5058799.94,
@@ -1953,6 +2069,7 @@
   },
   "Belgium": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4822046.17,
@@ -2054,6 +2171,7 @@
   },
   "Sweden": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4638441.21,
@@ -2170,6 +2288,7 @@
   },
   "Poland": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4450004.53
@@ -2260,6 +2379,7 @@
   },
   "Saudi Arabia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4174597.09,
@@ -2358,6 +2478,7 @@
   },
   "Norway": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4111784.86,
@@ -2478,6 +2599,7 @@
   },
   "Austria": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 3855704.25,
@@ -2576,6 +2698,7 @@
   },
   "Denmark": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 3261403.97,
@@ -2686,6 +2809,7 @@
   },
   "India": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 3217918.59,
@@ -2786,6 +2910,7 @@
   },
   "Greece": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 3082630.72,
@@ -2854,8 +2979,9 @@
       }
     }
   },
-  "Venezuela (Bolivarian Republic of)": {
-    "status": "organization",
+  "Venezuela, Bolivarian Republic of": {
+    "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 3029481.91,
@@ -2924,6 +3050,7 @@
   },
   "United Arab Emirates": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 2874867.21,
@@ -3028,6 +3155,7 @@
   },
   "Finland": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 2507657.28,
@@ -3146,6 +3274,7 @@
   },
   "Portugal": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 2290230.35
@@ -3245,6 +3374,7 @@
   },
   "Argentina": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 2087298.54,
@@ -3338,6 +3468,7 @@
   },
   "Ireland": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 2019654.61,
@@ -3443,6 +3574,7 @@
   },
   "Israel": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 1913357.0
@@ -3539,6 +3671,7 @@
   },
   "Czechia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 1865039.9,
@@ -3635,6 +3768,7 @@
   },
   "Singapore": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 1855376.48,
@@ -3711,6 +3845,7 @@
   },
   "South Africa": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 1797395.97,
@@ -3798,8 +3933,9 @@
       }
     }
   },
-  "Iran (Islamic Republic of)": {
-    "status": "member",
+  "Iran, Islamic Republic of": {
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 1720088.61,
@@ -3882,6 +4018,7 @@
   },
   "Indonesia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 1671771.52
@@ -3969,6 +4106,7 @@
   },
   "Chile": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 1613791.0,
@@ -4069,6 +4207,7 @@
   },
   "Malaysia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 1357711.4
@@ -4153,6 +4292,7 @@
   },
   "Kuwait": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 1319056.72,
@@ -4254,6 +4394,7 @@
   },
   "Hungary": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 1285234.75,
@@ -4337,6 +4478,7 @@
   },
   "Colombia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 1251412.78,
@@ -4426,6 +4568,7 @@
   },
   "New Zealand": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 1222422.53,
@@ -4519,6 +4662,7 @@
   },
   "Thailand": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 1154778.59,
@@ -4622,6 +4766,7 @@
   },
   "Romania": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 1091966.37,
@@ -4705,6 +4850,7 @@
   },
   "Qatar": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 1009827.3
@@ -4786,6 +4932,7 @@
   },
   "Slovakia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 826222.34
@@ -4863,6 +5010,7 @@
   },
   "Philippines": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 744083.28
@@ -4947,6 +5095,7 @@
   },
   "Libya": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 686102.76,
@@ -5011,6 +5160,7 @@
   },
   "Algeria": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 661944.21,
@@ -5105,6 +5255,7 @@
   },
   "Egypt": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 647449.09
@@ -5185,6 +5336,7 @@
   },
   "Croatia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 608795.41,
@@ -5258,6 +5410,7 @@
   },
   "Kazakhstan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 584636.86
@@ -5357,6 +5510,7 @@
   },
   "Peru": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 565310.02
@@ -5447,6 +5601,7 @@
   },
   "Oman": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 492834.38,
@@ -5520,6 +5675,7 @@
   },
   "Slovenia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 483170.96
@@ -5596,6 +5752,7 @@
   },
   "Ukraine": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 478339.25
@@ -5663,6 +5820,7 @@
   },
   "Nigeria": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 434853.86,
@@ -5749,6 +5907,7 @@
   },
   "Pakistan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 410695.32,
@@ -5840,6 +5999,7 @@
   },
   "Luxembourg": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 391368.48,
@@ -5949,6 +6109,7 @@
   },
   "Lithuania": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 352714.8
@@ -6030,6 +6191,7 @@
   },
   "Cuba": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 333387.96
@@ -6096,6 +6258,7 @@
   },
   "Iraq": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 328556.25,
@@ -6165,6 +6328,7 @@
   },
   "Morocco": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 299566.99,
@@ -6248,6 +6412,7 @@
   },
   "Belarus": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 270575.74
@@ -6313,6 +6478,7 @@
   },
   "Uruguay": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 251248.9
@@ -6400,6 +6566,7 @@
   },
   "Bulgaria": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 227090.35
@@ -6483,6 +6650,7 @@
   },
   "Cyprus": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 227090.35
@@ -6570,6 +6738,7 @@
   },
   "Latvia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 227090.35
@@ -6638,6 +6807,7 @@
   },
   "Dominican Republic": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 217426.93
@@ -6720,6 +6890,7 @@
   },
   "Ecuador": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 212595.22,
@@ -6805,6 +6976,7 @@
   },
   "Trinidad and Tobago": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 212595.22
@@ -6880,6 +7052,7 @@
   },
   "Lebanon": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 202931.8
@@ -6949,6 +7122,7 @@
   },
   "Viet Nam": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 202931.8
@@ -7035,6 +7209,7 @@
   },
   "Azerbaijan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 193268.38
@@ -7110,6 +7285,7 @@
   },
   "Estonia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 193268.38,
@@ -7201,6 +7377,7 @@
   },
   "Serbia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 193268.38
@@ -7275,6 +7452,7 @@
   },
   "Bahrain": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 188436.67
@@ -7341,6 +7519,7 @@
   },
   "Costa Rica": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 183604.96
@@ -7428,6 +7607,7 @@
   },
   "Syrian Arab Republic": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 173941.55
@@ -7491,6 +7671,7 @@
   },
   "Tunisia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 173941.55,
@@ -7572,6 +7753,7 @@
   },
   "Guatemala": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 130456.16,
@@ -7650,6 +7832,7 @@
   },
   "Iceland": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 130456.16
@@ -7728,6 +7911,7 @@
   },
   "Brunei Darussalam": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 125624.45
@@ -7785,6 +7969,7 @@
   },
   "Panama": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 125624.45
@@ -7875,6 +8060,7 @@
   },
   "Sri Lanka": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 120792.74
@@ -7954,6 +8140,7 @@
   },
   "Jordan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 106297.61
@@ -8033,6 +8220,7 @@
   },
   "Gabon": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 96634.19
@@ -8109,6 +8297,7 @@
   },
   "Turkmenistan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 91802.48
@@ -8178,6 +8367,7 @@
   },
   "Bahamas": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 82139.06
@@ -8248,6 +8438,7 @@
   },
   "Bosnia and Herzegovina": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 82139.06
@@ -8327,6 +8518,7 @@
   },
   "Botswana": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 82139.06
@@ -8406,6 +8598,7 @@
   },
   "El Salvador": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 77307.35,
@@ -8491,6 +8684,7 @@
   },
   "Malta": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 77307.35
@@ -8570,6 +8764,7 @@
   },
   "Uzbekistan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 72475.64
@@ -8639,6 +8834,7 @@
   },
   "Ghana": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 67643.93,
@@ -8723,6 +8919,7 @@
   },
   "Kenya": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 62812.22
@@ -8808,6 +9005,7 @@
   },
   "Mauritius": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 62812.22
@@ -8878,6 +9076,7 @@
   },
   "Cameroon": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 57980.52
@@ -8960,6 +9159,7 @@
   },
   "Monaco": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 57980.52,
@@ -9043,6 +9243,7 @@
   },
   "Jamaica": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 53148.81
@@ -9118,6 +9319,7 @@
   },
   "Angola": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 48317.1,
@@ -9194,6 +9396,7 @@
   },
   "Albania": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 48317.1,
@@ -9262,6 +9465,7 @@
   },
   "Bangladesh": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 48317.1,
@@ -9343,6 +9547,7 @@
   },
   "Ethiopia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 48317.1,
@@ -9426,6 +9631,7 @@
   },
   "Myanmar": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 48317.1,
@@ -9506,6 +9712,7 @@
   },
   "Namibia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 48317.1,
@@ -9582,6 +9789,7 @@
   },
   "Paraguay": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 48317.1
@@ -9666,6 +9874,7 @@
   },
   "Sudan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 48317.1,
@@ -9739,6 +9948,7 @@
   },
   "Yemen": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 48317.1
@@ -9807,6 +10017,7 @@
   },
   "Equatorial Guinea": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 48317.1,
@@ -9869,8 +10080,9 @@
       }
     }
   },
-  "Bolivia (Plurinational State of)": {
-    "status": "member",
+  "Bolivia, Plurinational State of": {
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 43485.39
@@ -9952,6 +10164,7 @@
   },
   "United Republic of Tanzania": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 43485.39
@@ -10021,6 +10234,7 @@
   },
   "Andorra": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 38653.68
@@ -10085,6 +10299,7 @@
   },
   "Barbados": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 38653.68
@@ -10159,6 +10374,7 @@
   },
   "Honduras": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 38653.68,
@@ -10237,6 +10453,7 @@
   },
   "North Macedonia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 38653.68
@@ -10311,6 +10528,7 @@
   },
   "Armenia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 33821.97
@@ -10393,6 +10611,7 @@
   },
   "Georgia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 33821.97,
@@ -10473,6 +10692,7 @@
   },
   "Zambia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 28994.26
@@ -10547,6 +10767,7 @@
   },
   "Democratic People's Republic of Korea": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 28990.26
@@ -10605,6 +10826,7 @@
   },
   "Nepal": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 28990.26,
@@ -10682,6 +10904,7 @@
   },
   "Senegal": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 28990.26
@@ -10755,6 +10978,7 @@
   },
   "Uganda": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 28990.26,
@@ -10829,6 +11053,7 @@
   },
   "Afghanistan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 24158.55,
@@ -10903,6 +11128,7 @@
   },
   "Congo": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 24158.55,
@@ -10979,6 +11205,7 @@
   },
   "Montenegro": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 24158.55
@@ -11055,6 +11282,7 @@
   },
   "Cambodia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 19326.84,
@@ -11131,6 +11359,7 @@
   },
   "Mali": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 19326.84,
@@ -11208,6 +11437,7 @@
   },
   "Papua New Guinea": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 19326.84
@@ -11273,6 +11503,7 @@
   },
   "South Sudan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 19326.84
@@ -11322,6 +11553,7 @@
   },
   "Suriname": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 19326.84
@@ -11379,6 +11611,7 @@
   },
   "Benin": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 14495.13
@@ -11452,6 +11685,7 @@
   },
   "Burkina Faso": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 14495.13
@@ -11525,6 +11759,7 @@
   },
   "Democratic Republic of the Congo": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 14495.13,
@@ -11600,6 +11835,7 @@
   },
   "Madagascar": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 14495.13,
@@ -11673,6 +11909,7 @@
   },
   "Fiji": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 14495.13
@@ -11745,6 +11982,7 @@
   },
   "Haiti": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 14495.13,
@@ -11821,6 +12059,7 @@
   },
   "Mongolia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 14495.13,
@@ -11895,6 +12134,7 @@
   },
   "Mozambique": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 14495.13,
@@ -11976,6 +12216,7 @@
   },
   "Nicaragua": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 14495.13
@@ -12056,6 +12297,7 @@
   },
   "Republic of Moldova": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 14495.13
@@ -12130,6 +12372,7 @@
   },
   "San Marino": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 14495.13
@@ -12184,6 +12427,7 @@
   },
   "Eswatini": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 14495.13
@@ -12251,6 +12495,7 @@
   },
   "Tajikistan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 14495.13,
@@ -12321,6 +12566,7 @@
   },
   "Zimbabwe": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 9664.42
@@ -12398,6 +12644,7 @@
   },
   "Antigua and Barbuda": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 9663.42
@@ -12463,6 +12710,7 @@
   },
   "Chad": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 9663.42,
@@ -12534,6 +12782,7 @@
   },
   "Kyrgyzstan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 9663.42
@@ -12606,6 +12855,7 @@
   },
   "Lao People's Democratic Republic": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 9663.42,
@@ -12670,6 +12920,7 @@
   },
   "Mauritania": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 9663.42,
@@ -12746,6 +12997,7 @@
   },
   "Malawi": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 9663.42
@@ -12823,6 +13075,7 @@
   },
   "Niger": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 9663.42
@@ -12894,6 +13147,7 @@
   },
   "Rwanda": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 9663.42
@@ -12960,6 +13214,7 @@
   },
   "Timor-Leste": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 9663.42
@@ -13028,6 +13283,7 @@
   },
   "Burundi": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -13098,6 +13354,7 @@
   },
   "Bhutan": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -13166,6 +13423,7 @@
   },
   "Belize": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -13240,6 +13498,7 @@
   },
   "Central African Republic": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71,
@@ -13310,6 +13569,7 @@
   },
   "Comoros": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71,
@@ -13375,6 +13635,7 @@
   },
   "Cabo Verde": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -13441,6 +13702,7 @@
   },
   "Djibouti": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71,
@@ -13511,6 +13773,7 @@
   },
   "Dominica": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -13569,6 +13832,7 @@
   },
   "Eritrea": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -13638,8 +13902,9 @@
       }
     }
   },
-  "Micronesia (Federated States of)": {
-    "status": "member",
+  "Micronesia, Federated States of": {
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -13688,6 +13953,7 @@
   },
   "Gambia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71,
@@ -13761,6 +14027,7 @@
   },
   "Guinea-Bissau": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71,
@@ -13827,6 +14094,7 @@
   },
   "Guinea": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71,
@@ -13897,6 +14165,7 @@
   },
   "Grenada": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -13952,6 +14221,7 @@
   },
   "Guyana": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -14026,6 +14296,7 @@
   },
   "Kiribati": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -14084,6 +14355,7 @@
   },
   "Liberia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71,
@@ -14158,6 +14430,7 @@
   },
   "Lesotho": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -14231,6 +14504,7 @@
   },
   "Marshall Islands": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -14277,6 +14551,7 @@
   },
   "Maldives": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -14342,6 +14617,7 @@
   },
   "Nauru": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -14378,6 +14654,7 @@
   },
   "Palau": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -14418,6 +14695,7 @@
   },
   "Saint Kitts and Nevis": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -14477,6 +14755,7 @@
   },
   "Saint Lucia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -14544,6 +14823,7 @@
   },
   "Saint Vincent and the Grenadines": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -14606,6 +14886,7 @@
   },
   "Samoa": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -14671,6 +14952,7 @@
   },
   "Sao Tome and Principe": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -14735,6 +15017,7 @@
   },
   "Seychelles": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -14804,6 +15087,7 @@
   },
   "Sierra Leone": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71,
@@ -14879,6 +15163,7 @@
   },
   "Solomon Islands": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -14931,6 +15216,7 @@
   },
   "Somalia": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -14989,6 +15275,7 @@
   },
   "Togo": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -15062,6 +15349,7 @@
   },
   "Tonga": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -15116,6 +15404,7 @@
   },
   "Tuvalu": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -15168,6 +15457,7 @@
   },
   "Vanuatu": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -15236,7 +15526,8 @@
     }
   },
   "Cook Islands": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -15271,7 +15562,8 @@
     }
   },
   "Niue": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Assessed": 4831.71
@@ -15297,7 +15589,8 @@
     }
   },
   "Kosovo": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Voluntary earmarked": 10087.56
@@ -15315,6 +15608,7 @@
   },
   "State of Palestine": {
     "status": "observer",
+    "category": "Government",
     "contributions": {
       "FAO": {
         "Voluntary earmarked": 150.62
@@ -15336,8 +15630,72 @@
       }
     }
   },
-  "United Nations Development Programme": {
+  "Global Environment Facility (thru UNDP or UNEP)": {
     "status": "organization",
+    "category": "Multilateral - Global Funds",
+    "contributions": {
+      "FAO": {
+        "Voluntary un-earmarked": 37165717.980000004
+      },
+      "ICAO": {
+        "Voluntary un-earmarked": 283825.7
+      },
+      "UN": {
+        "Voluntary earmarked": 4817584.0
+      },
+      "UNDP": {
+        "Voluntary un-earmarked": 423923142.0,
+        "Voluntary earmarked": 25081586.0
+      },
+      "UNIDO": {
+        "Voluntary un-earmarked": 61517337.870000005
+      }
+    }
+  },
+  "World Bank": {
+    "status": "organization",
+    "category": "Multilateral - IFIs",
+    "contributions": {
+      "FAO": {
+        "Voluntary earmarked": 27904752.09
+      },
+      "IFAD": {
+        "Voluntary earmarked": 15085000.0
+      },
+      "ILO": {
+        "Voluntary earmarked": 2097016.0
+      },
+      "UN": {
+        "Voluntary earmarked": 38326.0
+      },
+      "UNEP": {
+        "Voluntary un-earmarked": 221086561.0,
+        "Voluntary earmarked": 11151555.06
+      },
+      "UNESCO": {
+        "Voluntary un-earmarked": 530229.0,
+        "Voluntary earmarked": 928401.0
+      },
+      "UNFPA": {
+        "Voluntary earmarked": 4222212.96
+      },
+      "UNODC": {
+        "Voluntary earmarked": 17000.0
+      },
+      "UNU": {
+        "Voluntary earmarked": 7443.0
+      },
+      "WFP": {
+        "Voluntary earmarked": 6480000.0
+      },
+      "WHO": {
+        "Voluntary earmarked": 1000000.0
+      }
+    }
+  },
+  "UNDP (as donor)": {
+    "status": "organization",
+    "category": "Multilateral - UN Orgs",
     "contributions": {
       "FAO": {
         "Voluntary un-earmarked": 41015299.78000001
@@ -15422,6 +15780,7 @@
   },
   "UN OCHA": {
     "status": "organization",
+    "category": "Multilateral - UN Orgs",
     "contributions": {
       "FAO": {
         "Voluntary un-earmarked": 2124811.89,
@@ -15462,6 +15821,7 @@
   },
   "Multi Donor Trust Funds": {
     "status": "organization",
+    "category": "Non-Government",
     "contributions": {
       "FAO": {
         "Voluntary un-earmarked": 265421.23
@@ -15484,168 +15844,121 @@
       "UN Women": {
         "Voluntary un-earmarked": 14930106.59
       }
-    }
+    },
+    "is_other": true
   },
-  "Global Environment Facility (thru UNDP or UNEP)": {
+  "Unattributed": {
     "status": "organization",
+    "category": "Other",
     "contributions": {
       "FAO": {
-        "Voluntary un-earmarked": 37165717.980000004
-      },
-      "ICAO": {
-        "Voluntary un-earmarked": 283825.7
-      },
-      "UN": {
-        "Voluntary earmarked": 4817584.0
-      },
-      "UNDP": {
-        "Voluntary un-earmarked": 423923142.0,
-        "Voluntary earmarked": 25081586.0
-      },
-      "UNIDO": {
-        "Voluntary un-earmarked": 61517337.870000005
-      }
-    }
-  },
-  "European Union": {
-    "status": "organization",
-    "contributions": {
-      "FAO": {
-        "Voluntary earmarked": 130946690.6
+        "Other": 31601631.309999883
       },
       "IAEA": {
-        "Voluntary earmarked": 9811098.21
+        "Other": 11012079.260000028
       },
       "ICAO": {
-        "Voluntary earmarked": 4428986.71
+        "Other": 36409367.21999997
       },
       "IFAD": {
-        "Voluntary earmarked": 47342000.0
+        "Other": 9723000.0
       },
       "ILO": {
-        "Voluntary earmarked": 25438451.0
+        "Other": 78986196.45000005
+      },
+      "IMO": {
+        "Other": 17862227.759999994
       },
       "IOM": {
-        "Voluntary earmarked": 192740753.0
+        "Other": 105593931.0
       },
       "ITC": {
-        "Voluntary earmarked": 6026128.0
+        "Other": 44146389.0
+      },
+      "ITU": {
+        "Other": 65067702.41999999
       },
       "PAHO": {
-        "Voluntary earmarked": 1425714.0
+        "Other": 715468287.0
       },
       "UN": {
-        "Voluntary earmarked": 49117829.0
+        "Other": 609480347.8800002
+      },
+      "UN Tourism": {
+        "Other": 8424686.66
+      },
+      "UN-DPO": {
+        "Other": 87234000.0
+      },
+      "UNAIDS": {
+        "Other": 10237570.0
       },
       "UNDP": {
-        "Voluntary earmarked": 324321824.0
+        "Other": 473923927.0
       },
       "UNEP": {
-        "Voluntary earmarked": 51064980.050000004
+        "Other": 42829343.28000009
       },
       "UNESCO": {
-        "Voluntary earmarked": 12360103.0
+        "Other": 106799305.0
       },
       "UNFPA": {
-        "Voluntary earmarked": 20382649.19
+        "Other": 117450137.96999995
+      },
+      "UN-Habitat": {
+        "Other": 86720186.67999998
       },
       "UNHCR": {
-        "Voluntary earmarked": 444725054.0
+        "Other": 71463011.80000019
       },
       "UNICEF": {
-        "Voluntary earmarked": 291384457.4
+        "Other": 1271599006.1900003
       },
       "UNIDO": {
-        "Voluntary earmarked": 26713857.759999994
+        "Other": 67306738.25000003
       },
       "UNITAR": {
-        "Voluntary earmarked": 42386.63
+        "Other": 12062283.0
       },
       "UNODC": {
-        "Voluntary earmarked": 38878000.0
+        "Other": 51119541.389999986
+      },
+      "UNOPS": {
+        "Other": 789934000.0
       },
       "UNRWA": {
-        "Voluntary earmarked": 159286583.0
+        "Other": 149604717.3000002
       },
       "UNU": {
-        "Voluntary earmarked": 416583.0
+        "Other": 20550925.0
       },
       "UN Women": {
-        "Voluntary earmarked": 8609160.8
+        "Other": 33954886.96000001
+      },
+      "UPU": {
+        "Other": 44094753.00000001
       },
       "WFP": {
-        "Voluntary earmarked": 890135666.0
+        "Other": -21412442.28999996
       },
       "WHO": {
-        "Voluntary earmarked": 47477371.0
+        "Other": 531336338.0
+      },
+      "WIPO": {
+        "Other": 350891340.5
+      },
+      "WMO": {
+        "Other": 5948123.879999995
+      },
+      "WTO": {
+        "Other": 12281420.390000015
       }
-    }
-  },
-  "World Bank Group": {
-    "status": "organization",
-    "contributions": {
-      "FAO": {
-        "Voluntary earmarked": 27904752.09
-      },
-      "IFAD": {
-        "Voluntary earmarked": 15085000.0
-      },
-      "ILO": {
-        "Voluntary earmarked": 2097016.0
-      },
-      "UN": {
-        "Voluntary earmarked": 38326.0
-      },
-      "UNEP": {
-        "Voluntary un-earmarked": 221086561.0,
-        "Voluntary earmarked": 11151555.06
-      },
-      "UNESCO": {
-        "Voluntary un-earmarked": 530229.0,
-        "Voluntary earmarked": 928401.0
-      },
-      "UNFPA": {
-        "Voluntary earmarked": 4222212.96
-      },
-      "UNODC": {
-        "Voluntary earmarked": 17000.0
-      },
-      "UNU": {
-        "Voluntary earmarked": 7443.0
-      },
-      "WFP": {
-        "Voluntary earmarked": 6480000.0
-      },
-      "WHO": {
-        "Voluntary earmarked": 1000000.0
-      }
-    }
-  },
-  "Bill & Melinda Gates Foundation": {
-    "status": "organization",
-    "contributions": {
-      "FAO": {
-        "Voluntary earmarked": 6585369.57
-      },
-      "PAHO": {
-        "Voluntary earmarked": 906492.0
-      },
-      "UN": {
-        "Voluntary earmarked": 1395000.0
-      },
-      "UNDP": {
-        "Voluntary earmarked": 2657195.0
-      },
-      "WFP": {
-        "Voluntary un-earmarked": 8317821.0
-      },
-      "WHO": {
-        "Voluntary earmarked": 280034331.0
-      }
-    }
+    },
+    "is_other": true
   },
   "Liechtenstein": {
     "status": "member",
+    "category": "Government",
     "contributions": {
       "IAEA": {
         "Assessed": 34039.41,
@@ -15714,6 +16027,7 @@
   },
   "Holy See": {
     "status": "observer",
+    "category": "Government",
     "contributions": {
       "IAEA": {
         "Assessed": 3781.27,
@@ -15752,8 +16066,9 @@
       }
     }
   },
-  "China, Macao Special Administrative Region": {
-    "status": "organization",
+  "Macao SAR": {
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "ICAO": {
         "Voluntary earmarked": 64984.49
@@ -15785,8 +16100,9 @@
       }
     }
   },
-  "China, Hong Kong Special Administrative Region": {
-    "status": "organization",
+  "Hong Kong SAR": {
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "ICAO": {
         "Voluntary earmarked": 39488.92
@@ -15812,7 +16128,8 @@
     }
   },
   "Sint Maarten (Dutch part)": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "ICAO": {
         "Voluntary earmarked": 3544.31
@@ -15826,7 +16143,8 @@
     }
   },
   "Faroe Islands": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "IMO": {
         "Assessed": 5603.43
@@ -15836,8 +16154,33 @@
       }
     }
   },
-  "Private Donors": {
+  "Global Fund": {
     "status": "organization",
+    "category": "Multilateral - Global Funds",
+    "contributions": {
+      "IOM": {
+        "Voluntary un-earmarked": 7289025.0
+      },
+      "UNAIDS": {
+        "Voluntary un-earmarked": 61370.0
+      },
+      "UNDP": {
+        "Voluntary un-earmarked": 390489244.0
+      },
+      "UNICEF": {
+        "Voluntary un-earmarked": 30505030.15
+      },
+      "UNITAR": {
+        "Voluntary un-earmarked": 110980.0
+      },
+      "WHO": {
+        "Voluntary un-earmarked": 2469931.0
+      }
+    }
+  },
+  "Other Private": {
+    "status": "organization",
+    "category": "Non-Government",
     "contributions": {
       "IOM": {
         "Other": 865979.0,
@@ -15861,33 +16204,12 @@
       "WFP": {
         "Voluntary earmarked": 2787552.0
       }
-    }
-  },
-  "Global Fund to Fight": {
-    "status": "organization",
-    "contributions": {
-      "IOM": {
-        "Voluntary un-earmarked": 7289025.0
-      },
-      "UNAIDS": {
-        "Voluntary un-earmarked": 61370.0
-      },
-      "UNDP": {
-        "Voluntary un-earmarked": 390489244.0
-      },
-      "UNICEF": {
-        "Voluntary un-earmarked": 30505030.15
-      },
-      "UNITAR": {
-        "Voluntary un-earmarked": 110980.0
-      },
-      "WHO": {
-        "Voluntary un-earmarked": 2469931.0
-      }
-    }
+    },
+    "is_other": true
   },
   "Aruba": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "PAHO": {
         "Assessed": 16354.0
@@ -15907,7 +16229,8 @@
     }
   },
   "New Caledonia": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "UN": {
         "Voluntary earmarked": 4625.37
@@ -15924,7 +16247,8 @@
     }
   },
   "Puerto Rico": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "UN Tourism": {
         "Assessed": 25210.25
@@ -15932,7 +16256,8 @@
     }
   },
   "Montserrat": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "UNDP": {
         "Voluntary un-earmarked": 39330.0
@@ -15946,7 +16271,8 @@
     }
   },
   "Tokelau": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "UNDP": {
         "Voluntary un-earmarked": 18614.0,
@@ -15961,7 +16287,8 @@
     }
   },
   "French Polynesia": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "UNDP": {
         "Voluntary earmarked": 6596.0
@@ -15972,7 +16299,8 @@
     }
   },
   "Cayman Islands": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "UNEP": {
         "Assessed": 14202.0
@@ -15983,7 +16311,8 @@
     }
   },
   "Anguilla": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "UNEP": {
         "Assessed": 12791.0
@@ -15994,7 +16323,8 @@
     }
   },
   "British Virgin Islands": {
-    "status": "organization",
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "UNEP": {
         "Assessed": 7547.0
@@ -16009,6 +16339,7 @@
   },
   "JUNIOR PROFESSIONAL OFFICERS PROGRAMME": {
     "status": "organization",
+    "category": "Other",
     "contributions": {
       "UNFPA": {
         "Voluntary earmarked": 4004290.7
@@ -16017,6 +16348,7 @@
   },
   "USA National Committee": {
     "status": "organization",
+    "category": "NGOs",
     "contributions": {
       "UNICEF": {
         "Voluntary earmarked": 253959923.1
@@ -16026,8 +16358,9 @@
       }
     }
   },
-  "Taiwan (Chinese Taipei)": {
-    "status": "organization",
+  "Taiwan, Province of China": {
+    "status": "nonmember",
+    "category": "Government",
     "contributions": {
       "WTO": {
         "Assessed": 2918195.12,

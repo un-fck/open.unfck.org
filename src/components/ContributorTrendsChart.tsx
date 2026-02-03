@@ -36,12 +36,9 @@ interface ContributorTrendsData {
     years: number[];
     governmentContributors: string[];
     nonGovContributors: string[];
+    nonGovCategories?: Record<string, string[]>;  // category -> donors
   };
-  aggregates: {
-    gov: ContributorYearData[];
-    "non-gov": ContributorYearData[];
-    all: ContributorYearData[];
-  };
+  aggregates: Record<string, ContributorYearData[]>;  // includes gov, non-gov, all, cat:X
   contributors: Record<string, ContributorYearData[]>;
 }
 
@@ -83,6 +80,16 @@ export function ContributorTrendsChart() {
   // Build hierarchical groups from loaded data
   const groups: HierarchicalGroup[] = React.useMemo(() => {
     if (!data) return [];
+    
+    // Build subgroups for non-gov from categories
+    const nonGovSubgroups = data.meta.nonGovCategories
+      ? Object.entries(data.meta.nonGovCategories).map(([cat, donors]) => ({
+          id: `cat:${cat}`,
+          label: cat,
+          children: donors,
+        }))
+      : [];
+    
     return [
       {
         id: "gov",
@@ -94,7 +101,8 @@ export function ContributorTrendsChart() {
         id: "non-gov",
         label: "Non-Government",
         bgColor: "bg-faded-jade",
-        children: data.meta.nonGovContributors,
+        children: [],  // No direct children, use subgroups
+        subgroups: nonGovSubgroups,
       },
     ];
   }, [data]);
@@ -113,6 +121,10 @@ export function ContributorTrendsChart() {
           point["Government"] = data.aggregates.gov[idx]?.total || 0;
         } else if (id === "non-gov") {
           point["Non-Government"] = data.aggregates["non-gov"][idx]?.total || 0;
+        } else if (id.startsWith("cat:") && data.aggregates[id]) {
+          // Category aggregate
+          const catName = id.replace("cat:", "");
+          point[catName] = data.aggregates[id][idx]?.total || 0;
         } else if (data.contributors[id]) {
           point[id] = data.contributors[id][idx]?.total || 0;
         }
@@ -134,6 +146,8 @@ export function ContributorTrendsChart() {
         name = "Government";
       } else if (id === "non-gov") {
         name = "Non-Government";
+      } else if (id.startsWith("cat:")) {
+        name = id.replace("cat:", "");
       } else {
         name = id;
       }

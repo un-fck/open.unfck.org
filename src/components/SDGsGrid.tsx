@@ -13,18 +13,19 @@ import {
 } from "@/components/ui/tooltip";
 import { Switch } from "@/components/ui/switch";
 import { formatBudget } from "@/lib/entities";
-import { generateYearRange, YEAR_RANGES } from "@/lib/data";
+import { useYearRanges, generateYearRange } from "@/lib/useYearRanges";
 import {
   SDG,
   SDGExpensesData,
   SDG_COLORS,
 } from "@/lib/sdgs";
 
-const SDG_YEARS = generateYearRange(YEAR_RANGES.sdgExpenses.min, YEAR_RANGES.sdgExpenses.max);
-
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export default function SDGsGrid() {
+  const yearRanges = useYearRanges();
+  const SDG_YEARS = generateYearRange(yearRanges.sdgExpenses.min, yearRanges.sdgExpenses.max);
+
   const [sdgs, setSdgs] = useState<SDG[]>([]);
   const [selectedSDG, setSelectedSDG] = useState<SDG | null>(null);
   const [showSpending, setShowSpending] = useState<boolean>(true);
@@ -34,7 +35,7 @@ export default function SDGsGrid() {
     null
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [selectedYear, setSelectedYear] = useState<number>(YEAR_RANGES.sdgExpenses.default);
+  const [selectedYear, setSelectedYear] = useState<number>(yearRanges.sdgExpenses.default);
   
   const parseSDGNumber = useCallback((value: string) => {
     const num = parseInt(value, 10);

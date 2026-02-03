@@ -3,11 +3,14 @@
 import { X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import {
+  CATEGORY_LABELS,
   Contributor,
   formatBudget,
+  getContributionTypeBgColor,
   getContributionTypeOrder,
   getStatusStyle,
   getTotalContributions,
+  isGovernmentDonor,
 } from "@/lib/contributors";
 import { ShareButton } from "@/components/ShareButton";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
@@ -27,14 +30,6 @@ const getContributionBreakdown = (
     });
   });
   return breakdown;
-};
-
-const getContributionTypeColor = (type: string): string => {
-  if (type === "Assessed") return "bg-un-blue-muted";
-  if (type === "Voluntary un-earmarked") return "bg-un-blue-muted/80";
-  if (type === "Voluntary earmarked") return "bg-un-blue-muted/60";
-  if (type === "Other") return "bg-un-blue-muted/40";
-  return "bg-gray-500";
 };
 
 const formatBudgetFixed = (amount: number): string => {
@@ -163,17 +158,31 @@ export function ContributorSidebar({
             <h3 className="mb-3 text-lg font-normal uppercase tracking-wider text-gray-900 sm:text-xl">
               Overview
             </h3>
-            <div>
-              <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
-                Status
-              </span>
-              <div className="mt-0.5">
-                <span
-                  className={`inline-block rounded-full px-3 py-1 text-sm font-medium ${statusStyle.bgColor} ${statusStyle.textColor}`}
-                >
-                  {statusStyle.label}
+            <div className="flex flex-wrap gap-4">
+              <div>
+                <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
+                  Status
                 </span>
+                <div className="mt-0.5">
+                  <span
+                    className={`inline-block rounded-full px-3 py-1 text-sm font-medium ${statusStyle.bgColor} ${statusStyle.textColor}`}
+                  >
+                    {statusStyle.label}
+                  </span>
+                </div>
               </div>
+              {!isGovernmentDonor(contributor.status) && contributor.category && contributor.category !== "Non-Government" && (
+                <div>
+                  <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
+                    Category
+                  </span>
+                  <div className="mt-0.5">
+                    <span className="inline-block rounded-full bg-slate-200 px-3 py-1 text-sm font-medium text-slate-700">
+                      {CATEGORY_LABELS[contributor.category] || contributor.category}
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -205,7 +214,7 @@ export function ContributorSidebar({
                   >
                     <div className="flex items-center gap-2">
                       <div
-                        className={`h-2 w-2 rounded-full ${getContributionTypeColor(type)}`}
+                        className={`h-2 w-2 rounded-full ${getContributionTypeBgColor(type)}`}
                       />
                       <span className="text-sm text-gray-600">{type}</span>
                     </div>
@@ -261,7 +270,7 @@ export function ContributorSidebar({
                                   return typePercentage > 0 ? (
                                     <div
                                       key={type}
-                                      className={`${getContributionTypeColor(type)} transition-all`}
+                                      className={`${getContributionTypeBgColor(type)} transition-all`}
                                       style={{ width: `${typePercentage}%` }}
                                     />
                                   ) : null;

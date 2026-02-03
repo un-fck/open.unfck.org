@@ -9,7 +9,7 @@ import { useDeepLink } from "@/hooks/useDeepLink";
 import { ChartSearchInput } from "@/components/ui/chart-search-input";
 import { Switch } from "@/components/ui/switch";
 import { formatBudget } from "@/lib/entities";
-import { generateYearRange, YEAR_RANGES } from "@/lib/data";
+import { useYearRanges, generateYearRange } from "@/lib/useYearRanges";
 import { getSortedRegions } from "@/lib/regionGroupings";
 
 interface CountryExpense {
@@ -38,9 +38,10 @@ interface HybridMapDataPoint {
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
-const COUNTRY_YEARS = generateYearRange(YEAR_RANGES.countryExpenses.min, YEAR_RANGES.countryExpenses.max);
-
 export function CountryMap() {
+  const yearRanges = useYearRanges();
+  const COUNTRY_YEARS = generateYearRange(yearRanges.countryExpenses.min, yearRanges.countryExpenses.max);
+
   const [countryData, setCountryData] = useState<CountryExpense[]>([]);
   const [selectedCountry, setSelectedCountry] = useState<{
     iso3: string;
@@ -51,7 +52,7 @@ export function CountryMap() {
   const [loading, setLoading] = useState(true);
   const [showMap, setShowMap] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedYear, setSelectedYear] = useState<number>(YEAR_RANGES.countryExpenses.default);
+  const [selectedYear, setSelectedYear] = useState<number>(yearRanges.countryExpenses.default);
   const [pendingDeepLink, setPendingDeepLink] = useDeepLink({
     hashPrefix: "country",
     sectionId: "countries",

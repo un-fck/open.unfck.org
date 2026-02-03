@@ -5,11 +5,18 @@ import { ChevronRightIcon, CheckIcon, SearchIcon, X as XIcon } from "lucide-reac
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 
+export interface HierarchicalSubgroup {
+  id: string;
+  label: string;
+  children: string[];
+}
+
 export interface HierarchicalGroup {
   id: string;
   label: string;
   bgColor: string;
-  children: string[];
+  children: string[];  // Direct children (for gov)
+  subgroups?: HierarchicalSubgroup[];  // Nested subgroups (for non-gov categories)
 }
 
 export interface HierarchicalMultiSelectProps {
@@ -24,9 +31,10 @@ export interface HierarchicalMultiSelectProps {
 }
 
 /**
- * Hierarchical multi-select dropdown with two levels:
+ * Hierarchical multi-select dropdown with up to three levels:
  * - Level 1: Groups (e.g., "Government", "Non-Government") - selecting shows aggregate
- * - Level 2: Individual items within each group (expandable, collapsed by default)
+ * - Level 2: Subgroups or individual items (e.g., "NGOs", "Foundations" for non-gov)
+ * - Level 3: Individual items within subgroups
  * 
  * Selecting a group does NOT auto-select its children.
  * Users can mix group aggregates with individual items.
@@ -69,28 +77,43 @@ export function HierarchicalMultiSelect({
 
   const selectedCount = selected.size;
 
-  // Filter children based on search query
+  // Filter based on search query
   const normalizedQuery = searchQuery.toLowerCase().trim();
   const filteredGroups = React.useMemo(() => {
     if (!normalizedQuery) return groups;
     
-    return groups.map(group => ({
-      ...group,
-      children: group.children.filter(child => 
+    return groups.map(group => {
+      const filteredChildren = group.children.filter(child => 
         child.toLowerCase().includes(normalizedQuery)
-      ),
-      // Also match group label
-      matchesLabel: group.label.toLowerCase().includes(normalizedQuery),
-    })).filter(group => group.matchesLabel || group.children.length > 0);
+      );
+      const filteredSubgroups = group.subgroups?.map(sg => ({
+        ...sg,
+        children: sg.children.filter(child => 
+          child.toLowerCase().includes(normalizedQuery)
+        ),
+        matchesLabel: sg.label.toLowerCase().includes(normalizedQuery),
+      })).filter(sg => sg.matchesLabel || sg.children.length > 0);
+      
+      return {
+        ...group,
+        children: filteredChildren,
+        subgroups: filteredSubgroups,
+        matchesLabel: group.label.toLowerCase().includes(normalizedQuery),
+      };
+    }).filter(group => group.matchesLabel || group.children.length > 0 || (group.subgroups && group.subgroups.length > 0));
   }, [groups, normalizedQuery]);
 
   // Auto-expand groups when searching
   React.useEffect(() => {
     if (normalizedQuery) {
-      setExpandedGroups(new Set(filteredGroups.map(g => g.id)));
+      const expanded = new Set<string>();
+      filteredGroups.forEach(g => {
+        expanded.add(g.id);
+        g.subgroups?.forEach(sg => expanded.add(sg.id));
+      });
+      setExpandedGroups(expanded);
     }
   }, [normalizedQuery, filteredGroups]);
-
 
   // Get info about a selected item (label and group color)
   const getSelectedItemInfo = (id: string): { label: string; bgColor: string } | null => {
@@ -100,6 +123,16 @@ export function HierarchicalMultiSelect({
       }
       if (group.children.includes(id)) {
         return { label: id, bgColor: group.bgColor };
+      }
+      if (group.subgroups) {
+        for (const sg of group.subgroups) {
+          if (sg.id === id) {
+            return { label: sg.label, bgColor: group.bgColor };
+          }
+          if (sg.children.includes(id)) {
+            return { label: id, bgColor: group.bgColor };
+          }
+        }
       }
     }
     return null;
@@ -184,18 +217,19 @@ export function HierarchicalMultiSelect({
           ) : (
             filteredGroups.map((group) => {
               const isExpanded = expandedGroups.has(group.id);
-              const hasChildren = group.children.length > 0;
+              const hasExpandable = group.children.length > 0 || (group.subgroups && group.subgroups.length > 0);
+              const totalCount = group.children.length + (group.subgroups?.reduce((sum, sg) => sum + sg.children.length, 0) || 0);
               
               return (
                 <div key={group.id}>
                   {/* Group header (selectable for aggregate) */}
                   <div
                     className="flex w-full items-center gap-2 px-3 py-2 hover:bg-gray-100 transition-colors cursor-pointer"
-                    onClick={() => hasChildren && toggleExpanded(group.id)}
+                    onClick={() => hasExpandable && toggleExpanded(group.id)}
                   >
                     {/* Expand/collapse chevron */}
                     <div className="flex-shrink-0 w-4">
-                      {hasChildren && (
+                      {hasExpandable && (
                         <ChevronRightIcon className={cn(
                           "h-4 w-4 text-gray-400 transition-transform duration-200",
                           isExpanded && "rotate-90"
@@ -203,13 +237,12 @@ export function HierarchicalMultiSelect({
                       )}
                     </div>
                     
-                    {/* Checkbox */}
+                    {/* Colored checkbox (combined dot + checkbox) */}
                     <button
                       className={cn(
-                        "flex h-4 w-4 flex-shrink-0 items-center justify-center rounded border",
-                        selected.has(group.id) 
-                          ? cn(group.bgColor, "border-transparent") 
-                          : "border-gray-300 bg-white"
+                        "flex h-4 w-4 flex-shrink-0 items-center justify-center rounded",
+                        group.bgColor,
+                        !selected.has(group.id) && "opacity-40"
                       )}
                       onClick={(e) => toggleItem(group.id, e)}
                     >
@@ -218,38 +251,101 @@ export function HierarchicalMultiSelect({
                       )}
                     </button>
                     
-                    {/* Color indicator */}
-                    <span className={cn("h-4 w-4 flex-shrink-0 rounded", group.bgColor)} />
-                    
                     {/* Label */}
                     <span className="flex-1 min-w-0 text-sm font-medium truncate">{group.label}</span>
                     
                     {/* Count */}
                     <span className="flex-shrink-0 text-xs text-gray-500">
-                      ({group.children.length})
+                      ({totalCount})
                     </span>
                   </div>
                   
-                  {/* Children (expandable) */}
+                  {/* Subgroups (if any) */}
+                  {isExpanded && group.subgroups?.map((subgroup) => {
+                    const sgExpanded = expandedGroups.has(subgroup.id);
+                    const sgHasChildren = subgroup.children.length > 0;
+                    
+                    return (
+                      <div key={subgroup.id}>
+                        {/* Subgroup header */}
+                        <div
+                          className="flex w-full items-center gap-2 pl-7 pr-3 py-1.5 hover:bg-gray-100 transition-colors cursor-pointer"
+                          onClick={() => sgHasChildren && toggleExpanded(subgroup.id)}
+                        >
+                          {/* Expand/collapse chevron */}
+                          <div className="flex-shrink-0 w-4">
+                            {sgHasChildren && (
+                              <ChevronRightIcon className={cn(
+                                "h-4 w-4 text-gray-400 transition-transform duration-200",
+                                sgExpanded && "rotate-90"
+                              )} />
+                            )}
+                          </div>
+                          
+                          {/* Colored checkbox */}
+                          <button
+                            className={cn(
+                              "flex h-4 w-4 flex-shrink-0 items-center justify-center rounded",
+                              group.bgColor,
+                              !selected.has(subgroup.id) && "opacity-40"
+                            )}
+                            onClick={(e) => toggleItem(subgroup.id, e)}
+                          >
+                            {selected.has(subgroup.id) && (
+                              <CheckIcon className="h-3 w-3 text-white" />
+                            )}
+                          </button>
+                          
+                          {/* Label */}
+                          <span className="flex-1 min-w-0 text-sm truncate">{subgroup.label}</span>
+                          
+                          {/* Count */}
+                          <span className="flex-shrink-0 text-xs text-gray-500">
+                            ({subgroup.children.length})
+                          </span>
+                        </div>
+                        
+                        {/* Subgroup children */}
+                        {sgExpanded && subgroup.children.map((child) => (
+                          <button
+                            key={child}
+                            className="flex w-full items-center gap-2 pl-14 pr-3 py-1.5 text-left hover:bg-gray-100 transition-colors"
+                            onClick={(e) => toggleItem(child, e)}
+                          >
+                            {/* Colored checkbox */}
+                            <div className={cn(
+                              "flex h-4 w-4 flex-shrink-0 items-center justify-center rounded",
+                              group.bgColor,
+                              !selected.has(child) && "opacity-40"
+                            )}>
+                              {selected.has(child) && (
+                                <CheckIcon className="h-3 w-3 text-white" />
+                              )}
+                            </div>
+                            <span className="flex-1 min-w-0 text-sm truncate">{child}</span>
+                          </button>
+                        ))}
+                      </div>
+                    );
+                  })}
+                  
+                  {/* Direct children (no subgroups) */}
                   {isExpanded && group.children.map((child) => (
                     <button
                       key={child}
                       className="flex w-full items-center gap-2 pl-10 pr-3 py-1.5 text-left hover:bg-gray-100 transition-colors"
                       onClick={(e) => toggleItem(child, e)}
                     >
-                      {/* Checkbox */}
+                      {/* Colored checkbox */}
                       <div className={cn(
-                        "flex h-4 w-4 flex-shrink-0 items-center justify-center rounded border",
-                        selected.has(child) 
-                          ? "bg-gray-700 border-transparent" 
-                          : "border-gray-300 bg-white"
+                        "flex h-4 w-4 flex-shrink-0 items-center justify-center rounded",
+                        group.bgColor,
+                        !selected.has(child) && "opacity-40"
                       )}>
                         {selected.has(child) && (
                           <CheckIcon className="h-3 w-3 text-white" />
                         )}
                       </div>
-                      
-                      {/* Label - no color indicator for individual items */}
                       <span className="flex-1 min-w-0 text-sm truncate">{child}</span>
                     </button>
                   ))}

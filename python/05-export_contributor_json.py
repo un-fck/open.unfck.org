@@ -37,18 +37,27 @@ def export_donors_json(df: pd.DataFrame, state_info: dict):
     """Generate donors-{year}.json with contributions by donor."""
     for year in YEARS:
         ydf = df[df["year"] == year]
-        donors = defaultdict(lambda: {"status": "organization", "contributions": {}})
+        donors = defaultdict(lambda: {"status": "organization", "category": "Non-Government", "contributions": {}})
         
         for _, row in ydf.iterrows():
             d = row["donor_name"]
-            if row["is_other"]: continue  # Skip "Other X" entries for donor view
+            
+            # Set category from donor_type
+            donors[d]["category"] = row["donor_type"]
+            
+            # Mark aggregated "Other X" entries (no sidebar view)
+            if row["is_other"]:
+                donors[d]["is_other"] = True
             
             # Set status for government donors
-            if row["donor_type"] == "Government" and d in state_info:
-                donors[d]["status"] = state_info[d]["status"]
-                if year == max(YEARS) and state_info[d].get("payment_status"):
-                    donors[d]["payment_status"] = state_info[d]["payment_status"]
-                    donors[d]["payment_date"] = state_info[d]["payment_date"]
+            if row["donor_type"] == "Government":
+                if d in state_info:
+                    donors[d]["status"] = state_info[d]["status"]
+                    if year == max(YEARS) and state_info[d].get("payment_status"):
+                        donors[d]["payment_status"] = state_info[d]["payment_status"]
+                        donors[d]["payment_date"] = state_info[d]["payment_date"]
+                else:
+                    donors[d]["status"] = "nonmember"
             
             e, cat, amt = row["entity"], row["rev_cat"], row["amount"]
             donors[d]["contributions"].setdefault(e, {})[cat] = donors[d]["contributions"].get(e, {}).get(cat, 0) + amt
@@ -90,7 +99,13 @@ def export_entity_revenue_json(df: pd.DataFrame):
 def export_contributor_trends_json(df: pd.DataFrame):
     """Generate contributor-trends.json with time series data."""
     gov_donors = set(df[df["donor_type"] == "Government"]["donor_name"].unique())
-    nongov_donors = set(df[(df["donor_type"] != "Government") & (~df["is_other"])]["donor_name"].unique())
+    nongov_df = df[(df["donor_type"] != "Government") & (~df["is_other"])]
+    nongov_donors = set(nongov_df["donor_name"].unique())
+    
+    # Group non-gov donors by category
+    donor_to_cat = nongov_df.groupby("donor_name")["donor_type"].first().to_dict()
+    categories = sorted(set(donor_to_cat.values()))
+    cat_to_donors = {cat: sorted([d for d, c in donor_to_cat.items() if c == cat]) for cat in categories}
     
     # Build contributor time series
     data = defaultdict(lambda: defaultdict(lambda: {"assessed": 0, "voluntary_earmarked": 0, "voluntary_unearmarked": 0, "total": 0}))
@@ -107,32 +122,48 @@ def export_contributor_trends_json(df: pd.DataFrame):
             data[donor][year]["voluntary_earmarked"] += amt
         data[donor][year]["total"] += amt
     
-    # Build aggregates
+    # Build aggregates (gov, non-gov, all, and per-category)
     aggregates = {"gov": [], "non-gov": [], "all": []}
+    for cat in categories:
+        aggregates[f"cat:{cat}"] = []
+    
     for year in YEARS:
         gov_t = {"year": year, "assessed": 0, "voluntary_earmarked": 0, "voluntary_unearmarked": 0, "total": 0}
         nongov_t = {"year": year, "assessed": 0, "voluntary_earmarked": 0, "voluntary_unearmarked": 0, "total": 0}
+        cat_totals = {cat: {"year": year, "assessed": 0, "voluntary_earmarked": 0, "voluntary_unearmarked": 0, "total": 0} for cat in categories}
+        
         for d in gov_donors:
             for k in ["assessed", "voluntary_earmarked", "voluntary_unearmarked", "total"]:
                 gov_t[k] += data[d][year][k]
         for d in nongov_donors:
+            cat = donor_to_cat.get(d, "Other")
             for k in ["assessed", "voluntary_earmarked", "voluntary_unearmarked", "total"]:
                 nongov_t[k] += data[d][year][k]
+                if cat in cat_totals:
+                    cat_totals[cat][k] += data[d][year][k]
+        
         aggregates["gov"].append(gov_t)
         aggregates["non-gov"].append(nongov_t)
         aggregates["all"].append({k: gov_t[k] + nongov_t[k] for k in gov_t})
+        for cat in categories:
+            aggregates[f"cat:{cat}"].append(cat_totals[cat])
     
     contributors = {d: [{"year": y, **data[d][y]} for y in YEARS] for d in sorted(gov_donors | nongov_donors)}
     
     output = {
-        "meta": {"years": YEARS, "governmentContributors": sorted(gov_donors), "nonGovContributors": sorted(nongov_donors)},
+        "meta": {
+            "years": YEARS,
+            "governmentContributors": sorted(gov_donors),
+            "nonGovContributors": sorted(nongov_donors),
+            "nonGovCategories": {cat: cat_to_donors[cat] for cat in categories},
+        },
         "aggregates": aggregates,
         "contributors": contributors
     }
     
     with open(OUT / "contributor-trends.json", "w") as f:
         json.dump(output, f, indent=2)
-    print(f"contributor-trends.json: {len(contributors)} contributors")
+    print(f"contributor-trends.json: {len(contributors)} contributors, {len(categories)} categories")
 
 if __name__ == "__main__":
     print("Loading fused data...")

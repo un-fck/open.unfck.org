@@ -26,7 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import { generateYearRange, YEAR_RANGES } from "@/lib/data";
+import { useYearRanges, generateYearRange } from "@/lib/useYearRanges";
 
 interface Rect {
   x: number;
@@ -122,10 +122,11 @@ function slice(
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
-const SPENDING_YEARS = generateYearRange(YEAR_RANGES.entitySpending.min, YEAR_RANGES.entitySpending.max);
-const REVENUE_YEARS = generateYearRange(YEAR_RANGES.entityRevenue.min, YEAR_RANGES.entityRevenue.max);
-
 export function EntitiesTreemap() {
+  const yearRanges = useYearRanges();
+  const SPENDING_YEARS = generateYearRange(yearRanges.entitySpending.min, yearRanges.entitySpending.max);
+  const REVENUE_YEARS = generateYearRange(yearRanges.entityRevenue.min, yearRanges.entityRevenue.max);
+
   const [entities, setEntities] = useState<Entity[]>([]);
   const [spendingData, setSpendingData] = useState<Record<string, number>>({});
   const [revenueData, setRevenueData] = useState<Record<string, EntityRevenue>>({});
@@ -137,8 +138,8 @@ export function EntitiesTreemap() {
     new Set(Object.keys(systemGroupingStyles))
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [spendingYear, setSpendingYear] = useState<number>(YEAR_RANGES.entitySpending.default);
-  const [revenueYear, setRevenueYear] = useState<number>(YEAR_RANGES.entityRevenue.default);
+  const [spendingYear, setSpendingYear] = useState<number>(yearRanges.entitySpending.default);
+  const [revenueYear, setRevenueYear] = useState<number>(yearRanges.entityRevenue.default);
   const [pendingDeepLink, setPendingDeepLink] = useDeepLink({
     hashPrefix: "entity",
     sectionId: "entities",
@@ -205,99 +206,107 @@ export function EntitiesTreemap() {
       });
   }, [revenueYear, showRevenue]);
 
-  // Synthetic entities for revenue mode (CEB aggregates)
-  const syntheticRevenueEntities: Entity[] = [
-    {
-      entity: "UN",
-      entity_long: "Other UN Secretariat (incl. Political Missions)",
-      entity_combined: "Other UN Secretariat (incl. Political Missions)",
-      entity_description: "Aggregate revenue for the UN Secretariat including Special Political Missions. CEB reports this as a single entity. Excludes UNEP, UNODC, UN-Habitat, and ITC which report separately.",
-      entity_link: "https://unsceb.org",
-      entity_link_is_un_org: 1,
-      system_grouping: "UN Secretariat",
-      category: "CEB Aggregate",
-      un_principal_organ: "General Assembly",
-      un_pillar: null,
-      is_ceb_member: true,
-      head_of_entity_level: null,
-      head_of_entity_title_specific: null,
-      head_of_entity_title_general: null,
-      head_of_entity_name: null,
-      head_of_entity_bio: null,
-      head_of_entity_headshot: null,
-      global_leadership_team_url: null,
-      on_display: "TRUE",
-      foundational_mandate: null,
-      organizational_chart_link: null,
-      budget_financial_reporting_link: null,
-      results_framework_link: null,
-      strategic_plan_link: null,
-      annual_reports_link: null,
-      transparency_portal_link: null,
-      socials_linkedin: null,
-      socials_twitter: null,
-      socials_instagram: null,
-      entity_news_page: null,
-      entity_branding_page: null,
-      entity_data_page: null,
-      entity_logo_page: null,
-      entity_wikipedia_page: null,
-    },
-    {
-      entity: "UN-DPO",
-      entity_long: "Peacekeeping Operations",
-      entity_combined: "Peacekeeping Operations (UN-DPO)",
-      entity_description: "Aggregate revenue for UN Peacekeeping Operations. CEB reports all peacekeeping missions under this single entity.",
-      entity_link: "https://peacekeeping.un.org",
-      entity_link_is_un_org: 1,
-      system_grouping: "Peacekeeping Operations",
-      category: "CEB Aggregate",
-      un_principal_organ: "Security Council",
-      un_pillar: null,
-      is_ceb_member: true,
-      head_of_entity_level: null,
-      head_of_entity_title_specific: null,
-      head_of_entity_title_general: null,
-      head_of_entity_name: null,
-      head_of_entity_bio: null,
-      head_of_entity_headshot: null,
-      global_leadership_team_url: null,
-      on_display: "TRUE",
-      foundational_mandate: null,
-      organizational_chart_link: null,
-      budget_financial_reporting_link: null,
-      results_framework_link: null,
-      strategic_plan_link: null,
-      annual_reports_link: null,
-      transparency_portal_link: null,
-      socials_linkedin: null,
-      socials_twitter: null,
-      socials_instagram: null,
-      entity_news_page: null,
-      entity_branding_page: null,
-      entity_data_page: null,
-      entity_logo_page: null,
-      entity_wikipedia_page: null,
-    },
-  ];
+  // Synthetic entities for CEB aggregates (UN and UN-DPO)
+  const syntheticUN: Entity = {
+    entity: "UN",
+    entity_long: "UN Secretariat (incl. Political Missions)",
+    entity_combined: "UN Secretariat (incl. Political Missions)",
+    entity_description: "Aggregate for the UN Secretariat including Special Political Missions. CEB reports this as a single entity. Excludes UNEP, UNODC, UN-Habitat, and ITC which report separately.",
+    entity_link: "https://unsceb.org",
+    entity_link_is_un_org: 1,
+    system_grouping: "UN Secretariat",
+    category: "CEB Aggregate",
+    un_principal_organ: "General Assembly",
+    un_pillar: null,
+    is_ceb_member: true,
+    head_of_entity_level: null,
+    head_of_entity_title_specific: null,
+    head_of_entity_title_general: null,
+    head_of_entity_name: null,
+    head_of_entity_bio: null,
+    head_of_entity_headshot: null,
+    global_leadership_team_url: null,
+    on_display: "TRUE",
+    foundational_mandate: null,
+    organizational_chart_link: null,
+    budget_financial_reporting_link: null,
+    results_framework_link: null,
+    strategic_plan_link: null,
+    annual_reports_link: null,
+    transparency_portal_link: null,
+    socials_linkedin: null,
+    socials_twitter: null,
+    socials_instagram: null,
+    entity_news_page: null,
+    entity_branding_page: null,
+    entity_data_page: null,
+    entity_logo_page: null,
+    entity_wikipedia_page: null,
+  };
+
+  const syntheticDPO: Entity = {
+    entity: "UN-DPO",
+    entity_long: "Peacekeeping Operations",
+    entity_combined: "Peacekeeping Operations (UN-DPO)",
+    entity_description: "Aggregate for UN Peacekeeping Operations. CEB reports all peacekeeping missions under this single entity.",
+    entity_link: "https://peacekeeping.un.org",
+    entity_link_is_un_org: 1,
+    system_grouping: "Peacekeeping Operations",
+    category: "CEB Aggregate",
+    un_principal_organ: "Security Council",
+    un_pillar: null,
+    is_ceb_member: true,
+    head_of_entity_level: null,
+    head_of_entity_title_specific: null,
+    head_of_entity_title_general: null,
+    head_of_entity_name: null,
+    head_of_entity_bio: null,
+    head_of_entity_headshot: null,
+    global_leadership_team_url: null,
+    on_display: "TRUE",
+    foundational_mandate: null,
+    organizational_chart_link: null,
+    budget_financial_reporting_link: null,
+    results_framework_link: null,
+    strategic_plan_link: null,
+    annual_reports_link: null,
+    transparency_portal_link: null,
+    socials_linkedin: null,
+    socials_twitter: null,
+    socials_instagram: null,
+    entity_news_page: null,
+    entity_branding_page: null,
+    entity_data_page: null,
+    entity_logo_page: null,
+    entity_wikipedia_page: null,
+  };
+
+  const syntheticEntities: Entity[] = [syntheticUN, syntheticDPO];
 
   // Get the appropriate budget data and entities based on toggle
   const budgetData = showRevenue 
     ? Object.fromEntries(Object.entries(revenueData).map(([k, v]) => [k, v.total]))
     : spendingData;
 
-  // In revenue mode, use synthetic entities for UN/UN-DPO, plus regular entities that have revenue
-  const activeEntities = showRevenue
+  // Check if current spending year has secretariat fusion (detailed breakdown)
+  const isFusionYear = yearRanges.entitySpending.fusionYears?.includes(spendingYear) ?? false;
+
+  // Use synthetic entities for UN/UN-DPO when showing CEB aggregates:
+  // - Revenue mode: always (CEB only has aggregates for revenue)
+  // - Expenses mode: non-fusion years (2011-2018, 2024) use CEB aggregates
+  const useSyntheticEntities = showRevenue || !isFusionYear;
+
+  const activeEntities = useSyntheticEntities
     ? [
-        ...syntheticRevenueEntities.filter((e) => revenueData[e.entity]),
+        ...syntheticEntities.filter((e) => budgetData[e.entity]),
         ...entities.filter(
           (e) =>
-            revenueData[e.entity] &&
+            budgetData[e.entity] &&
             e.entity !== "UN" &&
             e.entity !== "UN-DPO"
         ),
       ]
-    : entities;
+    : entities.filter((e) => spendingData[e.entity] && spendingData[e.entity] > 0);
 
   const toggleGroup = (groupKey: string) => {
     setActiveGroups((prev) => {

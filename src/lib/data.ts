@@ -22,23 +22,3 @@ export async function loadStaticData<T>(filename: string): Promise<T> {
   }
   return res.json();
 }
-
-/**
- * Generate array of years from min to max (inclusive).
- */
-export function generateYearRange(minYear: number, maxYear: number): number[] {
-  const years: number[] = [];
-  for (let year = minYear; year <= maxYear; year++) {
-    years.push(year);
-  }
-  return years;
-}
-
-// Year ranges for each dataset
-export const YEAR_RANGES = {
-  donors: { min: 2013, max: 2024, default: 2024 },
-  entitySpending: { min: 2019, max: 2023, default: 2023 },
-  entityRevenue: { min: 2013, max: 2024, default: 2024 },
-  countryExpenses: { min: 2017, max: 2024, default: 2024 },
-  sdgExpenses: { min: 2018, max: 2024, default: 2024 },
-} as const;

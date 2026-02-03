@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Entity, Impact, EntityRevenue } from "@/types";
 import { getSystemGroupingStyle } from "@/lib/systemGroupings";
 import { formatBudget } from "@/lib/entities";
+import { getContributionTypeBgColor, getContributionTypeOrder } from "@/lib/contributors";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
 
 interface EntitySidebarProps {
@@ -16,21 +17,6 @@ interface EntitySidebarProps {
 }
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
-const getContributionTypeColor = (type: string): string => {
-  if (type === "Assessed") return "bg-un-blue-muted";
-  if (type === "Voluntary un-earmarked") return "bg-un-blue-muted/80";
-  if (type === "Voluntary earmarked") return "bg-un-blue-muted/60";
-  if (type === "Other") return "bg-un-blue-muted/40";
-  return "bg-gray-500";
-};
-
-const getContributionTypeOrder = (type: string): number => {
-  if (type === "Assessed") return 1;
-  if (type === "Voluntary un-earmarked") return 2;
-  if (type === "Voluntary earmarked") return 3;
-  return 4;
-};
 
 const formatBudgetFixed = (amount: number): string => {
   if (amount >= 1_000_000_000) {
@@ -249,7 +235,7 @@ export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySide
             {/* Total Revenue */}
             <div className="mt-3">
               <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
-                Total Revenue (2024)
+                Total Revenue{revenue?.year ? ` (${revenue.year})` : ""}
               </span>
               <div className="mt-0.5">
                 {revenue ? (
@@ -278,7 +264,7 @@ export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySide
                     >
                       <div className="flex items-center gap-2">
                         <div
-                          className={`h-2 w-2 rounded-full ${getContributionTypeColor(type)}`}
+                          className={`h-2 w-2 rounded-full ${getContributionTypeBgColor(type)}`}
                         />
                         <span className="text-sm text-gray-600">{type}</span>
                       </div>
@@ -330,7 +316,7 @@ export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySide
                               return typePercentage > 0 ? (
                                 <div
                                   key={type}
-                                  className={`${getContributionTypeColor(type)} transition-all`}
+                                  className={`${getContributionTypeBgColor(type)} transition-all`}
                                   style={{ width: `${typePercentage}%` }}
                                 />
                               ) : null;

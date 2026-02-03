@@ -6,6 +6,7 @@ Tiered approach:
 """
 import pandas as pd
 from pathlib import Path
+from utils import clean_donor_name, NON_GOVERNMENT_DONORS, GENERIC_DONORS, DONOR_CATEGORY_OVERRIDES
 
 ceb = Path("data/ceb")
 clean, fused = ceb / "clean", ceb / "fused"
@@ -51,6 +52,20 @@ def normalize_contrib_type(ct: str, desc_to_code: dict) -> str | None:
     if ct in ["1", "2"]: return None
     return desc_to_code.get(ct)
 
+def get_donor_info(donor_name: str, contrib_code: str | None, code_to_name: dict) -> tuple[str, str, str, bool]:
+    """Get normalized donor info: (name, contrib_code, donor_type, is_other)."""
+    name = clean_donor_name(donor_name)
+    is_other = name in GENERIC_DONORS
+    
+    # Apply category override if exists
+    if name in DONOR_CATEGORY_OVERRIDES:
+        code = DONOR_CATEGORY_OVERRIDES[name]
+    else:
+        code = contrib_code
+    
+    dtype = code_to_name.get(code, "Non-Government") if code else "Non-Government"
+    return name, code or "Unknown", dtype, is_other
+
 def fuse_revenue():
     code_to_name, desc_to_code = load_contrib_mapping()
     rev_type_map = load_rev_type_mapping()
@@ -81,11 +96,14 @@ def fuse_revenue():
             
             # Government donors (always specific, with rev_type)
             for _, row in gov_ent.iterrows():
+                donor = clean_donor_name(row.get("government_donor", "Unknown"))
+                # Reclassify entries incorrectly labeled as government
+                dtype = "Other" if donor in NON_GOVERNMENT_DONORS else "Government"
+                ccode = "C08B" if donor in NON_GOVERNMENT_DONORS else "C01"
                 results.append({
-                    "entity": entity, "year": year, "contrib_code": "C01",
-                    "rev_type": row["rev_code"], "donor_type": "Government",
-                    "donor_name": row.get("government_donor", "Unknown"),
-                    "amount": row["amount"], "is_other": False
+                    "entity": entity, "year": year, "contrib_code": ccode,
+                    "rev_type": row["rev_code"], "donor_type": dtype,
+                    "donor_name": donor, "amount": row["amount"], "is_other": False
                 })
             gov_total = gov_ent["amount"].sum()
             
@@ -107,11 +125,11 @@ def fuse_revenue():
                         donors_in = nongov_ent[(nongov_ent["contrib_code"] == code) & (nongov_ent["rev_code"] == rev_type)]
                         donors_sum = 0
                         for _, row in donors_in.iterrows():
+                            name, dcode, dtype, is_other = get_donor_info(row.get("donor", "Unknown"), code, code_to_name)
                             results.append({
-                                "entity": entity, "year": year, "contrib_code": code,
-                                "rev_type": rev_type, "donor_type": code_to_name[code],
-                                "donor_name": row.get("donor", "Unknown"),
-                                "amount": row["amount"], "is_other": False
+                                "entity": entity, "year": year, "contrib_code": dcode,
+                                "rev_type": rev_type, "donor_type": dtype,
+                                "donor_name": name, "amount": row["amount"], "is_other": is_other
                             })
                             donors_sum += row["amount"]
                         
@@ -139,13 +157,11 @@ def fuse_revenue():
             else:
                 # Tier 1: NonGov donors + single "Other" bucket
                 for _, row in nongov_ent.iterrows():
-                    code = row.get("contrib_code")
-                    dtype = code_to_name.get(code, "Non-Government") if code else "Non-Government"
+                    name, dcode, dtype, is_other = get_donor_info(row.get("donor", "Unknown"), row.get("contrib_code"), code_to_name)
                     results.append({
-                        "entity": entity, "year": year, "contrib_code": code or "Unknown",
+                        "entity": entity, "year": year, "contrib_code": dcode,
                         "rev_type": row["rev_code"], "donor_type": dtype,
-                        "donor_name": row.get("donor", "Unknown"),
-                        "amount": row["amount"], "is_other": False
+                        "donor_name": name, "amount": row["amount"], "is_other": is_other
                     })
                 nongov_total = nongov_ent["amount"].sum()
                 

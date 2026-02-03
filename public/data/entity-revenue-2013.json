@@ -67,12 +67,12 @@
         "Voluntary earmarked": 17216317.0
       },
       {
-        "donor": "United Nations Development Programme",
+        "donor": "UNDP (as donor)",
         "total": 25979906.18,
         "Voluntary earmarked": 25979906.18
       },
       {
-        "donor": "World Bank Group",
+        "donor": "World Bank",
         "total": 22936992.11,
         "Voluntary earmarked": 22936992.11
       },
@@ -266,7 +266,7 @@
         "Voluntary earmarked": 519632.0
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 1828939.8,
         "Assessed": 1603288.0,
         "Voluntary earmarked": 225651.8
@@ -329,7 +329,7 @@
         "Assessed": 1212613.0
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 1181895.0,
         "Assessed": 1187245.0,
         "Voluntary earmarked": -5350.0
@@ -749,7 +749,7 @@
         "Voluntary earmarked": 887.45
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 35516.0,
         "Assessed": 35516.0
       },
@@ -883,7 +883,7 @@
         "Assessed": 10147.0
       },
       {
-        "donor": "Micronesia (Federated States of)",
+        "donor": "Micronesia, Federated States of",
         "total": 5074.0,
         "Assessed": 5074.0
       },
@@ -1073,7 +1073,7 @@
     ]
   },
   "IAEA": {
-    "total": 683122179.39,
+    "total": 683122179.3900001,
     "year": 2013,
     "by_type": {
       "Assessed": 451510021.48,
@@ -1265,7 +1265,7 @@
         "Voluntary earmarked": 172413.75
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 2375206.92,
         "Assessed": 1197659.63,
         "Voluntary earmarked": 1177547.29
@@ -1349,7 +1349,7 @@
         "Voluntary earmarked": 608950.14
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 889350.91,
         "Assessed": 889350.91
       },
@@ -1625,7 +1625,7 @@
         "Voluntary earmarked": 74464.55
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 96633.27,
         "Assessed": 27667.77,
         "Voluntary earmarked": 68965.5
@@ -1735,7 +1735,7 @@
         "Voluntary earmarked": 9542.41
       },
       {
-        "donor": "United Nations Development Programme",
+        "donor": "UNDP (as donor)",
         "total": 41362.75,
         "Voluntary earmarked": 41362.75
       },
@@ -2099,7 +2099,7 @@
         "Voluntary earmarked": 690084.59
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 3864614.4899999998,
         "Assessed": 49140.73,
         "Voluntary earmarked": 3815473.76
@@ -2175,7 +2175,7 @@
         "Assessed": 1408731.6
       },
       {
-        "donor": "United Nations Development Programme",
+        "donor": "UNDP (as donor)",
         "total": 1367619.94,
         "Voluntary earmarked": 1367619.94
       },
@@ -2355,7 +2355,7 @@
         "Voluntary earmarked": 101596.38
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 260921.14,
         "Assessed": 180188.93,
         "Voluntary earmarked": 80732.21
@@ -2421,7 +2421,7 @@
         "Assessed": 180188.93
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 163807.44,
         "Assessed": 163807.44
       },
@@ -2526,7 +2526,7 @@
         "Assessed": 57331.95
       },
       {
-        "donor": "China, Macao Special Administrative Region",
+        "donor": "Macao SAR",
         "total": 55415.35,
         "Voluntary earmarked": 55415.35
       },
@@ -2546,7 +2546,7 @@
         "Assessed": 49140.73
       },
       {
-        "donor": "Micronesia (Federated States of)",
+        "donor": "Micronesia, Federated States of",
         "total": 49140.73,
         "Assessed": 49140.73
       },
@@ -3604,7 +3604,7 @@
         "Assessed": 1443213.1
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 1352742.86,
         "Assessed": 1352742.86
       },
@@ -3647,7 +3647,7 @@
         "Assessed": 1025327.38
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 1003786.91,
         "Assessed": 1003786.91
       },
@@ -3989,7 +3989,7 @@
         "Assessed": 34464.29
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 30157.14,
         "Assessed": 30157.14
       },
@@ -4346,7 +4346,7 @@
     ]
   },
   "IMO": {
-    "total": 77810188.48999998,
+    "total": 77810188.49,
     "year": 2013,
     "by_type": {
       "Assessed": 49859142.68,
@@ -4432,7 +4432,7 @@
         "Voluntary earmarked": 949573.73
       },
       {
-        "donor": "China, Hong Kong Special Administrative Region",
+        "donor": "Hong Kong SAR",
         "total": 1615172.7,
         "Assessed": 1615172.7
       },
@@ -4550,7 +4550,7 @@
         "Assessed": 164981.56
       },
       {
-        "donor": "United Nations Development Programme",
+        "donor": "UNDP (as donor)",
         "total": 163140.24,
         "Voluntary earmarked": 163140.24
       },
@@ -4628,7 +4628,7 @@
         "Voluntary earmarked": 21264.43
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 70666.0,
         "Assessed": 54747.02,
         "Voluntary earmarked": 15918.98
@@ -4639,7 +4639,7 @@
         "Assessed": 68006.51
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 66654.44,
         "Assessed": 66654.44
       },
@@ -4835,7 +4835,7 @@
         "Assessed": 26176.82
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 25525.58,
         "Assessed": 25525.58
       },
@@ -5245,12 +5245,12 @@
         "Assessed": 8548.75
       },
       {
-        "donor": "World Bank Group",
+        "donor": "World Bank",
         "total": 5742.14,
         "Voluntary earmarked": 5742.14
       },
       {
-        "donor": "China, Macao Special Administrative Region",
+        "donor": "Macao SAR",
         "total": 4274.37,
         "Assessed": 4274.37
       }
@@ -5550,7 +5550,7 @@
         "Assessed": 179911.0
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 147130.0,
         "Assessed": 147130.0
       },
@@ -5572,7 +5572,7 @@
         "Assessed": 110585.0
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 109158.0,
         "Assessed": 109158.0
       },
@@ -5808,7 +5808,7 @@
         "Assessed": 3763.0
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 3287.0,
         "Assessed": 3287.0
       },
@@ -5958,7 +5958,7 @@
         "Assessed": 758.0
       },
       {
-        "donor": "Micronesia (Federated States of)",
+        "donor": "Micronesia, Federated States of",
         "total": 475.0,
         "Assessed": 475.0
       },
@@ -6162,7 +6162,7 @@
         "Voluntary earmarked": 230000.0
       },
       {
-        "donor": "United Nations Development Programme",
+        "donor": "UNDP (as donor)",
         "total": 215000.0,
         "Voluntary earmarked": 215000.0
       },
@@ -6428,7 +6428,7 @@
         "Assessed": 358513.2
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 358513.2,
         "Assessed": 358513.2
       },
@@ -6488,7 +6488,7 @@
         "Assessed": 358513.2
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 358513.2,
         "Assessed": 358513.2
       },
@@ -6657,7 +6657,7 @@
         "Assessed": 89628.3
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 89628.3,
         "Assessed": 89628.3
       },
@@ -6962,7 +6962,7 @@
         "Assessed": 22407.08
       },
       {
-        "donor": "Micronesia (Federated States of)",
+        "donor": "Micronesia, Federated States of",
         "total": 22407.08,
         "Assessed": 22407.08
       },
@@ -7229,7 +7229,7 @@
         "Voluntary earmarked": 3587907.0
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 2102932.0,
         "Assessed": 2102932.0
       },
@@ -7261,7 +7261,7 @@
         "Voluntary earmarked": 640990.0
       },
       {
-        "donor": "Gavi Alliance",
+        "donor": "GAVI Alliance",
         "total": 460139.0,
         "Voluntary earmarked": 460139.0
       },
@@ -7289,7 +7289,7 @@
         "Voluntary earmarked": 298015.0
       },
       {
-        "donor": "United Nations Development Programme",
+        "donor": "UNDP (as donor)",
         "total": 298344.0,
         "Voluntary earmarked": 298344.0
       },
@@ -7363,7 +7363,7 @@
         "Assessed": 80808.0
       },
       {
-        "donor": "World Bank Group",
+        "donor": "World Bank",
         "total": 60112.0,
         "Voluntary earmarked": 60112.0
       },
@@ -7373,7 +7373,7 @@
         "Assessed": 59644.0
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 47138.0,
         "Assessed": 47138.0
       },
@@ -7643,7 +7643,7 @@
         "Voluntary earmarked": 57277.5
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 16211797.0,
         "Assessed": 15977729.0,
         "Voluntary earmarked": 234068.0
@@ -7667,7 +7667,7 @@
         "Voluntary earmarked": 1094382.71
       },
       {
-        "donor": "United Nations Development Programme",
+        "donor": "UNDP (as donor)",
         "total": 11918058.95,
         "Voluntary earmarked": 11918058.95
       },
@@ -7708,7 +7708,7 @@
         "Voluntary earmarked": 417068.08
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 9151899.09,
         "Assessed": 9071884.0,
         "Voluntary earmarked": 80015.09
@@ -7804,7 +7804,7 @@
         "Voluntary earmarked": 27000.0
       },
       {
-        "donor": "World Bank Group",
+        "donor": "World Bank",
         "total": 3237639.17,
         "Voluntary earmarked": 3237639.17
       },
@@ -8163,7 +8163,7 @@
         "Voluntary earmarked": 88179.75
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 274345.0,
         "Assessed": 229345.0,
         "Voluntary earmarked": 45000.0
@@ -8518,7 +8518,7 @@
         "Assessed": 25483.0
       },
       {
-        "donor": "Micronesia (Federated States of)",
+        "donor": "Micronesia, Federated States of",
         "total": 25483.0,
         "Assessed": 25483.0
       },
@@ -8595,7 +8595,7 @@
     ]
   },
   "UN Tourism": {
-    "total": 23911202.320000004,
+    "total": 23911202.32,
     "year": 2013,
     "by_type": {
       "Assessed": 16577770.74,
@@ -8621,7 +8621,7 @@
         "Assessed": 554981.48
       },
       {
-        "donor": "United Nations Development Programme",
+        "donor": "UNDP (as donor)",
         "total": 553611.63,
         "Voluntary earmarked": 553611.63
       },
@@ -9040,12 +9040,12 @@
         "Assessed": 68078.48
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 65494.36,
         "Assessed": 65494.36
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 65076.51,
         "Assessed": 65076.51
       },
@@ -9135,12 +9135,12 @@
         "Assessed": 45154.47
       },
       {
-        "donor": "China, Hong Kong Special Administrative Region",
+        "donor": "Hong Kong SAR",
         "total": 43651.02,
         "Assessed": 43651.02
       },
       {
-        "donor": "China, Macao Special Administrative Region",
+        "donor": "Macao SAR",
         "total": 43651.02,
         "Assessed": 43651.02
       },
@@ -9520,7 +9520,7 @@
         "Assessed": 7367067.0
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 6823282.0,
         "Assessed": 6823282.0
       },
@@ -9555,7 +9555,7 @@
         "Assessed": 4334896.0
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 4272388.0,
         "Assessed": 4272388.0
       },
@@ -9877,7 +9877,7 @@
         "Assessed": 116122.0
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 116081.0,
         "Assessed": 116081.0
       },
@@ -10097,7 +10097,7 @@
         "Assessed": 14517.0
       },
       {
-        "donor": "Micronesia (Federated States of)",
+        "donor": "Micronesia, Federated States of",
         "total": 14514.0,
         "Assessed": 14514.0
       },
@@ -10566,7 +10566,7 @@
         "Voluntary earmarked": 60248301.0
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 57256314.0,
         "Voluntary un-earmarked": 484418.0,
         "Voluntary earmarked": 56771896.0
@@ -10938,7 +10938,7 @@
         "Voluntary earmarked": 511996.0
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 989183.0,
         "Voluntary un-earmarked": 239941.0,
         "Voluntary earmarked": 749242.0
@@ -11219,7 +11219,7 @@
         "Voluntary un-earmarked": 288058.0
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 280775.0,
         "Voluntary earmarked": 280775.0
       },
@@ -11405,7 +11405,7 @@
         "Voluntary earmarked": -17.0
       },
       {
-        "donor": "Micronesia (Federated States of)",
+        "donor": "Micronesia, Federated States of",
         "total": -53.0,
         "Voluntary earmarked": -53.0
       },
@@ -11456,7 +11456,7 @@
     },
     "by_donor": [
       {
-        "donor": "World Bank Group",
+        "donor": "World Bank",
         "total": 74696865.0,
         "Voluntary earmarked": 74696865.0
       },
@@ -11508,7 +11508,7 @@
         "Voluntary earmarked": 7791811.03
       },
       {
-        "donor": "United Nations Development Programme",
+        "donor": "UNDP (as donor)",
         "total": 19530905.0,
         "Voluntary earmarked": 19530905.0
       },
@@ -11523,11 +11523,6 @@
         "total": 16021119.35,
         "Assessed": 2388058.66,
         "Voluntary earmarked": 13633060.69
-      },
-      {
-        "donor": "Multi Donor Trust Funds",
-        "total": 15747308.0,
-        "Voluntary earmarked": 15747308.0
       },
       {
         "donor": "Switzerland",
@@ -11728,7 +11723,7 @@
         "Voluntary earmarked": 101926.7
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 305180.0,
         "Assessed": 305180.0
       },
@@ -11761,7 +11756,7 @@
         "Voluntary earmarked": 50000.0
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 174999.29,
         "Assessed": 114091.21,
         "Voluntary earmarked": 60908.08
@@ -11942,7 +11937,7 @@
         "Voluntary earmarked": 39291.0
       },
       {
-        "donor": "China, Hong Kong Special Administrative Region",
+        "donor": "Hong Kong SAR",
         "total": 51566.99,
         "Voluntary earmarked": 51566.99
       },
@@ -12409,7 +12404,7 @@
         "Assessed": 3632.01
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 3132.77,
         "Assessed": 3132.77
       },
@@ -12543,7 +12538,7 @@
         "Assessed": 679.0
       },
       {
-        "donor": "Micronesia (Federated States of)",
+        "donor": "Micronesia, Federated States of",
         "total": 644.0,
         "Assessed": 644.0
       },
@@ -12644,7 +12639,7 @@
         "Voluntary earmarked": 902389.0
       },
       {
-        "donor": "World Bank Group",
+        "donor": "World Bank",
         "total": 17933914.0,
         "Voluntary earmarked": 17933914.0
       },
@@ -12714,11 +12709,6 @@
         "Voluntary earmarked": 3956429.0
       },
       {
-        "donor": "Multi Donor Trust Funds",
-        "total": 5639652.0,
-        "Voluntary earmarked": 5639652.0
-      },
-      {
         "donor": "Saudi Arabia",
         "total": 5357622.0,
         "Assessed": 3094414.0,
@@ -12778,7 +12768,7 @@
         "Voluntary earmarked": 10000.0
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 2506067.0,
         "Assessed": 2266071.0,
         "Voluntary earmarked": 239996.0
@@ -12796,7 +12786,7 @@
         "Voluntary earmarked": 17164.0
       },
       {
-        "donor": "United Nations Development Programme",
+        "donor": "UNDP (as donor)",
         "total": 2264621.0,
         "Voluntary earmarked": 2264621.0
       },
@@ -12842,7 +12832,7 @@
         "Assessed": 1375295.0
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 1358815.0,
         "Assessed": 1286635.0,
         "Voluntary earmarked": 72180.0
@@ -13281,7 +13271,7 @@
         "Assessed": 35814.0
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 32527.0,
         "Assessed": 32527.0
       },
@@ -13586,7 +13576,7 @@
         "Assessed": 3614.0
       },
       {
-        "donor": "Micronesia (Federated States of)",
+        "donor": "Micronesia, Federated States of",
         "total": 3603.0,
         "Assessed": 3603.0
       },
@@ -13686,7 +13676,7 @@
         "Assessed": 2128.0
       },
       {
-        "donor": "China, Macao Special Administrative Region",
+        "donor": "Macao SAR",
         "total": 2128.0,
         "Assessed": 2128.0
       },
@@ -13713,7 +13703,7 @@
     ]
   },
   "UNFPA": {
-    "total": 1013300000.0,
+    "total": 1013299999.9999999,
     "year": 2013,
     "by_type": {
       "Other": 349542330.67999995,
@@ -13798,11 +13788,6 @@
         "Voluntary earmarked": 3724000.0
       },
       {
-        "donor": "Multi Donor Trust Funds",
-        "total": 17845000.0,
-        "Voluntary earmarked": 17845000.0
-      },
-      {
         "donor": "UN OCHA",
         "total": 15636000.0,
         "Voluntary earmarked": 15636000.0
@@ -13825,7 +13810,7 @@
         "Voluntary earmarked": 6300000.0
       },
       {
-        "donor": "United Nations Development Programme",
+        "donor": "UNDP (as donor)",
         "total": 6274000.0,
         "Voluntary earmarked": 6274000.0
       },
@@ -13929,7 +13914,7 @@
         "Voluntary un-earmarked": 300000.0
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 258000.0,
         "Voluntary earmarked": 258000.0
       },
@@ -14012,7 +13997,7 @@
         "Voluntary un-earmarked": 48510.83
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 44000.0,
         "Voluntary un-earmarked": 13000.0,
         "Voluntary earmarked": 31000.0
@@ -14263,7 +14248,7 @@
         "Voluntary un-earmarked": 3166.23
       },
       {
-        "donor": "Micronesia (Federated States of)",
+        "donor": "Micronesia, Federated States of",
         "total": 3000.0,
         "Voluntary un-earmarked": 3000.0
       },
@@ -15119,7 +15104,7 @@
         "Voluntary earmarked": 125914242.6
       },
       {
-        "donor": "United Nations Development Programme",
+        "donor": "UNDP (as donor)",
         "total": 83714004.34,
         "Voluntary earmarked": 83714004.34
       },
@@ -15152,7 +15137,7 @@
         "Voluntary earmarked": 53197127.3
       },
       {
-        "donor": "Gavi Alliance",
+        "donor": "GAVI Alliance",
         "total": 47402896.0,
         "Voluntary earmarked": 47402896.0
       },
@@ -15173,11 +15158,6 @@
         "total": 34514550.84,
         "Voluntary un-earmarked": 13865591.0,
         "Voluntary earmarked": 20648959.84
-      },
-      {
-        "donor": "Multi Donor Trust Funds",
-        "total": 33853726.61,
-        "Voluntary earmarked": 33853726.61
       },
       {
         "donor": "Republic of Korea",
@@ -15422,7 +15402,7 @@
         "Voluntary earmarked": 168178.16
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 265000.0,
         "Voluntary un-earmarked": 40000.0,
         "Voluntary earmarked": 225000.0
@@ -15554,7 +15534,7 @@
         "Voluntary earmarked": 81521.74
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 109542.41,
         "Voluntary un-earmarked": 109542.41
       },
@@ -15792,7 +15772,7 @@
     ]
   },
   "UNIDO": {
-    "total": 264209812.62999997,
+    "total": 264209812.63,
     "year": 2013,
     "by_type": {
       "Assessed": 105557755.63,
@@ -16005,7 +15985,7 @@
         "Assessed": 801032.9
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 736319.0,
         "Assessed": 375154.39,
         "Voluntary earmarked": 361164.61
@@ -16026,7 +16006,7 @@
         "Assessed": 561146.07
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 505136.43,
         "Assessed": 505136.43
       },
@@ -16342,7 +16322,7 @@
         "Assessed": 12681.38
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 11624.82,
         "Assessed": 11624.82
       },
@@ -16755,7 +16735,7 @@
         "Voluntary earmarked": 879699.79
       },
       {
-        "donor": "United Nations Development Programme",
+        "donor": "UNDP (as donor)",
         "total": 694788.37,
         "Voluntary earmarked": 694788.37
       },
@@ -16999,7 +16979,7 @@
         "Voluntary earmarked": 2000000.0
       },
       {
-        "donor": "World Bank Group",
+        "donor": "World Bank",
         "total": 1628472.0,
         "Voluntary earmarked": 1628472.0
       },
@@ -17015,7 +16995,7 @@
         "Voluntary earmarked": 1382894.0
       },
       {
-        "donor": "United Nations Development Programme",
+        "donor": "UNDP (as donor)",
         "total": 1000613.0,
         "Voluntary earmarked": 1000613.0
       },
@@ -17081,7 +17061,7 @@
         "Voluntary earmarked": 89189.0
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 150000.0,
         "Voluntary earmarked": 150000.0
       },
@@ -17161,7 +17141,7 @@
         "Voluntary earmarked": 19908.0
       },
       {
-        "donor": "China, Hong Kong Special Administrative Region",
+        "donor": "Hong Kong SAR",
         "total": 13825.0,
         "Voluntary un-earmarked": 13825.0
       },
@@ -17580,7 +17560,7 @@
         "Voluntary un-earmarked": 13491.0
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 11745.0,
         "Voluntary earmarked": 11745.0
       },
@@ -17670,12 +17650,12 @@
         "Voluntary earmarked": 606717.0
       },
       {
-        "donor": "China, Macao Special Administrative Region",
+        "donor": "Macao SAR",
         "total": 332029.0,
         "Voluntary earmarked": 332029.0
       },
       {
-        "donor": "World Bank Group",
+        "donor": "World Bank",
         "total": 330112.0,
         "Voluntary earmarked": 330112.0
       },
@@ -17761,11 +17741,6 @@
         "Voluntary earmarked": 11047338.0
       },
       {
-        "donor": "Multi Donor Trust Funds",
-        "total": 17393346.0,
-        "Voluntary earmarked": 17393346.0
-      },
-      {
         "donor": "Netherlands",
         "total": 14818490.0,
         "Voluntary un-earmarked": 5174644.0,
@@ -17813,7 +17788,7 @@
         "Voluntary earmarked": 710962.0
       },
       {
-        "donor": "United Nations Development Programme",
+        "donor": "UNDP (as donor)",
         "total": 4524051.0,
         "Voluntary earmarked": 4524051.0
       },
@@ -18089,7 +18064,7 @@
         "Voluntary un-earmarked": 10000.0
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 10000.0,
         "Voluntary un-earmarked": 10000.0
       },
@@ -18369,7 +18344,7 @@
         "Voluntary un-earmarked": 500.0
       },
       {
-        "donor": "Micronesia (Federated States of)",
+        "donor": "Micronesia, Federated States of",
         "total": 500.0,
         "Voluntary un-earmarked": 500.0
       },
@@ -18446,7 +18421,7 @@
     ]
   },
   "UPU": {
-    "total": 70371619.88999999,
+    "total": 70371619.89,
     "year": 2013,
     "by_type": {
       "Assessed": 39454097.18,
@@ -18615,7 +18590,7 @@
         "Assessed": 239835.47
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 239835.47,
         "Assessed": 239835.47
       },
@@ -18820,7 +18795,7 @@
         "Assessed": 47967.1
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 47967.1,
         "Assessed": 47967.1
       },
@@ -18915,7 +18890,7 @@
         "Assessed": 47967.1
       },
       {
-        "donor": "China, Hong Kong Special Administrative Region",
+        "donor": "Hong Kong SAR",
         "total": 47967.1,
         "Assessed": 47967.1
       },
@@ -19170,7 +19145,7 @@
         "Assessed": 47967.1
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 47967.1,
         "Assessed": 47967.1
       },
@@ -19310,7 +19285,7 @@
         "Assessed": 23983.55
       },
       {
-        "donor": "China, Macao Special Administrative Region",
+        "donor": "Macao SAR",
         "total": 23983.55,
         "Assessed": 23983.55
       },
@@ -19422,7 +19397,7 @@
     ]
   },
   "WFP": {
-    "total": 4535848573.8,
+    "total": 4535848573.800001,
     "year": 2013,
     "by_type": {
       "Other": 427551582.4000002,
@@ -19590,7 +19565,7 @@
         "Voluntary earmarked": 5000000.0
       },
       {
-        "donor": "United Nations Development Programme",
+        "donor": "UNDP (as donor)",
         "total": 4695613.29,
         "Voluntary earmarked": 4695613.29
       },
@@ -19647,7 +19622,7 @@
         "Voluntary earmarked": 278532.62
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 250000.0,
         "Voluntary earmarked": 250000.0
       },
@@ -20073,7 +20048,7 @@
         "Assessed": 1620830.0
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 1458280.0,
         "Assessed": 1458280.0
       },
@@ -20125,7 +20100,7 @@
         "Assessed": 1096030.0
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 1082100.0,
         "Assessed": 1082100.0
       },
@@ -20591,7 +20566,7 @@
         "Voluntary earmarked": 50000.0
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 57510.0,
         "Assessed": 32510.0,
         "Voluntary earmarked": 25000.0
@@ -20781,7 +20756,7 @@
         "Assessed": 4650.0
       },
       {
-        "donor": "Micronesia (Federated States of)",
+        "donor": "Micronesia, Federated States of",
         "total": 4650.0,
         "Assessed": 4650.0
       },
@@ -20908,7 +20883,7 @@
     ]
   },
   "WIPO": {
-    "total": 398184280.07,
+    "total": 398184280.07000005,
     "year": 2013,
     "by_type": {
       "Assessed": 19783508.080000002,
@@ -21123,7 +21098,7 @@
         "Assessed": 51385.76
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 51385.76,
         "Assessed": 51385.76
       },
@@ -21336,7 +21311,7 @@
         "Assessed": 12846.72
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 12846.72,
         "Assessed": 12846.72
       },
@@ -21461,7 +21436,7 @@
         "Assessed": 3211.96
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 3211.96,
         "Assessed": 3211.96
       },
@@ -21501,7 +21476,7 @@
         "Assessed": 3211.96
       },
       {
-        "donor": "Micronesia (Federated States of)",
+        "donor": "Micronesia, Federated States of",
         "total": 3211.96,
         "Assessed": 3211.96
       },
@@ -21863,7 +21838,7 @@
     ]
   },
   "WMO": {
-    "total": 110599068.52999999,
+    "total": 110599068.53,
     "year": 2013,
     "by_type": {
       "Assessed": 73577562.61,
@@ -22065,7 +22040,7 @@
         "Assessed": 242757.41
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 228044.83,
         "Assessed": 228044.83
       },
@@ -22096,7 +22071,7 @@
         "Assessed": 183907.13
       },
       {
-        "donor": "Iran (Islamic Republic of)",
+        "donor": "Iran, Islamic Republic of",
         "total": 179848.47999999998,
         "Assessed": 169194.55,
         "Voluntary earmarked": 10653.93
@@ -22317,7 +22292,7 @@
         "Assessed": 22068.86
       },
       {
-        "donor": "China, Hong Kong Special Administrative Region",
+        "donor": "Hong Kong SAR",
         "total": 19808.42,
         "Assessed": 14712.57,
         "Voluntary earmarked": 5095.85
@@ -22412,7 +22387,7 @@
         "Assessed": 14712.57
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 14712.57,
         "Assessed": 14712.57
       },
@@ -22492,7 +22467,7 @@
         "Assessed": 14712.57
       },
       {
-        "donor": "Micronesia (Federated States of)",
+        "donor": "Micronesia, Federated States of",
         "total": 14712.57,
         "Assessed": 14712.57
       },
@@ -22602,7 +22577,7 @@
         "Assessed": 14712.57
       },
       {
-        "donor": "China, Macao Special Administrative Region",
+        "donor": "Macao SAR",
         "total": 14712.57,
         "Assessed": 14712.57
       },
@@ -22854,7 +22829,7 @@
     ]
   },
   "WTO": {
-    "total": 299773137.96999997,
+    "total": 299773137.97,
     "year": 2013,
     "by_type": {
       "Assessed": 220283815.42,
@@ -22932,7 +22907,7 @@
         "Voluntary earmarked": 3474669.35
       },
       {
-        "donor": "China, Hong Kong Special Administrative Region",
+        "donor": "Hong Kong SAR",
         "total": 5662248.12,
         "Assessed": 5662248.12
       },
@@ -22979,7 +22954,7 @@
         "Voluntary earmarked": 901920.0
       },
       {
-        "donor": "Taiwan (Chinese Taipei)",
+        "donor": "Taiwan, Province of China",
         "total": 3744365.98,
         "Assessed": 3455977.06,
         "Voluntary earmarked": 288388.92
@@ -23113,7 +23088,7 @@
         "Assessed": 830933.26
       },
       {
-        "donor": "Venezuela (Bolivarian Republic of)",
+        "donor": "Venezuela, Bolivarian Republic of",
         "total": 819912.92,
         "Assessed": 819912.92
       },
@@ -23229,7 +23204,7 @@
         "Assessed": 209386.36
       },
       {
-        "donor": "China, Macao Special Administrative Region",
+        "donor": "Macao SAR",
         "total": 207182.3,
         "Assessed": 207182.3
       },
@@ -23365,7 +23340,7 @@
         "Assessed": 72734.21
       },
       {
-        "donor": "Bolivia (Plurinational State of)",
+        "donor": "Bolivia, Plurinational State of",
         "total": 70530.14,
         "Assessed": 70530.14
       },
