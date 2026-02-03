@@ -16154,30 +16154,6 @@
       }
     }
   },
-  "Global Fund": {
-    "status": "organization",
-    "category": "Multilateral - Global Funds",
-    "contributions": {
-      "IOM": {
-        "Voluntary un-earmarked": 7289025.0
-      },
-      "UNAIDS": {
-        "Voluntary un-earmarked": 61370.0
-      },
-      "UNDP": {
-        "Voluntary un-earmarked": 390489244.0
-      },
-      "UNICEF": {
-        "Voluntary un-earmarked": 30505030.15
-      },
-      "UNITAR": {
-        "Voluntary un-earmarked": 110980.0
-      },
-      "WHO": {
-        "Voluntary un-earmarked": 2469931.0
-      }
-    }
-  },
   "Other Private": {
     "status": "organization",
     "category": "Non-Government",
@@ -16206,6 +16182,30 @@
       }
     },
     "is_other": true
+  },
+  "The Global Fund to Fight AIDS, Tuberculosis and Malaria": {
+    "status": "organization",
+    "category": "Non-Government",
+    "contributions": {
+      "IOM": {
+        "Voluntary un-earmarked": 7289025.0
+      },
+      "UNAIDS": {
+        "Voluntary un-earmarked": 61370.0
+      },
+      "UNDP": {
+        "Voluntary un-earmarked": 390489244.0
+      },
+      "UNICEF": {
+        "Voluntary un-earmarked": 30505030.15
+      },
+      "UNITAR": {
+        "Voluntary un-earmarked": 110980.0
+      },
+      "WHO": {
+        "Voluntary un-earmarked": 2469931.0
+      }
+    }
   },
   "Aruba": {
     "status": "nonmember",
