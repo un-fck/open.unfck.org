@@ -29,8 +29,8 @@ const formatYAxis = (value: number) => {
   return `$${value}`;
 };
 
-const formatTooltipValue = (value: number | null) => {
-  if (value === null || value === undefined) return "N/A";
+const formatTooltipValue = (value: unknown) => {
+  if (value === null || value === undefined || typeof value !== "number") return "N/A";
   return formatBudget(value);
 };
 
