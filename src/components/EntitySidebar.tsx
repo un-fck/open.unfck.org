@@ -3,7 +3,7 @@
 import { ExternalLink, X } from "lucide-react";
 import { ShareButton } from "@/components/ShareButton";
 import { useCallback, useEffect, useState } from "react";
-import { Entity, Impact, EntityRevenue } from "@/types";
+import { Entity, Impact, EntityRevenue, CountryExpense, EntitySpendingBreakdown } from "@/types";
 import { getSystemGroupingStyle } from "@/lib/systemGroupings";
 import { formatBudget } from "@/lib/entities";
 import { getContributionTypeBgColor, getContributionTypeOrder } from "@/lib/contributors";
@@ -14,6 +14,8 @@ import { YearSelector } from "@/components/ui/year-selector";
 import { useYearRanges, generateYearRange } from "@/lib/useYearRanges";
 import { EntityTrendChart, EntityTrendDataPoint } from "@/components/charts/EntityTrendChart";
 import { FinancingInstrumentChart, FinancingInstrumentDataPoint } from "@/components/charts/FinancingInstrumentChart";
+import { SDG_COLORS, SDG_SHORT_TITLES } from "@/lib/sdgs";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface EntityTrendsData {
   meta: { years: number[] };
@@ -47,8 +49,11 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
   const [impacts, setImpacts] = useState<Impact[]>([]);
   const [loadingImpacts, setLoadingImpacts] = useState(true);
   const [showAllDonors, setShowAllDonors] = useState(false);
+  const [showAllCountries, setShowAllCountries] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [spendingBreakdown, setSpendingBreakdown] = useState<EntitySpendingBreakdown | null>(null);
+  const [loadingSpending, setLoadingSpending] = useState(false);
   
   // Year selection
   const yearRanges = useYearRanges();
@@ -155,6 +160,36 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
         setLoadingImpacts(false);
       });
   }, [entity?.entity]);
+
+  // Fetch spending breakdown by country and SDG
+  useEffect(() => {
+    if (!entity?.entity) {
+      setSpendingBreakdown(null);
+      return;
+    }
+
+    setLoadingSpending(true);
+    Promise.all([
+      fetch(`${basePath}/data/country-expenses-${selectedYear}.json`)
+        .then(r => r.json())
+        .catch(() => []),
+      fetch(`${basePath}/data/sdg-expenses-${selectedYear}.json`)
+        .then(r => r.json())
+        .catch(() => ({})),
+    ]).then(([countryData, sdgData]: [CountryExpense[], Record<string, { total: number; entities: Record<string, number> }>]) => {
+      const byCountry = countryData
+        .filter(country => country.entities[entity.entity])
+        .map(country => ({ name: country.name, amount: country.entities[entity.entity] }))
+        .sort((a, b) => b.amount - a.amount);
+
+      const bySDG = Object.entries(sdgData)
+        .filter(([_, data]) => data.entities[entity.entity])
+        .map(([sdg, data]) => ({ sdg: parseInt(sdg), amount: data.entities[entity.entity] }))
+        .sort((a, b) => a.sdg - b.sdg);
+
+      setSpendingBreakdown({ byCountry, bySDG });
+    }).finally(() => setLoadingSpending(false));
+  }, [entity?.entity, selectedYear]);
 
   const handleClose = useCallback(() => {
     setIsClosing(true);
@@ -415,31 +450,52 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
                         key={contrib.donor}
                         className="flex items-center gap-2"
                       >
-                        <span className="w-20 flex-shrink-0 truncate text-left text-xs font-medium text-gray-700">
+                        <span className="w-24 flex-shrink-0 truncate text-left text-xs font-medium text-gray-700" title={contrib.donor}>
                           {contrib.donor.replace(
                             "United Kingdom of Great Britain and Northern Ireland",
                             "UK"
                           ).replace("United States of America", "USA")}
                         </span>
-                        <div className="flex flex-1 flex-col gap-px">
-                          <div
-                            className="flex h-2 overflow-hidden rounded-sm"
-                            style={{ width: `${normalizedWidth}%` }}
+                        <Tooltip delayDuration={200}>
+                          <TooltipTrigger asChild>
+                            <div className="flex flex-1 cursor-help flex-col gap-px">
+                              <div
+                                className="flex h-2 overflow-hidden rounded-sm"
+                                style={{ width: `${normalizedWidth}%` }}
+                              >
+                                {typeEntries.map(([type, amount]) => {
+                                  const typePercentage =
+                                    (amount / contrib.total) * 100;
+                                  return typePercentage > 0 ? (
+                                    <div
+                                      key={type}
+                                      className="transition-all"
+                                      style={{ width: `${typePercentage}%`, backgroundColor: getFinancingInstrumentColor(type) }}
+                                    />
+                                  ) : null;
+                                })}
+                              </div>
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent
+                            side="top"
+                            className="border border-slate-200 bg-white text-slate-800 shadow-lg"
                           >
-                            {typeEntries.map(([type, amount]) => {
-                              const typePercentage =
-                                (amount / contrib.total) * 100;
-                              return typePercentage > 0 ? (
-                                <div
-                                  key={type}
-                                  className="transition-all"
-                                  style={{ width: `${typePercentage}%`, backgroundColor: getFinancingInstrumentColor(type) }}
-                                />
-                              ) : null;
-                            })}
-                          </div>
-                        </div>
-                        <div className="w-20 flex-shrink-0 text-right text-xs text-gray-500">
+                            <div className="space-y-1 text-xs">
+                              <p className="font-medium">{contrib.donor}</p>
+                              {typeEntries.map(([type, amount]) => (
+                                <div key={type} className="flex items-center justify-between gap-4">
+                                  <span className="flex items-center gap-1.5">
+                                    <span className="h-2 w-2 rounded-full" style={{ backgroundColor: getFinancingInstrumentColor(type) }} />
+                                    {type}
+                                  </span>
+                                  <span className="font-medium">{formatBudgetFixed(amount)}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </TooltipContent>
+                        </Tooltip>
+                        <div className="w-16 flex-shrink-0 text-right text-xs text-gray-500">
                           {formatBudgetFixed(contrib.total)}
                         </div>
                       </div>
@@ -459,6 +515,99 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
             )}
           </div>
 
+          {/* Spending by Country Section */}
+          {spendingBreakdown && spendingBreakdown.byCountry.length > 0 && (
+            <div className="mt-4">
+              <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
+                Spending by Country
+              </span>
+              {loadingSpending ? (
+                <p className="mt-2 text-sm text-gray-500">Loading spending data...</p>
+              ) : (
+                <div className="mt-2 space-y-1.5">
+                  {(showAllCountries ? spendingBreakdown.byCountry : spendingBreakdown.byCountry.slice(0, 10)).map((country) => {
+                    const maxAmount = spendingBreakdown.byCountry[0]?.amount || 1;
+                    const normalizedWidth = (country.amount / maxAmount) * 100;
+
+                    return (
+                      <div
+                        key={country.name}
+                        className="flex items-center gap-2"
+                      >
+                        <span className="w-24 flex-shrink-0 truncate text-left text-xs font-medium text-gray-700" title={country.name}>
+                          {country.name}
+                        </span>
+                        <div className="flex flex-1 flex-col gap-px">
+                          <div
+                            className="h-2 rounded-sm bg-un-blue"
+                            style={{ width: `${normalizedWidth}%` }}
+                          />
+                        </div>
+                        <div className="w-16 flex-shrink-0 text-right text-xs text-gray-500">
+                          {formatBudgetFixed(country.amount)}
+                        </div>
+                      </div>
+                    );
+                  })}
+
+                  {!showAllCountries && spendingBreakdown.byCountry.length > 10 && (
+                    <button
+                      onClick={() => setShowAllCountries(true)}
+                      className="mt-2 text-xs text-gray-600 underline hover:text-gray-900"
+                    >
+                      Show all {spendingBreakdown.byCountry.length} countries
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Spending by SDG Section */}
+          {spendingBreakdown && spendingBreakdown.bySDG.length > 0 && (
+            <div className="mt-4">
+              <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
+                Spending by SDG
+              </span>
+              {loadingSpending ? (
+                <p className="mt-2 text-sm text-gray-500">Loading spending data...</p>
+              ) : (
+                <div className="mt-2 space-y-1.5">
+                  {spendingBreakdown.bySDG.map((item) => {
+                    const maxAmount = Math.max(...spendingBreakdown.bySDG.map(s => s.amount));
+                    const normalizedWidth = (item.amount / maxAmount) * 100;
+
+                    return (
+                      <div
+                        key={item.sdg}
+                        className="flex items-center gap-2"
+                      >
+                        <span className="w-24 flex-shrink-0 truncate text-xs text-gray-700" title={SDG_SHORT_TITLES[item.sdg]}>
+                          {SDG_SHORT_TITLES[item.sdg]}
+                        </span>
+                        <div
+                          className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded text-[10px] font-bold text-white"
+                          style={{ backgroundColor: SDG_COLORS[item.sdg] }}
+                        >
+                          {item.sdg}
+                        </div>
+                        <div className="flex flex-1 flex-col gap-px">
+                          <div
+                            className="h-2 rounded-sm"
+                            style={{ width: `${normalizedWidth}%`, backgroundColor: SDG_COLORS[item.sdg] }}
+                          />
+                        </div>
+                        <div className="w-16 flex-shrink-0 text-right text-xs text-gray-500">
+                          {formatBudgetFixed(item.amount)}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Impact Section */}
           <div>
             <h3 className="mb-3 text-lg font-normal uppercase tracking-wider text-gray-900 sm:text-xl">
@@ -467,19 +616,22 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
             {loadingImpacts ? (
               <p className="text-sm text-gray-500">Loading impacts...</p>
             ) : impacts.length > 0 ? (
-              <div className="space-y-3">
-                {impacts.map((impact) => (
-                  <div
-                    key={impact.id}
-                    className="flex items-stretch gap-3 rounded-md bg-gray-50 p-3"
-                  >
-                    <div className="w-1.5 flex-shrink-0 rounded-sm bg-un-blue" />
-                    <p className="text-sm leading-relaxed text-gray-700">
-                      {impact.impact}
-                    </p>
-                  </div>
-                ))}
-              </div>
+              <>
+                <div className="space-y-3">
+                  {impacts.map((impact) => (
+                    <div
+                      key={impact.id}
+                      className="flex items-stretch gap-3 rounded-md bg-gray-50 p-3"
+                    >
+                      <div className="w-1.5 flex-shrink-0 rounded-sm bg-un-blue" />
+                      <p className="text-sm leading-relaxed text-gray-700">
+                        {impact.impact}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-3 text-xs text-gray-400">Impacts extracted from 2024 annual report.</p>
+              </>
             ) : (
               <p className="text-sm italic text-gray-500">
                 No impact data available for this entity.

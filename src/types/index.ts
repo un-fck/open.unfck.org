@@ -64,3 +64,18 @@ export interface EntityRevenue {
   by_type: Record<string, number>;
   by_donor: DonorContribution[];
 }
+
+export interface CountryExpense {
+  iso3: string;
+  name: string;
+  region: string;
+  lat: number;
+  long: number;
+  total: number;
+  entities: Record<string, number>;
+}
+
+export interface EntitySpendingBreakdown {
+  byCountry: { name: string; amount: number }[];
+  bySDG: { sdg: number; amount: number }[];
+}

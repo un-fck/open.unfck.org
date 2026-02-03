@@ -19,6 +19,7 @@ import { useYearRanges, generateYearRange } from "@/lib/useYearRanges";
 import { FinancingInstrumentChart, FinancingInstrumentDataPoint } from "@/components/charts/FinancingInstrumentChart";
 import { FinancingInstrumentLabel } from "@/components/FinancingInstrumentLabel";
 import { getFinancingInstrumentColor } from "@/lib/financingInstruments";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -341,28 +342,49 @@ export function ContributorSidebar({
                             key={contrib.entity}
                             className="flex items-center gap-2"
                           >
-                            <span className="w-20 flex-shrink-0 truncate text-left text-xs font-medium text-gray-700">
+                            <span className="w-24 flex-shrink-0 truncate text-left text-xs font-medium text-gray-700" title={contrib.entity}>
                               {contrib.entity}
                             </span>
-                            <div className="flex flex-1 flex-col gap-px">
-                              <div
-                                className="flex h-2 overflow-hidden rounded-sm"
-                                style={{ width: `${normalizedWidth}%` }}
+                            <Tooltip delayDuration={200}>
+                              <TooltipTrigger asChild>
+                                <div className="flex flex-1 cursor-help flex-col gap-px">
+                                  <div
+                                    className="flex h-2 overflow-hidden rounded-sm"
+                                    style={{ width: `${normalizedWidth}%` }}
+                                  >
+                                    {typeEntries.map(([type, amount]) => {
+                                      const typePercentage =
+                                        (amount / contrib.total) * 100;
+                                      return typePercentage > 0 ? (
+                                        <div
+                                          key={type}
+                                          className="transition-all"
+                                          style={{ width: `${typePercentage}%`, backgroundColor: getFinancingInstrumentColor(type) }}
+                                        />
+                                      ) : null;
+                                    })}
+                                  </div>
+                                </div>
+                              </TooltipTrigger>
+                              <TooltipContent
+                                side="top"
+                                className="border border-slate-200 bg-white text-slate-800 shadow-lg"
                               >
-                                {typeEntries.map(([type, amount]) => {
-                                  const typePercentage =
-                                    (amount / contrib.total) * 100;
-                                  return typePercentage > 0 ? (
-                                    <div
-                                      key={type}
-                                      className="transition-all"
-                                      style={{ width: `${typePercentage}%`, backgroundColor: getFinancingInstrumentColor(type) }}
-                                    />
-                                  ) : null;
-                                })}
-                              </div>
-                            </div>
-                            <div className="w-20 flex-shrink-0 text-right text-xs text-gray-500">
+                                <div className="space-y-1 text-xs">
+                                  <p className="font-medium">{contrib.entity}</p>
+                                  {typeEntries.map(([type, amount]) => (
+                                    <div key={type} className="flex items-center justify-between gap-4">
+                                      <span className="flex items-center gap-1.5">
+                                        <span className="h-2 w-2 rounded-full" style={{ backgroundColor: getFinancingInstrumentColor(type) }} />
+                                        {type}
+                                      </span>
+                                      <span className="font-medium">{formatBudgetFixed(amount)}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              </TooltipContent>
+                            </Tooltip>
+                            <div className="w-16 flex-shrink-0 text-right text-xs text-gray-500">
                               {formatBudgetFixed(contrib.total)}
                             </div>
                           </div>
