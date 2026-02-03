@@ -14,6 +14,7 @@ import {
 } from "@/lib/contributors";
 import { ShareButton } from "@/components/ShareButton";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
+import { navigateToSidebar } from "@/hooks/useDeepLink";
 import { YearSelector } from "@/components/ui/year-selector";
 import { useYearRanges, generateYearRange } from "@/lib/useYearRanges";
 import { FinancingInstrumentChart, FinancingInstrumentDataPoint } from "@/components/charts/FinancingInstrumentChart";
@@ -149,10 +150,9 @@ export function ContributorSidebar({
   };
 
   useEffect(() => {
-    const originalOverflow = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
     return () => {
-      document.documentElement.style.overflow = originalOverflow;
+      document.documentElement.style.overflow = "";
     };
   }, []);
 
@@ -342,9 +342,13 @@ export function ContributorSidebar({
                             key={contrib.entity}
                             className="flex items-center gap-2"
                           >
-                            <span className="w-24 flex-shrink-0 truncate text-left text-xs font-medium text-gray-700" title={contrib.entity}>
+                            <button
+                              onClick={() => navigateToSidebar("entity", contrib.entity)}
+                              className="w-24 flex-shrink-0 truncate text-left text-xs font-medium text-gray-700 hover:text-un-blue hover:underline"
+                              title={contrib.entity}
+                            >
                               {contrib.entity}
-                            </span>
+                            </button>
                             <Tooltip delayDuration={200}>
                               <TooltipTrigger asChild>
                                 <div className="flex flex-1 cursor-help flex-col gap-px">

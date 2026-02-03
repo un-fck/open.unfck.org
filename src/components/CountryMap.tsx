@@ -56,6 +56,7 @@ export function CountryMap() {
   const [pendingDeepLink, setPendingDeepLink] = useDeepLink({
     hashPrefix: "country",
     sectionId: "countries",
+    onNavigateAway: () => setSelectedCountry(null),
   });
 
   // Open sidebar when data is loaded and there's a pending deep link
@@ -72,7 +73,7 @@ export function CountryMap() {
       }
       setPendingDeepLink(null);
     }
-  }, [loading, pendingDeepLink, countryData]);
+  }, [loading, pendingDeepLink, countryData, setPendingDeepLink]);
 
   useEffect(() => {
     setLoading(true);

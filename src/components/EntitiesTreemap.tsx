@@ -144,6 +144,7 @@ export function EntitiesTreemap() {
   const [pendingDeepLink, setPendingDeepLink] = useDeepLink({
     hashPrefix: "entity",
     sectionId: "entities",
+    onNavigateAway: () => setSelectedEntity(null),
   });
 
   // Open sidebar when data is loaded and there's a pending deep link
@@ -155,7 +156,7 @@ export function EntitiesTreemap() {
       }
       setPendingDeepLink(null);
     }
-  }, [loading, pendingDeepLink, entities]);
+  }, [loading, pendingDeepLink, entities, setPendingDeepLink]);
 
   // Current year based on mode
   const currentYear = showRevenue ? revenueYear : spendingYear;

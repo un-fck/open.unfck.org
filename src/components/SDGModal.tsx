@@ -6,6 +6,7 @@ import { formatBudget } from "@/lib/entities";
 import { SDG } from "@/lib/sdgs";
 import { ShareButton } from "@/components/ShareButton";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
+import { navigateToSidebar } from "@/hooks/useDeepLink";
 import { YearSelector } from "@/components/ui/year-selector";
 import { useYearRanges, generateYearRange } from "@/lib/useYearRanges";
 
@@ -100,10 +101,9 @@ export default function SDGModal({
   };
 
   useEffect(() => {
-    const originalOverflow = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
     return () => {
-      document.documentElement.style.overflow = originalOverflow;
+      document.documentElement.style.overflow = "";
     };
   }, []);
 
@@ -213,9 +213,13 @@ export default function SDGModal({
                         key={entity.name}
                         className="flex items-center gap-2"
                       >
-                        <span className="w-20 flex-shrink-0 truncate text-left text-xs font-medium text-gray-700">
+                        <button
+                          onClick={() => navigateToSidebar("entity", entity.name)}
+                          className="w-20 flex-shrink-0 truncate text-left text-xs font-medium text-gray-700 hover:text-un-blue hover:underline"
+                          title={entity.name}
+                        >
                           {entity.name}
-                        </span>
+                        </button>
                         <div className="flex flex-1 flex-col gap-px">
                           <div
                             className="flex h-2 overflow-hidden rounded-sm"

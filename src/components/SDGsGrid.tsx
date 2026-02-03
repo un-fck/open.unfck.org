@@ -46,6 +46,7 @@ export default function SDGsGrid() {
     hashPrefix: "sdg",
     sectionId: "sdgs",
     transform: parseSDGNumber,
+    onNavigateAway: () => setSelectedSDG(null),
   });
 
   // Open modal when data is loaded and there's a pending deep link
@@ -57,7 +58,7 @@ export default function SDGsGrid() {
       }
       setPendingDeepLink(null);
     }
-  }, [pendingDeepLink, sdgs]);
+  }, [pendingDeepLink, sdgs, setPendingDeepLink]);
 
   useEffect(() => {
     fetch(`${basePath}/data/sdgs.json`)

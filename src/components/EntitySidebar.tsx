@@ -10,6 +10,7 @@ import { getContributionTypeBgColor, getContributionTypeOrder } from "@/lib/cont
 import { FinancingInstrumentLabel } from "@/components/FinancingInstrumentLabel";
 import { getFinancingInstrumentColor } from "@/lib/financingInstruments";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
+import { navigateToSidebar } from "@/hooks/useDeepLink";
 import { YearSelector } from "@/components/ui/year-selector";
 import { useYearRanges, generateYearRange } from "@/lib/useYearRanges";
 import { EntityTrendChart, EntityTrendDataPoint } from "@/components/charts/EntityTrendChart";
@@ -179,7 +180,7 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
     ]).then(([countryData, sdgData]: [CountryExpense[], Record<string, { total: number; entities: Record<string, number> }>]) => {
       const byCountry = countryData
         .filter(country => country.entities[entity.entity])
-        .map(country => ({ name: country.name, amount: country.entities[entity.entity] }))
+        .map(country => ({ name: country.name, iso3: country.iso3, amount: country.entities[entity.entity] }))
         .sort((a, b) => b.amount - a.amount);
 
       const bySDG = Object.entries(sdgData)
@@ -217,10 +218,9 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
   };
 
   useEffect(() => {
-    const originalOverflow = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
     return () => {
-      document.documentElement.style.overflow = originalOverflow;
+      document.documentElement.style.overflow = "";
     };
   }, []);
 
@@ -450,12 +450,16 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
                         key={contrib.donor}
                         className="flex items-center gap-2"
                       >
-                        <span className="w-24 flex-shrink-0 truncate text-left text-xs font-medium text-gray-700" title={contrib.donor}>
+                        <button
+                          onClick={() => navigateToSidebar("donor", contrib.donor)}
+                          className="w-24 flex-shrink-0 truncate text-left text-xs font-medium text-gray-700 hover:text-un-blue hover:underline"
+                          title={contrib.donor}
+                        >
                           {contrib.donor.replace(
                             "United Kingdom of Great Britain and Northern Ireland",
                             "UK"
                           ).replace("United States of America", "USA")}
-                        </span>
+                        </button>
                         <Tooltip delayDuration={200}>
                           <TooltipTrigger asChild>
                             <div className="flex flex-1 cursor-help flex-col gap-px">
@@ -531,12 +535,16 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
 
                     return (
                       <div
-                        key={country.name}
+                        key={country.iso3}
                         className="flex items-center gap-2"
                       >
-                        <span className="w-24 flex-shrink-0 truncate text-left text-xs font-medium text-gray-700" title={country.name}>
+                        <button
+                          onClick={() => navigateToSidebar("country", country.iso3)}
+                          className="w-24 flex-shrink-0 truncate text-left text-xs font-medium text-gray-700 hover:text-un-blue hover:underline"
+                          title={country.name}
+                        >
                           {country.name}
-                        </span>
+                        </button>
                         <div className="flex flex-1 flex-col gap-px">
                           <div
                             className="h-2 rounded-sm bg-un-blue"
@@ -578,11 +586,12 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
                     const normalizedWidth = (item.amount / maxAmount) * 100;
 
                     return (
-                      <div
+                      <button
                         key={item.sdg}
-                        className="flex items-center gap-2"
+                        onClick={() => navigateToSidebar("sdg", item.sdg)}
+                        className="group flex w-full items-center gap-2 rounded hover:bg-gray-50"
                       >
-                        <span className="w-24 flex-shrink-0 truncate text-xs text-gray-700" title={SDG_SHORT_TITLES[item.sdg]}>
+                        <span className="w-24 flex-shrink-0 truncate text-left text-xs text-gray-700 group-hover:text-un-blue group-hover:underline" title={SDG_SHORT_TITLES[item.sdg]}>
                           {SDG_SHORT_TITLES[item.sdg]}
                         </span>
                         <div
@@ -600,7 +609,7 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
                         <div className="w-16 flex-shrink-0 text-right text-xs text-gray-500">
                           {formatBudgetFixed(item.amount)}
                         </div>
-                      </div>
+                      </button>
                     );
                   })}
                 </div>

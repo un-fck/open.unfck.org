@@ -170,6 +170,7 @@ export function ContributorsTreemap() {
   const [pendingDeepLink, setPendingDeepLink] = useDeepLink({
     hashPrefix: "donor",
     sectionId: "donors",
+    onNavigateAway: () => setSelectedContributor(null),
   });
 
   // Open sidebar when data is loaded and there's a pending deep link
@@ -181,7 +182,7 @@ export function ContributorsTreemap() {
       }
       setPendingDeepLink(null);
     }
-  }, [loading, pendingDeepLink, contributors]);
+  }, [loading, pendingDeepLink, contributors, setPendingDeepLink]);
 
   useEffect(() => {
     setLoading(true);

@@ -76,6 +76,6 @@ export interface CountryExpense {
 }
 
 export interface EntitySpendingBreakdown {
-  byCountry: { name: string; amount: number }[];
+  byCountry: { name: string; iso3: string; amount: number }[];
   bySDG: { sdg: number; amount: number }[];
 }

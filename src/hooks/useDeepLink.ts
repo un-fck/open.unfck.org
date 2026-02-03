@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface UseDeepLinkOptions<T> {
   /** The hash prefix to match (e.g., "donor", "entity", "country", "sdg") */
@@ -9,11 +9,20 @@ interface UseDeepLinkOptions<T> {
   sectionId: string;
   /** Transform the hash value (default: identity function) */
   transform?: (value: string) => T;
+  /** Callback when hash changes to a different type (for closing sidebars) */
+  onNavigateAway?: () => void;
+}
+
+/** Navigate to a sidebar by updating the URL hash */
+export function navigateToSidebar(type: string, value: string | number) {
+  window.history.pushState(null, "", `#${type}=${encodeURIComponent(String(value))}`);
+  window.dispatchEvent(new HashChangeEvent("hashchange"));
 }
 
 /**
  * Hook for handling deep links with hash-based routing.
  * Parses URL hash, sets pending value, and scrolls to section.
+ * Listens for hashchange and popstate events to handle runtime navigation.
  * 
  * @returns The pending deep link value (or null if none)
  */
@@ -21,28 +30,51 @@ export function useDeepLink<T = string>({
   hashPrefix,
   sectionId,
   transform,
+  onNavigateAway,
 }: UseDeepLinkOptions<T>): [T | null, (value: T | null) => void] {
   const [pendingDeepLink, setPendingDeepLink] = useState<T | null>(null);
+  
+  // Use ref to avoid recreating processHash when callback changes
+  const onNavigateAwayRef = useRef(onNavigateAway);
+  onNavigateAwayRef.current = onNavigateAway;
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const hash = window.location.hash;
-      const prefix = `#${hashPrefix}=`;
-      if (hash.startsWith(prefix)) {
-        const rawValue = decodeURIComponent(hash.replace(prefix, ""));
-        const value = transform ? transform(rawValue) : (rawValue as unknown as T);
-        
-        // For number transforms, check if parsing succeeded
-        if (value !== null && value !== undefined && !Number.isNaN(value)) {
-          setPendingDeepLink(value);
-          // Scroll to the section
-          setTimeout(() => {
-            document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
-          }, 100);
-        }
+  const processHash = useCallback(() => {
+    if (typeof window === "undefined") return;
+    const hash = window.location.hash;
+    const prefix = `#${hashPrefix}=`;
+    
+    if (hash.startsWith(prefix)) {
+      const rawValue = decodeURIComponent(hash.replace(prefix, ""));
+      const value = transform ? transform(rawValue) : (rawValue as unknown as T);
+      if (value !== null && value !== undefined && !Number.isNaN(value)) {
+        setPendingDeepLink(value);
+        // Delay scroll to allow any closing sidebars to restore overflow first
+        setTimeout(() => {
+          document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+        }, 350);
       }
+    } else if (hash && !hash.startsWith(prefix)) {
+      // Hash changed to different type - close this component's sidebar
+      onNavigateAwayRef.current?.();
     }
   }, [hashPrefix, sectionId, transform]);
+
+  // Process hash on mount
+  useEffect(() => {
+    processHash();
+  }, [processHash]);
+
+  // Listen for hash changes and browser navigation
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const handleChange = () => processHash();
+    window.addEventListener("hashchange", handleChange);
+    window.addEventListener("popstate", handleChange);
+    return () => {
+      window.removeEventListener("hashchange", handleChange);
+      window.removeEventListener("popstate", handleChange);
+    };
+  }, [processHash]);
 
   return [pendingDeepLink, setPendingDeepLink];
 }

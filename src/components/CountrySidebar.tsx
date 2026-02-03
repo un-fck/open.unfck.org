@@ -5,6 +5,7 @@ import { ShareButton } from "@/components/ShareButton";
 import { useCallback, useEffect, useState } from "react";
 import { formatBudget } from "@/lib/entities";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
+import { navigateToSidebar } from "@/hooks/useDeepLink";
 import { YearSelector } from "@/components/ui/year-selector";
 import { useYearRanges, generateYearRange } from "@/lib/useYearRanges";
 
@@ -99,10 +100,9 @@ export function CountrySidebar({ country, initialYear, onClose }: CountrySidebar
   };
 
   useEffect(() => {
-    const originalOverflow = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
     return () => {
-      document.documentElement.style.overflow = originalOverflow;
+      document.documentElement.style.overflow = "";
     };
   }, []);
 
@@ -201,9 +201,13 @@ export function CountrySidebar({ country, initialYear, onClose }: CountrySidebar
                 const normalizedWidth = (amount / maxEntityTotal) * 100;
                 return (
                   <div key={entity} className="flex items-center gap-2">
-                    <span className="w-20 flex-shrink-0 truncate text-left text-xs font-medium text-gray-700">
+                    <button
+                      onClick={() => navigateToSidebar("entity", entity)}
+                      className="w-20 flex-shrink-0 truncate text-left text-xs font-medium text-gray-700 hover:text-un-blue hover:underline"
+                      title={entity}
+                    >
                       {entity}
-                    </span>
+                    </button>
                     <div className="flex flex-1 flex-col gap-px">
                       <div
                         className="h-2 rounded-sm bg-un-blue transition-all"
