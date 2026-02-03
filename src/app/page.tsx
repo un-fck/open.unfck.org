@@ -11,6 +11,7 @@ import {
   Users,
 } from "lucide-react";
 import Image from "next/image";
+import { AnimatedCornerLogo } from "@/components/AnimatedCornerLogo";
 import { ContributorsTreemap } from "@/components/ContributorsTreemap";
 import { ContributorTrendsChart } from "@/components/ContributorTrendsChart";
 import { CountryMap } from "@/components/CountryMap";
@@ -29,6 +30,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
+      <AnimatedCornerLogo />
       {/* Header */}
       <PageHeader />
 
