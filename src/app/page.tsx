@@ -119,12 +119,46 @@ export default function Home() {
               <ExpandableCard id="methodology" title="Methodology">
                 <div className="space-y-4">
                   <p>
-                    Data is sourced from the UN Chief Executives Board (CEB)
-                    financial statistics and the UN Secretariat Annual Report.
-                    CEB data comes from audited financial statements aligned
-                    with the Data Standards for UN System-Wide Reporting of
-                    Financial Data. Secretariat entities are integrated as
-                    sub-entities within the UN Secretariat entry.
+                    Data is sourced from the{" "}
+                    <a href="https://unsceb.org/financial-statistics" className="underline hover:text-un-blue" target="_blank" rel="noopener noreferrer">
+                      UN Chief Executives Board (CEB) financial statistics
+                    </a>{" "}
+                    database, covering 48 UN System organizations. CEB data comes from audited
+                    financial statements aligned with the{" "}
+                    <a href="https://unsceb.org/data-standards-united-nations-system-wide-reporting-financial-data" className="underline hover:text-un-blue" target="_blank" rel="noopener noreferrer">
+                      Data Standards for UN System-Wide Reporting of Financial Data
+                    </a>.
+                  </p>
+                  <p>
+                    For enhanced granularity, UN Secretariat expenses are integrated from the{" "}
+                    <a href="https://www.un.org/annualreport/" className="underline hover:text-un-blue" target="_blank" rel="noopener noreferrer">
+                      UN Secretariat Annual Report
+                    </a>, sourced from data published in the{" "}
+                    <a href="https://results.un.org/" className="underline hover:text-un-blue" target="_blank" rel="noopener noreferrer">
+                      UN Secretariat Programme Budget
+                    </a>{" "}
+                    and audited financial statements. This allows expenses to be viewed by
+                    organizational entity within the UN Secretariat.
+                  </p>
+
+                  <h4 className="mt-6 font-medium text-gray-900">Revenue Data</h4>
+                  <p className="text-sm">
+                    Revenue figures combine CEB data on government and non-government contributors.
+                    For 2021 onwards, contributors are categorized by type (Governments, Foundations,
+                    Private Sector, Multilateral Organizations, etc.) using the CEB&apos;s contributor
+                    classification system. For earlier years, contributor categories are partially
+                    available. Where specific donors are not identified, contributions are shown as
+                    aggregated totals (e.g., &ldquo;Other Foundations&rdquo;).
+                  </p>
+
+                  <h4 className="mt-6 font-medium text-gray-900">Expenses Data</h4>
+                  <p className="text-sm">
+                    Expenses figures use CEB data as the primary source, covering 48+ UN entities.
+                    For years 2019-2023, we integrate UN Secretariat data to break down the &ldquo;UN&rdquo; and
+                    &ldquo;UN-DPO&rdquo; aggregates into their constituent departments and peacekeeping missions
+                    (150+ sub-entities). Note that CEB figures aggregate individual entity statements without
+                    adjusting for inter-agency transfers, while Secretariat data is consolidated and eliminates
+                    internal transfers, resulting in slightly lower but more accurate totals.
                   </p>
 
                   <h4 className="mt-6 font-medium text-gray-900">Notes</h4>

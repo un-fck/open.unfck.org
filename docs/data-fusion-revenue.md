@@ -74,6 +74,12 @@ File: `data/ceb/fused/revenue_by_contributor.csv`
 
 3. **Negative amounts**: Legitimate accounting entries from audited statements including FX losses, refunds, and prior-period corrections. Approximately 1-2B/year in negative entries across all categories.
 
+4. **Donor name variations**: Multiple variants of the same donor (e.g., "GAVI Alliance" / "GAVI The Vaccine Alliance") are normalized via `DONOR_MAPPING` in `utils.py`.
+
+5. **Category misclassifications**: Some donors appear with incorrect C-codes in the source data. `DONOR_CATEGORY_OVERRIDES` in `utils.py` fixes known cases (e.g., Bill & Melinda Gates Foundation → Foundations, European Union → EU).
+
+6. **Generic bucket donors**: Entries like "Private Sector", "Private Donors" are aggregated catch-all buckets, not specific donors. These are marked as `is_other=True` via `GENERIC_DONORS` in `utils.py`.
+
 ### Coverage Gaps
 
 - Pre-2013: No government donor breakdown available
