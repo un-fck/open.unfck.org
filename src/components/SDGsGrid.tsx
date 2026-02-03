@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import SDGModal from "./SDGModal";
 import { YearSlider } from "@/components/YearSlider";
 import { useDeepLink } from "@/hooks/useDeepLink";
@@ -124,9 +124,11 @@ export default function SDGsGrid() {
 
   const [sdgs, setSdgs] = useState<SDG[]>([]);
   const [selectedSDG, setSelectedSDG] = useState<SDG | null>(null);
-  const [showSpending, setShowSpending] = useState<boolean>(true);
-  const [showEntities, setShowEntities] = useState<boolean>(true); // Controls entity visibility
-  const [bgFaded, setBgFaded] = useState<boolean>(true); // Background fades to light when entities visible
+  const [showSpending, setShowSpending] = useState<boolean>(false);
+  const [showEntities, setShowEntities] = useState<boolean>(false); // Controls entity visibility
+  const [bgFaded, setBgFaded] = useState<boolean>(false); // Background fades to light when entities visible
+  const [hasScrollRevealed, setHasScrollRevealed] = useState<boolean>(false);
+  const gridRef = useRef<HTMLDivElement>(null);
   const [expensesData, setExpensesData] = useState<SDGExpensesData | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedYear, setSelectedYear] = useState<number>(yearRanges.sdgExpenses.default);
@@ -136,15 +138,35 @@ export default function SDGsGrid() {
     if (showSpending) {
       // Going to spending: entities fade in immediately, bg fades after
       setShowEntities(true);
-      const timer = setTimeout(() => setBgFaded(true), 250);
+      const timer = setTimeout(() => setBgFaded(true), 800);
       return () => clearTimeout(timer);
     } else {
-      // Going to grid: bg restores first (500ms), then entities fade out
+      // Going to grid: bg restores first (1400ms), then entities fade out
       setBgFaded(false);
-      const timer = setTimeout(() => setShowEntities(false), 500);
+      const timer = setTimeout(() => setShowEntities(false), 1400);
       return () => clearTimeout(timer);
     }
   }, [showSpending]);
+
+  // Scroll-triggered reveal: transition when grid top reaches 40% from viewport top
+  useEffect(() => {
+    if (hasScrollRevealed) return;
+    let ticking = false;
+    const handleScroll = () => {
+      if (ticking || !gridRef.current) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        if (gridRef.current && gridRef.current.getBoundingClientRect().top < window.innerHeight * 0.4) {
+          setHasScrollRevealed(true);
+          setShowSpending(true);
+        }
+        ticking = false;
+      });
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [hasScrollRevealed]);
 
   const parseSDGNumber = useCallback((value: string) => {
     const num = parseInt(value, 10);
@@ -257,7 +279,7 @@ export default function SDGsGrid() {
         </div>
       </div>
 
-      <div className="relative h-[calc(100vh-320px)] min-h-[600px] w-full">
+      <div ref={gridRef} className="relative h-[calc(100vh-320px)] min-h-[600px] w-full">
         {filteredSDGData.map((sdgData) => {
           const sdgNumber = sdgData.sdgNumber;
           const sdg = sdgs.find((s) => s.number === sdgNumber);
@@ -278,20 +300,21 @@ export default function SDGsGrid() {
             <Tooltip key={sdgNumber} delayDuration={50}>
               <TooltipTrigger asChild>
                 <div
-                  className="absolute cursor-pointer overflow-hidden text-white transition-all duration-500 ease-in-out hover:brightness-110"
+                  className="absolute cursor-pointer overflow-hidden text-white transition-all ease-in-out hover:brightness-110"
                   style={{
                     left: `${pos.x}%`,
                     top: `${pos.y}%`,
                     width: `${pos.width}%`,
                     height: `${pos.height}%`,
                     backgroundColor: bgFaded ? "#e5e7eb" : color,
+                    transitionDuration: "1400ms",
                   }}
                   onClick={() => sdg && setSelectedSDG(sdg)}
                 >
                   {/* Entity sub-treemap with fade */}
                   <div
-                    className="absolute inset-0 transition-opacity duration-300"
-                    style={{ opacity: showEntities ? 1 : 0 }}
+                    className="absolute inset-0 transition-opacity"
+                    style={{ opacity: showEntities ? 1 : 0, transitionDuration: "1000ms" }}
                   >
                     {entityRects.map((rect, i) => (
                       <div
@@ -316,20 +339,21 @@ export default function SDGsGrid() {
 
                   {/* SDG label - full cell in grid mode, corner overlay in spending mode */}
                   <div
-                    className="absolute z-10 flex transition-all duration-500"
+                    className="absolute z-10 flex transition-all"
                     style={{
                       left: 0,
                       top: 0,
                       padding: showSpending ? "0.5rem" : "1rem",
                       backgroundColor: showSpending ? color : "transparent",
+                      transitionDuration: "1400ms",
                     }}
                   >
                     <span className="mr-2 flex-shrink-0 text-2xl font-bold leading-none sm:text-3xl">{sdgNumber}</span>
                     <div className="flex flex-col pt-0.5">
                       <span className="text-left text-xs font-semibold leading-tight sm:text-sm">{shortTitle}</span>
                       <span
-                        className="mt-0.5 text-xs opacity-90 transition-opacity duration-300 sm:text-sm"
-                        style={{ opacity: showSpending ? 1 : 0 }}
+                        className="mt-0.5 text-xs opacity-90 transition-opacity sm:text-sm"
+                        style={{ opacity: showSpending ? 1 : 0, transitionDuration: "600ms" }}
                       >
                         {formatBudget(sdgData.total)}
                       </span>
