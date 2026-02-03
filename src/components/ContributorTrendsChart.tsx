@@ -122,8 +122,8 @@ export function ContributorTrendsChart() {
         } else if (id === "non-gov") {
           point["Non-Government"] = data.aggregates["non-gov"][idx]?.total || 0;
         } else if (id.startsWith("cat:") && data.aggregates[id]) {
-          // Category aggregate
-          const catName = id.replace("cat:", "");
+          // Category aggregate - prefix to avoid collision with individual donors
+          const catName = id.replace("cat:", "") + " (all)";
           point[catName] = data.aggregates[id][idx]?.total || 0;
         } else if (data.contributors[id]) {
           point[id] = data.contributors[id][idx]?.total || 0;
@@ -147,7 +147,7 @@ export function ContributorTrendsChart() {
       } else if (id === "non-gov") {
         name = "Non-Government";
       } else if (id.startsWith("cat:")) {
-        name = id.replace("cat:", "");
+        name = id.replace("cat:", "") + " (all)";
       } else {
         name = id;
       }
