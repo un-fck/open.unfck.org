@@ -175,7 +175,6 @@ export function YearSlider({
 
   return (
     <div className="flex h-9 items-center gap-3">
-      <span className="text-xs text-gray-400">{minYear}</span>
       <div
         ref={trackRef}
         role="slider"
