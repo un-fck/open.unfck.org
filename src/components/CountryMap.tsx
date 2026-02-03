@@ -76,7 +76,6 @@ export function CountryMap() {
   }, [loading, pendingDeepLink, countryData, setPendingDeepLink]);
 
   useEffect(() => {
-    setLoading(true);
     fetch(`${basePath}/data/country-expenses-${selectedYear}.json`)
       .then((res) => res.json())
       .then((data: CountryExpense[]) => {

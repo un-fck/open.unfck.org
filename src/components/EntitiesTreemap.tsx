@@ -174,7 +174,6 @@ export function EntitiesTreemap() {
 
   // Load spending data when spending year changes
   useEffect(() => {
-    setLoading(true);
     fetch(`${basePath}/data/entity-spending-${spendingYear}.json`)
       .then((res) => res.json())
       .then((spendingArray: BudgetEntry[]) => {
@@ -196,7 +195,6 @@ export function EntitiesTreemap() {
 
   // Load revenue data when revenue year changes
   useEffect(() => {
-    setLoading(true);
     fetch(`${basePath}/data/entity-revenue-${revenueYear}.json`)
       .then((res) => res.json())
       .then((revenueObj: Record<string, EntityRevenue>) => {
@@ -640,7 +638,7 @@ export function EntitiesTreemap() {
           <TooltipTrigger asChild>
             <div
               data-entity={rect.data.entity}
-              className={`absolute cursor-pointer transition-all duration-150 hover:ring-2 hover:ring-white/60 hover:brightness-110 ${!hasRevenueBreakdown ? styles.bgColor : ""} ${styles.textColor}`}
+              className={`absolute cursor-pointer transition-[left,top,width,height] duration-[1400ms] ease-in-out hover:ring-2 hover:ring-white/60 hover:brightness-110 ${!hasRevenueBreakdown ? styles.bgColor : ""} ${styles.textColor}`}
               style={{
                 left: `${rect.x}%`,
                 top: `${rect.y}%`,

@@ -186,7 +186,6 @@ export function ContributorsTreemap() {
   }, [loading, pendingDeepLink, contributors, setPendingDeepLink]);
 
   useEffect(() => {
-    setLoading(true);
     fetch(`${basePath}/data/donors-${selectedYear}.json`)
       .then((res) => res.json())
       .then((data: Record<string, ContributorData>) => {
@@ -365,7 +364,7 @@ export function ContributorsTreemap() {
         <TooltipTrigger asChild>
           <div
             data-state={rect.data.name}
-            className="absolute cursor-pointer transition-all duration-150 hover:ring-2 hover:ring-white/60 hover:brightness-110"
+            className="absolute cursor-pointer transition-[left,top,width,height] duration-[1400ms] ease-in-out hover:ring-2 hover:ring-white/60 hover:brightness-110"
             style={{
               left: `${rect.x}%`,
               top: `${rect.y}%`,

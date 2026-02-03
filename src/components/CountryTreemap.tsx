@@ -183,7 +183,7 @@ export function CountryTreemap({ data, onCountryClick }: CountryTreemapProps) {
             >
               <TooltipTrigger asChild>
                 <div
-                  className={`absolute cursor-pointer transition-all duration-150 hover:ring-2 hover:ring-white/60 hover:brightness-110 ${styles.bgColor} ${styles.textColor}`}
+                  className={`absolute cursor-pointer transition-[left,top,width,height] duration-[1400ms] ease-in-out hover:ring-2 hover:ring-white/60 hover:brightness-110 ${styles.bgColor} ${styles.textColor}`}
                   style={{
                     left: `${countryRect.x}%`,
                     top: `${countryRect.y}%`,
