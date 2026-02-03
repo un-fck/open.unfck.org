@@ -14,9 +14,23 @@ import {
 } from "@/lib/contributors";
 import { ShareButton } from "@/components/ShareButton";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
+import { YearSelector } from "@/components/ui/year-selector";
+import { useYearRanges, generateYearRange } from "@/lib/useYearRanges";
+import { FinancingInstrumentChart, FinancingInstrumentDataPoint } from "@/components/charts/FinancingInstrumentChart";
+import { FinancingInstrumentLabel } from "@/components/FinancingInstrumentLabel";
+import { getFinancingInstrumentColor } from "@/lib/financingInstruments";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+interface ContributorTrendsData {
+  meta: { years: number[] };
+  aggregates: Record<string, { year: number; assessed: number; voluntary_earmarked: number; voluntary_unearmarked: number }[]>;
+  contributors: Record<string, { year: number; assessed: number; voluntary_earmarked: number; voluntary_unearmarked: number }[]>;
+}
 
 interface ContributorSidebarProps {
   contributor: Contributor | null;
+  initialYear: number;
   onClose: () => void;
 }
 
@@ -45,6 +59,7 @@ const formatBudgetFixed = (amount: number): string => {
 
 export function ContributorSidebar({
   contributor,
+  initialYear,
   onClose,
 }: ContributorSidebarProps) {
   const [isVisible, setIsVisible] = useState(false);
@@ -53,8 +68,54 @@ export function ContributorSidebar({
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [showAllEntities, setShowAllEntities] = useState(false);
   
+  // Year selection
+  const yearRanges = useYearRanges();
+  const availableYears = generateYearRange(yearRanges.donors.min, yearRanges.donors.max).reverse();
+  const [selectedYear, setSelectedYear] = useState(initialYear);
+  const [yearContributor, setYearContributor] = useState<Contributor | null>(contributor);
+  const [loadingYear, setLoadingYear] = useState(false);
+  
+  // Trends data for chart
+  const [trendsData, setTrendsData] = useState<FinancingInstrumentDataPoint[]>([]);
+  
   // Focus trap for accessibility
   const focusTrapRef = useFocusTrap(!!contributor);
+
+  // Fetch contributor trends data on mount
+  useEffect(() => {
+    if (!contributor?.name) return;
+    fetch(`${basePath}/data/contributor-trends.json`)
+      .then(res => res.json())
+      .then((data: ContributorTrendsData) => {
+        const contributorData = data.contributors[contributor.name];
+        if (contributorData) {
+          setTrendsData(contributorData.map(item => ({
+            year: item.year.toString(),
+            Assessed: item.assessed,
+            "Voluntary un-earmarked": item.voluntary_unearmarked,
+            "Voluntary earmarked": item.voluntary_earmarked,
+          })));
+        }
+      })
+      .catch(() => setTrendsData([]));
+  }, [contributor?.name]);
+
+  // Fetch contributor data when year changes
+  useEffect(() => {
+    if (!contributor?.name || selectedYear === initialYear) {
+      setYearContributor(contributor);
+      return;
+    }
+    setLoadingYear(true);
+    fetch(`${basePath}/data/donors-${selectedYear}.json`)
+      .then(res => res.json())
+      .then((data: Record<string, Contributor>) => {
+        const found = data[contributor.name];
+        setYearContributor(found ? { ...found, name: contributor.name } : null);
+      })
+      .catch(() => setYearContributor(null))
+      .finally(() => setLoadingYear(false));
+  }, [selectedYear, contributor?.name, initialYear, contributor]);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 10);
@@ -100,14 +161,16 @@ export function ContributorSidebar({
 
   if (!contributor) return null;
 
-  const statusStyle = getStatusStyle(contributor.status);
-  const totalContributions = getTotalContributions(contributor.contributions);
-  const breakdown = getContributionBreakdown(contributor.contributions);
+  // Use year-specific data when available
+  const displayContributor = yearContributor || contributor;
+  const statusStyle = getStatusStyle(displayContributor.status);
+  const totalContributions = getTotalContributions(displayContributor.contributions);
+  const breakdown = getContributionBreakdown(displayContributor.contributions);
   const breakdownEntries = Object.entries(breakdown).sort(
     (a, b) => getContributionTypeOrder(a[0]) - getContributionTypeOrder(b[0])
   );
 
-  const entityContributions = Object.entries(contributor.contributions)
+  const entityContributions = Object.entries(displayContributor.contributions)
     .map(([entity, types]) => {
       const total = Object.values(types).reduce((sum, val) => sum + val, 0);
       return {
@@ -154,10 +217,32 @@ export function ContributorSidebar({
         </div>
 
         <div className="space-y-6 px-6 pb-6 pt-4 sm:px-8 sm:pb-8 sm:pt-5">
+          {!yearContributor && !loadingYear && selectedYear !== initialYear ? (
+            <>
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-normal uppercase tracking-wider text-gray-900 sm:text-xl">
+                Overview
+              </h3>
+              <div className="flex items-center gap-2">
+                <YearSelector years={availableYears} selected={selectedYear} onChange={setSelectedYear} />
+              </div>
+            </div>
+            <p className="text-sm italic text-gray-500">
+              No data available for {contributor.name} in {selectedYear}.
+            </p>
+            </>
+          ) : (
+          <>
           <div>
-            <h3 className="mb-3 text-lg font-normal uppercase tracking-wider text-gray-900 sm:text-xl">
-              Overview
-            </h3>
+            <div className="mb-3 flex items-center justify-between">
+              <h3 className="text-lg font-normal uppercase tracking-wider text-gray-900 sm:text-xl">
+                Overview
+              </h3>
+              <div className="flex items-center gap-2">
+                <YearSelector years={availableYears} selected={selectedYear} onChange={setSelectedYear} />
+                {loadingYear && <span className="text-xs text-gray-400">Loading...</span>}
+              </div>
+            </div>
             <div className="flex flex-wrap gap-4">
               <div>
                 <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
@@ -171,14 +256,14 @@ export function ContributorSidebar({
                   </span>
                 </div>
               </div>
-              {!isGovernmentDonor(contributor.status) && contributor.category && contributor.category !== "Non-Government" && (
+              {!isGovernmentDonor(displayContributor.status) && displayContributor.category && displayContributor.category !== "Non-Government" && (
                 <div>
                   <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
                     Category
                   </span>
                   <div className="mt-0.5">
                     <span className="inline-block rounded-full bg-slate-200 px-3 py-1 text-sm font-medium text-slate-700">
-                      {CATEGORY_LABELS[contributor.category] || contributor.category}
+                      {CATEGORY_LABELS[displayContributor.category] || displayContributor.category}
                     </span>
                   </div>
                 </div>
@@ -204,7 +289,7 @@ export function ContributorSidebar({
 
             <div className="mt-4">
               <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
-                By Type
+                By Financing Instrument
               </span>
               <div className="mt-2 space-y-2">
                 {breakdownEntries.map(([type, amount]) => (
@@ -212,18 +297,18 @@ export function ContributorSidebar({
                     key={type}
                     className="flex items-center justify-between gap-2"
                   >
-                    <div className="flex items-center gap-2">
-                      <div
-                        className={`h-2 w-2 rounded-full ${getContributionTypeBgColor(type)}`}
-                      />
-                      <span className="text-sm text-gray-600">{type}</span>
-                    </div>
+                    <FinancingInstrumentLabel type={type} />
                     <span className="text-sm font-semibold text-gray-700">
                       {formatBudget(amount)}
                     </span>
                   </div>
                 ))}
               </div>
+              {trendsData.length > 0 && (
+                <div className="mt-3">
+                  <FinancingInstrumentChart data={trendsData} compact showLegend={false} />
+                </div>
+              )}
             </div>
 
             <div className="mt-4">
@@ -270,8 +355,8 @@ export function ContributorSidebar({
                                   return typePercentage > 0 ? (
                                     <div
                                       key={type}
-                                      className={`${getContributionTypeBgColor(type)} transition-all`}
-                                      style={{ width: `${typePercentage}%` }}
+                                      className="transition-all"
+                                      style={{ width: `${typePercentage}%`, backgroundColor: getFinancingInstrumentColor(type) }}
                                     />
                                   ) : null;
                                 })}
@@ -298,6 +383,8 @@ export function ContributorSidebar({
               </div>
             </div>
           </div>
+          </>
+          )}
         </div>
       </div>
     </div>

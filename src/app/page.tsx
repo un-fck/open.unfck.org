@@ -456,7 +456,7 @@ export default function Home() {
               <ResourceLink
                 title="UN System Chart"
                 description="Interactive organizational chart of the United Nations System"
-                href="https://www.un.org/en/about-us/un-system"
+                href="https://systemchart.un.org/"
                 icon={Network}
               />
               <ResourceLink

@@ -34,34 +34,40 @@ export const CATEGORY_LABELS: Record<string, string> = {
   "Other Contributors": "Other",
   "No Contributor": "N/A",
   "Other": "Other",
+  "Unattributed": "Unattributed",
+};
+
+// Unattributed is a special category for revenue where we don't know the source
+export const isUnattributed = (contributor: Contributor): boolean => {
+  return contributor.name === "Unattributed";
 };
 
 export const getStatusStyle = (status: string) => {
   switch (status) {
     case "member":
       return {
-        bgColor: "bg-un-blue-muted",
+        bgColor: "bg-un-blue",
         textColor: "text-white",
         label: "Member State",
         order: 1,
       };
     case "observer":
       return {
-        bgColor: "bg-un-blue-dark",
+        bgColor: "bg-[#4db8e8]",
         textColor: "text-white",
         label: "Observer State",
         order: 2,
       };
     case "nonmember":
       return {
-        bgColor: "bg-un-blue-slate",
-        textColor: "text-white",
+        bgColor: "bg-[#99d6f2]",
+        textColor: "text-gray-800",
         label: "Non-Member State",
         order: 3,
       };
     case "organization":
       return {
-        bgColor: "bg-faded-jade",
+        bgColor: "bg-smoky",
         textColor: "text-white",
         label: "Non-Government",
         order: 4,

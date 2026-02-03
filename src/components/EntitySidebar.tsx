@@ -7,12 +7,24 @@ import { Entity, Impact, EntityRevenue } from "@/types";
 import { getSystemGroupingStyle } from "@/lib/systemGroupings";
 import { formatBudget } from "@/lib/entities";
 import { getContributionTypeBgColor, getContributionTypeOrder } from "@/lib/contributors";
+import { FinancingInstrumentLabel } from "@/components/FinancingInstrumentLabel";
+import { getFinancingInstrumentColor } from "@/lib/financingInstruments";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
+import { YearSelector } from "@/components/ui/year-selector";
+import { useYearRanges, generateYearRange } from "@/lib/useYearRanges";
+import { EntityTrendChart, EntityTrendDataPoint } from "@/components/charts/EntityTrendChart";
+import { FinancingInstrumentChart, FinancingInstrumentDataPoint } from "@/components/charts/FinancingInstrumentChart";
+
+interface EntityTrendsData {
+  meta: { years: number[] };
+  entities: Record<string, { year: number; revenue: number | null; expenses: number | null }[]>;
+}
 
 interface EntitySidebarProps {
   entity: Entity | null;
   spending: number;
   revenue: EntityRevenue | null;
+  initialYear: number;
   onClose: () => void;
 }
 
@@ -29,7 +41,7 @@ const formatBudgetFixed = (amount: number): string => {
   return `$${amount.toFixed(2)}`;
 };
 
-export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySidebarProps) {
+export function EntitySidebar({ entity, spending, revenue, initialYear, onClose }: EntitySidebarProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [impacts, setImpacts] = useState<Impact[]>([]);
@@ -38,8 +50,82 @@ export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySide
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   
+  // Year selection
+  const yearRanges = useYearRanges();
+  const availableYears = generateYearRange(yearRanges.entityRevenue.min, yearRanges.entityRevenue.max).reverse();
+  const [selectedYear, setSelectedYear] = useState(initialYear);
+  const [yearSpending, setYearSpending] = useState<number>(spending);
+  const [yearRevenue, setYearRevenue] = useState<EntityRevenue | null>(revenue);
+  const [loadingYear, setLoadingYear] = useState(false);
+  
+  // Trend data for charts
+  const [trendData, setTrendData] = useState<EntityTrendDataPoint[]>([]);
+  const [financingTrendData, setFinancingTrendData] = useState<FinancingInstrumentDataPoint[]>([]);
+  
   // Focus trap for accessibility
   const focusTrapRef = useFocusTrap(!!entity);
+
+  // Fetch entity trends data on mount
+  useEffect(() => {
+    if (!entity?.entity) return;
+    fetch(`${basePath}/data/entity-trends.json`)
+      .then(res => res.json())
+      .then((data: EntityTrendsData) => {
+        const entityData = data.entities[entity.entity];
+        if (entityData) {
+          setTrendData(entityData.map(item => ({
+            year: item.year.toString(),
+            revenue: item.revenue,
+            expenses: item.expenses,
+          })));
+        }
+      })
+      .catch(() => setTrendData([]));
+  }, [entity?.entity]);
+
+  // Fetch financing instrument timeline data (from multiple entity-revenue files)
+  useEffect(() => {
+    if (!entity?.entity) return;
+    const years = generateYearRange(yearRanges.entityRevenue.min, yearRanges.entityRevenue.max);
+    Promise.all(
+      years.map(year =>
+        fetch(`${basePath}/data/entity-revenue-${year}.json`)
+          .then(r => r.json())
+          .then(data => ({ year, data: data[entity.entity] }))
+          .catch(() => ({ year, data: null }))
+      )
+    ).then(results => {
+      const fiData: FinancingInstrumentDataPoint[] = results
+        .filter(r => r.data?.by_type)
+        .map(r => ({
+          year: r.year.toString(),
+          Assessed: r.data.by_type["Assessed"] || 0,
+          "Voluntary un-earmarked": r.data.by_type["Voluntary un-earmarked"] || 0,
+          "Voluntary earmarked": r.data.by_type["Voluntary earmarked"] || 0,
+          Other: r.data.by_type["Other"] || 0,
+        }));
+      setFinancingTrendData(fiData);
+    });
+  }, [entity?.entity, yearRanges.entityRevenue.min, yearRanges.entityRevenue.max]);
+
+  // Fetch data when year changes
+  useEffect(() => {
+    if (!entity?.entity || selectedYear === initialYear) {
+      setYearSpending(spending);
+      setYearRevenue(revenue);
+      return;
+    }
+    setLoadingYear(true);
+    Promise.all([
+      fetch(`${basePath}/data/entity-revenue-${selectedYear}.json`).then(r => r.json()).catch(() => ({})),
+      fetch(`${basePath}/data/entity-spending-${selectedYear}.json`).then(r => r.json()).catch(() => []),
+    ]).then(([revenueData, spendingData]) => {
+      const entityRevenue = revenueData[entity.entity] || null;
+      setYearRevenue(entityRevenue);
+      const spendingEntry = spendingData.find((e: { entity: string; amount: number }) => e.entity === entity.entity);
+      setYearSpending(spendingEntry?.amount || 0);
+    }).finally(() => setLoadingYear(false));
+  }, [selectedYear, entity?.entity, initialYear, spending, revenue]);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 10);
@@ -112,15 +198,15 @@ export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySide
   const groupingStyle = getSystemGroupingStyle(entity.system_grouping || "");
   const description = entity.entity_description || entity.entity_long || "";
 
-  // Process revenue breakdown by type
-  const revenueByType = revenue?.by_type
-    ? Object.entries(revenue.by_type).sort(
+  // Process revenue breakdown by financing instrument (use year-specific data)
+  const revenueByType = yearRevenue?.by_type
+    ? Object.entries(yearRevenue.by_type).sort(
         (a, b) => getContributionTypeOrder(a[0]) - getContributionTypeOrder(b[0])
       )
     : [];
 
   // Process revenue breakdown by donor
-  const donorContributions = revenue?.by_donor || [];
+  const donorContributions = yearRevenue?.by_donor || [];
   const displayedDonors = showAllDonors
     ? donorContributions
     : donorContributions.slice(0, 10);
@@ -171,9 +257,15 @@ export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySide
         <div className="space-y-6 px-6 pb-6 pt-4 sm:px-8 sm:pb-8 sm:pt-5">
           {/* Overview Section */}
           <div>
-            <h3 className="mb-3 text-lg font-normal uppercase tracking-wider text-gray-900 sm:text-xl">
-              Overview
-            </h3>
+            <div className="mb-3 flex items-center justify-between">
+              <h3 className="text-lg font-normal uppercase tracking-wider text-gray-900 sm:text-xl">
+                Overview
+              </h3>
+              <div className="flex items-center gap-2">
+                <YearSelector years={availableYears} selected={selectedYear} onChange={setSelectedYear} />
+                {loadingYear && <span className="text-xs text-gray-400">Loading...</span>}
+              </div>
+            </div>
             <div>
               <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
                 System Grouping
@@ -227,7 +319,7 @@ export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySide
               </span>
               <div className="mt-0.5">
                 <div className="text-base font-semibold text-gray-700">
-                  {spending > 0 ? formatBudget(spending) : "N/A"}
+                  {yearSpending > 0 ? formatBudget(yearSpending) : "N/A"}
                 </div>
               </div>
             </div>
@@ -235,12 +327,12 @@ export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySide
             {/* Total Revenue */}
             <div className="mt-3">
               <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
-                Total Revenue{revenue?.year ? ` (${revenue.year})` : ""}
+                Total Revenue
               </span>
               <div className="mt-0.5">
-                {revenue ? (
+                {yearRevenue ? (
                   <div className="text-base font-semibold text-gray-700">
-                    {formatBudget(revenue.total)}
+                    {formatBudget(yearRevenue.total)}
                   </div>
                 ) : (
                   <div className="text-sm italic text-gray-500">
@@ -250,35 +342,59 @@ export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySide
               </div>
             </div>
 
-            {/* Revenue by Type */}
-            {revenue && revenueByType.length > 0 && (
+            {/* Revenue by Financing Instrument */}
+            {(yearRevenue && revenueByType.length > 0) || financingTrendData.length > 0 ? (
               <div className="mt-4">
                 <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
-                  Revenue by Type
+                  Revenue by Financing Instrument
                 </span>
-                <div className="mt-2 space-y-2">
-                  {revenueByType.map(([type, amount]) => (
-                    <div
-                      key={type}
-                      className="flex items-center justify-between gap-2"
-                    >
-                      <div className="flex items-center gap-2">
-                        <div
-                          className={`h-2 w-2 rounded-full ${getContributionTypeBgColor(type)}`}
-                        />
-                        <span className="text-sm text-gray-600">{type}</span>
+                {yearRevenue && revenueByType.length > 0 && (
+                  <div className="mt-2 space-y-2">
+                    {revenueByType.map(([type, amount]) => (
+                      <div
+                        key={type}
+                        className="flex items-center justify-between gap-2"
+                      >
+                        <FinancingInstrumentLabel type={type} />
+                        <span className="text-sm font-semibold text-gray-700">
+                          {formatBudget(amount)}
+                        </span>
                       </div>
-                      <span className="text-sm font-semibold text-gray-700">
-                        {formatBudget(amount)}
-                      </span>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                )}
+                {financingTrendData.length > 0 && (
+                  <div className="mt-3">
+                    <FinancingInstrumentChart data={financingTrendData} compact showLegend={false} />
+                  </div>
+                )}
+              </div>
+            ) : null}
+
+            {/* Revenue vs Expenses Trend */}
+            {trendData.length > 0 && (
+              <div className="mt-4">
+                <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
+                  Revenue vs Expenses
+                </span>
+                <div className="mt-1 flex gap-3 text-xs text-gray-500">
+                  <span className="flex items-center gap-1">
+                    <span className="inline-block h-2 w-2 rounded-full bg-un-blue" />
+                    Revenue
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <span className="inline-block h-2 w-2 rounded-full bg-faded-jade" />
+                    Expenses
+                  </span>
+                </div>
+                <div className="mt-2">
+                  <EntityTrendChart data={trendData} compact />
                 </div>
               </div>
             )}
 
             {/* Revenue by Donor */}
-            {revenue && donorContributions.length > 0 && (
+            {yearRevenue && donorContributions.length > 0 && (
               <div className="mt-4">
                 <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
                   Revenue by Donor
@@ -316,8 +432,8 @@ export function EntitySidebar({ entity, spending, revenue, onClose }: EntitySide
                               return typePercentage > 0 ? (
                                 <div
                                   key={type}
-                                  className={`${getContributionTypeBgColor(type)} transition-all`}
-                                  style={{ width: `${typePercentage}%` }}
+                                  className="transition-all"
+                                  style={{ width: `${typePercentage}%`, backgroundColor: getFinancingInstrumentColor(type) }}
                                 />
                               ) : null;
                             })}

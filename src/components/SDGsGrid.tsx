@@ -243,6 +243,7 @@ export default function SDGsGrid() {
           entityExpenses={
             expensesData?.[selectedSDG.number.toString()]?.entities
           }
+          initialYear={selectedYear}
         />
       )}
     </>

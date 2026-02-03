@@ -5,14 +5,21 @@ import { ShareButton } from "@/components/ShareButton";
 import { useCallback, useEffect, useState } from "react";
 import { formatBudget } from "@/lib/entities";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
+import { YearSelector } from "@/components/ui/year-selector";
+import { useYearRanges, generateYearRange } from "@/lib/useYearRanges";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+interface CountryData {
+  iso3: string;
+  name: string;
+  total: number;
+  entities: Record<string, number>;
+}
 
 interface CountrySidebarProps {
-  country: {
-    iso3: string;
-    name: string;
-    total: number;
-    entities: Record<string, number>;
-  };
+  country: CountryData;
+  initialYear: number;
   onClose: () => void;
 }
 
@@ -27,15 +34,39 @@ const formatBudgetFixed = (amount: number): string => {
   return `$${amount.toFixed(2)}`;
 };
 
-export function CountrySidebar({ country, onClose }: CountrySidebarProps) {
+export function CountrySidebar({ country, initialYear, onClose }: CountrySidebarProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [showAllEntities, setShowAllEntities] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   
+  // Year selection
+  const yearRanges = useYearRanges();
+  const availableYears = generateYearRange(yearRanges.countryExpenses.min, yearRanges.countryExpenses.max).reverse();
+  const [selectedYear, setSelectedYear] = useState(initialYear);
+  const [yearCountry, setYearCountry] = useState<CountryData>(country);
+  const [loadingYear, setLoadingYear] = useState(false);
+  
   // Focus trap for accessibility
   const focusTrapRef = useFocusTrap(true);
+
+  // Fetch country data when year changes
+  useEffect(() => {
+    if (selectedYear === initialYear) {
+      setYearCountry(country);
+      return;
+    }
+    setLoadingYear(true);
+    fetch(`${basePath}/data/country-expenses-${selectedYear}.json`)
+      .then(res => res.json())
+      .then((data: CountryData[]) => {
+        const found = data.find(c => c.iso3 === country.iso3);
+        setYearCountry(found || { ...country, total: 0, entities: {} });
+      })
+      .catch(() => setYearCountry({ ...country, total: 0, entities: {} }))
+      .finally(() => setLoadingYear(false));
+  }, [selectedYear, country, initialYear]);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 10);
@@ -79,8 +110,8 @@ export function CountrySidebar({ country, onClose }: CountrySidebarProps) {
     if (e.target === e.currentTarget) handleClose();
   };
 
-  // Sort entities by amount descending
-  const sortedEntities = Object.entries(country.entities).sort(
+  // Sort entities by amount descending (use year-specific data)
+  const sortedEntities = Object.entries(yearCountry.entities).sort(
     (a, b) => b[1] - a[1]
   );
   const displayedEntities = showAllEntities
@@ -131,16 +162,22 @@ export function CountrySidebar({ country, onClose }: CountrySidebarProps) {
         <div className="space-y-6 px-6 pb-6 pt-4 sm:px-8 sm:pb-8 sm:pt-5">
           {/* Summary stats */}
           <div>
-            <h3 className="mb-3 text-lg font-normal uppercase tracking-wider text-gray-900 sm:text-xl">
-              Summary
-            </h3>
+            <div className="mb-3 flex items-center justify-between">
+              <h3 className="text-lg font-normal uppercase tracking-wider text-gray-900 sm:text-xl">
+                Summary
+              </h3>
+              <div className="flex items-center gap-2">
+                <YearSelector years={availableYears} selected={selectedYear} onChange={setSelectedYear} />
+                {loadingYear && <span className="text-xs text-gray-400">Loading...</span>}
+              </div>
+            </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
                   Total Expenses
                 </span>
                 <div className="mt-0.5 text-xl font-bold text-gray-900">
-                  {formatBudget(country.total)}
+                  {formatBudget(yearCountry.total)}
                 </div>
               </div>
               <div>

@@ -143,17 +143,16 @@ export function HierarchicalMultiSelect({
       <Popover open={open} onOpenChange={setOpen}>
         {/* Chips row with "+" trigger first for stable positioning */}
         <div className="flex flex-wrap items-center gap-1.5">
-          {/* Add chip trigger - first so it doesn't move when items are added */}
+          {/* Add chip trigger - always shows "+ select" with border for better affordance */}
           <PopoverTrigger asChild>
             <button
               className={cn(
-                "flex items-center justify-center rounded-full bg-gray-100 py-1 text-xs text-gray-600 transition-colors hover:bg-gray-200 hover:text-gray-800",
-                selectedCount === 0 ? "gap-1 px-2" : "w-[26px]",
-                open && "bg-gray-200"
+                "flex items-center justify-center gap-1 rounded-full border border-gray-300 bg-gray-100 px-2 py-1 text-xs text-gray-600 transition-colors hover:border-gray-400 hover:bg-gray-200 hover:text-gray-800",
+                open && "border-gray-400 bg-gray-200"
               )}
             >
               <span>+</span>
-              {selectedCount === 0 && <span>{addLabel}</span>}
+              <span>Select</span>
             </button>
           </PopoverTrigger>
           

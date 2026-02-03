@@ -18,6 +18,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { FINANCING_INSTRUMENT_TOOLTIPS, getFinancingInstrumentColor } from "@/lib/financingInstruments";
 import {
   Select,
   SelectContent,
@@ -797,14 +798,25 @@ export function EntitiesTreemap() {
         {showRevenue && (
           <div className="flex flex-wrap gap-3">
             {[
-              { type: "Assessed", label: "Assessed", opacity: "opacity-100" },
-              { type: "Voluntary un-earmarked", label: "Voluntary un-earmarked", opacity: "opacity-80" },
-              { type: "Voluntary earmarked", label: "Voluntary earmarked", opacity: "opacity-60" },
-            ].map(({ type, label, opacity }) => (
-              <div key={type} className="flex items-center gap-1.5">
-                <div className={`h-3 w-3 rounded-sm bg-gray-500 ${opacity}`} />
-                <span className="text-xs text-gray-600">{label}</span>
-              </div>
+              { type: "Assessed", label: "Assessed" },
+              { type: "Voluntary un-earmarked", label: "Voluntary un-earmarked" },
+              { type: "Voluntary earmarked", label: "Voluntary earmarked" },
+            ].map(({ type, label }) => (
+              <Tooltip key={type} delayDuration={200}>
+                <TooltipTrigger asChild>
+                  <div className="flex cursor-help items-center gap-1.5">
+                    <div className="h-3 w-3 rounded-sm" style={{ backgroundColor: getFinancingInstrumentColor(type) }} />
+                    <span className="text-xs text-gray-600 underline decoration-dotted underline-offset-2">{label}</span>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent 
+                  side="top" 
+                  sideOffset={4}
+                  className="max-w-[250px] border border-slate-200 bg-white text-slate-800 shadow-lg"
+                >
+                  <p className="text-xs">{FINANCING_INSTRUMENT_TOOLTIPS[type]}</p>
+                </TooltipContent>
+              </Tooltip>
             ))}
           </div>
         )}
@@ -834,6 +846,7 @@ export function EntitiesTreemap() {
           entity={selectedEntity}
           spending={spendingData[selectedEntity.entity] || 0}
           revenue={revenueData[selectedEntity.entity] || null}
+          initialYear={revenueYear}
           onClose={() => setSelectedEntity(null)}
         />
       )}

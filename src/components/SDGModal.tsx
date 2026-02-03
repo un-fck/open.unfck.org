@@ -6,12 +6,21 @@ import { formatBudget } from "@/lib/entities";
 import { SDG } from "@/lib/sdgs";
 import { ShareButton } from "@/components/ShareButton";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
+import { YearSelector } from "@/components/ui/year-selector";
+import { useYearRanges, generateYearRange } from "@/lib/useYearRanges";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+interface SDGExpensesData {
+  [sdgNumber: string]: { total: number; entities: { [entity: string]: number } };
+}
 
 interface SDGModalProps {
   sdg: SDG | null;
   onClose: () => void;
   color: string;
   entityExpenses?: { [entity: string]: number };
+  initialYear: number;
 }
 
 export default function SDGModal({
@@ -19,6 +28,7 @@ export default function SDGModal({
   onClose,
   color,
   entityExpenses,
+  initialYear,
 }: SDGModalProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -26,8 +36,32 @@ export default function SDGModal({
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [showAllEntities, setShowAllEntities] = useState(false);
   
+  // Year selection
+  const yearRanges = useYearRanges();
+  const availableYears = generateYearRange(yearRanges.sdgExpenses.min, yearRanges.sdgExpenses.max).reverse();
+  const [selectedYear, setSelectedYear] = useState(initialYear);
+  const [yearEntityExpenses, setYearEntityExpenses] = useState<{ [entity: string]: number } | undefined>(entityExpenses);
+  const [loadingYear, setLoadingYear] = useState(false);
+  
   // Focus trap for accessibility
   const focusTrapRef = useFocusTrap(!!sdg);
+
+  // Fetch SDG expenses when year changes
+  useEffect(() => {
+    if (!sdg || selectedYear === initialYear) {
+      setYearEntityExpenses(entityExpenses);
+      return;
+    }
+    setLoadingYear(true);
+    fetch(`${basePath}/data/sdg-expenses-${selectedYear}.json`)
+      .then(res => res.json())
+      .then((data: SDGExpensesData) => {
+        const sdgData = data[sdg.number.toString()];
+        setYearEntityExpenses(sdgData?.entities);
+      })
+      .catch(() => setYearEntityExpenses(undefined))
+      .finally(() => setLoadingYear(false));
+  }, [selectedYear, sdg, initialYear, entityExpenses]);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 10);
@@ -75,9 +109,9 @@ export default function SDGModal({
 
   if (!sdg) return null;
 
-  // Process entity expenses for display
-  const sortedEntities = entityExpenses
-    ? Object.entries(entityExpenses)
+  // Process entity expenses for display (use year-specific data)
+  const sortedEntities = yearEntityExpenses
+    ? Object.entries(yearEntityExpenses)
         .map(([name, amount]) => ({ name, amount }))
         .sort((a, b) => b.amount - a.amount)
     : [];
@@ -144,11 +178,17 @@ export default function SDGModal({
 
         <div className="space-y-4 px-4 pb-4 pt-3 sm:px-6 sm:pb-6 sm:pt-4">
           {/* Entity Expenses Breakdown */}
-          {sortedEntities.length > 0 && (
+          {(sortedEntities.length > 0 || loadingYear) && (
             <div>
-              <h3 className="mb-3 text-lg font-normal uppercase tracking-wider text-gray-900 sm:text-xl">
-                Expenses
-              </h3>
+              <div className="mb-3 flex items-center justify-between">
+                <h3 className="text-lg font-normal uppercase tracking-wider text-gray-900 sm:text-xl">
+                  Expenses
+                </h3>
+                <div className="flex items-center gap-2">
+                  <YearSelector years={availableYears} selected={selectedYear} onChange={setSelectedYear} />
+                  {loadingYear && <span className="text-xs text-gray-400">Loading...</span>}
+                </div>
+              </div>
 
               <div>
                 <span className="text-sm font-normal uppercase tracking-wide text-gray-600">

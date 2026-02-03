@@ -3,8 +3,6 @@
 import * as React from "react";
 import {
   LineChart,
-  AreaChart,
-  Area,
   Line,
   XAxis,
   YAxis,
@@ -13,14 +11,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { HierarchicalMultiSelect, HierarchicalGroup } from "@/components/ui/hierarchical-multi-select";
+import { HierarchicalSingleSelect, HierarchicalGroup as SingleSelectGroup } from "@/components/ui/hierarchical-single-select";
+import { FinancingInstrumentChart, FinancingInstrumentDataPoint } from "@/components/charts/FinancingInstrumentChart";
 import { formatBudget } from "@/lib/contributors";
-
-// Revenue type colors (matching the treemap opacity pattern)
-const REVENUE_TYPE_COLORS = {
-  assessed: "#009edb",           // UN blue - full opacity
-  voluntary_unearmarked: "#4db8e8", // UN blue - lighter
-  voluntary_earmarked: "#99d6f2",   // UN blue - lightest
-};
 
 // Type for the contributor trends data
 interface ContributorYearData {
@@ -60,6 +53,7 @@ export function ContributorTrendsChart() {
   const [data, setData] = React.useState<ContributorTrendsData | null>(null);
   const [loading, setLoading] = React.useState(true);
   const [selected, setSelected] = React.useState<Set<string>>(new Set(["gov", "non-gov"]));
+  const [financingContributor, setFinancingContributor] = React.useState<string>("all");
 
   // Load data on mount
   React.useEffect(() => {
@@ -77,11 +71,10 @@ export function ContributorTrendsChart() {
     loadData();
   }, []);
 
-  // Build hierarchical groups from loaded data
+  // Build hierarchical groups for compare chart (multi-select)
   const groups: HierarchicalGroup[] = React.useMemo(() => {
     if (!data) return [];
     
-    // Build subgroups for non-gov from categories
     const nonGovSubgroups = data.meta.nonGovCategories
       ? Object.entries(data.meta.nonGovCategories).map(([cat, donors]) => ({
           id: `cat:${cat}`,
@@ -100,12 +93,30 @@ export function ContributorTrendsChart() {
       {
         id: "non-gov",
         label: "Non-Government",
-        bgColor: "bg-faded-jade",
-        children: [],  // No direct children, use subgroups
+        bgColor: "bg-smoky",
+        children: [],
         subgroups: nonGovSubgroups,
       },
     ];
   }, [data]);
+
+  // Build hierarchical groups for financing instrument chart (single-select)
+  const financingSingleSelectGroups: SingleSelectGroup[] = React.useMemo(() => {
+    if (!data) return [];
+    
+    return [
+      { id: "all", label: "All contributors", children: [] },
+      { id: "gov", label: "Government", children: data.meta.governmentContributors },
+      { id: "non-gov", label: "Non-Government", children: data.meta.nonGovContributors },
+    ];
+  }, [data]);
+
+  const getFinancingLabel = React.useCallback((id: string) => {
+    if (id === "all") return "All contributors";
+    if (id === "gov") return "Government";
+    if (id === "non-gov") return "Non-Government";
+    return id;
+  }, []);
 
   // Transform data for the chart based on selection
   const chartData = React.useMemo(() => {
@@ -175,16 +186,29 @@ export function ContributorTrendsChart() {
     return formatBudget(value);
   };
 
-  // Data for stacked area chart (revenue types for all contributors)
-  const revenueTypeData = React.useMemo(() => {
+  // Data for stacked area chart (financing instruments, filtered by selected contributor)
+  const financingInstrumentData: FinancingInstrumentDataPoint[] = React.useMemo(() => {
     if (!data) return [];
-    return data.aggregates.all.map((item) => ({
+    
+    // Get the appropriate data based on selection
+    let sourceData: ContributorYearData[] | undefined;
+    if (financingContributor === "all") {
+      sourceData = data.aggregates.all;
+    } else if (financingContributor === "gov" || financingContributor === "non-gov") {
+      sourceData = data.aggregates[financingContributor];
+    } else {
+      sourceData = data.contributors[financingContributor];
+    }
+    
+    if (!sourceData) return [];
+    
+    return sourceData.map((item) => ({
       year: item.year.toString(),
       Assessed: item.assessed,
       "Voluntary un-earmarked": item.voluntary_unearmarked,
       "Voluntary earmarked": item.voluntary_earmarked,
     }));
-  }, [data]);
+  }, [data, financingContributor]);
 
   return (
     <>
@@ -270,97 +294,30 @@ export function ContributorTrendsChart() {
             </div>
         </div>
 
-        {/* Chart B: Revenue types (stacked area chart) */}
+        {/* Chart B: Financing instruments (stacked area chart) */}
         <div className="flex flex-col">
-          {/* Title and legend */}
           <div className="space-y-2">
             <h4 className="text-sm font-medium text-gray-700">
-              Revenue by type
+              Revenue by financing instrument
             </h4>
-            <div className="flex flex-wrap gap-2">
-              <div className="flex items-center gap-1.5 rounded-full bg-gray-100 py-1 px-2 text-xs text-gray-700">
-                <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: REVENUE_TYPE_COLORS.assessed }} />
-                <span>Assessed</span>
-              </div>
-              <div className="flex items-center gap-1.5 rounded-full bg-gray-100 py-1 px-2 text-xs text-gray-700">
-                <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: REVENUE_TYPE_COLORS.voluntary_unearmarked }} />
-                <span>Voluntary un-earmarked</span>
-              </div>
-              <div className="flex items-center gap-1.5 rounded-full bg-gray-100 py-1 px-2 text-xs text-gray-700">
-                <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: REVENUE_TYPE_COLORS.voluntary_earmarked }} />
-                <span>Voluntary earmarked</span>
-              </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <HierarchicalSingleSelect
+                groups={financingSingleSelectGroups}
+                selected={financingContributor}
+                onChange={setFinancingContributor}
+                getLabel={getFinancingLabel}
+              />
             </div>
           </div>
-
-          {/* Chart - mt-auto pushes to bottom of grid cell */}
-          <div className="mt-auto pt-3 h-[280px] w-full">
-              {loading ? (
-                <div className="flex h-full items-center justify-center text-gray-500">
-                  Loading trends...
-                </div>
-              ) : (
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart
-                    data={revenueTypeData}
-                    margin={{ top: 20, right: 5, left: 5, bottom: 5 }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                    <XAxis
-                      dataKey="year"
-                      tick={{ fontSize: 12 }}
-                      tickLine={false}
-                      axisLine={{ stroke: "#e5e7eb" }}
-                    />
-                    <YAxis
-                      orientation="right"
-                      width={1}
-                      tick={{ fontSize: 11, fill: "#6b7280", dx: -5, dy: -8 }}
-                      tickLine={false}
-                      axisLine={false}
-                      domain={[0, 'auto']}
-                      tickFormatter={(value) => {
-                        if (value >= 1e9) return `$${(value / 1e9).toFixed(0)}B`;
-                        if (value >= 1e6) return `$${(value / 1e6).toFixed(0)}M`;
-                        return `$${value}`;
-                      }}
-                      mirror
-                    />
-                    <Tooltip
-                      formatter={formatTooltipValue}
-                      labelFormatter={(label) => `Year: ${label}`}
-                      contentStyle={{
-                        backgroundColor: "white",
-                        border: "1px solid #e5e7eb",
-                        borderRadius: "4px",
-                        fontSize: "12px",
-                      }}
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="Assessed"
-                      stackId="1"
-                      stroke={REVENUE_TYPE_COLORS.assessed}
-                      fill={REVENUE_TYPE_COLORS.assessed}
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="Voluntary un-earmarked"
-                      stackId="1"
-                      stroke={REVENUE_TYPE_COLORS.voluntary_unearmarked}
-                      fill={REVENUE_TYPE_COLORS.voluntary_unearmarked}
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="Voluntary earmarked"
-                      stackId="1"
-                      stroke={REVENUE_TYPE_COLORS.voluntary_earmarked}
-                      fill={REVENUE_TYPE_COLORS.voluntary_earmarked}
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              )}
-            </div>
+          <div className="mt-auto pt-3">
+            {loading ? (
+              <div className="flex h-[280px] items-center justify-center text-gray-500">
+                Loading trends...
+              </div>
+            ) : (
+              <FinancingInstrumentChart data={financingInstrumentData} height={280} />
+            )}
+          </div>
         </div>
       </div>
     </>

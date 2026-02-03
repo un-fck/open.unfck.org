@@ -274,6 +274,7 @@ export function CountryMap() {
       {selectedCountry && (
         <CountrySidebar
           country={selectedCountry}
+          initialYear={selectedYear}
           onClose={() => setSelectedCountry(null)}
         />
       )}
