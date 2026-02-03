@@ -149,12 +149,12 @@ export default function SDGsGrid() {
                   setTimeout(() => setShowSpending(checked), 400);
                   setTimeout(() => setIsAnimating(false), 800);
                 }}
-                aria-label="Toggle between goals and expenses"
+                aria-label="Toggle between goals and spending"
               />
               <span
                 className={`text-sm ${showSpending ? "font-medium text-gray-900" : "text-gray-500"}`}
               >
-                Expenses
+                Spending
               </span>
             </div>
           </div>

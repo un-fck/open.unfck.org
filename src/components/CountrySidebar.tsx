@@ -174,7 +174,7 @@ export function CountrySidebar({ country, initialYear, onClose }: CountrySidebar
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
-                  Total Expenses
+                  Total Spending
                 </span>
                 <div className="mt-0.5 text-xl font-bold text-gray-900">
                   {formatBudget(yearCountry.total)}
@@ -194,7 +194,7 @@ export function CountrySidebar({ country, initialYear, onClose }: CountrySidebar
           {/* Spending by Entity */}
           <div>
             <h3 className="mb-3 text-lg font-normal uppercase tracking-wider text-gray-900 sm:text-xl">
-              Expenses by Entity
+              Spending by Entity
             </h3>
             <div className="space-y-2">
               {displayedEntities.map(([entity, amount]) => {

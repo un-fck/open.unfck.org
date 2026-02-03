@@ -298,7 +298,7 @@ export function ContributorTrendsChart() {
         <div className="flex flex-col">
           <div className="space-y-2">
             <h4 className="text-sm font-medium text-gray-700">
-              Revenue by financing instrument
+              Funding by financing instrument
             </h4>
             <div className="flex flex-wrap items-center gap-2">
               <HierarchicalSingleSelect

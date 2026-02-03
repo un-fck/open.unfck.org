@@ -350,7 +350,7 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
             {/* Total Spending */}
             <div>
               <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
-                Total Expenses
+                Total Spending
               </span>
               <div className="mt-0.5">
                 <div className="text-base font-semibold text-gray-700">
@@ -359,10 +359,10 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
               </div>
             </div>
 
-            {/* Total Revenue */}
+            {/* Total Funding */}
             <div className="mt-3">
               <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
-                Total Revenue
+                Total Funding
               </span>
               <div className="mt-0.5">
                 {yearRevenue ? (
@@ -371,17 +371,17 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
                   </div>
                 ) : (
                   <div className="text-sm italic text-gray-500">
-                    Revenue data not available at sub-entity level
+                    Funding data not available at sub-entity level
                   </div>
                 )}
               </div>
             </div>
 
-            {/* Revenue by Financing Instrument */}
+            {/* Funding by Financing Instrument */}
             {(yearRevenue && revenueByType.length > 0) || financingTrendData.length > 0 ? (
               <div className="mt-4">
                 <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
-                  Revenue by Financing Instrument
+                  Funding by Financing Instrument
                 </span>
                 {yearRevenue && revenueByType.length > 0 && (
                   <div className="mt-2 space-y-2">
@@ -428,11 +428,11 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
               </div>
             )}
 
-            {/* Revenue by Donor */}
+            {/* Funding by Donor */}
             {yearRevenue && donorContributions.length > 0 && (
               <div className="mt-4">
                 <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
-                  Revenue by Donor
+                  Funding by Donor
                 </span>
                 <div className="mt-2 space-y-1.5">
                   {displayedDonors.map((contrib) => {

@@ -528,18 +528,18 @@ export function EntitiesTreemap() {
             onChange={setCurrentYear}
           />
 
-          {/* Revenue/Spending Toggle */}
+          {/* Funding/Spending Toggle */}
           <div className="flex h-9 items-center gap-2">
             <span className={`text-sm ${showRevenue ? "font-medium text-gray-900" : "text-gray-500"}`}>
-              Revenue
+              Funding
             </span>
             <Switch
               checked={!showRevenue}
               onCheckedChange={(checked) => setShowRevenue(!checked)}
-              aria-label="Toggle between revenue and expenses"
+              aria-label="Toggle between funding and spending"
             />
             <span className={`text-sm ${!showRevenue ? "font-medium text-gray-900" : "text-gray-500"}`}>
-              Expenses
+              Spending
             </span>
           </div>
         </div>
