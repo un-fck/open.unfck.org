@@ -10,6 +10,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { ClickHint } from "@/components/ui/ClickHint";
 import {
   CATEGORY_LABELS,
   CONTRIBUTION_TYPES,
@@ -364,7 +365,7 @@ export function ContributorsTreemap() {
         <TooltipTrigger asChild>
           <div
             data-state={rect.data.name}
-            className="absolute cursor-pointer"
+            className="absolute cursor-pointer transition-all duration-150 hover:ring-2 hover:ring-white/60 hover:brightness-110"
             style={{
               left: `${rect.x}%`,
               top: `${rect.y}%`,
@@ -432,12 +433,7 @@ export function ContributorsTreemap() {
             <p className="mt-1 text-xs font-semibold text-slate-600">
               {formatBudget(stateContributions)}
             </p>
-            <p className="mt-1 hidden text-xs text-slate-400 sm:block">
-              Click to view {isOther ? "breakdown" : "contributor details"}
-            </p>
-            <p className="mt-1 text-xs text-slate-400 sm:hidden">
-              Tap to view {isOther ? "breakdown" : "details"}
-            </p>
+            <ClickHint text={isOther ? "Click for breakdown" : "Click for details"} />
           </div>
         </TooltipContent>
       </Tooltip>

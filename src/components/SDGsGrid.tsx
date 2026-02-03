@@ -10,6 +10,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { ClickHint } from "@/components/ui/ClickHint";
 import { Switch } from "@/components/ui/switch";
 import { formatBudget } from "@/lib/entities";
 import { useYearRanges, generateYearRange } from "@/lib/useYearRanges";
@@ -300,7 +301,7 @@ export default function SDGsGrid() {
             <Tooltip key={sdgNumber} delayDuration={50}>
               <TooltipTrigger asChild>
                 <div
-                  className="absolute cursor-pointer overflow-hidden text-white transition-all ease-in-out hover:brightness-110"
+                  className="absolute cursor-pointer overflow-hidden text-white transition-all ease-in-out hover:brightness-110 hover:ring-2 hover:ring-white/60"
                   style={{
                     left: `${pos.x}%`,
                     top: `${pos.y}%`,
@@ -366,8 +367,7 @@ export default function SDGsGrid() {
                   <p className="text-sm font-bold leading-tight sm:text-base">SDG {sdgNumber}: {shortTitle}</p>
                   {sdg && <p className="mt-1 text-xs leading-tight text-slate-600 sm:text-sm">{sdg.title}</p>}
                   <p className="mt-1 text-xs font-semibold text-slate-600">{formatBudget(sdgData.total)}</p>
-                  <p className="mt-1 hidden text-xs text-slate-500 sm:block">Click to view details</p>
-                  <p className="mt-1 text-xs text-slate-500 sm:hidden">Tap to view details</p>
+                  <ClickHint />
                 </div>
               </TooltipContent>
             </Tooltip>

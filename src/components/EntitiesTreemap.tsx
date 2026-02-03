@@ -18,6 +18,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { ClickHint } from "@/components/ui/ClickHint";
 import { FINANCING_INSTRUMENT_TOOLTIPS, getFinancingInstrumentColor } from "@/lib/financingInstruments";
 import {
   Select,
@@ -639,7 +640,7 @@ export function EntitiesTreemap() {
           <TooltipTrigger asChild>
             <div
               data-entity={rect.data.entity}
-              className={`absolute cursor-pointer ${!hasRevenueBreakdown ? styles.bgColor : ""} ${styles.textColor}`}
+              className={`absolute cursor-pointer transition-all duration-150 hover:ring-2 hover:ring-white/60 hover:brightness-110 ${!hasRevenueBreakdown ? styles.bgColor : ""} ${styles.textColor}`}
               style={{
                 left: `${rect.x}%`,
                 top: `${rect.y}%`,
@@ -709,12 +710,7 @@ export function EntitiesTreemap() {
               <p className="mt-1 text-xs font-semibold text-slate-600">
                 {formatBudget(entityBudget)}
               </p>
-              <p className="mt-1 hidden text-xs text-slate-400 sm:block">
-                Click to view entity details
-              </p>
-              <p className="mt-1 text-xs text-slate-400 sm:hidden">
-                Tap to view details
-              </p>
+              <ClickHint />
             </div>
           </TooltipContent>
         </Tooltip>

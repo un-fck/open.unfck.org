@@ -5,6 +5,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { ClickHint } from "@/components/ui/ClickHint";
 import { formatBudget } from "@/lib/entities";
 import { getRegionStyle, regionStyles } from "@/lib/regionGroupings";
 
@@ -182,21 +183,14 @@ export function CountryTreemap({ data, onCountryClick }: CountryTreemapProps) {
             >
               <TooltipTrigger asChild>
                 <div
-                  className={`absolute cursor-pointer ${styles.bgColor} ${styles.textColor}`}
+                  className={`absolute cursor-pointer transition-all duration-150 hover:ring-2 hover:ring-white/60 hover:brightness-110 ${styles.bgColor} ${styles.textColor}`}
                   style={{
                     left: `${countryRect.x}%`,
                     top: `${countryRect.y}%`,
                     width: `${countryRect.width}%`,
                     height: `${countryRect.height}%`,
-                    opacity: 0.9,
                   }}
                   onClick={() => onCountryClick(countryItem.data)}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.opacity = "1";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.opacity = "0.9";
-                  }}
                 >
                   {showLabel && (
                     <div className="h-full overflow-hidden p-1">
@@ -233,12 +227,7 @@ export function CountryTreemap({ data, onCountryClick }: CountryTreemapProps) {
                   <p className="mt-1 text-xs font-semibold text-slate-600">
                     {formatBudget(countryItem.data.total)}
                   </p>
-                  <p className="mt-1 hidden text-xs text-slate-400 sm:block">
-                    Click to view country details
-                  </p>
-                  <p className="mt-1 text-xs text-slate-400 sm:hidden">
-                    Tap to view details
-                  </p>
+                  <ClickHint />
                 </div>
               </TooltipContent>
             </Tooltip>
