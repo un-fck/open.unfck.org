@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { ChartSearchInput } from "@/components/ui/chart-search-input";
 import { Entity, BudgetEntry, EntityRevenue } from "@/types";
-import { useDeepLink } from "@/hooks/useDeepLink";
+import { useDeepLink, replaceToSidebar, clearSidebarHash } from "@/hooks/useDeepLink";
 import {
   systemGroupingStyles,
   getSystemGroupingStyle,
@@ -647,7 +647,10 @@ export function EntitiesTreemap() {
                 opacity: isHovered ? 1 : 0.9,
                 zIndex: isHovered ? 10 : 1,
               }}
-              onClick={() => setSelectedEntity(rect.data)}
+              onClick={() => {
+                setSelectedEntity(rect.data);
+                replaceToSidebar("entity", rect.data.entity);
+              }}
               onMouseEnter={() => setHoveredEntity(rect.data.entity)}
               onMouseLeave={() => setHoveredEntity(null)}
             >
@@ -842,7 +845,10 @@ export function EntitiesTreemap() {
           spending={spendingData[selectedEntity.entity] || 0}
           revenue={revenueData[selectedEntity.entity] || null}
           initialYear={revenueYear}
-          onClose={() => setSelectedEntity(null)}
+          onClose={() => {
+            setSelectedEntity(null);
+            clearSidebarHash();
+          }}
         />
       )}
     </div>

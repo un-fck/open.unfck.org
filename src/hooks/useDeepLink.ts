@@ -13,10 +13,20 @@ interface UseDeepLinkOptions<T> {
   onNavigateAway?: () => void;
 }
 
-/** Navigate to a sidebar by updating the URL hash */
+/** Navigate to a sidebar by updating the URL hash (adds history entry) */
 export function navigateToSidebar(type: string, value: string | number) {
   window.history.pushState(null, "", `#${type}=${encodeURIComponent(String(value))}`);
   window.dispatchEvent(new HashChangeEvent("hashchange"));
+}
+
+/** Update URL to sidebar without adding history entry (for initial opens from charts) */
+export function replaceToSidebar(type: string, value: string | number) {
+  window.history.replaceState(null, "", `#${type}=${encodeURIComponent(String(value))}`);
+}
+
+/** Clear the sidebar hash from URL without adding history entry */
+export function clearSidebarHash() {
+  window.history.replaceState(null, "", window.location.pathname + window.location.search);
 }
 
 /**

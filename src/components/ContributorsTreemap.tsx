@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { ContributorSidebar } from "@/components/ContributorSidebar";
 import { YearSlider } from "@/components/YearSlider";
-import { useDeepLink } from "@/hooks/useDeepLink";
+import { useDeepLink, replaceToSidebar, clearSidebarHash } from "@/hooks/useDeepLink";
 import { ChartSearchInput } from "@/components/ui/chart-search-input";
 import {
   Tooltip,
@@ -372,7 +372,10 @@ export function ContributorsTreemap() {
               height: `${rect.height}%`,
               zIndex: isHovered ? 10 : 1,
             }}
-            onClick={() => setSelectedContributor(rect.data)}
+            onClick={() => {
+              setSelectedContributor(rect.data);
+              replaceToSidebar("donor", rect.data.name);
+            }}
             onMouseEnter={() => setHoveredState(rect.data.name)}
             onMouseLeave={() => setHoveredState(null)}
           >
@@ -553,7 +556,10 @@ export function ContributorsTreemap() {
         <ContributorSidebar
           contributor={selectedContributor}
           initialYear={selectedYear}
-          onClose={() => setSelectedContributor(null)}
+          onClose={() => {
+            setSelectedContributor(null);
+            clearSidebarHash();
+          }}
         />
       )}
     </div>

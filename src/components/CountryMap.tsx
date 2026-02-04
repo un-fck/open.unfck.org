@@ -5,7 +5,7 @@ import { HybridMap } from "@undp/data-viz";
 import { CountrySidebar } from "@/components/CountrySidebar";
 import { CountryTreemap } from "@/components/CountryTreemap";
 import { YearSlider } from "@/components/YearSlider";
-import { useDeepLink } from "@/hooks/useDeepLink";
+import { useDeepLink, replaceToSidebar, clearSidebarHash } from "@/hooks/useDeepLink";
 import { ChartSearchInput } from "@/components/ui/chart-search-input";
 import { Switch } from "@/components/ui/switch";
 import { formatBudget } from "@/lib/entities";
@@ -143,6 +143,7 @@ export function CountryMap() {
         total: d.data.total,
         entities: d.data.entities,
       });
+      replaceToSidebar("country", d.data.iso3);
     }
   };
 
@@ -153,6 +154,12 @@ export function CountryMap() {
       total: country.total,
       entities: country.entities,
     });
+    replaceToSidebar("country", country.iso3);
+  };
+
+  const handleClose = () => {
+    setSelectedCountry(null);
+    clearSidebarHash();
   };
 
   return (
@@ -276,7 +283,7 @@ export function CountryMap() {
         <CountrySidebar
           country={selectedCountry}
           initialYear={selectedYear}
-          onClose={() => setSelectedCountry(null)}
+          onClose={handleClose}
         />
       )}
     </div>

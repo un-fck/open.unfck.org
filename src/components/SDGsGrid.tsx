@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import SDGModal from "./SDGModal";
 import { YearSlider } from "@/components/YearSlider";
-import { useDeepLink } from "@/hooks/useDeepLink";
+import { useDeepLink, replaceToSidebar, clearSidebarHash } from "@/hooks/useDeepLink";
 import { ChartSearchInput } from "@/components/ui/chart-search-input";
 import {
   Tooltip,
@@ -310,7 +310,12 @@ export default function SDGsGrid() {
                     backgroundColor: bgFaded ? "#e5e7eb" : color,
                     transitionDuration: "1400ms",
                   }}
-                  onClick={() => sdg && setSelectedSDG(sdg)}
+                  onClick={() => {
+                    if (sdg) {
+                      setSelectedSDG(sdg);
+                      replaceToSidebar("sdg", sdg.number);
+                    }
+                  }}
                 >
                   {/* Entity sub-treemap with fade */}
                   <div
@@ -378,7 +383,10 @@ export default function SDGsGrid() {
       {selectedSDG && (
         <SDGModal
           sdg={selectedSDG}
-          onClose={() => setSelectedSDG(null)}
+          onClose={() => {
+            setSelectedSDG(null);
+            clearSidebarHash();
+          }}
           color={SDG_COLORS[selectedSDG.number]}
           entityExpenses={expensesData?.[selectedSDG.number.toString()]?.entities}
           initialYear={selectedYear}
