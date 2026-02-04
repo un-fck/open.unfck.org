@@ -73,17 +73,17 @@
     "count": 2843,
     "metrics": [
       {
-        "total": 3314386594.178,
+        "total": 3314388366.678,
         "metricId": 8,
         "metricName": "Total Expenditure"
       },
       {
-        "total": 4945973962.895,
+        "total": 4945974462.895,
         "metricId": 6,
         "metricName": "Total Available Resources"
       },
       {
-        "total": 7941253453.169,
+        "total": 7941253953.169,
         "metricId": 5,
         "metricName": "Total Required Resources"
       }
@@ -103,7 +103,7 @@
         ]
       }
     },
-    "count": 4446,
+    "count": 4445,
     "metrics": [
       {
         "total": 3512816455.769,
@@ -111,12 +111,12 @@
         "metricName": "Total Expenditure"
       },
       {
-        "total": 4602619704.213,
+        "total": 4601827682.213,
         "metricId": 6,
         "metricName": "Total Available Resources"
       },
       {
-        "total": 6257763338.091,
+        "total": 6256876816.091,
         "metricId": 5,
         "metricName": "Total Required Resources"
       }
@@ -139,17 +139,17 @@
     "count": 2539,
     "metrics": [
       {
-        "total": 1487131502.17,
+        "total": 1487031272.67,
         "metricId": 8,
         "metricName": "Total Expenditure"
       },
       {
-        "total": 2033209747.998,
+        "total": 2033109518.498,
         "metricId": 6,
         "metricName": "Total Available Resources"
       },
       {
-        "total": 3251017378.16,
+        "total": 3250917148.66,
         "metricId": 5,
         "metricName": "Total Required Resources"
       }
@@ -172,17 +172,17 @@
     "count": 4900,
     "metrics": [
       {
-        "total": 1034678407.336,
+        "total": 1034667729.836,
         "metricId": 8,
         "metricName": "Total Expenditure"
       },
       {
-        "total": 1591483366.81,
+        "total": 1591223908.144,
         "metricId": 6,
         "metricName": "Total Available Resources"
       },
       {
-        "total": 2323978933.781,
+        "total": 2323719533.115,
         "metricId": 5,
         "metricName": "Total Required Resources"
       }
@@ -276,7 +276,7 @@
         "metricName": "Total Expenditure"
       },
       {
-        "total": 1116113778.433,
+        "total": 1116113720.433,
         "metricId": 6,
         "metricName": "Total Available Resources"
       },
@@ -342,12 +342,12 @@
         "metricName": "Total Expenditure"
       },
       {
-        "total": 965836312.58,
+        "total": 965771645.914,
         "metricId": 6,
         "metricName": "Total Available Resources"
       },
       {
-        "total": 1416494657.581,
+        "total": 1416429990.915,
         "metricId": 5,
         "metricName": "Total Required Resources"
       }
@@ -502,17 +502,17 @@
     "count": 1101,
     "metrics": [
       {
-        "total": 209603464.303,
+        "total": 209605866.303,
         "metricId": 8,
         "metricName": "Total Expenditure"
       },
       {
-        "total": 492686129.307,
+        "total": 492805629.307,
         "metricId": 6,
         "metricName": "Total Available Resources"
       },
       {
-        "total": 690622388.613,
+        "total": 690741888.613,
         "metricId": 5,
         "metricName": "Total Required Resources"
       }
@@ -532,20 +532,20 @@
         ]
       }
     },
-    "count": 3967,
+    "count": 3968,
     "metrics": [
       {
-        "total": 1297451052.233,
+        "total": 1297352787.733,
         "metricId": 8,
         "metricName": "Total Expenditure"
       },
       {
-        "total": 1926315793.59,
+        "total": 1926113616.424,
         "metricId": 6,
         "metricName": "Total Available Resources"
       },
       {
-        "total": 2668087567.464,
+        "total": 2667885390.298,
         "metricId": 5,
         "metricName": "Total Required Resources"
       }
@@ -573,12 +573,12 @@
         "metricName": "Total Expenditure"
       },
       {
-        "total": 702771436.392,
+        "total": 702891436.392,
         "metricId": 6,
         "metricName": "Total Available Resources"
       },
       {
-        "total": 1044848427.8,
+        "total": 1044968427.8,
         "metricId": 5,
         "metricName": "Total Required Resources"
       }

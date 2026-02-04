@@ -54,6 +54,24 @@ def fetch_projects_for_workspace(workspace_id: int, year: int = 2024) -> list[di
                        timeout=60)
     return res.json() if res.text and res.text != '[]' else []
 
+def fetch_framework_level(workspace_id: int, level: str, year: int = 2024) -> list[dict]:
+    """Fetch SP/OC/OU for a workspace. Level is 'SP', 'OC', or 'OU'."""
+    params = {"workspaceIds": workspace_id, "grouping": f"planEntity:{level}", "financeYears": year}
+    data = get(f"{BASE}/planEntity/finance/overview", params)
+    if data:
+        return data
+    # Fall back to all-time
+    params.pop("financeYears")
+    return get(f"{BASE}/planEntity/finance/overview", params) or []
+
+def fetch_framework_for_workspace(workspace_id: int, year: int = 2024) -> dict:
+    """Fetch full results framework (SP/OC/OU) for a workspace."""
+    return {
+        "sp": fetch_framework_level(workspace_id, "SP", year),
+        "oc": fetch_framework_level(workspace_id, "OC", year),
+        "ou": fetch_framework_level(workspace_id, "OU", year),
+    }
+
 def extract_metrics(item: dict) -> dict:
     """Extract required/available/spent from metrics list."""
     metrics = {m["metricName"]: m["total"] for m in item.get("metrics", [])}
@@ -94,5 +112,14 @@ if __name__ == "__main__":
     (OUT / "projects_by_country.json").write_text(json.dumps(all_projects, indent=2, ensure_ascii=False))
     total = sum(sum(len(a.get("planEntities", [])) for a in agencies) for agencies in all_projects.values())
     print(f"  {total} projects across {len(all_projects)} countries")
+
+    print("Fetching results framework per country...")
+    all_frameworks = {}
+    for country, ws_id in tqdm(list(workspaces.items())):
+        fw = fetch_framework_for_workspace(ws_id)
+        if any(fw.values()):
+            all_frameworks[country] = fw
+    (OUT / "frameworks_by_country.json").write_text(json.dumps(all_frameworks, indent=2, ensure_ascii=False))
+    print(f"  {len(all_frameworks)} countries with framework data")
 
     print("Done.")

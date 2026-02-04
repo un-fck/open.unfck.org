@@ -41,6 +41,7 @@ export interface UninfoCountryFull {
   totals: UninfoMetrics;
   sdgs: Record<string, UninfoMetrics>;
   projects: UninfoProject[];
+  framework?: FrameworkNode[];
 }
 
 // Index entry (for quick lookups)
@@ -56,6 +57,15 @@ export interface UninfoSdgData {
   totals: UninfoMetrics;
   countries: Record<string, UninfoMetrics>;
   top_underfunded: string[];
+}
+
+// Results Framework types (SP -> OC -> OU hierarchy)
+export interface FrameworkNode extends UninfoMetrics {
+  id: number;
+  code: string;
+  name: string;
+  description?: string;
+  children?: FrameworkNode[];
 }
 
 // Caches

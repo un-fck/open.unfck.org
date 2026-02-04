@@ -267,7 +267,7 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
         onTouchEnd={onTouchEnd}
       >
         {/* Header */}
-        <div className="sticky top-0 border-b border-gray-300 bg-white px-6 pb-2 pt-4 sm:px-8 sm:pb-3 sm:pt-6">
+        <div className="sticky top-0 z-10 border-b border-gray-300 bg-white px-6 pb-2 pt-4 sm:px-8 sm:pb-3 sm:pt-6">
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1">
               <h2 id={sidebarTitleId} className="text-xl font-bold leading-tight text-gray-900 sm:text-2xl lg:text-2xl">

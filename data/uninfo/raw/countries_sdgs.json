@@ -1,63 +1,78 @@
 {
   "Curaçao": {
     "workspace_id": 44,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Aruba": {
     "workspace_id": 44,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Saint Vincent and the Grenadines": {
     "workspace_id": 197,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Saint Lucia": {
     "workspace_id": 197,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Saint Kitts and Nevis": {
     "workspace_id": 197,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Montserrat": {
     "workspace_id": 197,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Grenada": {
     "workspace_id": 197,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Dominica": {
     "workspace_id": 197,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Virgin Islands, British": {
     "workspace_id": 197,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Antigua and Barbuda": {
     "workspace_id": 197,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Anguilla (United Kingdom)": {
     "workspace_id": 197,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Turks and Caicos Islands": {
     "workspace_id": 139,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Cayman Islands": {
     "workspace_id": 139,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Bermuda": {
     "workspace_id": 139,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Bahamas": {
     "workspace_id": 139,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Micronesia, Federated States of": {
     "workspace_id": 241,
@@ -647,7 +662,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Palau": {
     "workspace_id": 241,
@@ -1237,7 +1253,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Marshall Islands": {
     "workspace_id": 241,
@@ -1827,7 +1844,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Kiribati": {
     "workspace_id": 241,
@@ -2417,7 +2435,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Nauru": {
     "workspace_id": 241,
@@ -3007,35 +3026,43 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Suriname": {
     "workspace_id": 59,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Guyana": {
     "workspace_id": 153,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Belize": {
     "workspace_id": 247,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Barbados": {
     "workspace_id": 197,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Trinidad and Tobago": {
     "workspace_id": 44,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Sint Maarten (Dutch part)": {
     "workspace_id": 44,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Jamaica": {
     "workspace_id": 139,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Congo, The Democratic Republic of the": {
     "workspace_id": 251,
@@ -4149,7 +4176,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Cook Islands": {
     "workspace_id": 241,
@@ -4739,7 +4767,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Niue": {
     "workspace_id": 241,
@@ -5329,7 +5358,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Tokelau": {
     "workspace_id": 241,
@@ -5919,27 +5949,33 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Fiji": {
     "workspace_id": 168,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Solomon Islands": {
     "workspace_id": 168,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Tonga": {
     "workspace_id": 168,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Tuvalu": {
     "workspace_id": 168,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Vanuatu": {
     "workspace_id": 168,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "occupied Palestinian territory": {
     "workspace_id": 233,
@@ -6000,7 +6036,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Kosovo": {
     "workspace_id": 230,
@@ -6434,7 +6471,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "El Salvador": {
     "workspace_id": 228,
@@ -7019,11 +7057,13 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Korea, Democratic People's Republic of": {
     "workspace_id": 227,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Angola": {
     "workspace_id": 221,
@@ -7589,7 +7629,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Albania": {
     "workspace_id": 220,
@@ -8155,11 +8196,13 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "United Arab Emirates": {
     "workspace_id": 218,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Argentina": {
     "workspace_id": 217,
@@ -8725,7 +8768,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Armenia": {
     "workspace_id": 216,
@@ -9258,7 +9302,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Azerbaijan": {
     "workspace_id": 212,
@@ -9791,7 +9836,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Burundi": {
     "workspace_id": 211,
@@ -10324,7 +10370,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Benin": {
     "workspace_id": 209,
@@ -10824,7 +10871,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Burkina Faso": {
     "workspace_id": 208,
@@ -11390,7 +11438,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Bangladesh": {
     "workspace_id": 207,
@@ -11956,7 +12005,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Bahrain": {
     "workspace_id": 205,
@@ -12905,7 +12955,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Belarus": {
     "workspace_id": 202,
@@ -13433,7 +13484,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Bolivia, Plurinational State of": {
     "workspace_id": 199,
@@ -13966,7 +14018,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Brazil": {
     "workspace_id": 198,
@@ -14532,7 +14585,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Bhutan": {
     "workspace_id": 195,
@@ -15093,7 +15147,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Botswana": {
     "workspace_id": 193,
@@ -15621,7 +15676,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Central African Republic": {
     "workspace_id": 192,
@@ -16154,7 +16210,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Chile": {
     "workspace_id": 190,
@@ -16744,7 +16801,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Côte d'Ivoire": {
     "workspace_id": 189,
@@ -17277,7 +17335,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Cameroon": {
     "workspace_id": 188,
@@ -17788,7 +17847,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Congo": {
     "workspace_id": 187,
@@ -18241,7 +18301,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Colombia": {
     "workspace_id": 186,
@@ -18797,7 +18858,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Comoros": {
     "workspace_id": 185,
@@ -19905,7 +19967,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Cuba": {
     "workspace_id": 183,
@@ -20471,7 +20534,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Djibouti": {
     "workspace_id": 180,
@@ -21516,7 +21580,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Algeria": {
     "workspace_id": 177,
@@ -22082,7 +22147,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Ecuador": {
     "workspace_id": 176,
@@ -22648,7 +22714,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Egypt": {
     "workspace_id": 175,
@@ -23238,7 +23305,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Eritrea": {
     "workspace_id": 174,
@@ -23804,7 +23872,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Ethiopia": {
     "workspace_id": 170,
@@ -24791,7 +24860,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Georgia": {
     "workspace_id": 165,
@@ -25324,7 +25394,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Guinea": {
     "workspace_id": 162,
@@ -25890,7 +25961,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Gambia": {
     "workspace_id": 161,
@@ -26423,7 +26495,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Guinea-Bissau": {
     "workspace_id": 160,
@@ -26937,7 +27010,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Equatorial Guinea": {
     "workspace_id": 159,
@@ -27366,7 +27440,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Guatemala": {
     "workspace_id": 155,
@@ -27899,7 +27974,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Honduras": {
     "workspace_id": 151,
@@ -28432,7 +28508,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Haiti": {
     "workspace_id": 149,
@@ -28998,7 +29075,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Indonesia": {
     "workspace_id": 147,
@@ -29564,7 +29642,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "India": {
     "workspace_id": 146,
@@ -30097,7 +30176,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Iran, Islamic Republic of": {
     "workspace_id": 144,
@@ -30663,11 +30743,13 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Iraq": {
     "workspace_id": 143,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Jordan": {
     "workspace_id": 137,
@@ -31682,7 +31764,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Kyrgyzstan": {
     "workspace_id": 134,
@@ -32215,7 +32298,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Cambodia": {
     "workspace_id": 133,
@@ -32781,11 +32865,13 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Kuwait": {
     "workspace_id": 130,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Lao People's Democratic Republic": {
     "workspace_id": 129,
@@ -33313,7 +33399,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Lebanon": {
     "workspace_id": 128,
@@ -33888,7 +33975,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Liberia": {
     "workspace_id": 127,
@@ -34421,7 +34509,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Libya": {
     "workspace_id": 126,
@@ -34977,7 +35066,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Sri Lanka": {
     "workspace_id": 123,
@@ -35543,7 +35633,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Lesotho": {
     "workspace_id": 122,
@@ -36071,7 +36162,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Moldova, Republic of": {
     "workspace_id": 116,
@@ -36604,7 +36696,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Madagascar": {
     "workspace_id": 115,
@@ -37170,7 +37263,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Maldives": {
     "workspace_id": 114,
@@ -37703,7 +37797,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Mexico": {
     "workspace_id": 113,
@@ -38269,7 +38364,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Mali": {
     "workspace_id": 111,
@@ -38797,7 +38893,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Myanmar": {
     "workspace_id": 109,
@@ -39235,17 +39332,17 @@
         "count": 5,
         "metrics": [
           {
-            "total": 151618.5,
+            "total": 153391,
             "metricId": 8,
             "metricName": "Total Expenditure"
           },
           {
-            "total": 350463.667,
+            "total": 350963.667,
             "metricId": 5,
             "metricName": "Total Required Resources"
           },
           {
-            "total": 350463.667,
+            "total": 350963.667,
             "metricId": 6,
             "metricName": "Total Available Resources"
           }
@@ -39273,12 +39370,12 @@
             "metricName": "Total Expenditure"
           },
           {
-            "total": 1852438.667,
+            "total": 1060416.667,
             "metricId": 6,
             "metricName": "Total Available Resources"
           },
           {
-            "total": 2271505,
+            "total": 1464983,
             "metricId": 5,
             "metricName": "Total Required Resources"
           }
@@ -39301,17 +39398,17 @@
         "count": 24,
         "metrics": [
           {
-            "total": 1602765.001,
+            "total": 1502535.501,
             "metricId": 8,
             "metricName": "Total Expenditure"
           },
           {
-            "total": 1702585.501,
+            "total": 1602356.001,
             "metricId": 6,
             "metricName": "Total Available Resources"
           },
           {
-            "total": 2157276.167,
+            "total": 2057046.667,
             "metricId": 5,
             "metricName": "Total Required Resources"
           }
@@ -39334,17 +39431,17 @@
         "count": 21,
         "metrics": [
           {
-            "total": 1442814.501,
+            "total": 1432137.001,
             "metricId": 8,
             "metricName": "Total Expenditure"
           },
           {
-            "total": 1762270.001,
+            "total": 1502811.335,
             "metricId": 6,
             "metricName": "Total Available Resources"
           },
           {
-            "total": 1815470.001,
+            "total": 1556069.335,
             "metricId": 5,
             "metricName": "Total Required Resources"
           }
@@ -39438,7 +39535,7 @@
             "metricName": "Total Expenditure"
           },
           {
-            "total": 981122.667,
+            "total": 981064.667,
             "metricId": 6,
             "metricName": "Total Available Resources"
           },
@@ -39504,12 +39601,12 @@
             "metricName": "Total Expenditure"
           },
           {
-            "total": 2067571.167,
+            "total": 2002904.501,
             "metricId": 6,
             "metricName": "Total Available Resources"
           },
           {
-            "total": 2453003,
+            "total": 2388336.334,
             "metricId": 5,
             "metricName": "Total Required Resources"
           }
@@ -39631,17 +39728,17 @@
         "count": 3,
         "metrics": [
           {
-            "total": 521049,
+            "total": 523451,
             "metricId": 8,
             "metricName": "Total Expenditure"
           },
           {
-            "total": 537500,
+            "total": 657000,
             "metricId": 5,
             "metricName": "Total Required Resources"
           },
           {
-            "total": 537500,
+            "total": 657000,
             "metricId": 6,
             "metricName": "Total Available Resources"
           }
@@ -39661,20 +39758,20 @@
             ]
           }
         },
-        "count": 56,
+        "count": 57,
         "metrics": [
           {
-            "total": 5059941.834,
+            "total": 4961677.334,
             "metricId": 8,
             "metricName": "Total Expenditure"
           },
           {
-            "total": 6941387.334,
+            "total": 6739210.168,
             "metricId": 6,
             "metricName": "Total Available Resources"
           },
           {
-            "total": 7820376.5,
+            "total": 7618199.334,
             "metricId": 5,
             "metricName": "Total Required Resources"
           }
@@ -39702,18 +39799,19 @@
             "metricName": "Total Expenditure"
           },
           {
-            "total": 187018.667,
+            "total": 307018.667,
             "metricId": 6,
             "metricName": "Total Available Resources"
           },
           {
-            "total": 356987.667,
+            "total": 476987.667,
             "metricId": 5,
             "metricName": "Total Required Resources"
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Mongolia": {
     "workspace_id": 107,
@@ -40246,7 +40344,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Mauritania": {
     "workspace_id": 106,
@@ -40647,7 +40746,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Mauritius": {
     "workspace_id": 105,
@@ -41180,7 +41280,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Seychelles": {
     "workspace_id": 54,
@@ -41693,7 +41794,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Namibia": {
     "workspace_id": 104,
@@ -42708,11 +42810,13 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Nicaragua": {
     "workspace_id": 100,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Nepal": {
     "workspace_id": 96,
@@ -43245,7 +43349,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Pakistan": {
     "workspace_id": 92,
@@ -43811,7 +43916,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Panama": {
     "workspace_id": 91,
@@ -44377,7 +44483,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Peru": {
     "workspace_id": 89,
@@ -44928,7 +45035,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Philippines": {
     "workspace_id": 88,
@@ -45494,7 +45602,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Papua New Guinea": {
     "workspace_id": 86,
@@ -46060,7 +46169,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Paraguay": {
     "workspace_id": 81,
@@ -47651,7 +47761,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Sudan": {
     "workspace_id": 73,
@@ -48137,7 +48248,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Senegal": {
     "workspace_id": 72,
@@ -48571,7 +48683,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Sierra Leone": {
     "workspace_id": 66,
@@ -49057,7 +49170,8 @@
   },
   "Somalia": {
     "workspace_id": 63,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Serbia": {
     "workspace_id": 62,
@@ -49623,7 +49737,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "South Sudan": {
     "workspace_id": 61,
@@ -50108,7 +50223,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "São Tomé and Príncipe": {
     "workspace_id": 60,
@@ -50674,7 +50790,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Eswatini": {
     "workspace_id": 55,
@@ -51022,7 +51139,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Syrian Arab Republic": {
     "workspace_id": 53,
@@ -52014,7 +52132,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Togo": {
     "workspace_id": 51,
@@ -52504,7 +52623,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Thailand": {
     "workspace_id": 50,
@@ -53070,7 +53190,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Tajikistan": {
     "workspace_id": 49,
@@ -53603,7 +53724,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Turkmenistan": {
     "workspace_id": 47,
@@ -54169,7 +54291,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Timor-Leste": {
     "workspace_id": 46,
@@ -54669,7 +54792,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Turkiye": {
     "workspace_id": 43,
@@ -55235,7 +55359,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Uruguay": {
     "workspace_id": 41,
@@ -55801,7 +55926,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Venezuela, Bolivarian Republic of": {
     "workspace_id": 40,
@@ -56329,7 +56455,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Viet Nam": {
     "workspace_id": 37,
@@ -56895,7 +57022,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Tanzania, United Republic of": {
     "workspace_id": 36,
@@ -56980,7 +57108,7 @@
             ]
           }
         },
-        "count": 120,
+        "count": 119,
         "metrics": [
           {
             "total": 13244376,
@@ -56993,7 +57121,7 @@
             "metricName": "Total Available Resources"
           },
           {
-            "total": 29580576.667,
+            "total": 29500576.667,
             "metricId": 5,
             "metricName": "Total Required Resources"
           }
@@ -57461,7 +57589,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Ukraine": {
     "workspace_id": 35,
@@ -58481,11 +58610,13 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Yemen": {
     "workspace_id": 33,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "South Africa": {
     "workspace_id": 32,
@@ -58881,7 +59012,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Mozambique": {
     "workspace_id": 31,
@@ -59447,7 +59579,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Zambia": {
     "workspace_id": 30,
@@ -59980,7 +60113,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Tunisia": {
     "workspace_id": 29,
@@ -60546,7 +60680,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Cabo Verde": {
     "workspace_id": 28,
@@ -61112,7 +61247,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Malawi": {
     "workspace_id": 27,
@@ -61612,7 +61748,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Malaysia": {
     "workspace_id": 26,
@@ -62178,7 +62315,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Brunei Darussalam": {
     "workspace_id": 26,
@@ -62744,7 +62882,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Singapore": {
     "workspace_id": 26,
@@ -63310,7 +63449,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "China": {
     "workspace_id": 24,
@@ -63791,7 +63931,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Morocco": {
     "workspace_id": 23,
@@ -64357,7 +64498,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Nigeria": {
     "workspace_id": 22,
@@ -64923,7 +65065,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Afghanistan": {
     "workspace_id": 21,
@@ -65489,7 +65632,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Ghana": {
     "workspace_id": 20,
@@ -66055,7 +66199,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "North Macedonia, Republic of": {
     "workspace_id": 19,
@@ -66588,7 +66733,8 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Kazakhstan": {
     "workspace_id": 18,
@@ -67154,11 +67300,13 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   },
   "Uganda": {
     "workspace_id": 15,
-    "sdgs": []
+    "sdgs": [],
+    "has_year_data": false
   },
   "Zimbabwe": {
     "workspace_id": 14,
@@ -67724,6 +67872,7 @@
           }
         ]
       }
-    ]
+    ],
+    "has_year_data": true
   }
 }

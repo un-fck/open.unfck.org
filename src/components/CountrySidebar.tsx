@@ -11,6 +11,7 @@ import { useYearRanges, generateYearRange } from "@/lib/useYearRanges";
 import { loadUninfoCountry, UninfoCountryFull } from "@/lib/data";
 import { UninfoFundingBar } from "@/components/UninfoFundingBar";
 import { UninfoProjectTable } from "@/components/UninfoProjectTable";
+import { ResultsFramework } from "@/components/ResultsFramework";
 import { SDG_COLORS, SDG_SHORT_TITLES } from "@/lib/sdgs";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { SortSelector, SortOption } from "@/components/ui/sort-selector";
@@ -163,7 +164,7 @@ export function CountrySidebar({ country, initialYear, onClose }: CountrySidebar
         onTouchEnd={onTouchEnd}
       >
         {/* Header */}
-        <div className="sticky top-0 border-b border-gray-300 bg-white px-6 pb-2 pt-4 sm:px-8 sm:pb-3 sm:pt-6">
+        <div className="sticky top-0 z-10 border-b border-gray-300 bg-white px-6 pb-2 pt-4 sm:px-8 sm:pb-3 sm:pt-6">
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1">
               <h2 id={sidebarTitleId} className="text-xl font-bold leading-tight text-gray-900 sm:text-2xl lg:text-2xl">
@@ -379,6 +380,18 @@ export function CountrySidebar({ country, initialYear, onClose }: CountrySidebar
                       })()}
                     </div>
                   </div>
+
+                  {/* Results Framework */}
+                  {uninfoData.framework && uninfoData.framework.length > 0 && (
+                    <div className="mt-4">
+                      <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
+                        Results Framework
+                      </span>
+                      <div className="mt-2">
+                        <ResultsFramework framework={uninfoData.framework} />
+                      </div>
+                    </div>
+                  )}
 
                   {/* Top Projects */}
                   {uninfoData.projects.length > 0 && (

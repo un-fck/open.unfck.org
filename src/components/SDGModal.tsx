@@ -175,7 +175,7 @@ export default function SDGModal({
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        <div className="sticky top-0 border-b border-gray-300 bg-white px-4 pb-2 pt-3 sm:px-6 sm:pb-3 sm:pt-4">
+        <div className="sticky top-0 z-10 border-b border-gray-300 bg-white px-4 pb-2 pt-3 sm:px-6 sm:pb-3 sm:pt-4">
           <div className="flex items-start justify-between gap-3">
             <div className="flex-1">
               <div className="mb-1 flex items-center gap-2">

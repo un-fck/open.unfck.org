@@ -654,9 +654,9 @@
   "2": {
     "name": "Zero Hunger",
     "totals": {
-      "required": 7941253453.17,
-      "available": 4945973962.9,
-      "spent": 3314386594.18
+      "required": 7941253953.17,
+      "available": 4945974462.9,
+      "spent": 3314388366.68
     },
     "countries": {
       "FSM": {
@@ -1015,9 +1015,9 @@
         "spent": 6744829.25
       },
       "MNE": {
-        "required": 350463.67,
-        "available": 350463.67,
-        "spent": 151618.5
+        "required": 350963.67,
+        "available": 350963.67,
+        "spent": 153391
       },
       "MNG": {
         "required": 3591638,
@@ -1291,8 +1291,8 @@
   "3": {
     "name": "Good Health and Well-being",
     "totals": {
-      "required": 6257763338.09,
-      "available": 4602619704.21,
+      "required": 6256876816.09,
+      "available": 4601827682.21,
       "spent": 3512816455.77
     },
     "countries": {
@@ -1657,8 +1657,8 @@
         "spent": 880544.25
       },
       "MNE": {
-        "required": 2271505,
-        "available": 1852438.67,
+        "required": 1464983,
+        "available": 1060416.67,
         "spent": 993044.17
       },
       "MNG": {
@@ -1827,7 +1827,7 @@
         "spent": 14350516.7
       },
       "TZA": {
-        "required": 29580576.67,
+        "required": 29500576.67,
         "available": 21403291.5,
         "spent": 13244376
       },
@@ -1943,9 +1943,9 @@
   "4": {
     "name": "Quality Education",
     "totals": {
-      "required": 3251017378.16,
-      "available": 2033209748.0,
-      "spent": 1487131502.17
+      "required": 3250917148.66,
+      "available": 2033109518.5,
+      "spent": 1487031272.67
     },
     "countries": {
       "FSM": {
@@ -2309,9 +2309,9 @@
         "spent": 0
       },
       "MNE": {
-        "required": 2157276.17,
-        "available": 1702585.5,
-        "spent": 1602765.0
+        "required": 2057046.67,
+        "available": 1602356.0,
+        "spent": 1502535.5
       },
       "MNG": {
         "required": 2176804,
@@ -2595,9 +2595,9 @@
   "5": {
     "name": "Gender Equality",
     "totals": {
-      "required": 2323978933.78,
-      "available": 1591483366.81,
-      "spent": 1034678407.34
+      "required": 2323719533.11,
+      "available": 1591223908.14,
+      "spent": 1034667729.84
     },
     "countries": {
       "FSM": {
@@ -2966,9 +2966,9 @@
         "spent": 648702
       },
       "MNE": {
-        "required": 1815470.0,
-        "available": 1762270.0,
-        "spent": 1442814.5
+        "required": 1556069.33,
+        "available": 1502811.33,
+        "spent": 1432137.0
       },
       "MNG": {
         "required": 4720785,
@@ -4467,7 +4467,7 @@
     "name": "Decent Jobs and Economic Growth",
     "totals": {
       "required": 1715717189.14,
-      "available": 1116113778.43,
+      "available": 1116113720.43,
       "spent": 630309962.05
     },
     "countries": {
@@ -4833,7 +4833,7 @@
       },
       "MNE": {
         "required": 1032102.67,
-        "available": 981122.67,
+        "available": 981064.67,
         "spent": 667078.5
       },
       "MNG": {
@@ -5740,8 +5740,8 @@
   "10": {
     "name": "Reduced Inequalities",
     "totals": {
-      "required": 1416494657.58,
-      "available": 965836312.58,
+      "required": 1416429990.91,
+      "available": 965771645.91,
       "spent": 658602269.41
     },
     "countries": {
@@ -6106,8 +6106,8 @@
         "spent": 652452
       },
       "MNE": {
-        "required": 2453003,
-        "available": 2067571.17,
+        "required": 2388336.33,
+        "available": 2002904.5,
         "spent": 1725849.67
       },
       "MNG": {
@@ -8730,9 +8730,9 @@
   "15": {
     "name": "Life on Land",
     "totals": {
-      "required": 690622388.61,
-      "available": 492686129.31,
-      "spent": 209603464.3
+      "required": 690741888.61,
+      "available": 492805629.31,
+      "spent": 209605866.3
     },
     "countries": {
       "FSM": {
@@ -9071,9 +9071,9 @@
         "spent": 596908.25
       },
       "MNE": {
-        "required": 537500,
-        "available": 537500,
-        "spent": 521049
+        "required": 657000,
+        "available": 657000,
+        "spent": 523451
       },
       "MNG": {
         "required": 3919435.33,
@@ -9337,9 +9337,9 @@
   "16": {
     "name": "Peace and Justice - Strong Institutions",
     "totals": {
-      "required": 2668087567.46,
-      "available": 1926315793.59,
-      "spent": 1297451052.23
+      "required": 2667885390.3,
+      "available": 1926113616.42,
+      "spent": 1297352787.73
     },
     "countries": {
       "FSM": {
@@ -9708,9 +9708,9 @@
         "spent": 450000
       },
       "MNE": {
-        "required": 7820376.5,
-        "available": 6941387.33,
-        "spent": 5059941.83
+        "required": 7618199.33,
+        "available": 6739210.17,
+        "spent": 4961677.33
       },
       "MNG": {
         "required": 2242661,
@@ -9989,8 +9989,8 @@
   "17": {
     "name": "Partnerships for the Goals",
     "totals": {
-      "required": 1044848427.8,
-      "available": 702771436.39,
+      "required": 1044968427.8,
+      "available": 702891436.39,
       "spent": 522512069.87
     },
     "countries": {
@@ -10340,8 +10340,8 @@
         "spent": 981550.83
       },
       "MNE": {
-        "required": 356987.67,
-        "available": 187018.67,
+        "required": 476987.67,
+        "available": 307018.67,
         "spent": 161210.67
       },
       "MNG": {
