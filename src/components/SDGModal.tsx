@@ -9,6 +9,18 @@ import { useFocusTrap } from "@/hooks/useFocusTrap";
 import { navigateToSidebar } from "@/hooks/useDeepLink";
 import { YearSelector } from "@/components/ui/year-selector";
 import { useYearRanges, generateYearRange } from "@/lib/useYearRanges";
+import { loadUninfoSdgs, loadUninfoCountryIndex, UninfoSdgData } from "@/lib/data";
+import { UninfoFundingBar } from "@/components/UninfoFundingBar";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { SortSelector, SortOption } from "@/components/ui/sort-selector";
+
+const UNINFO_SORT_OPTIONS: SortOption[] = [
+  { value: "available", label: "Available" },
+  { value: "required", label: "Required" },
+  { value: "spent", label: "Spent" },
+  { value: "funding_gap", label: "Funding Gap" },
+  { value: "spending_gap", label: "Spending Gap" },
+];
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -44,8 +56,26 @@ export default function SDGModal({
   const [yearEntityExpenses, setYearEntityExpenses] = useState<{ [entity: string]: number } | undefined>(entityExpenses);
   const [loadingYear, setLoadingYear] = useState(false);
   
+  // UNINFO Cooperation Framework data
+  const [uninfoData, setUninfoData] = useState<UninfoSdgData | null>(null);
+  const [countryNames, setCountryNames] = useState<Record<string, string>>({});
+  const [uninfoSort, setUninfoSort] = useState("available");
+  
   // Focus trap for accessibility
   const focusTrapRef = useFocusTrap(!!sdg);
+  
+  // Load UNINFO data and country names
+  useEffect(() => {
+    if (!sdg) return;
+    Promise.all([loadUninfoSdgs(), loadUninfoCountryIndex()])
+      .then(([sdgData, indexData]) => {
+        setUninfoData(sdgData[sdg.number.toString()] || null);
+        const names: Record<string, string> = {};
+        for (const [iso3, data] of Object.entries(indexData)) names[iso3] = data.name;
+        setCountryNames(names);
+      })
+      .catch(() => setUninfoData(null));
+  }, [sdg]);
 
   // Fetch SDG expenses when year changes
   useEffect(() => {
@@ -251,8 +281,108 @@ export default function SDGModal({
             </div>
           )}
 
+          {/* UNSDG Cooperation Framework Section */}
+          {uninfoData && (
+            <div className="border-t border-gray-200 pt-4">
+              <h3 className="mb-1 text-lg font-normal uppercase tracking-wider text-gray-900 sm:text-xl">
+                UNSDG Cooperation Framework
+              </h3>
+              
+              {selectedYear !== 2024 ? (
+                <p className="text-xs text-gray-500 italic">Data only available for 2024.</p>
+              ) : (
+                <>
+                  <p className="mb-4 text-xs text-gray-500">
+                    Country-level programme data only, not representative of total spending. <a href="#methodology" className="underline hover:text-gray-700">Learn more.</a>
+                  </p>
+
+                  {/* Overall */}
+                  <div>
+                    <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
+                      Overall
+                    </span>
+                    <div className="mt-2">
+                      <UninfoFundingBar
+                        required={uninfoData.totals.required}
+                        available={uninfoData.totals.available}
+                        spent={uninfoData.totals.spent}
+                      />
+                    </div>
+                  </div>
+
+                  {/* By Country */}
+                  {Object.keys(uninfoData.countries).length > 0 && (
+                    <div className="mt-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
+                          By Country
+                        </span>
+                        <SortSelector options={UNINFO_SORT_OPTIONS} selected={uninfoSort} onChange={setUninfoSort} />
+                      </div>
+                      <div className="mt-2 space-y-1.5">
+                        {(() => {
+                          const entries = Object.entries(uninfoData.countries);
+                          const sorted = entries.sort((a, b) => {
+                            const [, ma] = a, [, mb] = b;
+                            if (uninfoSort === "required") return mb.required - ma.required;
+                            if (uninfoSort === "available") return mb.available - ma.available;
+                            if (uninfoSort === "spent") return mb.spent - ma.spent;
+                            if (uninfoSort === "funding_gap") return (mb.required - mb.available) - (ma.required - ma.available);
+                            if (uninfoSort === "spending_gap") return (mb.available - mb.spent) - (ma.available - ma.spent);
+                            return 0;
+                          });
+                          const top10 = sorted.slice(0, 10);
+                          const maxVal = Math.max(...top10.map(([, m]) => m.required));
+                          return top10.map(([iso3, metrics]) => {
+                            const barWidth = (metrics.required / maxVal) * 100;
+                            const availPct = (metrics.available / metrics.required) * 100;
+                            const spentPct = (metrics.spent / metrics.required) * 100;
+                            const name = countryNames[iso3] || iso3;
+                            return (
+                              <Tooltip key={iso3} delayDuration={200}>
+                                <TooltipTrigger asChild>
+                                  <button
+                                    onClick={() => navigateToSidebar("country", iso3)}
+                                    className="group flex w-full items-center gap-2 rounded hover:bg-gray-50"
+                                  >
+                                    <span className="w-20 flex-shrink-0 truncate text-left text-xs font-medium text-gray-700 group-hover:text-un-blue group-hover:underline" title={name}>
+                                      {name}
+                                    </span>
+                                    <div className="flex flex-1 flex-col gap-px">
+                                      <div
+                                        className="relative h-2 overflow-hidden rounded-sm bg-gray-200"
+                                        style={{ width: `${barWidth}%` }}
+                                      >
+                                        <div className="absolute inset-y-0 left-0 bg-un-blue/30" style={{ width: `${availPct}%` }} />
+                                        <div className="absolute inset-y-0 left-0 bg-un-blue" style={{ width: `${spentPct}%` }} />
+                                      </div>
+                                    </div>
+                                  </button>
+                                </TooltipTrigger>
+                                <TooltipContent side="top" className="border border-slate-200 bg-white text-slate-800 shadow-lg p-3">
+                                  <p className="font-medium text-xs mb-2">{name}</p>
+                                  <UninfoFundingBar
+                                    required={metrics.required}
+                                    available={metrics.available}
+                                    spent={metrics.spent}
+                                    compact
+                                  />
+                                </TooltipContent>
+                              </Tooltip>
+                            );
+                          });
+                        })()}
+                      </div>
+                    </div>
+                  )}
+
+                </>
+              )}
+            </div>
+          )}
+
           {/* Targets and Indicators */}
-          <div>
+          <div className="border-t border-gray-200 pt-4">
             <h3 className="mb-3 text-lg font-normal uppercase tracking-wider text-gray-900 sm:text-xl">
               Targets & Indicators
             </h3>

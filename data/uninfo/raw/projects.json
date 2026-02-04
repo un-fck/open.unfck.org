@@ -1,0 +1,6 @@
+{
+  "status": "error",
+  "statusCode": 500,
+  "message": "DB Error: terminating connection due to administrator command",
+  "uuid": "dd1fb74f-89a7-42e3-af8c-d53bf664bd06"
+}

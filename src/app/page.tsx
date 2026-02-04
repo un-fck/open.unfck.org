@@ -215,6 +215,34 @@ export default function Home() {
                       acceptance by the United Nations.
                     </li>
                   </ol>
+
+                  <h4 className="mt-6 font-medium text-gray-900">UN Cooperation Framework Data</h4>
+                  <p className="text-sm">
+                    This site also displays data from the{" "}
+                    <a href="https://uninfo.org" className="underline hover:text-un-blue" target="_blank" rel="noopener noreferrer">
+                      UN Sustainable Development Cooperation Framework system (UNINFO)
+                    </a>, which tracks planned activities at the country level.
+                  </p>
+                  <p className="text-sm mt-2">
+                    <strong>Key differences from CEB data:</strong>
+                  </p>
+                  <ul className="list-inside list-disc space-y-1 text-sm mt-1">
+                    <li>CEB: Historical actual expenditure from audited financial statements</li>
+                    <li>UNINFO: Planned resources and partial actuals for Cooperation Framework activities</li>
+                  </ul>
+                  <p className="text-sm mt-2">
+                    <strong>Three metrics shown:</strong>
+                  </p>
+                  <ul className="list-inside list-disc space-y-1 text-sm mt-1">
+                    <li>Required: Total budget needed for planned activities</li>
+                    <li>Available: Funding secured from donors</li>
+                    <li>Spent: Actual expenditure recorded</li>
+                  </ul>
+                  <p className="text-sm mt-2">
+                    UNINFO covers approximately 120 countries with Cooperation Frameworks, representing
+                    roughly 40% of total UN system spending. The remainder includes headquarters operations,
+                    peacekeeping missions, and global programs outside country frameworks.
+                  </p>
                 </div>
               </ExpandableCard>
 

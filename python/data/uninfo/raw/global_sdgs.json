@@ -1,0 +1,587 @@
+[
+  {
+    "id": null,
+    "name": "",
+    "short": "",
+    "properties": {},
+    "count": 62,
+    "metrics": [
+      {
+        "total": 1467190,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 3709717,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 153773124,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "End poverty in all its forms everywhere",
+    "short": "No Poverty",
+    "properties": {
+      "color": {
+        "hex": "#e5243b",
+        "rgb": [
+          229,
+          36,
+          59
+        ]
+      }
+    },
+    "count": 3086,
+    "metrics": [
+      {
+        "total": 1445793840.926,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 2456856931.962,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 3802277028.451,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "End hunger, achieve food security and improved nutrition and promote sustainable agriculture",
+    "short": "Zero Hunger",
+    "properties": {
+      "color": {
+        "hex": "#e5b735",
+        "rgb": [
+          229,
+          183,
+          53
+        ]
+      }
+    },
+    "count": 2843,
+    "metrics": [
+      {
+        "total": 3314388366.678,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 4945974462.895,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 7941253953.169,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Ensure healthy lives and promote well-being for all at all ages",
+    "short": "Good Health and Well-being",
+    "properties": {
+      "color": {
+        "hex": "#4c9f38",
+        "rgb": [
+          76,
+          159,
+          56
+        ]
+      }
+    },
+    "count": 4445,
+    "metrics": [
+      {
+        "total": 3512816455.769,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 4601827682.213,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 6256876816.091,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all",
+    "short": "Quality Education",
+    "properties": {
+      "color": {
+        "hex": "#c5192d",
+        "rgb": [
+          197,
+          25,
+          45
+        ]
+      }
+    },
+    "count": 2539,
+    "metrics": [
+      {
+        "total": 1487031272.67,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 2033109518.498,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 3250917148.66,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Achieve gender equality and empower all women and girls",
+    "short": "Gender Equality",
+    "properties": {
+      "color": {
+        "hex": "#ff3a21",
+        "rgb": [
+          255,
+          58,
+          33
+        ]
+      }
+    },
+    "count": 4900,
+    "metrics": [
+      {
+        "total": 1034667729.836,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 1591223908.144,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 2323719533.115,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Ensure availability and sustainable management of water and sanitation for all",
+    "short": "Clean Water and Sanitation",
+    "properties": {
+      "color": {
+        "hex": "#26bde2",
+        "rgb": [
+          38,
+          189,
+          226
+        ]
+      }
+    },
+    "count": 991,
+    "metrics": [
+      {
+        "total": 624573061.681,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 843448097.23,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 1676325329.061,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Ensure access to affordable, reliable, sustainable and modern energy for all",
+    "short": "Affordable and Clean Energy",
+    "properties": {
+      "color": {
+        "hex": "#fcc30b",
+        "rgb": [
+          252,
+          195,
+          11
+        ]
+      }
+    },
+    "count": 485,
+    "metrics": [
+      {
+        "total": 273092203.731,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 364848102.74,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 437420441.193,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Promote sustained, inclusive and sustainable economic growth, full and productive employment and decent work for all",
+    "short": "Decent Jobs and Economic Growth",
+    "properties": {
+      "color": {
+        "hex": "#a21942",
+        "rgb": [
+          162,
+          25,
+          66
+        ]
+      }
+    },
+    "count": 2802,
+    "metrics": [
+      {
+        "total": 630309962.052,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 1116113720.433,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 1715717189.138,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Build resilient infrastructure, promote inclusive and sustainable industrialization and foster innovation",
+    "short": "Industry, Innovation and Infrastructure",
+    "properties": {
+      "color": {
+        "hex": "#fd6925",
+        "rgb": [
+          253,
+          105,
+          37
+        ]
+      }
+    },
+    "count": 1078,
+    "metrics": [
+      {
+        "total": 423644246.727,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 654347457.764,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 767702342.507,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Reduce inequality within and among countries",
+    "short": "Reduced Inequalities",
+    "properties": {
+      "color": {
+        "hex": "#dd1367",
+        "rgb": [
+          221,
+          19,
+          103
+        ]
+      }
+    },
+    "count": 2698,
+    "metrics": [
+      {
+        "total": 658602269.414,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 965771645.914,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 1416429990.915,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Make cities and human settlements inclusive, safe, resilient and sustainable",
+    "short": "Sustainable Cities and Communities",
+    "properties": {
+      "color": {
+        "hex": "#fd9d24",
+        "rgb": [
+          253,
+          157,
+          36
+        ]
+      }
+    },
+    "count": 1427,
+    "metrics": [
+      {
+        "total": 482518585.804,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 727772939.277,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 1029400651.763,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Ensure sustainable consumption and production patterns",
+    "short": "Responsible Consumption and Production",
+    "properties": {
+      "color": {
+        "hex": "#c9992d",
+        "rgb": [
+          201,
+          153,
+          45
+        ]
+      }
+    },
+    "count": 720,
+    "metrics": [
+      {
+        "total": 110916344.721,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 186599859.346,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 277567161.25,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Take urgent action to combat climate change and its impacts.",
+    "short": "Climate Action",
+    "properties": {
+      "color": {
+        "hex": "#3f7e44",
+        "rgb": [
+          63,
+          126,
+          68
+        ]
+      }
+    },
+    "count": 2549,
+    "metrics": [
+      {
+        "total": 464533683.024,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 787971864.319,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 1130898349.548,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Conserve and sustainably use the oceans, seas and marine resources for sustainable development",
+    "short": "Life Below Water",
+    "properties": {
+      "color": {
+        "hex": "#0a97d9",
+        "rgb": [
+          10,
+          151,
+          217
+        ]
+      }
+    },
+    "count": 451,
+    "metrics": [
+      {
+        "total": 74188960.736,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 139089833.152,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 183488606.504,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification, and halt and reverse land degradation and halt biodiversity loss",
+    "short": "Life on Land",
+    "properties": {
+      "color": {
+        "hex": "#56c02b",
+        "rgb": [
+          86,
+          192,
+          43
+        ]
+      }
+    },
+    "count": 1101,
+    "metrics": [
+      {
+        "total": 209605866.303,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 492805629.307,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 690741888.613,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Promote peaceful and inclusive societies for sustainable development, provide access to justice for all and build effective, accountable and inclusive institutions at all levels",
+    "short": "Peace and Justice - Strong Institutions",
+    "properties": {
+      "color": {
+        "hex": "#00689d",
+        "rgb": [
+          0,
+          104,
+          157
+        ]
+      }
+    },
+    "count": 3968,
+    "metrics": [
+      {
+        "total": 1297352787.733,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 1926113616.424,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 2667885390.298,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Strengthen the means of implementation and revitalize the global partnership for sustainable development",
+    "short": "Partnerships for the Goals",
+    "properties": {
+      "color": {
+        "hex": "#19486a",
+        "rgb": [
+          25,
+          72,
+          106
+        ]
+      }
+    },
+    "count": 1997,
+    "metrics": [
+      {
+        "total": 522512069.874,
+        "metricId": 8,
+        "metricName": "Total Expenditure"
+      },
+      {
+        "total": 702891436.392,
+        "metricId": 6,
+        "metricName": "Total Available Resources"
+      },
+      {
+        "total": 1044968427.8,
+        "metricId": 5,
+        "metricName": "Total Required Resources"
+      }
+    ]
+  }
+]

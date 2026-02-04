@@ -1,0 +1,1272 @@
+{
+  "FSM": {
+    "workspace_id": 241,
+    "name": "Micronesia, Federated States of",
+    "totals": {
+      "required": 269244263.01,
+      "available": 213918947.99,
+      "spent": 77889011.95
+    },
+    "project_count": 1437
+  },
+  "PLW": {
+    "workspace_id": 241,
+    "name": "Palau",
+    "totals": {
+      "required": 269244263.01,
+      "available": 213918947.99,
+      "spent": 77889011.95
+    },
+    "project_count": 1437
+  },
+  "MHL": {
+    "workspace_id": 241,
+    "name": "Marshall Islands",
+    "totals": {
+      "required": 269244263.01,
+      "available": 213918947.99,
+      "spent": 77889011.95
+    },
+    "project_count": 1437
+  },
+  "KIR": {
+    "workspace_id": 241,
+    "name": "Kiribati",
+    "totals": {
+      "required": 269244263.01,
+      "available": 213918947.99,
+      "spent": 77889011.95
+    },
+    "project_count": 1437
+  },
+  "NRU": {
+    "workspace_id": 241,
+    "name": "Nauru",
+    "totals": {
+      "required": 269244263.01,
+      "available": 213918947.99,
+      "spent": 77889011.95
+    },
+    "project_count": 1437
+  },
+  "COD": {
+    "workspace_id": 251,
+    "name": "Congo, The Democratic Republic of the",
+    "totals": {
+      "required": 2189320162.99,
+      "available": 1265974181.0,
+      "spent": 102830245.99
+    },
+    "project_count": 0
+  },
+  "WSM": {
+    "workspace_id": 241,
+    "name": "Samoa",
+    "totals": {
+      "required": 269244263.01,
+      "available": 213918947.99,
+      "spent": 77889011.95
+    },
+    "project_count": 1437
+  },
+  "COK": {
+    "workspace_id": 241,
+    "name": "Cook Islands",
+    "totals": {
+      "required": 269244263.01,
+      "available": 213918947.99,
+      "spent": 77889011.95
+    },
+    "project_count": 1437
+  },
+  "NIU": {
+    "workspace_id": 241,
+    "name": "Niue",
+    "totals": {
+      "required": 269244263.01,
+      "available": 213918947.99,
+      "spent": 77889011.95
+    },
+    "project_count": 1437
+  },
+  "TKL": {
+    "workspace_id": 241,
+    "name": "Tokelau",
+    "totals": {
+      "required": 269244263.01,
+      "available": 213918947.99,
+      "spent": 77889011.95
+    },
+    "project_count": 1437
+  },
+  "PSE": {
+    "workspace_id": 233,
+    "name": "occupied Palestinian territory",
+    "totals": {
+      "required": 620000,
+      "available": 420000,
+      "spent": 0
+    },
+    "project_count": 9
+  },
+  "XKX": {
+    "workspace_id": 230,
+    "name": "Kosovo",
+    "totals": {
+      "required": 32299786.02,
+      "available": 28296636.01,
+      "spent": 25366182.01
+    },
+    "project_count": 143
+  },
+  "SLV": {
+    "workspace_id": 228,
+    "name": "El Salvador",
+    "totals": {
+      "required": 147286478.99,
+      "available": 125531617.99,
+      "spent": 104331400.01
+    },
+    "project_count": 209
+  },
+  "AGO": {
+    "workspace_id": 221,
+    "name": "Angola",
+    "totals": {
+      "required": 143784437.01,
+      "available": 108919029.0,
+      "spent": 81634083.01
+    },
+    "project_count": 162
+  },
+  "ALB": {
+    "workspace_id": 220,
+    "name": "Albania",
+    "totals": {
+      "required": 83171503.0,
+      "available": 76485526.99,
+      "spent": 68306429.0
+    },
+    "project_count": 252
+  },
+  "ARG": {
+    "workspace_id": 217,
+    "name": "Argentina",
+    "totals": {
+      "required": 476483420.98,
+      "available": 428257428.98,
+      "spent": 366501974.99
+    },
+    "project_count": 124
+  },
+  "ARM": {
+    "workspace_id": 216,
+    "name": "Armenia",
+    "totals": {
+      "required": 65609964.0,
+      "available": 56482902.0,
+      "spent": 51749125.0
+    },
+    "project_count": 144
+  },
+  "AZE": {
+    "workspace_id": 212,
+    "name": "Azerbaijan",
+    "totals": {
+      "required": 35196910.99,
+      "available": 29435241.99,
+      "spent": 23525758.98
+    },
+    "project_count": 125
+  },
+  "BDI": {
+    "workspace_id": 211,
+    "name": "Burundi",
+    "totals": {
+      "required": 239278297.0,
+      "available": 203816957.0,
+      "spent": 173711833.0
+    },
+    "project_count": 221
+  },
+  "BEN": {
+    "workspace_id": 209,
+    "name": "Benin",
+    "totals": {
+      "required": 204689773.98,
+      "available": 161056131.02,
+      "spent": 104613754.01
+    },
+    "project_count": 234
+  },
+  "BFA": {
+    "workspace_id": 208,
+    "name": "Burkina Faso",
+    "totals": {
+      "required": 370562719.98,
+      "available": 282509706.97,
+      "spent": 235392944.98
+    },
+    "project_count": 739
+  },
+  "BGD": {
+    "workspace_id": 207,
+    "name": "Bangladesh",
+    "totals": {
+      "required": 292552907.01,
+      "available": 244796368.03,
+      "spent": 215019043.0
+    },
+    "project_count": 191
+  },
+  "BHR": {
+    "workspace_id": 205,
+    "name": "Bahrain",
+    "totals": {
+      "required": 8670374.01,
+      "available": 1387529.01,
+      "spent": 0
+    },
+    "project_count": 0
+  },
+  "BIH": {
+    "workspace_id": 203,
+    "name": "Bosnia and Herzegovina",
+    "totals": {
+      "required": 106246007.0,
+      "available": 92241661.0,
+      "spent": 87334116.02
+    },
+    "project_count": 157
+  },
+  "BLR": {
+    "workspace_id": 202,
+    "name": "Belarus",
+    "totals": {
+      "required": 30959454.99,
+      "available": 23122378.99,
+      "spent": 20848764.99
+    },
+    "project_count": 109
+  },
+  "BOL": {
+    "workspace_id": 199,
+    "name": "Bolivia, Plurinational State of",
+    "totals": {
+      "required": 66875794.01,
+      "available": 56241075.01,
+      "spent": 52184879.01
+    },
+    "project_count": 256
+  },
+  "BRA": {
+    "workspace_id": 198,
+    "name": "Brazil",
+    "totals": {
+      "required": 208956082.0,
+      "available": 185005899.99,
+      "spent": 168060535.99
+    },
+    "project_count": 361
+  },
+  "BTN": {
+    "workspace_id": 195,
+    "name": "Bhutan",
+    "totals": {
+      "required": 30044060.97,
+      "available": 29476916.97,
+      "spent": 25892011.99
+    },
+    "project_count": 93
+  },
+  "BWA": {
+    "workspace_id": 193,
+    "name": "Botswana",
+    "totals": {
+      "required": 13279693.01,
+      "available": 11169511.0,
+      "spent": 9407710.0
+    },
+    "project_count": 117
+  },
+  "CAF": {
+    "workspace_id": 192,
+    "name": "Central African Republic",
+    "totals": {
+      "required": 446261635.0,
+      "available": 291775161.0,
+      "spent": 199852915.01
+    },
+    "project_count": 133
+  },
+  "CHL": {
+    "workspace_id": 190,
+    "name": "Chile",
+    "totals": {
+      "required": 108248690.01,
+      "available": 47676461.99,
+      "spent": 44239335.01
+    },
+    "project_count": 263
+  },
+  "CIV": {
+    "workspace_id": 189,
+    "name": "C\u00f4te d'Ivoire",
+    "totals": {
+      "required": 184176913.98,
+      "available": 157651954.97,
+      "spent": 125515292.99
+    },
+    "project_count": 311
+  },
+  "CMR": {
+    "workspace_id": 188,
+    "name": "Cameroon",
+    "totals": {
+      "required": 405528045.98,
+      "available": 261986701.0,
+      "spent": 7315452.0
+    },
+    "project_count": 282
+  },
+  "COG": {
+    "workspace_id": 187,
+    "name": "Congo",
+    "totals": {
+      "required": 117825028.99,
+      "available": 69801655.01,
+      "spent": 0
+    },
+    "project_count": 170
+  },
+  "COL": {
+    "workspace_id": 186,
+    "name": "Colombia",
+    "totals": {
+      "required": 351213274.02,
+      "available": 208057685.0,
+      "spent": 89432170.0
+    },
+    "project_count": 140
+  },
+  "COM": {
+    "workspace_id": 185,
+    "name": "Comoros",
+    "totals": {
+      "required": 30566071.98,
+      "available": 27536671.98,
+      "spent": 2927149.01
+    },
+    "project_count": 0
+  },
+  "CRI": {
+    "workspace_id": 184,
+    "name": "Costa Rica",
+    "totals": {
+      "required": 103633998.99,
+      "available": 78481365.0,
+      "spent": 60109872.98
+    },
+    "project_count": 254
+  },
+  "CUB": {
+    "workspace_id": 183,
+    "name": "Cuba",
+    "totals": {
+      "required": 106402714.0,
+      "available": 82035599.99,
+      "spent": 59302449.97
+    },
+    "project_count": 187
+  },
+  "DJI": {
+    "workspace_id": 180,
+    "name": "Djibouti",
+    "totals": {
+      "required": 466334939.99,
+      "available": 160076643.0,
+      "spent": 343913
+    },
+    "project_count": 0
+  },
+  "DOM": {
+    "workspace_id": 178,
+    "name": "Dominican Republic",
+    "totals": {
+      "required": 68603825.99,
+      "available": 68104783.0,
+      "spent": 60950249.99
+    },
+    "project_count": 169
+  },
+  "DZA": {
+    "workspace_id": 177,
+    "name": "Algeria",
+    "totals": {
+      "required": 19321919.98,
+      "available": 15208950.99,
+      "spent": 14141943.0
+    },
+    "project_count": 122
+  },
+  "ECU": {
+    "workspace_id": 176,
+    "name": "Ecuador",
+    "totals": {
+      "required": 313697956.0,
+      "available": 209729585.02,
+      "spent": 175863093.69
+    },
+    "project_count": 277
+  },
+  "EGY": {
+    "workspace_id": 175,
+    "name": "Egypt",
+    "totals": {
+      "required": 270704957.0,
+      "available": 240193839.99,
+      "spent": 172837575.01
+    },
+    "project_count": 300
+  },
+  "ERI": {
+    "workspace_id": 174,
+    "name": "Eritrea",
+    "totals": {
+      "required": 97338484.0,
+      "available": 70572317.0,
+      "spent": 37568882.99
+    },
+    "project_count": 190
+  },
+  "ETH": {
+    "workspace_id": 170,
+    "name": "Ethiopia",
+    "totals": {
+      "required": 520941617.99,
+      "available": 400668049.99,
+      "spent": 0
+    },
+    "project_count": 0
+  },
+  "GAB": {
+    "workspace_id": 166,
+    "name": "Gabon",
+    "totals": {
+      "required": 17577064.99,
+      "available": 16909319.0,
+      "spent": 15004673.99
+    },
+    "project_count": 121
+  },
+  "GEO": {
+    "workspace_id": 165,
+    "name": "Georgia",
+    "totals": {
+      "required": 70562961.99,
+      "available": 65146208.99,
+      "spent": 50623623.99
+    },
+    "project_count": 175
+  },
+  "GIN": {
+    "workspace_id": 162,
+    "name": "Guinea",
+    "totals": {
+      "required": 172410684.99,
+      "available": 134856176.02,
+      "spent": 103159805.01
+    },
+    "project_count": 176
+  },
+  "GMB": {
+    "workspace_id": 161,
+    "name": "Gambia",
+    "totals": {
+      "required": 41221604.0,
+      "available": 32137983.0,
+      "spent": 13545659.0
+    },
+    "project_count": 198
+  },
+  "GNB": {
+    "workspace_id": 160,
+    "name": "Guinea-Bissau",
+    "totals": {
+      "required": 67519607.01,
+      "available": 60649382.01,
+      "spent": 45605616.02
+    },
+    "project_count": 76
+  },
+  "GNQ": {
+    "workspace_id": 159,
+    "name": "Equatorial Guinea",
+    "totals": {
+      "required": 46206359.0,
+      "available": 28196292,
+      "spent": 15496905.01
+    },
+    "project_count": 135
+  },
+  "GTM": {
+    "workspace_id": 155,
+    "name": "Guatemala",
+    "totals": {
+      "required": 339506884.99,
+      "available": 292056441.01,
+      "spent": 212762603.99
+    },
+    "project_count": 224
+  },
+  "HND": {
+    "workspace_id": 151,
+    "name": "Honduras",
+    "totals": {
+      "required": 235245760.99,
+      "available": 194094494.0,
+      "spent": 152696503.0
+    },
+    "project_count": 169
+  },
+  "HTI": {
+    "workspace_id": 149,
+    "name": "Haiti",
+    "totals": {
+      "required": 597097147.0,
+      "available": 462089863.0,
+      "spent": 254863299.99
+    },
+    "project_count": 178
+  },
+  "IDN": {
+    "workspace_id": 147,
+    "name": "Indonesia",
+    "totals": {
+      "required": 254321166.97,
+      "available": 231829576.97,
+      "spent": 160370251.99
+    },
+    "project_count": 290
+  },
+  "IND": {
+    "workspace_id": 146,
+    "name": "India",
+    "totals": {
+      "required": 288130745.01,
+      "available": 259609507.01,
+      "spent": 206889981.99
+    },
+    "project_count": 275
+  },
+  "IRN": {
+    "workspace_id": 144,
+    "name": "Iran, Islamic Republic of",
+    "totals": {
+      "required": 39386396.0,
+      "available": 26225929.0,
+      "spent": 22328595.0
+    },
+    "project_count": 163
+  },
+  "JOR": {
+    "workspace_id": 137,
+    "name": "Jordan",
+    "totals": {
+      "required": 1352947859.13,
+      "available": 916422911.4,
+      "spent": 268659984.49
+    },
+    "project_count": 0
+  },
+  "KEN": {
+    "workspace_id": 135,
+    "name": "Kenya",
+    "totals": {
+      "required": 1035223959.01,
+      "available": 664406011.01,
+      "spent": 528618722.99
+    },
+    "project_count": 288
+  },
+  "KGZ": {
+    "workspace_id": 134,
+    "name": "Kyrgyzstan",
+    "totals": {
+      "required": 75020016.99,
+      "available": 66882473.01,
+      "spent": 57287683.01
+    },
+    "project_count": 193
+  },
+  "KHM": {
+    "workspace_id": 133,
+    "name": "Cambodia",
+    "totals": {
+      "required": 133063663.02,
+      "available": 122450781.0,
+      "spent": 105945745.01
+    },
+    "project_count": 258
+  },
+  "LAO": {
+    "workspace_id": 129,
+    "name": "Lao People's Democratic Republic",
+    "totals": {
+      "required": 137549354.0,
+      "available": 118218323.0,
+      "spent": 67131995.0
+    },
+    "project_count": 153
+  },
+  "LBN": {
+    "workspace_id": 128,
+    "name": "Lebanon",
+    "totals": {
+      "required": 1665495081.99,
+      "available": 863295256.0,
+      "spent": 467966475.99
+    },
+    "project_count": 319
+  },
+  "LBR": {
+    "workspace_id": 127,
+    "name": "Liberia",
+    "totals": {
+      "required": 132312503.0,
+      "available": 101547215.0,
+      "spent": 75016672.0
+    },
+    "project_count": 236
+  },
+  "LBY": {
+    "workspace_id": 126,
+    "name": "Libya",
+    "totals": {
+      "required": 243220053.0,
+      "available": 153164855.0,
+      "spent": 109369091.02
+    },
+    "project_count": 273
+  },
+  "LKA": {
+    "workspace_id": 123,
+    "name": "Sri Lanka",
+    "totals": {
+      "required": 117213421.99,
+      "available": 98102358.99,
+      "spent": 81293866.98
+    },
+    "project_count": 207
+  },
+  "LSO": {
+    "workspace_id": 122,
+    "name": "Lesotho",
+    "totals": {
+      "required": 28117822.0,
+      "available": 17744597.0,
+      "spent": 13565983.01
+    },
+    "project_count": 176
+  },
+  "MDA": {
+    "workspace_id": 116,
+    "name": "Moldova, Republic of",
+    "totals": {
+      "required": 180952370.0,
+      "available": 174340541.0,
+      "spent": 169762135.98
+    },
+    "project_count": 243
+  },
+  "MDG": {
+    "workspace_id": 115,
+    "name": "Madagascar",
+    "totals": {
+      "required": 335024607.0,
+      "available": 290336252.01,
+      "spent": 213007190.99
+    },
+    "project_count": 195
+  },
+  "MDV": {
+    "workspace_id": 114,
+    "name": "Maldives",
+    "totals": {
+      "required": 65885454.0,
+      "available": 54218828.0,
+      "spent": 36766250.99
+    },
+    "project_count": 102
+  },
+  "MEX": {
+    "workspace_id": 113,
+    "name": "Mexico",
+    "totals": {
+      "required": 247156630.99,
+      "available": 192387555.01,
+      "spent": 139121620.98
+    },
+    "project_count": 279
+  },
+  "MLI": {
+    "workspace_id": 111,
+    "name": "Mali",
+    "totals": {
+      "required": 724178555.99,
+      "available": 563447827.0,
+      "spent": 106551580.0
+    },
+    "project_count": 364
+  },
+  "MMR": {
+    "workspace_id": 109,
+    "name": "Myanmar",
+    "totals": {
+      "required": 553655381.99,
+      "available": 336914542.99,
+      "spent": 12988018.0
+    },
+    "project_count": 0
+  },
+  "MNE": {
+    "workspace_id": 108,
+    "name": "Montenegro",
+    "totals": {
+      "required": 25330660.02,
+      "available": 23043528.02,
+      "spent": 17926094.01
+    },
+    "project_count": 152
+  },
+  "MNG": {
+    "workspace_id": 107,
+    "name": "Mongolia",
+    "totals": {
+      "required": 55135602.99,
+      "available": 52972146.99,
+      "spent": 46372606.99
+    },
+    "project_count": 143
+  },
+  "MRT": {
+    "workspace_id": 106,
+    "name": "Mauritania",
+    "totals": {
+      "required": 131015324.0,
+      "available": 99019145.99,
+      "spent": 72280930.99
+    },
+    "project_count": 184
+  },
+  "MUS": {
+    "workspace_id": 105,
+    "name": "Mauritius",
+    "totals": {
+      "required": 8478510.01,
+      "available": 7105278.01,
+      "spent": 4305806.01
+    },
+    "project_count": 89
+  },
+  "SYC": {
+    "workspace_id": 54,
+    "name": "Seychelles",
+    "totals": {
+      "required": 8390408.02,
+      "available": 5445016.02,
+      "spent": 4499429.0
+    },
+    "project_count": 79
+  },
+  "NAM": {
+    "workspace_id": 104,
+    "name": "Namibia",
+    "totals": {
+      "required": 42321707.01,
+      "available": 28525276.01,
+      "spent": 0
+    },
+    "project_count": 0
+  },
+  "NER": {
+    "workspace_id": 102,
+    "name": "Niger",
+    "totals": {
+      "required": 478826299.99,
+      "available": 358442937.01,
+      "spent": 201388387.99
+    },
+    "project_count": 77
+  },
+  "NPL": {
+    "workspace_id": 96,
+    "name": "Nepal",
+    "totals": {
+      "required": 169317135.0,
+      "available": 148205069.01,
+      "spent": 122376448.0
+    },
+    "project_count": 271
+  },
+  "PAK": {
+    "workspace_id": 92,
+    "name": "Pakistan",
+    "totals": {
+      "required": 1266082199.0,
+      "available": 921033527.99,
+      "spent": 641589535.01
+    },
+    "project_count": 307
+  },
+  "PAN": {
+    "workspace_id": 91,
+    "name": "Panama",
+    "totals": {
+      "required": 96052456.01,
+      "available": 88694583.02,
+      "spent": 78317986.0
+    },
+    "project_count": 119
+  },
+  "PER": {
+    "workspace_id": 89,
+    "name": "Peru",
+    "totals": {
+      "required": 220057291.99,
+      "available": 183224459.99,
+      "spent": 20281444.0
+    },
+    "project_count": 258
+  },
+  "PHL": {
+    "workspace_id": 88,
+    "name": "Philippines",
+    "totals": {
+      "required": 214760153.99,
+      "available": 165296124.0,
+      "spent": 143536311.0
+    },
+    "project_count": 202
+  },
+  "PNG": {
+    "workspace_id": 86,
+    "name": "Papua New Guinea",
+    "totals": {
+      "required": 221881235.02,
+      "available": 139381502.02,
+      "spent": 82243599.0
+    },
+    "project_count": 213
+  },
+  "PRY": {
+    "workspace_id": 81,
+    "name": "Paraguay",
+    "totals": {
+      "required": 71929853.98,
+      "available": 69266481.0,
+      "spent": 35594430.99
+    },
+    "project_count": 0
+  },
+  "RWA": {
+    "workspace_id": 75,
+    "name": "Rwanda",
+    "totals": {
+      "required": 103174995.0,
+      "available": 73246400.0,
+      "spent": 60443268.01
+    },
+    "project_count": 0
+  },
+  "SAU": {
+    "workspace_id": 74,
+    "name": "Saudi Arabia",
+    "totals": {
+      "required": 90464268.98,
+      "available": 80632818.99,
+      "spent": 78401707.01
+    },
+    "project_count": 80
+  },
+  "SDN": {
+    "workspace_id": 73,
+    "name": "Sudan",
+    "totals": {
+      "required": 34528500.01,
+      "available": 8784500.01,
+      "spent": 84000
+    },
+    "project_count": 223
+  },
+  "SEN": {
+    "workspace_id": 72,
+    "name": "Senegal",
+    "totals": {
+      "required": 93366089.0,
+      "available": 93188749.0,
+      "spent": 62423020.99
+    },
+    "project_count": 113
+  },
+  "SLE": {
+    "workspace_id": 66,
+    "name": "Sierra Leone",
+    "totals": {
+      "required": 197553321.01,
+      "available": 120978873.98,
+      "spent": 0
+    },
+    "project_count": 0
+  },
+  "SRB": {
+    "workspace_id": 62,
+    "name": "Serbia",
+    "totals": {
+      "required": 118538365.99,
+      "available": 118538365.99,
+      "spent": 94991405.98
+    },
+    "project_count": 158
+  },
+  "SSD": {
+    "workspace_id": 61,
+    "name": "South Sudan",
+    "totals": {
+      "required": 1010950685.01,
+      "available": 506439660.02,
+      "spent": 289389867.01
+    },
+    "project_count": 202
+  },
+  "STP": {
+    "workspace_id": 60,
+    "name": "S\u00e3o Tom\u00e9 and Pr\u00edncipe",
+    "totals": {
+      "required": 27575548.02,
+      "available": 24259967.01,
+      "spent": 18663390.01
+    },
+    "project_count": 108
+  },
+  "SWZ": {
+    "workspace_id": 55,
+    "name": "Eswatini",
+    "totals": {
+      "required": 62956801,
+      "available": 3802885,
+      "spent": 1378947.01
+    },
+    "project_count": 20
+  },
+  "SYR": {
+    "workspace_id": 53,
+    "name": "Syrian Arab Republic",
+    "totals": {
+      "required": 1499758505.99,
+      "available": 357729973.02,
+      "spent": 0
+    },
+    "project_count": 0
+  },
+  "TCD": {
+    "workspace_id": 52,
+    "name": "Chad",
+    "totals": {
+      "required": 888714625.01,
+      "available": 391297769.01,
+      "spent": 276777814.01
+    },
+    "project_count": 395
+  },
+  "TGO": {
+    "workspace_id": 51,
+    "name": "Togo",
+    "totals": {
+      "required": 74583111.0,
+      "available": 53707733.99,
+      "spent": 32963590.99
+    },
+    "project_count": 151
+  },
+  "THA": {
+    "workspace_id": 50,
+    "name": "Thailand",
+    "totals": {
+      "required": 142050174.02,
+      "available": 102290156.03,
+      "spent": 80084450.99
+    },
+    "project_count": 123
+  },
+  "TJK": {
+    "workspace_id": 49,
+    "name": "Tajikistan",
+    "totals": {
+      "required": 107549109.02,
+      "available": 101226198.0,
+      "spent": 74079042.01
+    },
+    "project_count": 157
+  },
+  "TKM": {
+    "workspace_id": 47,
+    "name": "Turkmenistan",
+    "totals": {
+      "required": 79458135.01,
+      "available": 77838920.01,
+      "spent": 73546085.98
+    },
+    "project_count": 194
+  },
+  "TLS": {
+    "workspace_id": 46,
+    "name": "Timor-Leste",
+    "totals": {
+      "required": 75096678.99,
+      "available": 59966159.99,
+      "spent": 41189701.99
+    },
+    "project_count": 175
+  },
+  "TUR": {
+    "workspace_id": 43,
+    "name": "Turkiye",
+    "totals": {
+      "required": 496941553.99,
+      "available": 320277281.0,
+      "spent": 254279482.99
+    },
+    "project_count": 249
+  },
+  "URY": {
+    "workspace_id": 41,
+    "name": "Uruguay",
+    "totals": {
+      "required": 170307354.98,
+      "available": 166510288.98,
+      "spent": 164221486.99
+    },
+    "project_count": 196
+  },
+  "VEN": {
+    "workspace_id": 40,
+    "name": "Venezuela, Bolivarian Republic of",
+    "totals": {
+      "required": 319975108.98,
+      "available": 168201471.0,
+      "spent": 138003350.99
+    },
+    "project_count": 191
+  },
+  "VNM": {
+    "workspace_id": 37,
+    "name": "Viet Nam",
+    "totals": {
+      "required": 112342399.02,
+      "available": 93245890.02,
+      "spent": 83613225.02
+    },
+    "project_count": 194
+  },
+  "TZA": {
+    "workspace_id": 36,
+    "name": "Tanzania, United Republic of",
+    "totals": {
+      "required": 358838577.01,
+      "available": 218551245.97,
+      "spent": 134232613.98
+    },
+    "project_count": 554
+  },
+  "UKR": {
+    "workspace_id": 35,
+    "name": "Ukraine",
+    "totals": {
+      "required": 1817839110.01,
+      "available": 996522902.99,
+      "spent": 41820000
+    },
+    "project_count": 0
+  },
+  "UZB": {
+    "workspace_id": 34,
+    "name": "Uzbekistan",
+    "totals": {
+      "required": 129672856.02,
+      "available": 94760453.0,
+      "spent": 72441916.01
+    },
+    "project_count": 273
+  },
+  "ZAF": {
+    "workspace_id": 32,
+    "name": "South Africa",
+    "totals": {
+      "required": 5315884.01,
+      "available": 5215884.01,
+      "spent": 1080487.99
+    },
+    "project_count": 17
+  },
+  "MOZ": {
+    "workspace_id": 31,
+    "name": "Mozambique",
+    "totals": {
+      "required": 642218605.01,
+      "available": 547657381.0,
+      "spent": 411028691.0
+    },
+    "project_count": 260
+  },
+  "ZMB": {
+    "workspace_id": 30,
+    "name": "Zambia",
+    "totals": {
+      "required": 448986969.03,
+      "available": 233199983.01,
+      "spent": 88039435.99
+    },
+    "project_count": 333
+  },
+  "TUN": {
+    "workspace_id": 29,
+    "name": "Tunisia",
+    "totals": {
+      "required": 197124211.99,
+      "available": 163513093.99,
+      "spent": 77334741.0
+    },
+    "project_count": 212
+  },
+  "CPV": {
+    "workspace_id": 28,
+    "name": "Cabo Verde",
+    "totals": {
+      "required": 18562878.0,
+      "available": 16882640.0,
+      "spent": 12960177.0
+    },
+    "project_count": 155
+  },
+  "MWI": {
+    "workspace_id": 27,
+    "name": "Malawi",
+    "totals": {
+      "required": 555245479.99,
+      "available": 375150831.99,
+      "spent": 186451937.98
+    },
+    "project_count": 157
+  },
+  "MYS": {
+    "workspace_id": 26,
+    "name": "Malaysia",
+    "totals": {
+      "required": 52571058.0,
+      "available": 52913745.01,
+      "spent": 39502001.01
+    },
+    "project_count": 151
+  },
+  "BRN": {
+    "workspace_id": 26,
+    "name": "Brunei Darussalam",
+    "totals": {
+      "required": 52571058.0,
+      "available": 52913745.01,
+      "spent": 39502001.01
+    },
+    "project_count": 151
+  },
+  "SGP": {
+    "workspace_id": 26,
+    "name": "Singapore",
+    "totals": {
+      "required": 52571058.0,
+      "available": 52913745.01,
+      "spent": 39502001.01
+    },
+    "project_count": 151
+  },
+  "CHN": {
+    "workspace_id": 24,
+    "name": "China",
+    "totals": {
+      "required": 142687226.0,
+      "available": 126565932.02,
+      "spent": 0
+    },
+    "project_count": 183
+  },
+  "MAR": {
+    "workspace_id": 23,
+    "name": "Morocco",
+    "totals": {
+      "required": 73165048.0,
+      "available": 70049541.99,
+      "spent": 49883725.99
+    },
+    "project_count": 159
+  },
+  "NGA": {
+    "workspace_id": 22,
+    "name": "Nigeria",
+    "totals": {
+      "required": 767599453.99,
+      "available": 475262348.01,
+      "spent": 358827133.99
+    },
+    "project_count": 397
+  },
+  "AFG": {
+    "workspace_id": 21,
+    "name": "Afghanistan",
+    "totals": {
+      "required": 3281813944.0,
+      "available": 1594246313.01,
+      "spent": 1336140804.99
+    },
+    "project_count": 166
+  },
+  "GHA": {
+    "workspace_id": 20,
+    "name": "Ghana",
+    "totals": {
+      "required": 179699770.03,
+      "available": 151172240.02,
+      "spent": 95995315.01
+    },
+    "project_count": 379
+  },
+  "MKD": {
+    "workspace_id": 19,
+    "name": "North Macedonia, Republic of",
+    "totals": {
+      "required": 35397800.0,
+      "available": 31524811.01,
+      "spent": 27594334.0
+    },
+    "project_count": 171
+  },
+  "KAZ": {
+    "workspace_id": 18,
+    "name": "Kazakhstan",
+    "totals": {
+      "required": 48100363.0,
+      "available": 43659860.99,
+      "spent": 39035256.0
+    },
+    "project_count": 224
+  },
+  "ZWE": {
+    "workspace_id": 14,
+    "name": "Zimbabwe",
+    "totals": {
+      "required": 346547942.0,
+      "available": 250867868.99,
+      "spent": 186205390.99
+    },
+    "project_count": 192
+  }
+}
