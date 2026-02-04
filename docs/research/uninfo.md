@@ -128,6 +128,39 @@ Returns agencies with their projects nested inside.
 **Example**: `grouping=planEntity:SOU&grouping=sdg`
 Returns projects with SDG linkages nested inside.
 
+### Results Framework Hierarchy
+
+Each Cooperation Framework follows a **logical hierarchy**:
+
+```
+Strategic Priority (SP)
+  └── Outcome (OC)
+        └── Output (OU)
+              └── Sub-output/Project (SOU)
+```
+
+**API Grouping Options**:
+- `planEntity:SP` - Strategic Priorities (top level goals)
+- `planEntity:OC` - Outcomes (high-level results)
+- `planEntity:OU` - Outputs (specific deliverables)
+- `planEntity:SOU` - Sub-outputs/Projects (individual activities)
+
+**Example counts (Afghanistan)**:
+| Level | Count | Example |
+|-------|-------|---------|
+| Strategic Priorities | 3 | "Sustained Essential Services" |
+| Outcomes | 3 | "By 2027, more people can access essential services..." |
+| Outputs | 11 | "Output 1.1: Health systems improved..." |
+| Projects | 183 | Individual agency activities |
+
+**Data returned per level**:
+- `id`, `code`, `name`, `description`
+- `parentId`, `parentName` (links to parent level)
+- `startDate`, `endDate`
+- `metrics` (required/available/spent)
+
+**Note**: Some countries have multiple framework cycles (e.g., Mali has 2022-2024 and 2024-2026 frameworks), causing duplicates. Dedupe by keeping latest `endDate` per code.
+
 ## Comparison with CEB Data
 
 | Dimension | UNINFO | CEB |
@@ -292,13 +325,13 @@ Each sidebar (country, SDG, entity) will include a **"UN Cooperation Framework D
 2. Nested bar chart showing Required → Available → Spent
 3. Dimension-specific breakdowns
 
-### Country Sidebar
+### Country Sidebar (Implemented)
+- Overall Required/Available/Spent comparison
 - SDG breakdown with funding gaps (unique to UNINFO)
-- Required/Available/Spent comparison
-- Delivery rate by SDG
+- **Results Framework** - Expandable tree showing Strategic Priorities → Outcomes → Outputs with funding bars
+- Top Projects with expandable details
 - Link to UNINFO country page
 - Link to UNSDG country page
-- Link to Results Framework documents
 
 ### SDG Sidebar
 - Country breakdown with funding gaps
@@ -321,6 +354,22 @@ Projects are bundled with per-country data files:
 - No separate fetch needed - projects load with country data
 - Top 5 projects shown initially with "Show all" option
 - Projects sorted by required funding (descending)
+- Expandable project boxes show description, timeline, outcome
+
+### Results Framework (Implemented)
+
+Displays the logical hierarchy of UN work in each country:
+- **Strategic Priorities** (SP) - Top-level goals (2-4 per country)
+- **Outcomes** (OC) - High-level results (1-3 per SP)
+- **Outputs** (OU) - Specific deliverables (1-6 per Outcome)
+
+Features:
+- Expandable tree structure with nested indentation
+- Nested funding bars (Required → Available → Spent) at each level
+- Code badges extracted from titles (e.g., "1.2.3" shown in UN blue circle)
+- Tooltips show full title and detailed funding breakdown
+- Uppercase titles converted to title case for readability
+- Deduped by framework cycle (keeps latest endDate)
 
 ## Future Ideas (Out of Scope)
 
