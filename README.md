@@ -1,86 +1,82 @@
-# UN Website Boilerplate
+# UN Transparency Portal
 
-https://github.com/kleinlennart/un-website-boilerplate
+**[open.unfck.org](https://open.unfck.org)**
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+The UN Transparency Portal makes financial data from across the UN System accessible through interactive visualizations. Explore who contributes, which organizations receive funding, where resources are deployed, and which Sustainable Development Goals they support.
 
-## Branches
+## Features
 
-This template has two variants:
+- **Contributors** — Treemaps and trends showing government and donor contributions by financing instrument
+- **Entities** — Spending breakdowns for 48+ UN organizations
+- **Countries** — Interactive world map with geographic spending data
+- **SDGs** — Grid visualization of spending by Sustainable Development Goal
 
-| Branch | Description |
-|--------|-------------|
-| `main` | Static site, no authentication |
-| `template-with-auth` | Adds magic link auth, PostgreSQL integration, entity/document search |
+## Data Sources
 
-When creating from this template, check "Include all branches" to get both. Then switch if needed:
+| Source | Coverage | Description |
+|--------|----------|-------------|
+| [CEB Financial Statistics](https://unsceb.org/financial-statistics) | 2011–2024 | Audited financial data from 48+ UN System organizations |
+| UN Secretariat Spending | 2019–2023 | Granular breakdown into 150+ departments and missions |
+| [UNINFO](https://uninfo.org/) | 2022–2024 | Cooperation Framework data for 127 countries |
 
-```bash
-git checkout template-with-auth
+## Tech Stack
+
+**Frontend:** Next.js 16, React 19, TypeScript, Tailwind CSS 4, Recharts, [UNDP Data Visualization Library](https://github.com/UNDP-Data/undp-visualization-library) (for map component)
+
+**Data Processing:** Python 3.13+, pandas, requests
+
+## Project Structure
+
+```
+src/
+├── app/                 # Next.js app router (single-page app)
+├── components/          # React components
+│   ├── *Treemap.tsx     #   Interactive treemap visualizations
+│   ├── *Sidebar.tsx     #   Detail panels for selections
+│   ├── *TrendsChart.tsx #   Time series charts
+│   ├── charts/          #   Reusable chart primitives
+│   └── ui/              #   Base UI components (shadcn)
+├── lib/                 # Data loading, entity/SDG/region mappings
+├── hooks/               # Custom React hooks
+└── types/               # TypeScript interfaces
+
+python/                  # Data pipeline scripts (numbered, run in order)
+
+public/data/             # Processed JSON served to frontend
+├── {view}-{year}.json   #   Year-specific data per visualization
+├── uninfo-countries/    #   Per-country UNINFO data (127 files)
+└── manifest.json        #   Data availability metadata
+
+data/                    # Raw/intermediate data (gitignored)
+├── ceb/{raw,clean,fused}/ # CEB data processing stages
+└── uninfo/raw/          #   Cached UNINFO API responses
+
+docs/                    # Methodology documentation
+└── research/            # Data source research notes
 ```
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Data Pipeline
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Python scripts in `python/` fetch and process raw data into JSON. Run them in numbered order with `uv run <script>.py`.
 
-## Learn More
+## Documentation
 
-To learn more about Next.js, take a look at the following resources:
+See [`docs/`](docs/) for detailed documentation:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Data Availability](docs/data-availability.md) — What data exists for which years
+- [Data Fusion: Revenue](docs/data-fusion-revenue.md) — How revenue sources are combined
+- [Data Fusion: Expenses](docs/data-fusion-expenses.md) — How expense data is merged
+- [Research Notes](docs/research/) — Background research and data source analysis
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Maintenance
-
-### Check for issues
-```bash
-npm audit          # Security vulnerabilities
-npm outdated       # Outdated packages
-npm run lint       # ESLint errors
-npx tsc --noEmit   # TypeScript errors
-```
-
-### Update packages
-```bash
-npm update                                              # Safe patch/minor updates
-npm install next@latest eslint-config-next@latest       # Update Next.js
-```
-
-### Update shadcn/ui components
-```bash
-npx shadcn@latest diff                                  # Check for component updates
-npx shadcn@latest add <component-name> --overwrite      # Update specific component
-```
-
-### Clean install (if issues occur)
-```bash
-rm -rf node_modules .next && npm install
-```
-
-## Good to know
-
-- use `npx shadcn@latest add <component-name>` when you need to add components.
-
-- https://nextjs.org/docs/app/api-reference/file-conventions/src-folder
-- https://nextjs.org/docs/app/getting-started/project-structure
-
-- The `/public` directory should remain in the root of your project.
-- Config files like `package.json`, `next.config.js` and `tsconfig.json` should remain in the root of your project.
-- `.env.*` files should remain in the root of your project.
-- `src/app` or `src/pages` will be ignored if `app` or `pages` are present in the root directory.
-- If you are using a `src` directory, consider moving other application folders such as `/components` or `/lib` into `src` for consistency.
-- If you are using a Proxy, ensure it is placed inside the `src` folder.
-- When using Tailwind CSS, add the `/src` prefix to the `content` array in your `tailwind.config.js` file to ensure proper scanning.
-- If you use TypeScript path aliases like `@/*`, update the `paths` object in `tsconfig.json` to include `src/`.
+MIT
