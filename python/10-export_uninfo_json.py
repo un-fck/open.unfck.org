@@ -44,8 +44,12 @@ def build_projects_by_country(data: dict) -> dict[str, list]:
                     "id": proj.get("id"),
                     "agency": abbr,
                     "sdg": sdg,
-                    "name": proj.get("name", "")[:200],
                     "code": proj.get("code", ""),
+                    "name": proj.get("name", "")[:200],
+                    "description": (proj.get("description") or "")[:500] or None,
+                    "start": proj.get("startDate"),
+                    "end": proj.get("endDate"),
+                    "outcome": (proj.get("parentName") or "")[:200] or None,
                     **m,
                 })
     # Sort each country's projects by required descending

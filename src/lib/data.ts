@@ -23,8 +23,12 @@ export interface UninfoProject {
   id: number;
   agency: string;
   sdg: number | null;
-  name: string;
   code: string;
+  name: string;
+  description: string | null;
+  start: string | null;
+  end: string | null;
+  outcome: string | null;
   required: number;
   available: number;
   spent: number;
