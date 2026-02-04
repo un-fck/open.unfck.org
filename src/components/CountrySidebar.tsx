@@ -17,6 +17,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { SortSelector, SortOption } from "@/components/ui/sort-selector";
 
 const UNINFO_SORT_OPTIONS: SortOption[] = [
+  { value: "sdg_number", label: "SDG Number" },
   { value: "available", label: "Available" },
   { value: "required", label: "Required" },
   { value: "spent", label: "Spent" },
@@ -66,7 +67,7 @@ export function CountrySidebar({ country, initialYear, onClose }: CountrySidebar
   
   // UNINFO Cooperation Framework data
   const [uninfoData, setUninfoData] = useState<UninfoCountryFull | null>(null);
-  const [uninfoSort, setUninfoSort] = useState("available");
+  const [uninfoSort, setUninfoSort] = useState("sdg_number");
   
   // Focus trap for accessibility
   const focusTrapRef = useFocusTrap(true);
@@ -324,6 +325,7 @@ export function CountrySidebar({ country, initialYear, onClose }: CountrySidebar
                         const entries = Object.entries(uninfoData.sdgs);
                         const sorted = entries.sort((a, b) => {
                           const [, ma] = a, [, mb] = b;
+                          if (uninfoSort === "sdg_number") return parseInt(a[0]) - parseInt(b[0]);
                           if (uninfoSort === "required") return mb.required - ma.required;
                           if (uninfoSort === "available") return mb.available - ma.available;
                           if (uninfoSort === "spent") return mb.spent - ma.spent;
