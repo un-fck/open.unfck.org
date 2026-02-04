@@ -309,12 +309,18 @@ UNINFO uses standard UN abbreviations matching systemchart:
 ```
 public/data/
   uninfo-countries/
-    AFG.json    # ~50-200KB each, contains totals, SDGs, projects
-    BRA.json
+    AFG.json    # ~50-200KB each
+    BRA.json    # Contains: totals, sdgs, projects, framework
     ...
-  uninfo-countries-index.json  # Quick lookup without loading full data
+  uninfo-countries-index.json  # Quick lookup (no projects/framework)
   uninfo-sdgs.json             # SDG data with country breakdowns
 ```
+
+Each country file contains:
+- `workspace_id`, `name`, `totals` - Basic info
+- `sdgs` - SDG breakdown with financial metrics
+- `projects` - All sub-outputs/projects with details
+- `framework` - Results Framework hierarchy (SP → OC → OU tree)
 
 ## Website Integration Plan
 
