@@ -75,27 +75,29 @@ function FrameworkNodeItem({ node, level, maxRequired }: FrameworkNodeProps) {
             onClick={() => hasChildren && setExpanded(!expanded)}
             className={`w-full text-left rounded-lg bg-gray-50 p-2 mb-1 ${hasChildren ? "cursor-pointer hover:bg-gray-100" : "cursor-default"}`}
           >
-            <div className="flex items-start gap-2">
+            {/* Top row: chevron + circle + bar */}
+            <div className="flex items-center gap-2">
               {hasChildren && (
-                <ChevronRight className={`h-3 w-3 mt-1 text-gray-400 transition-transform flex-shrink-0 ${expanded ? "rotate-90" : ""}`} />
+                <ChevronRight className={`h-3 w-3 text-gray-400 transition-transform flex-shrink-0 ${expanded ? "rotate-90" : ""}`} />
               )}
               {!hasChildren && <span className="w-3 flex-shrink-0" />}
               {displayCode && <CodeBadge code={displayCode} />}
               {!displayCode && <span className="w-5 flex-shrink-0" />}
               <div className="flex-1 min-w-0">
-                <span className="text-xs font-medium text-gray-700 line-clamp-2">
-                  {displayName}
-                </span>
-                <div className="mt-1.5">
-                  <div
-                    className="relative h-2 overflow-hidden rounded-sm bg-gray-200"
-                    style={{ width: `${barWidth}%`, minWidth: "20px" }}
-                  >
-                    <div className="absolute inset-y-0 left-0 opacity-30" style={{ width: `${availPct}%`, backgroundColor: UN_BLUE }} />
-                    <div className="absolute inset-y-0 left-0" style={{ width: `${spentPct}%`, backgroundColor: UN_BLUE }} />
-                  </div>
+                <div
+                  className="relative h-2 overflow-hidden rounded-sm bg-gray-200"
+                  style={{ width: `${barWidth}%`, minWidth: "20px" }}
+                >
+                  <div className="absolute inset-y-0 left-0 opacity-30" style={{ width: `${availPct}%`, backgroundColor: UN_BLUE }} />
+                  <div className="absolute inset-y-0 left-0" style={{ width: `${spentPct}%`, backgroundColor: UN_BLUE }} />
                 </div>
               </div>
+            </div>
+            {/* Bottom row: text aligned with bar */}
+            <div className="mt-1.5 ml-[calc(12px+8px+20px+8px)]">
+              <span className="text-xs font-medium text-gray-700 line-clamp-2">
+                {displayName}
+              </span>
             </div>
           </button>
         </TooltipTrigger>
