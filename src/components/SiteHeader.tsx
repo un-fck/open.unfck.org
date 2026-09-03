@@ -43,6 +43,7 @@ export function SiteHeader() {
         activeHref={activeItem ? withBase(activeItem.href) : undefined}
         mobileMenuLabel="Open navigation menu"
         emblemPlacement="outboard"
+        transparency="low"
         containerClassName="max-w-6xl px-6 md:px-12 lg:px-16"
       />
     </>
