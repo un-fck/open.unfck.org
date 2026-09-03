@@ -157,24 +157,6 @@ export function SecretariatOverview() {
       .sort((a, b) => b.total - a.total || a.name.localeCompare(b.name));
   }, [current, tiles]);
 
-  const priorityTotals = useMemo(() => {
-    if (!current) return [];
-    const amounts = new Map<string, number>();
-    for (const entity of current.entities) {
-      for (const cell of entity.cells) {
-        if (!fundingSet.has(cell.funding_source)) continue;
-        amounts.set(
-          cell.priority_area,
-          (amounts.get(cell.priority_area) ?? 0) + cell.amount,
-        );
-      }
-    }
-    return current.meta.priorities
-      .map((name) => ({ key: name, total: amounts.get(name) ?? 0 }))
-      .filter((item) => item.total > 0)
-      .sort((a, b) => b.total - a.total || a.key.localeCompare(b.key));
-  }, [current, fundingSet]);
-
   const groupRects = layoutGroups(
     groups.map((item) => ({ key: item.name, total: item.total })),
     100,
@@ -182,7 +164,6 @@ export function SecretariatOverview() {
     0.4,
     5,
   );
-  const priorityRects = layoutGroups(priorityTotals, 100, 100, 0.4, 5);
 
   if (!current && !error) {
     return (
@@ -217,58 +198,6 @@ export function SecretariatOverview() {
             )
           }
         />
-      </div>
-
-      <div className="mb-10">
-        <h3 className="mb-3 text-sm font-semibold tracking-wide text-gray-600 uppercase">
-          Spending by priority area
-        </h3>
-        <div
-          className="relative h-72 w-full overflow-hidden bg-gray-100 md:h-80"
-          role="img"
-          aria-label="Secretariat expenses by priority area"
-          aria-describedby="secretariat-priority-area-values"
-        >
-          {priorityRects.map((rect) => {
-            const total =
-              priorityTotals.find((item) => item.key === rect.key)?.total ?? 0;
-            const color = priorityAreaColor(rect.key);
-            const showLabel = rect.width > 12 && rect.height > 10;
-            return (
-              <div
-                key={rect.key}
-                className="absolute overflow-hidden text-white"
-                title={`${rect.key}: ${formatBudget(total)}`}
-                style={{
-                  left: `${rect.x}%`,
-                  top: `${rect.y}%`,
-                  width: `${rect.width}%`,
-                  height: `${rect.height}%`,
-                  backgroundColor: color,
-                  boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.85)",
-                }}
-              >
-                {showLabel && (
-                  <div className="p-2">
-                    <div className="text-[11px] leading-tight font-semibold sm:text-xs">
-                      {rect.key}
-                    </div>
-                    <div className="mt-0.5 text-[10px] leading-tight opacity-90">
-                      {formatBudget(total)}
-                    </div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-        <ul id="secretariat-priority-area-values" className="sr-only">
-          {priorityTotals.map((item) => (
-            <li key={item.key}>
-              {item.key}: {formatBudget(item.total)}
-            </li>
-          ))}
-        </ul>
       </div>
 
       <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
