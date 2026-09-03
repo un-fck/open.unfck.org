@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { ExternalLink, X } from "lucide-react";
-import { ShareButton } from "@/components/ShareButton";
+import { ExternalLink } from "lucide-react";
+import { SidebarControls } from "@/components/SidebarControls";
 import {
   SidebarStackedTrend,
   type FinancingInstrumentDataPoint,
@@ -164,17 +164,11 @@ export function PeacekeepingMissionSidebar({
               {locationLabel ? ` · ${locationLabel}` : ""} · {fiscalYear}
             </p>
           </div>
-          <div className="flex items-center gap-2">
-            <ShareButton hash={`pko-mission=${encodeURIComponent(code)}`} />
-            <button
-              type="button"
-              onClick={close}
-              aria-label="Close mission details"
-              className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200"
-            >
-              <X className="size-4" />
-            </button>
-          </div>
+          <SidebarControls
+            shareHash={`pko-mission=${encodeURIComponent(code)}`}
+            onClose={close}
+            closeLabel="Close mission details"
+          />
         </header>
 
         <div className="space-y-8 px-6 py-6">

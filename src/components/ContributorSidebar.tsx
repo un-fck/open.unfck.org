@@ -1,6 +1,5 @@
 "use client";
 
-import { X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import {
   CATEGORY_LABELS,
@@ -12,7 +11,7 @@ import {
   getTotalContributions,
   isGovernmentDonor,
 } from "@/lib/contributors";
-import { ShareButton } from "@/components/ShareButton";
+import { SidebarControls } from "@/components/SidebarControls";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
 import { navigateToSidebar } from "@/hooks/useDeepLink";
 import { YearSelector } from "@/components/ui/year-selector";
@@ -204,16 +203,11 @@ export function ContributorSidebar({
             <h2 id={sidebarTitleId} className="flex-1 text-xl font-bold leading-tight text-gray-900 sm:text-2xl lg:text-2xl">
               {contributor.name}
             </h2>
-            <div className="flex items-center gap-2">
-              <ShareButton hash={`donor=${encodeURIComponent(contributor.name)}`} />
-              <button
-                onClick={handleClose}
-                className="flex h-8 w-8 flex-shrink-0 cursor-pointer items-center justify-center rounded-full bg-gray-200 text-gray-600 transition-all duration-200 ease-out hover:bg-gray-400 hover:text-gray-100 focus:bg-gray-400 focus:text-gray-100 focus:outline-none"
-                aria-label="Close sidebar"
-              >
-                <X className="h-3 w-3" />
-              </button>
-            </div>
+            <SidebarControls
+              shareHash={`donor=${encodeURIComponent(contributor.name)}`}
+              onClose={handleClose}
+              closeLabel="Close sidebar"
+            />
           </div>
         </div>
 

@@ -1,7 +1,7 @@
 "use client";
 
-import { ExternalLink, X } from "lucide-react";
-import { ShareButton } from "@/components/ShareButton";
+import { ExternalLink } from "lucide-react";
+import { SidebarControls } from "@/components/SidebarControls";
 import { useCallback, useEffect, useState } from "react";
 import { Entity, Impact, EntityRevenue, CountryExpense, EntitySpendingBreakdown } from "@/types";
 import { getSystemGroupingStyle } from "@/lib/systemGroupings";
@@ -275,16 +275,11 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
               </h2>
               <p className="mt-1 text-sm text-gray-600">{entity.entity_long}</p>
             </div>
-            <div className="flex items-center gap-2">
-              <ShareButton hash={`entity=${encodeURIComponent(entity.entity || '')}`} />
-              <button
-                onClick={handleClose}
-                className="flex h-8 w-8 flex-shrink-0 cursor-pointer items-center justify-center rounded-full bg-gray-200 text-gray-600 transition-all duration-200 ease-out hover:bg-gray-400 hover:text-gray-100 focus:bg-gray-400 focus:text-gray-100 focus:outline-none"
-                aria-label="Close sidebar"
-              >
-                <X className="h-3 w-3" />
-              </button>
-            </div>
+            <SidebarControls
+              shareHash={`entity=${encodeURIComponent(entity.entity || "")}`}
+              onClose={handleClose}
+              closeLabel="Close sidebar"
+            />
           </div>
         </div>
 

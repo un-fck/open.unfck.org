@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { X } from "lucide-react";
+import { SidebarControls } from "@/components/SidebarControls";
 import {
   FUNDING_SOURCE_TREND_SERIES,
   SidebarStackedTrend,
@@ -151,14 +151,7 @@ export function SecretariatEntitySidebar({
               {groupLabel} · {year}
             </p>
           </div>
-          <button
-            type="button"
-            onClick={close}
-            aria-label="Close entity details"
-            className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200"
-          >
-            <X className="size-4" />
-          </button>
+          <SidebarControls onClose={close} closeLabel="Close entity details" />
         </header>
 
         <div className="space-y-8 px-6 py-6">

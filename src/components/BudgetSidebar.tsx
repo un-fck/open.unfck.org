@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight, ExternalLink, X } from "lucide-react";
+import { ChevronRight, ExternalLink } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import type {
   BudgetFundingSource,
@@ -11,7 +11,7 @@ import type {
 } from "@/types";
 import { formatBudget } from "@/lib/entities";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
-import { ShareButton } from "@/components/ShareButton";
+import { SidebarControls } from "@/components/SidebarControls";
 import {
   Tooltip,
   TooltipContent,
@@ -855,18 +855,11 @@ export function BudgetSidebar({
                 {subtitle()} · {meta.fiscalYear}
               </p>
             </div>
-            <div className="flex items-center gap-2">
-              <ShareButton
-                hash={`${hashPrefix}=${encodeURIComponent(node.id)}`}
-              />
-              <button
-                onClick={handleClose}
-                className="flex h-8 w-8 flex-shrink-0 cursor-pointer items-center justify-center rounded-full bg-gray-200 text-gray-600 transition-all duration-200 ease-out hover:bg-gray-400 hover:text-gray-100 focus:outline-none"
-                aria-label="Close sidebar"
-              >
-                <X className="h-3 w-3" />
-              </button>
-            </div>
+            <SidebarControls
+              shareHash={`${hashPrefix}=${encodeURIComponent(node.id)}`}
+              onClose={handleClose}
+              closeLabel="Close sidebar"
+            />
           </div>
         </div>
 

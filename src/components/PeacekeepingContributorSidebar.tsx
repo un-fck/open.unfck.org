@@ -1,8 +1,8 @@
 "use client";
 
-import { ExternalLink, X } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ShareButton } from "@/components/ShareButton";
+import { SidebarControls } from "@/components/SidebarControls";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
 import type {
   PeacekeepingContributor,
@@ -96,19 +96,11 @@ export function PeacekeepingContributorSidebar({
               Peacekeeping assessments · {meta.fiscal_year}
             </p>
           </div>
-          <div className="flex gap-2">
-            <ShareButton
-              hash={`peacekeeping-contributor=${encodeURIComponent(contributor.name)}`}
-            />
-            <button
-              type="button"
-              onClick={close}
-              aria-label="Close sidebar"
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300"
-            >
-              <X className="h-3 w-3" />
-            </button>
-          </div>
+          <SidebarControls
+            shareHash={`peacekeeping-contributor=${encodeURIComponent(contributor.name)}`}
+            onClose={close}
+            closeLabel="Close sidebar"
+          />
         </header>
 
         <div className="space-y-6 px-6 py-5 sm:px-8">
