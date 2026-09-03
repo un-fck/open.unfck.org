@@ -129,7 +129,7 @@ export function SystemCategoryTreemap() {
   }
 
   return (
-    <div className="mt-10 grid gap-8 md:grid-cols-2 md:items-start">
+    <section className="grid gap-8 rounded-lg border border-gray-200 bg-white p-6 md:col-span-2 md:grid-cols-2 md:items-center">
       <div>
         <h2 className="text-xl font-bold tracking-tight text-gray-900">
           UN System vs UN Secretariat
@@ -142,7 +142,7 @@ export function SystemCategoryTreemap() {
       </div>
 
       <div
-        className="relative h-80 w-full overflow-hidden bg-gray-100"
+        className="relative h-72 w-full overflow-hidden bg-gray-100 md:justify-self-end md:w-[90%]"
         role="img"
         aria-label={`UN System spending by category in ${year}. UN Secretariat and peacekeeping operations are highlighted.`}
       >
@@ -202,6 +202,6 @@ export function SystemCategoryTreemap() {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 }

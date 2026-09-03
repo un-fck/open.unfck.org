@@ -40,8 +40,8 @@ export default function HomePage() {
             title="UN Secretariat Financials"
             links={visibleSecretariatNav()}
           />
+          <SystemCategoryTreemap />
         </div>
-        <SystemCategoryTreemap />
       </section>
 
       <PageBody className="md:py-16">
