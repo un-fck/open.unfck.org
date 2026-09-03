@@ -10,7 +10,7 @@ YEARS = list(range(2011, 2025))
 UNCATEGORIZED = "Uncategorized"
 SYNTHETIC_ENTITY_GROUPS = {
     "UN": "UN Secretariat",
-    "UN-DPO": "Peacekeeping Operations",
+    "UN-DPO": "UN Secretariat",
 }
 
 def load_revenue() -> dict[str, dict[int, float]]:

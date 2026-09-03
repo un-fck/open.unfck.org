@@ -8,7 +8,6 @@ export interface Entity {
   system_grouping: string;
   category: string;
   un_principal_organ: string | string[];
-  un_pillar: string | null;
   is_ceb_member: boolean | null;
   head_of_entity_level: string | null;
   head_of_entity_title_specific: string | null;

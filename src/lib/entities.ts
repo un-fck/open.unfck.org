@@ -30,7 +30,6 @@ export function createUncategorizedEntity(entityCode: string): Entity {
     system_grouping: UNCATEGORIZED_SYSTEM_GROUP,
     category: UNCATEGORIZED_SYSTEM_GROUP,
     un_principal_organ: [],
-    un_pillar: null,
     is_ceb_member: null,
     head_of_entity_level: null,
     head_of_entity_title_specific: null,
