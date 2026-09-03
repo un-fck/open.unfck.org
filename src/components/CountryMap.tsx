@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { HybridMap } from "@undp/data-viz";
+import { HybridMap } from "@undp/data-viz/HybridMap";
 import { CountrySidebar } from "@/components/CountrySidebar";
 import { CountryTreemap } from "@/components/CountryTreemap";
 import { YearSlider } from "@/components/YearSlider";

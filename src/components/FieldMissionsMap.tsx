@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { DotDensityMap } from "@undp/data-viz";
+import { DotDensityMap } from "@undp/data-viz/DotDensityMap";
 import { SecretariatGroupBar } from "@/components/SecretariatStackedBar";
 import { YearSlider } from "@/components/YearSlider";
 import { loadStaticData, loadYearData } from "@/lib/data";

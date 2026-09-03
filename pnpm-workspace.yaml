@@ -5,3 +5,8 @@
 allowBuilds:
   sharp: false
   unrs-resolver: false
+overrides:
+  # @undp/data-viz uses this optional dependency only for XLSX downloads, which
+  # Open does not use. Its direct CDN tarball is blocked by pnpm 11's default
+  # blockExoticSubdeps protection, so omit only this unused optional edge.
+  '@undp/data-viz@2.2.3>xlsx': '-'

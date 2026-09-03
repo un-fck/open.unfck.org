@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { DotDensityMap } from "@undp/data-viz";
+import { DotDensityMap } from "@undp/data-viz/DotDensityMap";
 import { PeacekeepingMissionSidebar } from "@/components/PeacekeepingMissionSidebar";
 import {
   Tooltip,
