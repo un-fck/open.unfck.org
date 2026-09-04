@@ -25,15 +25,21 @@ export function FundingSourcePills({
   onToggle,
   sources = BUDGET_FUNDING_SOURCES,
   disabled = false,
+  grouped = false,
 }: {
   selected: readonly BudgetFundingSource[];
   onToggle: (source: BudgetFundingSource) => void;
   sources?: readonly BudgetFundingSource[];
   disabled?: boolean;
+  grouped?: boolean;
 }) {
   return (
     <div
-      className="flex flex-wrap gap-2"
+      className={
+        grouped
+          ? "flex flex-wrap gap-1 rounded-md border border-gray-200 bg-white p-1"
+          : "flex flex-wrap gap-2"
+      }
       role="group"
       aria-label="Funding sources"
     >
@@ -50,7 +56,9 @@ export function FundingSourcePills({
             className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs transition-colors focus-visible:ring-2 focus-visible:ring-un-blue focus-visible:outline-none ${
               active
                 ? "bg-gray-100 font-medium text-gray-800"
-                : "bg-white text-gray-400 ring-1 ring-gray-200"
+                : grouped
+                  ? "text-gray-500 hover:bg-gray-50"
+                  : "bg-white text-gray-400 ring-1 ring-gray-200"
             }`}
           >
             <span

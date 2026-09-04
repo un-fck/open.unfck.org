@@ -167,14 +167,16 @@ export function CountryMap() {
       {/* Filter Controls */}
       <div className="mb-3 flex flex-col gap-2">
         <div className="flex flex-col flex-wrap gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-3">
-          {/* Search Input */}
-          <ChartSearchInput
-            value={searchQuery}
-            onChange={setSearchQuery}
-            placeholder="Search by country or region..."
-          />
+          {/* The shared treemap shell owns its search; keep map search here. */}
+          {showMap && (
+            <ChartSearchInput
+              value={searchQuery}
+              onChange={setSearchQuery}
+              placeholder="Search by country or region..."
+            />
+          )}
 
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4 sm:ms-auto">
             {/* Year Slider */}
             <YearSlider
               years={COUNTRY_YEARS}
@@ -205,7 +207,7 @@ export function CountryMap() {
       </div>
 
       {/* Map or Treemap View */}
-      {filteredData.length === 0 ? (
+      {showMap && filteredData.length === 0 ? (
         <div className="flex h-[650px] w-full items-center justify-center bg-gray-100">
           <p className="text-lg text-gray-500">
             No countries match the search criteria
@@ -260,8 +262,13 @@ export function CountryMap() {
         </div>
       ) : (
         <>
-          <CountryTreemap data={filteredData} onCountryClick={handleTreemapClick} />
-          
+          <CountryTreemap
+            data={countryData}
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            onCountryClick={handleTreemapClick}
+          />
+
           {/* Region Legend */}
           <div className="mt-3 flex flex-wrap gap-3">
             {getSortedRegions()

@@ -29,8 +29,6 @@ const SECRETARIAT_GROUPS = new Set([
   PEACEKEEPING_OPERATIONS_GROUP,
 ]);
 
-const SECRETARIAT_FILL = "#009edb";
-
 function homeGroup(
   entity: Entity,
   pkoCodes: Set<string>,
@@ -38,8 +36,6 @@ function homeGroup(
 ): string {
   const canonical = aliases[entity.entity] ?? entity.entity;
   if (
-    entity.entity === "UN-DPO" ||
-    canonical === "UN-DPO" ||
     entity.system_grouping === PEACEKEEPING_OPERATIONS_GROUP ||
     pkoCodes.has(entity.entity) ||
     pkoCodes.has(canonical)
@@ -144,7 +140,7 @@ export function SystemCategoryTreemap() {
       <div
         className="relative h-72 w-full overflow-hidden bg-gray-100 md:justify-self-end md:w-[90%]"
         role="img"
-        aria-label={`UN System spending by category in ${year}. UN Secretariat and peacekeeping operations are highlighted.`}
+        aria-label={`UN System spending by category in ${year}. Tile colors identify the organization categories.`}
       >
         {rects.length === 0 && (
           <div className="flex h-full items-center justify-center text-sm text-gray-500">
@@ -165,16 +161,14 @@ export function SystemCategoryTreemap() {
                   aria-label={`${styles.label}. Opens ${inSecretariat ? "UN Secretariat" : "UN System"} financials.`}
                   className={cn(
                     "absolute overflow-hidden text-left transition-[filter] hover:brightness-95",
-                    inSecretariat ? "text-white" : "bg-gray-200 text-gray-800",
+                    styles.bgColor,
+                    styles.textColor,
                   )}
                   style={{
                     left: `${rect.x}%`,
                     top: `${rect.y}%`,
                     width: `${rect.width}%`,
                     height: `${rect.height}%`,
-                    backgroundColor: inSecretariat
-                      ? SECRETARIAT_FILL
-                      : undefined,
                     boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.9)",
                   }}
                 >

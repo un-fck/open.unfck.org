@@ -1,16 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { ChartSearchInput } from "@/components/ui/chart-search-input";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+  GroupedTreemap,
+  type GroupedTreemapRow,
+  type GroupedTreemapTooltipContext,
+} from "@un-eosg/ui/components/grouped-treemap";
+import { useEffect, useMemo, useState } from "react";
 import { YearSlider } from "@/components/YearSlider";
-import { RegularBudgetPaymentTimeline } from "@/components/RegularBudgetPaymentTimeline";
+import { RegularBudgetPaymentTimelineCard } from "@/components/RegularBudgetPaymentTimelineCard";
 import { RegularBudgetPaymentStatusTrends } from "@/components/RegularBudgetPaymentStatusTrends";
-import { squarify } from "@/lib/treemapLayout";
 import { useYearRanges } from "@/lib/useYearRanges";
 import type {
   RegularBudgetContributor,
@@ -24,28 +22,23 @@ const STATUS_STYLES: Record<
   RegularBudgetPaymentStatus,
   {
     label: string;
-    tile: string;
-    swatch: string;
-    text: string;
+    color: string;
+    textColor?: string;
   }
 > = {
   paid_on_time: {
     label: "Paid in full on time",
-    tile: "bg-[#004987]",
-    swatch: "bg-[#004987]",
-    text: "text-white",
+    color: "#004987",
   },
   paid_late: {
     label: "Paid in full after due date",
-    tile: "bg-[#66C6E8]",
-    swatch: "bg-[#66C6E8]",
-    text: "text-[#003B5C]",
+    color: "#66C6E8",
+    textColor: "var(--color-un-blue-shade)",
   },
   not_paid_in_full: {
     label: "Not listed as paid in full",
-    tile: "bg-[#EAF7FB]",
-    swatch: "bg-[#EAF7FB]",
-    text: "text-[#003B5C]",
+    color: "#EAF7FB",
+    textColor: "var(--color-un-blue-shade)",
   },
 };
 
@@ -80,6 +73,48 @@ function statusCount(
   if (status === "paid_on_time") return data.meta.paid_on_time_count;
   if (status === "paid_late") return data.meta.paid_late_count;
   return data.meta.not_paid_in_full_count;
+}
+
+function matchesContributor(name: string, query: string): boolean {
+  return name
+    .toLocaleLowerCase()
+    .includes(query.trim().toLocaleLowerCase());
+}
+
+function ContributorTooltip({
+  context,
+  asOf,
+}: {
+  context: GroupedTreemapTooltipContext<
+    RegularBudgetPaymentStatus,
+    never,
+    RegularBudgetContributor,
+    never
+  >;
+  asOf: string;
+}) {
+  const contributor = context.leaf.data;
+  if (!contributor) return null;
+  const status = STATUS_STYLES[contributor.payment_status];
+  const paymentDetail =
+    contributor.payment_status === "not_paid_in_full"
+      ? `Not listed as paid in full as of ${formatDate(asOf)}`
+      : contributor.payment_date
+        ? `${status.label} on ${formatDate(contributor.payment_date)}`
+        : status.label;
+
+  return (
+    <div className="space-y-1 text-center">
+      <p className="text-sm font-semibold">{contributor.name}</p>
+      <p className="text-xs font-medium">
+        {formatCurrency(contributor.assessment_amount)} assessment
+      </p>
+      <p className="text-xs opacity-75">
+        {contributor.assessment_rate.toFixed(3)}% assessment rate
+      </p>
+      <p className="text-xs opacity-75">{paymentDetail}</p>
+    </div>
+  );
 }
 
 export function RegularBudgetContributorsTreemap() {
@@ -124,130 +159,44 @@ export function RegularBudgetContributorsTreemap() {
     return () => controller.abort();
   }, [selectedYear]);
 
-  const filteredContributors = useMemo(() => {
+  const rows = useMemo(() => {
     if (!data) return [];
-    const query = searchQuery.trim().toLocaleLowerCase();
-    if (!query) return data.contributors;
-    return data.contributors.filter((contributor) =>
-      contributor.name.toLocaleLowerCase().includes(query),
-    );
-  }, [data, searchQuery]);
-
-  const statusRows = useMemo(() => {
-    if (!data) return [];
-
-    const total = data.contributors.reduce(
-      (sum, contributor) => sum + contributor.assessment_amount,
-      0,
-    );
-    let y = 0;
-
-    return STATUS_ORDER.map((status) => {
-      const contributors = data.contributors.filter(
-        (contributor) => contributor.payment_status === status,
-      );
-      const assessmentTotal = contributors.reduce(
-        (sum, contributor) => sum + contributor.assessment_amount,
-        0,
-      );
-      const height = (assessmentTotal / total) * 100;
-      const row = { status, y, height, assessmentTotal };
-      y += height;
-      return row;
-    });
+    return STATUS_ORDER.map((status) => ({
+      key: status,
+      label: STATUS_STYLES[status].label,
+      color: STATUS_STYLES[status].color,
+      data: status,
+      leaves: data.contributors
+        .filter(
+          (contributor) =>
+            contributor.payment_status === status &&
+            Number.isFinite(contributor.assessment_amount) &&
+            contributor.assessment_amount > 0,
+        )
+        .sort(
+          (a, b) =>
+            b.assessment_amount - a.assessment_amount ||
+            a.name.localeCompare(b.name),
+        )
+        .map((contributor) => ({
+          key: contributor.name,
+          label: contributor.name,
+          value: contributor.assessment_amount,
+          color: STATUS_STYLES[contributor.payment_status].color,
+          textColor: STATUS_STYLES[contributor.payment_status].textColor,
+          data: contributor,
+        })),
+    })).filter((row) => row.leaves.length > 0) satisfies GroupedTreemapRow<
+      RegularBudgetPaymentStatus,
+      never,
+      RegularBudgetContributor,
+      never
+    >[];
   }, [data]);
-
-  const rectangles = useMemo(
-    () =>
-      statusRows.flatMap((row) =>
-        squarify(
-          filteredContributors
-            .filter((contributor) => contributor.payment_status === row.status)
-            .map((contributor) => ({
-              value: contributor.assessment_amount,
-              data: contributor,
-            })),
-          0,
-          row.y,
-          100,
-          row.height,
-        ),
-      ),
-    [filteredContributors, statusRows],
-  );
-
-  const renderTile = (
-    rectangle: (typeof rectangles)[number],
-    contributor: RegularBudgetContributor,
-  ) => {
-    const style = STATUS_STYLES[contributor.payment_status];
-    const showName = rectangle.width > 4.5 && rectangle.height > 3;
-    const showAmount = rectangle.width > 6 && rectangle.height > 5;
-    const paymentDetail =
-      contributor.payment_status === "not_paid_in_full"
-        ? `Not listed as paid in full as of ${formatDate(data!.meta.as_of)}`
-        : `${style.label} on ${formatDate(contributor.payment_date!)}`;
-
-    return (
-      <Tooltip key={contributor.name} delayDuration={60}>
-        <TooltipTrigger asChild>
-          <div
-            role="img"
-            tabIndex={0}
-            className={`absolute overflow-hidden text-left transition-[left,top,width,height,filter] duration-700 hover:z-10 hover:brightness-110 focus-visible:z-20 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none focus-visible:ring-inset ${contributor.payment_status === "not_paid_in_full" ? "shadow-[inset_0_0_0_2px_#004987]" : "shadow-[inset_0_0_0_0.5px_rgba(255,255,255,0.75)]"} ${style.tile} ${style.text}`}
-            style={{
-              left: `${rectangle.x}%`,
-              top: `${rectangle.y}%`,
-              width: `${rectangle.width}%`,
-              height: `${rectangle.height}%`,
-            }}
-            aria-label={`${contributor.name}: ${formatCurrency(contributor.assessment_amount)}, ${style.label}`}
-          >
-            {showName && (
-              <span className="absolute inset-0 block overflow-hidden p-1.5 sm:p-2">
-                <span className="block truncate text-[10px] leading-tight font-semibold sm:text-xs">
-                  {contributor.name}
-                </span>
-                {showAmount && (
-                  <span className="mt-0.5 block truncate text-[10px] leading-tight opacity-90 sm:text-xs">
-                    {formatCurrency(contributor.assessment_amount, true)} ·{" "}
-                    {contributor.assessment_rate.toFixed(3)}%
-                  </span>
-                )}
-              </span>
-            )}
-          </div>
-        </TooltipTrigger>
-        <TooltipContent
-          side="top"
-          sideOffset={8}
-          hideWhenDetached
-          collisionPadding={12}
-          className="max-w-xs border border-slate-200 bg-white text-slate-800 shadow-lg"
-        >
-          <div className="space-y-1 p-1 text-center">
-            <p className="text-sm font-semibold">{contributor.name}</p>
-            <p className="text-xs font-medium text-slate-700">
-              {formatCurrency(contributor.assessment_amount)} assessment
-            </p>
-            <p className="text-xs text-slate-500">
-              {contributor.assessment_rate.toFixed(3)}% assessment rate
-            </p>
-            <p className="text-xs text-slate-600">{paymentDetail}</p>
-          </div>
-        </TooltipContent>
-      </Tooltip>
-    );
-  };
 
   return (
     <div className="w-full">
-      <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-        <ChartSearchInput
-          value={searchQuery}
-          onChange={setSearchQuery}
-          placeholder="Search Member States..."
-        />
+      <div className="mb-3 flex justify-end">
         <YearSlider
           years={years.years}
           selectedYear={selectedYear}
@@ -265,7 +214,8 @@ export function RegularBudgetContributorsTreemap() {
                 return (
                   <div key={status} className="flex items-center gap-1.5">
                     <span
-                      className={`h-3 w-3 rounded-sm border border-gray-200 ${style.swatch}`}
+                      className="h-3 w-3 rounded-sm border border-gray-200"
+                      style={{ backgroundColor: style.color }}
                     />
                     <span className="text-xs text-gray-600">
                       {style.label} ({statusCount(data, status)})
@@ -280,42 +230,38 @@ export function RegularBudgetContributorsTreemap() {
             </p>
           </div>
 
-          <div className="relative h-[560px] w-full bg-gray-100 sm:h-[680px] lg:h-[780px]">
-            {rectangles.length > 0 ? (
-              rectangles.map((rectangle) =>
-                renderTile(rectangle, rectangle.data),
-              )
-            ) : (
+          <GroupedTreemap<
+            RegularBudgetPaymentStatus,
+            never,
+            RegularBudgetContributor,
+            never
+          >
+            rows={rows}
+            search={{
+              value: searchQuery,
+              onChange: setSearchQuery,
+              label: "Search Member States",
+              placeholder: "Search Member States...",
+              predicate: (leafLabel, _subgroupLabel, _rowLabel, query) =>
+                matchesContributor(leafLabel, query),
+            }}
+            totalLabel="Total"
+            layout={{ rowOrder: "input", consolidateSmallRows: false }}
+            plotClassName="h-[560px] sm:h-[680px] lg:h-[780px]"
+            formatValue={(value) => formatCurrency(value, true)}
+            formatAccessibleValue={(value) => formatCurrency(value)}
+            showLeafValues
+            renderTooltip={(context) => (
+              <ContributorTooltip context={context} asOf={data.meta.as_of} />
+            )}
+            emptyContent={
               <div className="flex h-full items-center justify-center">
                 <p className="text-sm text-gray-500">
                   No Member States match your search.
                 </p>
               </div>
-            )}
-            {statusRows.map((row, index) => {
-              if (row.status === "not_paid_in_full") {
-                return (
-                  <div
-                    key={row.status}
-                    className="pointer-events-none absolute inset-x-0 z-20 h-1 -translate-y-full bg-white"
-                    style={{ top: `${row.y}%` }}
-                    aria-hidden="true"
-                  />
-                );
-              }
-              return (
-                <div
-                  key={row.status}
-                  className={`pointer-events-none absolute inset-x-0 z-20 border-white ${index === 0 ? "" : "border-t-4"}`}
-                  style={{ top: `${row.y}%`, height: `${row.height}%` }}
-                  aria-hidden="true"
-                />
-              );
-            })}
-          </div>
-
-          <RegularBudgetPaymentTimeline data={data} />
-          <RegularBudgetPaymentStatusTrends />
+            }
+          />
 
           <div className="mt-4 space-y-2 text-xs leading-relaxed text-gray-500">
             <p>
@@ -388,6 +334,10 @@ export function RegularBudgetContributorsTreemap() {
           <p className="text-sm text-red-700">{error}</p>
         </div>
       )}
+      <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-6">
+        <RegularBudgetPaymentStatusTrends />
+        <RegularBudgetPaymentTimelineCard />
+      </div>
     </div>
   );
 }

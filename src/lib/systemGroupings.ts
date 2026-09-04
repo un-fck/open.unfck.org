@@ -20,84 +20,84 @@ type SystemGroupingVisual = Pick<
 // the shared organization taxonomy in data/.
 const systemGroupingVisuals: Record<string, SystemGroupingVisual> = {
   "UN Secretariat": {
-    bgColor: "bg-gray-300",
+    bgColor: "bg-open-system-category-secretariat",
     textColor: "text-black",
-    hexColor: "#d1d5db",
+    hexColor: "var(--color-open-system-category-secretariat)",
   },
   // Both peacekeeping keys share one short label: only one of them carries
   // entities at a time, so the legend must not show the pair as two entries.
   "Peacekeeping Operations and Political Missions": {
-    bgColor: "bg-au-chico",
-    textColor: "text-white",
-    hexColor: "#a0665c",
+    bgColor: "bg-open-system-category-peacekeeping",
+    textColor: "text-black",
+    hexColor: "var(--color-open-system-category-peacekeeping)",
   },
   // Synthetic grouping for the UN-DPO CEB aggregate
   "Peacekeeping Operations": {
-    bgColor: "bg-au-chico",
-    textColor: "text-white",
-    hexColor: "#a0665c",
+    bgColor: "bg-open-system-category-peacekeeping",
+    textColor: "text-black",
+    hexColor: "var(--color-open-system-category-peacekeeping)",
   },
   "Regional Commissions": {
-    bgColor: "bg-smoky",
-    textColor: "text-white",
-    hexColor: "#6c5b7b",
+    bgColor: "bg-open-system-category-regional-commissions",
+    textColor: "text-black",
+    hexColor: "var(--color-open-system-category-regional-commissions)",
   },
   "Funds and Programmes": {
-    bgColor: "bg-camouflage-green",
-    textColor: "text-white",
-    hexColor: "#7d8471",
+    bgColor: "bg-open-system-category-funds-programmes",
+    textColor: "text-black",
+    hexColor: "var(--color-open-system-category-funds-programmes)",
   },
   "Research and Training": {
-    bgColor: "bg-camouflage-green",
-    textColor: "text-white",
-    hexColor: "#7d8471",
+    bgColor: "bg-open-system-category-research-training",
+    textColor: "text-black",
+    hexColor: "var(--color-open-system-category-research-training)",
   },
   "Subsidiary Organs": {
-    bgColor: "bg-trout",
-    textColor: "text-white",
-    hexColor: "#495057",
+    bgColor: "bg-open-system-category-neutral",
+    textColor: "text-black",
+    hexColor: "var(--color-open-system-category-neutral)",
   },
   "International Court of Justice": {
-    bgColor: "bg-shuttle-gray",
-    textColor: "text-white",
-    hexColor: "#5a6c7d",
+    bgColor: "bg-open-system-category-neutral",
+    textColor: "text-black",
+    hexColor: "var(--color-open-system-category-neutral)",
   },
   "Intergovernmental and Expert Bodies": {
-    bgColor: "bg-gray-500",
-    textColor: "text-white",
-    hexColor: "#6b7280",
+    bgColor: "bg-open-system-category-neutral",
+    textColor: "text-black",
+    hexColor: "var(--color-open-system-category-neutral)",
   },
   "Specialized Agencies": {
-    bgColor: "bg-shuttle-gray",
-    textColor: "text-white",
-    hexColor: "#5a6c7d",
+    bgColor: "bg-open-system-category-specialized-agencies",
+    textColor: "text-black",
+    hexColor: "var(--color-open-system-category-specialized-agencies)",
   },
   "Related Organizations": {
-    bgColor: "bg-black",
-    textColor: "text-white",
-    hexColor: "#1f2937",
+    bgColor: "bg-open-system-category-related-organizations",
+    textColor: "text-black",
+    hexColor: "var(--color-open-system-category-related-organizations)",
   },
   "Other Entities": {
-    bgColor: "bg-gray-500",
-    textColor: "text-white",
-    hexColor: "#6b7280",
+    bgColor: "bg-open-system-category-other-entities",
+    textColor: "text-black",
+    hexColor: "var(--color-open-system-category-other-entities)",
   },
   "Other Bodies": {
-    bgColor: "bg-pale-oyster",
-    textColor: "text-white",
-    hexColor: "#9b8b7a",
-  },
-  Uncategorized: {
-    bgColor: "bg-gray-400",
+    bgColor: "bg-open-system-category-neutral",
     textColor: "text-black",
-    hexColor: "#9ca3af",
+    hexColor: "var(--color-open-system-category-neutral)",
+  },
+  "Uncategorized": {
+    bgColor: "bg-open-system-category-neutral",
+    textColor: "text-black",
+    hexColor: "var(--color-open-system-category-neutral)",
   },
 };
 
 const fallbackVisual: SystemGroupingVisual = {
-  bgColor: "bg-gray-400",
-  textColor: "text-white",
-  hexColor: "#9ca3af",
+  bgColor: "bg-open-system-category-neutral",
+  textColor: "text-black",
+  hexColor: "var(--color-open-system-category-neutral)",
 };
 
 export const systemGroupingStyles: Record<string, SystemGroupingStyle> =
@@ -115,9 +115,7 @@ export const systemGroupingStyles: Record<string, SystemGroupingStyle> =
 export function getSystemGroupingStyle(grouping: string): SystemGroupingStyle {
   return (
     systemGroupingStyles[grouping] || {
-      bgColor: "bg-gray-400",
-      textColor: "text-white",
-      hexColor: "#9ca3af",
+      ...fallbackVisual,
       order: 999,
       label: grouping,
     }

@@ -1,7 +1,11 @@
 {
   "schema_version": 1,
   "system_groupings": [
-    { "key": "UN Secretariat", "label": "UN Secretariat", "order": 1 },
+    {
+      "key": "UN Secretariat",
+      "label": "UN Secretariat-administered",
+      "order": 1
+    },
     {
       "key": "Peacekeeping Operations and Political Missions",
       "label": "Peacekeeping",

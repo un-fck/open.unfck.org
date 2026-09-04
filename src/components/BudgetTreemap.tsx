@@ -19,6 +19,11 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
+  GroupedTreemap,
+  type GroupedTreemapRow,
+  type GroupedTreemapTooltipContext,
+} from "@un-eosg/ui/components/grouped-treemap";
+import {
   ExternalLink,
   SplitSquareHorizontal,
   TriangleAlert,
@@ -131,6 +136,19 @@ interface EntityProjection {
   unassignedAmount: number;
 }
 
+interface SharedBudgetLeafData {
+  node: BudgetNode;
+  sidebarNodeId: string;
+  note?: string;
+}
+
+type SharedBudgetRow = GroupedTreemapRow<
+  BudgetNode,
+  BudgetNode,
+  SharedBudgetLeafData,
+  BudgetFundingSource
+>;
+
 const EMPTY_ENTITY_PROJECTION: EntityProjection = {
   nodes: [],
   sidebarNodes: [],
@@ -148,6 +166,73 @@ function addFundingValues(
       target[source] = (target[source] ?? 0) + (values[source] ?? 0);
     }
   }
+}
+
+function subtractFundingValues(
+  parent: BudgetNode,
+  children: readonly BudgetNode[],
+): Partial<Record<BudgetFundingSource, number>> {
+  return Object.fromEntries(
+    BUDGET_FUNDING_SOURCES.map((source) => [
+      source,
+      Math.max(
+        0,
+        (parent.values?.[source] ?? 0) -
+          children.reduce(
+            (sum, child) => sum + (child.values?.[source] ?? 0),
+            0,
+          ),
+      ),
+    ]).filter(([, amount]) => Number(amount) > 0),
+  ) as Partial<Record<BudgetFundingSource, number>>;
+}
+
+function remainderNode(
+  parent: BudgetNode,
+  children: readonly BudgetNode[],
+  id: string,
+  label: string,
+  amount = Math.max(
+    0,
+    parent.amount - children.reduce((sum, child) => sum + child.amount, 0),
+  ),
+): BudgetNode {
+  const residualValues = subtractFundingValues(parent, children);
+  const residualValueTotal = Object.values(residualValues).reduce(
+    (sum, value) => sum + value,
+    0,
+  );
+  const values =
+    residualValueTotal > 0 && residualValueTotal !== amount
+      ? Object.fromEntries(
+          Object.entries(residualValues).map(([source, value]) => [
+            source,
+            (value / residualValueTotal) * amount,
+          ]),
+        )
+      : residualValues;
+  return {
+    id,
+    parentId: parent.id,
+    tier: "detail",
+    kind: "allocation",
+    code: null,
+    label,
+    amount,
+    basis: "derived_entity_projection",
+    values,
+    completeness: "incomplete",
+    isRemainder: true,
+    note: "Published parent amount not assigned to the displayed lower-level source placements.",
+  };
+}
+
+function sharedTreemapColor(
+  color: string,
+  source: BudgetFundingSource,
+): string {
+  const opacity = FUNDING_SHADE_OPACITY[source] ?? 0.35;
+  return `color-mix(in srgb, ${color} ${Math.round(opacity * 100)}%, white)`;
 }
 
 /**
@@ -567,6 +652,8 @@ interface BudgetTreemapProps {
   trustFundLevel?: "entity" | "fund";
   /** Programme-budget grouping dimension; sections and entities never share tiles. */
   ppbGrouping?: PpbGrouping;
+  /** Changes the Programme Budget leaf display without changing its section hierarchy. */
+  onPpbGroupingChange?: (grouping: PpbGrouping) => void;
 }
 
 export function BudgetTreemap({
@@ -582,6 +669,7 @@ export function BudgetTreemap({
   headlineFundingSource,
   trustFundLevel = "entity",
   ppbGrouping = "section",
+  onPpbGroupingChange,
 }: BudgetTreemapProps) {
   const yearRanges = useYearRanges();
   const isAudited = dataset.startsWith("budget-audited-");
@@ -1289,23 +1377,439 @@ export function BudgetTreemap({
     key;
   const metricDefinition = meta?.metrics?.[metric];
 
+  const usesSharedProgrammeBudget = !isPko && !isTrustFund;
+  const usesSharedTrustFundExpenses = isTrustFund && trustFundLevel === "fund";
+  const usesSharedTreemap =
+    usesSharedProgrammeBudget || usesSharedTrustFundExpenses;
+
+  const sharedRows = useMemo<SharedBudgetRow[]>(() => {
+    if (!filteredData || !usesSharedTreemap) return [];
+
+    const leaf = (
+      node: BudgetNode,
+      label: string,
+      color: string,
+      sidebarNodeId = node.id,
+      key = node.id,
+      note?: string,
+    ) => ({
+      key,
+      label,
+      value: node.amount,
+      color,
+      data: { node, sidebarNodeId, note },
+      segments: positiveFundingValues(node).map(([source, value]) => ({
+        key: source,
+        label: fundingLabel(source),
+        value,
+        color: sharedTreemapColor(color, source),
+        data: source,
+      })),
+      onActivate: () => openSidebar(sidebarNodeId),
+    });
+
+    if (usesSharedTrustFundExpenses) {
+      return filteredData.nodes
+        .filter((node) => node.tier === "budget_unit")
+        .map((entity, index) => {
+          const color = BAND_PALETTE[index % BAND_PALETTE.length].bg;
+          const funds = (childrenOf[entity.id] ?? []).filter(
+            (node) => node.tier === "detail" && node.amount > 0,
+          );
+          const childrenTotal = funds.reduce(
+            (sum, fund) => sum + fund.amount,
+            0,
+          );
+          const leaves = funds.map((fund) => leaf(fund, fund.label, color));
+          if (childrenTotal < entity.amount) {
+            const remainder = remainderNode(
+              entity,
+              funds,
+              `${entity.id}::unassigned-funds`,
+              "Not assigned to an individual trust fund",
+            );
+            leaves.push(
+              leaf(
+                remainder,
+                remainder.label,
+                color,
+                entity.id,
+                remainder.id,
+                remainder.note,
+              ),
+            );
+          }
+          return {
+            key: entity.id,
+            label: entity.entity?.acronym ?? entity.code ?? entity.label,
+            color,
+            data: entity,
+            leaves,
+          } satisfies SharedBudgetRow;
+        })
+        .filter((row) => (row.leaves?.length ?? 0) > 0)
+        .sort(
+          (a, b) =>
+            (b.leaves ?? []).reduce((sum, item) => sum + item.value, 0) -
+              (a.leaves ?? []).reduce((sum, item) => sum + item.value, 0) ||
+            a.label.localeCompare(b.label),
+        );
+    }
+
+    const root = filteredData.nodes.find((node) => node.parentId === null);
+    if (!root || root.amount <= 0) return [];
+    if (Math.abs(root.breakdown?.difference ?? 0) > 5000) {
+      const color = BAND_PALETTE[0].bg;
+      return [
+        {
+          key: root.id,
+          label: root.label,
+          color,
+          data: root,
+          leaves: [leaf(root, root.label, color)],
+        },
+      ];
+    }
+
+    const parts = filteredData.nodes
+      .filter((node) => node.tier === "part" && node.amount > 0)
+      .sort(
+        (a, b) =>
+          (budgetPartStyles[a.code ?? ""]?.order ?? 999) -
+            (budgetPartStyles[b.code ?? ""]?.order ?? 999) ||
+          a.label.localeCompare(b.label),
+      );
+    const rows: SharedBudgetRow[] = [];
+
+    for (const [index, part] of parts.entries()) {
+      const color =
+        PART_BAND_COLORS[part.code ?? ""]?.bg ??
+        BAND_PALETTE[index % BAND_PALETTE.length].bg;
+      const sections = (childrenOf[part.id] ?? []).filter(
+        (node) => node.tier === "section" && node.amount > 0,
+      );
+      const sectionTotal = sections.reduce(
+        (sum, section) => sum + section.amount,
+        0,
+      );
+
+      if (
+        Math.abs(part.breakdown?.difference ?? 0) > 5000 ||
+        sectionTotal > part.amount
+      ) {
+        const remainder = remainderNode(
+          part,
+          [],
+          `${part.id}::unreconciled-sections`,
+          "Published part total (section breakdown withheld)",
+          part.amount,
+        );
+        rows.push({
+          key: part.id,
+          label: PART_SHORT_NAMES[part.code ?? ""] ?? part.label,
+          color,
+          data: part,
+          leaves: [
+            leaf(
+              remainder,
+              remainder.label,
+              color,
+              part.id,
+              remainder.id,
+              "Published section values do not reconcile to this budget part, so the lower geometry is withheld.",
+            ),
+          ],
+        });
+        continue;
+      }
+
+      const subgroups = sections.map((section) => {
+        if (ppbGrouping === "section") {
+          return {
+            key: section.id,
+            label: `Section ${section.code ?? ""}: ${section.label}`,
+            data: section,
+            labelVisibility: "tooltip-only" as const,
+            leaves: [leaf(section, section.label, color)],
+          };
+        }
+
+        const units = (childrenOf[section.id] ?? []).filter(
+          (node) => node.tier === "budget_unit" && node.amount > 0,
+        );
+        const unitTotal = units.reduce((sum, unit) => sum + unit.amount, 0);
+        if (
+          Math.abs(section.breakdown?.difference ?? 0) > 5000 ||
+          unitTotal > section.amount
+        ) {
+          const remainder = remainderNode(
+            section,
+            [],
+            `${section.id}::unreconciled-entities`,
+            "Not assigned to a single entity",
+            section.amount,
+          );
+          return {
+            key: section.id,
+            label: `Section ${section.code ?? ""}: ${section.label}`,
+            data: section,
+            labelVisibility: "tooltip-only" as const,
+            leaves: [
+              leaf(
+                remainder,
+                remainder.label,
+                color,
+                section.id,
+                remainder.id,
+                "Published entity placements do not reconcile to this section, so its lower geometry is withheld.",
+              ),
+            ],
+          };
+        }
+
+        const leaves = units.map((unit) =>
+          leaf(
+            unit,
+            unit.entity?.acronym ?? unit.entity?.name ?? unit.label,
+            color,
+            unit.id,
+            `${section.id}::${unit.id}`,
+          ),
+        );
+        if (unitTotal < section.amount) {
+          const remainder = remainderNode(
+            section,
+            units,
+            `${section.id}::unassigned-entity`,
+            "Not assigned to a single entity",
+          );
+          leaves.push(
+            leaf(
+              remainder,
+              remainder.label,
+              color,
+              section.id,
+              remainder.id,
+              remainder.note,
+            ),
+          );
+        }
+        return {
+          key: section.id,
+          label: `Section ${section.code ?? ""}: ${section.label}`,
+          data: section,
+          labelVisibility: "tooltip-only" as const,
+          leaves,
+        };
+      });
+
+      if (sectionTotal < part.amount) {
+        const remainder = remainderNode(
+          part,
+          sections,
+          `${part.id}::unassigned-section`,
+          "Not assigned to a budget section",
+        );
+        subgroups.push({
+          key: remainder.id,
+          label: remainder.label,
+          data: part,
+          labelVisibility: "tooltip-only",
+          leaves: [
+            leaf(
+              remainder,
+              remainder.label,
+              color,
+              part.id,
+              remainder.id,
+              remainder.note,
+            ),
+          ],
+        });
+      }
+
+      rows.push({
+        key: part.id,
+        label: PART_SHORT_NAMES[part.code ?? ""] ?? part.label,
+        color,
+        data: part,
+        subgroups,
+      });
+    }
+
+    const partsTotal = parts.reduce((sum, part) => sum + part.amount, 0);
+    if (partsTotal < root.amount) {
+      const remainder = remainderNode(
+        root,
+        parts,
+        `${root.id}::unassigned-part`,
+        "Not assigned to a budget part",
+      );
+      const color = BAND_PALETTE[rows.length % BAND_PALETTE.length].bg;
+      rows.push({
+        key: remainder.id,
+        label: remainder.label,
+        color,
+        data: root,
+        leaves: [
+          leaf(
+            remainder,
+            remainder.label,
+            color,
+            root.id,
+            remainder.id,
+            remainder.note,
+          ),
+        ],
+      });
+    } else if (partsTotal > root.amount) {
+      const color = BAND_PALETTE[0].bg;
+      const remainder = remainderNode(
+        root,
+        [],
+        `${root.id}::unreconciled-parts`,
+        "Published total (budget-part breakdown withheld)",
+        root.amount,
+      );
+      return [
+        {
+          key: root.id,
+          label: root.label,
+          color,
+          data: root,
+          leaves: [
+            leaf(
+              remainder,
+              remainder.label,
+              color,
+              root.id,
+              remainder.id,
+              "Published budget-part values exceed the whole-budget total, so the lower geometry is withheld.",
+            ),
+          ],
+        },
+      ];
+    }
+    return rows;
+  }, [
+    childrenOf,
+    filteredData,
+    fundingLabel,
+    openSidebar,
+    ppbGrouping,
+    usesSharedTreemap,
+    usesSharedTrustFundExpenses,
+  ]);
+
+  const sharedSearchMatches = useCallback(
+    (
+      leafLabel: string,
+      subgroupLabel: string,
+      rowLabel: string,
+      query: string,
+    ) =>
+      `${leafLabel} ${subgroupLabel} ${rowLabel}`
+        .toLocaleLowerCase()
+        .includes(query.trim().toLocaleLowerCase()),
+    [],
+  );
+
+  const sharedProgrammeSummaries = useMemo(() => {
+    if (!usesSharedProgrammeBudget) return undefined;
+    const query = searchQuery.trim().toLocaleLowerCase();
+    return activeFundingSources.map((source) => {
+      const total = sharedRows.reduce(
+        (rowSum, row) =>
+          rowSum +
+          (
+            row.subgroups ?? [
+              {
+                key: `${row.key}::implicit`,
+                label: row.label,
+                leaves: row.leaves ?? [],
+              },
+            ]
+          ).reduce(
+            (subgroupSum, subgroup) =>
+              subgroupSum +
+              subgroup.leaves.reduce((leafSum, item) => {
+                if (
+                  query &&
+                  !sharedSearchMatches(
+                    item.label,
+                    subgroup.label,
+                    row.label,
+                    query,
+                  )
+                ) {
+                  return leafSum;
+                }
+                return (
+                  leafSum +
+                  (item.segments ?? [])
+                    .filter((segment) => segment.key === source)
+                    .reduce((sum, segment) => sum + segment.value, 0)
+                );
+              }, 0),
+            0,
+          ),
+        0,
+      );
+      return {
+        key: source,
+        label: fundingLabel(source),
+        value: formatBudget(total),
+      };
+    });
+  }, [
+    activeFundingSources,
+    fundingLabel,
+    searchQuery,
+    sharedRows,
+    sharedSearchMatches,
+    usesSharedProgrammeBudget,
+  ]);
+
   const controls = (
     <div
       className={`${usesOverviewGroupLayout ? "mb-6" : "mb-3"} flex flex-col flex-wrap gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-3`}
     >
-      <ChartSearchInput
-        value={searchQuery}
-        onChange={setSearchQuery}
-        placeholder={
-          isPko
-            ? "Search missions and cost items..."
-            : isTrustFund
-              ? "Search entities and trust funds..."
-              : isAlignedPpb && ppbGrouping === "entity"
-                ? "Search entities..."
-                : "Search budget sections..."
-        }
-      />
+      <div className="flex flex-wrap items-center gap-4">
+        <ChartSearchInput
+          value={searchQuery}
+          onChange={setSearchQuery}
+          placeholder={
+            isPko
+              ? "Search missions and cost items..."
+              : isTrustFund
+                ? "Search entities and trust funds..."
+                : isAlignedPpb && ppbGrouping === "entity"
+                  ? "Search entities..."
+                  : "Search budget sections..."
+          }
+        />
+        {isAlignedPpb && onPpbGroupingChange && (
+          <div className="flex h-9 items-center gap-2">
+            <span
+              className={`text-sm ${ppbGrouping === "entity" ? "font-medium text-gray-900" : "text-gray-500"}`}
+            >
+              Entities
+            </span>
+            <Switch
+              checked={ppbGrouping === "section"}
+              onCheckedChange={(checked) =>
+                onPpbGroupingChange(checked ? "section" : "entity")
+              }
+              aria-label="Toggle between entity and budget section tiles"
+            />
+            <span
+              className={`text-sm ${ppbGrouping === "section" ? "font-medium text-gray-900" : "text-gray-500"}`}
+            >
+              Sections
+            </span>
+          </div>
+        )}
+      </div>
       <div className="flex flex-wrap items-center gap-4">
         {!usesOverviewGroupLayout && !isAlignedPpb && (
           <span className="text-sm text-gray-500">
@@ -1392,6 +1896,218 @@ export function BudgetTreemap({
       ),
     0,
   );
+
+  if (usesSharedTreemap) {
+    const sharedSources = meta.documentUrl
+      ? [
+          {
+            key: meta.documentSymbol ?? meta.documentUrl,
+            label:
+              meta.sourceEdition && meta.documentSymbol
+                ? `PPB ${meta.sourceEdition} · ${meta.documentSymbol}`
+                : (meta.documentSymbol ?? meta.title),
+            href: meta.documentUrl,
+            openInNewTab: true as const,
+            newTabLabel: "opens in a new tab",
+          },
+        ]
+      : meta.source.url
+        ? [
+            {
+              key: meta.source.url,
+              label: `${meta.source.repo} ${meta.source.release}`,
+              href: meta.source.url,
+              openInNewTab: true as const,
+              newTabLabel: "opens in a new tab",
+            },
+          ]
+        : [];
+    const searchAccessory =
+      isAlignedPpb && onPpbGroupingChange ? (
+        <div className="flex h-9 items-center gap-2">
+          <span
+            className={`text-sm ${ppbGrouping === "entity" ? "font-medium text-gray-900" : "text-gray-500"}`}
+          >
+            Entities
+          </span>
+          <Switch
+            checked={ppbGrouping === "section"}
+            onCheckedChange={(checked) =>
+              onPpbGroupingChange(checked ? "section" : "entity")
+            }
+            aria-label="Toggle between entity and budget section tiles"
+          />
+          <span
+            className={`text-sm ${ppbGrouping === "section" ? "font-medium text-gray-900" : "text-gray-500"}`}
+          >
+            Sections
+          </span>
+        </div>
+      ) : undefined;
+
+    return (
+      <div className="w-full">
+        {showYearSelector && years.length > 1 && (
+          <div className="mb-3 flex justify-end">
+            <YearSlider
+              years={years}
+              selectedYear={year}
+              onChange={setInternalYear}
+              formatLabel={yearLabel}
+            />
+          </div>
+        )}
+
+        {meta.sourceNote && (
+          <p className="mb-3 border-l-4 border-amber-400 bg-amber-50 px-4 py-3 text-sm text-amber-950">
+            {meta.sourceNote}
+          </p>
+        )}
+
+        {isAlignedPpb &&
+          ppbGrouping === "entity" &&
+          entityProjection.unassignedAmount > 0 && (
+            <p className="mb-3 border-l-2 border-amber-400 bg-amber-50 px-3 py-2 text-xs text-amber-900">
+              Amounts without a source-evidenced entity placement remain
+              explicit “Not assigned to a single entity” tiles inside their
+              published budget section.
+            </p>
+          )}
+
+        {meta.partial && (
+          <p className="mb-3 border-l-2 border-amber-400 bg-amber-50 px-3 py-2 text-xs text-amber-900">
+            {meta.scopeLabel}. This year does not publish every funding source,
+            so it is not directly comparable with years that do.
+          </p>
+        )}
+
+        {withheldBreakdowns > 0 && (
+          <p className="mb-3 border-l-2 border-amber-400 bg-amber-50 px-3 py-2 text-xs text-amber-900">
+            {withheldBreakdowns} published parent total
+            {withheldBreakdowns === 1 ? " has" : "s have"} a lower-level
+            breakdown that does not reconcile. The chart preserves each parent
+            total and withholds its child geometry; open the flagged tile to
+            inspect the published lines and difference.
+          </p>
+        )}
+
+        <GroupedTreemap<
+          BudgetNode,
+          BudgetNode,
+          SharedBudgetLeafData,
+          BudgetFundingSource
+        >
+          rows={sharedRows}
+          search={{
+            value: searchQuery,
+            onChange: setSearchQuery,
+            label: usesSharedTrustFundExpenses
+              ? "Search entities and trust funds"
+              : ppbGrouping === "entity"
+                ? "Search entities"
+                : "Search budget sections",
+            placeholder: usesSharedTrustFundExpenses
+              ? "Search entities and trust funds..."
+              : ppbGrouping === "entity"
+                ? "Search entities..."
+                : "Search budget sections...",
+            predicate: sharedSearchMatches,
+          }}
+          searchAccessory={searchAccessory}
+          summaries={sharedProgrammeSummaries}
+          totalLabel="Total"
+          plotClassName={
+            usesSharedTrustFundExpenses
+              ? "h-[620px] sm:h-[720px] lg:h-[820px]"
+              : "h-[720px] sm:h-[900px] lg:h-[1200px]"
+          }
+          showLeafValues
+          formatValue={(value) => formatBudget(value)}
+          formatAccessibleValue={(value) => formatBudget(value)}
+          renderTooltip={(
+            context: GroupedTreemapTooltipContext<
+              BudgetNode,
+              BudgetNode,
+              SharedBudgetLeafData,
+              BudgetFundingSource
+            >,
+          ) => (
+            <div className="space-y-1">
+              <p className="text-sm font-semibold">{context.leaf.label}</p>
+              <p className="text-xs opacity-80">
+                {context.breadcrumb.join(" › ")}
+              </p>
+              <p className="text-xs font-medium">
+                {formatBudget(context.leaf.value)}
+              </p>
+              {(context.leaf.segments ?? []).map((segment) => (
+                <p
+                  key={segment.key}
+                  className="flex justify-between gap-4 text-xs"
+                >
+                  <span>{segment.label}</span>
+                  <span className="tabular-nums">
+                    {formatBudget(segment.value)}
+                  </span>
+                </p>
+              ))}
+              {context.leaf.data?.note && (
+                <p className="text-xs opacity-80">{context.leaf.data.note}</p>
+              )}
+              <p className="text-xs opacity-70">Click for details</p>
+            </div>
+          )}
+          emptyContent={
+            <div className="flex h-full items-center justify-center text-sm text-gray-500">
+              {activeFundingSources.length === 0
+                ? "Select at least one funding source."
+                : searchQuery.trim()
+                  ? `Nothing matches “${searchQuery}”.`
+                  : "No budget value is available for the selected controls."}
+            </div>
+          }
+          sources={sharedSources}
+          sourceHeading="Source:"
+        />
+
+        {usesSharedTrustFundExpenses &&
+          filteredData.nodes.some(
+            (node) => node.tier === "detail" && node.amount <= 0,
+          ) && (
+            <p className="mt-3 text-xs text-gray-500">
+              {
+                filteredData.nodes.filter(
+                  (node) => node.tier === "detail" && node.amount <= 0,
+                ).length
+              }{" "}
+              trust funds with zero or negative annual expenses remain in the
+              data but are omitted because they cannot be drawn as areas. The
+              displayed total is the sum of visible positive fund tiles.
+            </p>
+          )}
+
+        {meta.scopeWarning && (
+          <p className="mt-3 text-xs text-gray-500">{meta.scopeWarning}</p>
+        )}
+
+        {selected && (
+          <BudgetSidebar
+            node={selected}
+            parent={selected.parentId ? sidebarById[selected.parentId] : null}
+            childrenByParent={sidebarChildrenOf}
+            meta={filteredData.meta}
+            hashPrefix={hashPrefix}
+            dataset={dataset}
+            years={years}
+            onClose={() => {
+              setSelectedId(null);
+              clearSidebarHash();
+            }}
+          />
+        )}
+      </div>
+    );
+  }
 
   if (bands.length === 0) {
     return (
@@ -1783,6 +2499,26 @@ export function BudgetTreemap({
           ))}
         </div>
       </div>
+
+      {isAlignedPpb && headlineFundingSource && (
+        <p className="mt-3 text-xs text-gray-500">
+          Source:{" "}
+          {meta.documentUrl && meta.documentSymbol ? (
+            <a
+              href={meta.documentUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-un-blue hover:underline"
+            >
+              {meta.sourceEdition ? `PPB ${meta.sourceEdition} · ` : ""}
+              {meta.documentSymbol}
+              <ExternalLink className="h-3 w-3" />
+            </a>
+          ) : (
+            "budget fascicles"
+          )}
+        </p>
+      )}
 
       {/* Total, scope caveat and source */}
       {!headlineFundingSource && (

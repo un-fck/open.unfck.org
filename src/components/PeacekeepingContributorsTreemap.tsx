@@ -1,21 +1,18 @@
 "use client";
 
-import { ExternalLink } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
-import { PeacekeepingContributorSidebar } from "@/components/PeacekeepingContributorSidebar";
-import { ChartSearchInput } from "@/components/ui/chart-search-input";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+  GroupedTreemap,
+  type GroupedTreemapRow,
+  type GroupedTreemapTooltipContext,
+} from "@un-eosg/ui/components/grouped-treemap";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { PeacekeepingContributorSidebar } from "@/components/PeacekeepingContributorSidebar";
 import { YearSlider } from "@/components/YearSlider";
 import {
   clearSidebarHash,
   replaceToSidebar,
   useDeepLink,
 } from "@/hooks/useDeepLink";
-import { squarifyDense } from "@/lib/treemapLayout";
 import { useYearRanges } from "@/lib/useYearRanges";
 import type {
   PeacekeepingContributor,
@@ -35,6 +32,36 @@ function currency(value: number, compact = false): string {
 
 function cycleLabel(year: number): string {
   return `${year}/${String(year + 1).slice(-2)}`;
+}
+
+function matchesQuery(name: string, query: string): boolean {
+  return name.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase());
+}
+
+function ContributorTooltip({
+  context,
+}: {
+  context: GroupedTreemapTooltipContext<
+    "member-states",
+    never,
+    PeacekeepingContributor,
+    never
+  >;
+}) {
+  const contributor = context.leaf.data;
+  if (!contributor) return null;
+  return (
+    <div className="space-y-0.5">
+      <p className="text-sm font-semibold">{contributor.name}</p>
+      <p className="text-xs">
+        {currency(contributor.net_assessment)} net assessed
+      </p>
+      <p className="text-xs opacity-75">
+        {contributor.missions.length} mission account
+        {contributor.missions.length === 1 ? "" : "s"} · click for details
+      </p>
+    </div>
+  );
 }
 
 export function PeacekeepingContributorsTreemap() {
@@ -95,52 +122,61 @@ export function PeacekeepingContributorsTreemap() {
     return () => window.clearTimeout(id);
   }, [current, pending, setPending]);
 
-  const contributors = useMemo(() => {
-    if (!current) return [];
-    const needle = query.trim().toLocaleLowerCase();
-    return current.contributors
-      .filter(
-        (contributor) =>
-          contributor.net_assessment > 0 &&
-          (!needle || contributor.name.toLocaleLowerCase().includes(needle)),
-      )
-      .sort(
-        (a, b) =>
-          b.net_assessment - a.net_assessment || a.name.localeCompare(b.name),
-      );
-  }, [current, query]);
-  const rectangles = useMemo(
-    () =>
-      squarifyDense(
-        contributors.map((contributor) => ({
-          value: contributor.net_assessment,
-          data: contributor,
-        })),
-        0,
-        0,
-        100,
-        100,
-      ),
-    [contributors],
-  );
   const exceptionCount = current
     ? current.meta.verification.source_rate_anomalies.length +
       current.meta.verification.rows_derived_from_printed_totals.length
     : 0;
 
-  const open = (contributor: PeacekeepingContributor) => {
+  const open = useCallback((contributor: PeacekeepingContributor) => {
     setSelectedName(contributor.name);
     replaceToSidebar("peacekeeping-contributor", contributor.name);
-  };
+  }, []);
+  const positiveContributors = useMemo(
+    () =>
+      current?.contributors.filter(
+        (contributor) => contributor.net_assessment > 0,
+      ) ?? [],
+    [current],
+  );
+  const rows = useMemo(
+    () => [
+      {
+        key: "member-states",
+        label: "Member States",
+        color: "#009edb",
+        data: "member-states" as const,
+        leaves: positiveContributors
+          .slice()
+          .sort(
+            (a, b) =>
+              b.net_assessment - a.net_assessment ||
+              a.name.localeCompare(b.name),
+          )
+          .map((contributor) => ({
+            key: contributor.name,
+            label: contributor.name,
+            value: contributor.net_assessment,
+            color: "#009edb",
+            textColor: "var(--color-un-black)",
+            data: contributor,
+            onActivate: () => open(contributor),
+          })),
+      } satisfies GroupedTreemapRow<
+        "member-states",
+        never,
+        PeacekeepingContributor,
+        never
+      >,
+    ],
+    [open, positiveContributors],
+  );
+  const visibleTotal = positiveContributors
+    .filter((contributor) => matchesQuery(contributor.name, query))
+    .reduce((sum, contributor) => sum + contributor.net_assessment, 0);
 
   return (
     <div className="w-full">
-      <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-        <ChartSearchInput
-          value={query}
-          onChange={setQuery}
-          placeholder="Search Member States..."
-        />
+      <div className="mb-3 flex justify-end">
         <YearSlider
           years={years.years}
           selectedYear={year}
@@ -156,68 +192,56 @@ export function PeacekeepingContributorsTreemap() {
               Tile area represents each Member State&apos;s net assessed amount
             </span>
             <span>
-              {currency(current.meta.total_net_assessment, true)} net ·{" "}
               {current.meta.coverage.contributors} Member States ·{" "}
               {current.meta.coverage.missions} missions
             </span>
           </div>
 
-          <div className="relative h-[560px] w-full bg-gray-100 sm:h-[680px] lg:h-[780px]">
-            {rectangles.length > 0 ? (
-              rectangles.map((rectangle) => {
-                const contributor = rectangle.data;
-                const showName = rectangle.width > 4.5 && rectangle.height > 3;
-                const showAmount = rectangle.width > 7 && rectangle.height > 5;
-                return (
-                  <Tooltip key={contributor.name} delayDuration={60}>
-                    <TooltipTrigger asChild>
-                      <button
-                        type="button"
-                        onClick={() => open(contributor)}
-                        className="absolute overflow-hidden bg-un-blue text-left text-[#003B5C] shadow-[inset_0_0_0_0.5px_rgba(255,255,255,0.85)] transition-[left,top,width,height,filter] duration-700 hover:z-10 hover:brightness-110 focus-visible:z-20 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none focus-visible:ring-inset"
-                        style={{
-                          left: `${rectangle.x}%`,
-                          top: `${rectangle.y}%`,
-                          width: `${rectangle.width}%`,
-                          height: `${rectangle.height}%`,
-                        }}
-                        aria-label={`${contributor.name}: ${currency(contributor.net_assessment)} net assessed`}
-                      >
-                        {showName && (
-                          <span className="absolute inset-0 block overflow-hidden p-1.5 sm:p-2">
-                            <span className="block truncate text-[10px] leading-tight font-semibold sm:text-xs">
-                              {contributor.name}
-                            </span>
-                            {showAmount && (
-                              <span className="mt-0.5 block truncate text-[10px] opacity-90 sm:text-xs">
-                                {currency(contributor.net_assessment, true)}
-                              </span>
-                            )}
-                          </span>
-                        )}
-                      </button>
-                    </TooltipTrigger>
-                    <TooltipContent className="max-w-xs border border-slate-200 bg-white text-slate-800 shadow-lg">
-                      <p className="text-sm font-semibold">
-                        {contributor.name}
-                      </p>
-                      <p className="text-xs">
-                        {currency(contributor.net_assessment)} net assessed
-                      </p>
-                      <p className="text-xs text-slate-500">
-                        {contributor.missions.length} mission accounts · click
-                        for details
-                      </p>
-                    </TooltipContent>
-                  </Tooltip>
-                );
-              })
-            ) : (
+          <GroupedTreemap<
+            "member-states",
+            never,
+            PeacekeepingContributor,
+            never
+          >
+            rows={rows}
+            search={{
+              value: query,
+              onChange: setQuery,
+              label: "Search Member States",
+              placeholder: "Search Member States...",
+              predicate: (leafLabel, _subgroupLabel, _rowLabel, needle) =>
+                matchesQuery(leafLabel, needle),
+            }}
+            summaries={[
+              {
+                key: "visible-total",
+                label: query ? "Matching positive total" : "Positive total",
+                value: currency(visibleTotal, true),
+              },
+            ]}
+            totalLabel="Total"
+            plotClassName="h-[560px] sm:h-[680px] lg:h-[780px]"
+            formatValue={(value) => currency(value, true)}
+            formatAccessibleValue={(value) => currency(value)}
+            renderTooltip={(context) => (
+              <ContributorTooltip context={context} />
+            )}
+            emptyContent={
               <div className="flex h-full items-center justify-center text-sm text-gray-500">
                 No contributors match your search.
               </div>
-            )}
-          </div>
+            }
+            sources={[
+              {
+                key: "committee-on-contributions",
+                label: "Committee on Contributions source index",
+                href: current.meta.source_page,
+                openInNewTab: true,
+                newTabLabel: "opens in a new tab",
+              },
+            ]}
+            sourceHeading="Source:"
+          />
 
           <div className="mt-4 space-y-2 text-xs leading-relaxed text-gray-500">
             <p>
@@ -233,15 +257,6 @@ export function PeacekeepingContributorsTreemap() {
                 contributor sidebar and export explain how each was handled.
               </p>
             )}
-            <a
-              href={current.meta.source_page}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-un-blue hover:underline"
-            >
-              Committee on Contributions source index
-              <ExternalLink className="h-3 w-3" />
-            </a>
           </div>
         </>
       )}

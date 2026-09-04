@@ -1,13 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { ExternalLink } from "lucide-react";
-import { ChartSearchInput } from "@/components/ui/chart-search-input";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+  GroupedTreemap,
+  type GroupedTreemapRow,
+  type GroupedTreemapTooltipContext,
+} from "@un-eosg/ui/components/grouped-treemap";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { TrustFundContributorSidebar } from "@/components/TrustFundContributorSidebar";
 import { YearSlider } from "@/components/YearSlider";
 import {
@@ -16,7 +14,6 @@ import {
   useDeepLink,
 } from "@/hooks/useDeepLink";
 import { useYearRanges } from "@/lib/useYearRanges";
-import { layoutGroups, squarifyDense } from "@/lib/treemapLayout";
 import type { TrustFundContributor, TrustFundContributorsData } from "@/types";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
@@ -25,19 +22,19 @@ type ContributorGroup = "governments" | "other";
 
 const GROUP_STYLES: Record<
   ContributorGroup,
-  { label: string; tile: string; color: string }
+  { label: string; color: string; textColor: string }
 > = {
   governments: {
     label: "Governments",
-    tile: "bg-un-blue text-slate-950",
     color: "#009edb",
+    textColor: "#020617",
   },
   other: {
     label: "Other contributors",
-    tile: "bg-emerald-700 text-white",
     color: "#047857",
+    textColor: "#ffffff",
   },
-} as const;
+};
 
 function groupOf(contributor: TrustFundContributor): ContributorGroup {
   return contributor.counterparty_group === "Government"
@@ -52,6 +49,36 @@ function currency(value: number, compact = false): string {
     notation: compact ? "compact" : "standard",
     maximumFractionDigits: compact ? 1 : 0,
   }).format(value);
+}
+
+function matchesQuery(name: string, query: string): boolean {
+  return name.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase());
+}
+
+function ContributorTooltip({
+  context,
+}: {
+  context: GroupedTreemapTooltipContext<
+    ContributorGroup,
+    never,
+    TrustFundContributor,
+    never
+  >;
+}) {
+  const contributor = context.leaf.data;
+  if (!contributor) return null;
+  return (
+    <div className="space-y-0.5">
+      <p className="text-sm font-semibold">{contributor.name}</p>
+      <p className="text-xs">
+        {currency(contributor.amount_usd)} net recognized
+      </p>
+      <p className="text-xs opacity-75">
+        {contributor.destinations.length} destination fund
+        {contributor.destinations.length === 1 ? "" : "s"}
+      </p>
+    </div>
+  );
 }
 
 export function TrustFundContributorsTreemap() {
@@ -110,88 +137,66 @@ export function TrustFundContributorsTreemap() {
     return () => window.clearTimeout(id);
   }, [current, pending, setPending]);
 
-  const contributors = useMemo(() => {
-    if (!current) return [];
-    const needle = query.trim().toLocaleLowerCase();
-    return current.contributors.filter(
-      (contributor) =>
-        contributor.amount_usd > 0 &&
-        (!needle || contributor.name.toLocaleLowerCase().includes(needle)),
-    );
-  }, [current, query]);
-  const contributorGroups = useMemo(
+  const open = useCallback((contributor: TrustFundContributor) => {
+    setSelectedName(contributor.name);
+    replaceToSidebar("trust-fund-contributor", contributor.name);
+  }, []);
+  const positiveContributors = useMemo(
     () =>
-      (Object.keys(GROUP_STYLES) as ContributorGroup[])
-        .map((key) => {
-          const members = contributors
-            .filter((contributor) => groupOf(contributor) === key)
-            .sort(
-              (a, b) =>
-                b.amount_usd - a.amount_usd || a.name.localeCompare(b.name),
-            );
-          return {
-            key,
-            members,
-            total: members.reduce(
-              (sum, contributor) => sum + contributor.amount_usd,
-              0,
-            ),
-          };
-        })
-        .filter((group) => group.total > 0)
-        .sort((a, b) => b.total - a.total),
-    [contributors],
+      current?.contributors.filter(
+        (contributor) => contributor.amount_usd > 0,
+      ) ?? [],
+    [current],
   );
-  const groupRectangles = useMemo(
-    () =>
-      layoutGroups(
-        contributorGroups.map((group) => ({
-          key: group.key,
-          total: group.total,
-        })),
-        100,
-        100,
-        0.4,
-        5,
-      ).map((rectangle) => ({
-        ...rectangle,
-        data: contributorGroups.find((group) => group.key === rectangle.key)!,
-      })),
-    [contributorGroups],
-  );
-  const rectangles = useMemo(
-    () =>
-      groupRectangles.flatMap((groupRectangle) =>
-        squarifyDense(
-          groupRectangle.data.members.map((contributor) => ({
+  const rows = useMemo(() => {
+    const result = (Object.keys(GROUP_STYLES) as ContributorGroup[]).map(
+      (key) => {
+        const members = positiveContributors
+          .filter((contributor) => groupOf(contributor) === key)
+          .sort(
+            (a, b) =>
+              b.amount_usd - a.amount_usd || a.name.localeCompare(b.name),
+          );
+        return {
+          key,
+          label: GROUP_STYLES[key].label,
+          color: GROUP_STYLES[key].color,
+          data: key,
+          leaves: members.map((contributor) => ({
+            key: contributor.name,
+            label: contributor.name,
             value: contributor.amount_usd,
+            color: GROUP_STYLES[key].color,
+            textColor: GROUP_STYLES[key].textColor,
             data: contributor,
+            onActivate: () => open(contributor),
           })),
-          groupRectangle.x,
-          groupRectangle.y,
-          groupRectangle.width,
-          groupRectangle.height,
-        ),
-      ),
-    [groupRectangles],
-  );
+        } satisfies GroupedTreemapRow<
+          ContributorGroup,
+          never,
+          TrustFundContributor,
+          never
+        >;
+      },
+    );
+    return result
+      .filter((row) => row.leaves.length > 0)
+      .sort(
+        (a, b) =>
+          b.leaves.reduce((sum, leaf) => sum + leaf.value, 0) -
+          a.leaves.reduce((sum, leaf) => sum + leaf.value, 0),
+      );
+  }, [open, positiveContributors]);
+  const visibleTotal = positiveContributors
+    .filter((contributor) => matchesQuery(contributor.name, query))
+    .reduce((sum, contributor) => sum + contributor.amount_usd, 0);
   const nonPositiveCount =
     current?.contributors.filter((contributor) => contributor.amount_usd <= 0)
       .length ?? 0;
 
-  const open = (contributor: TrustFundContributor) => {
-    setSelectedName(contributor.name);
-    replaceToSidebar("trust-fund-contributor", contributor.name);
-  };
-
   return (
     <div className="w-full">
-      <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-        <ChartSearchInput
-          value={query}
-          onChange={setQuery}
-          placeholder="Search contributors..."
-        />
+      <div className="mb-3 flex justify-end">
         <YearSlider
           years={years.years}
           selectedYear={year}
@@ -203,13 +208,15 @@ export function TrustFundContributorsTreemap() {
         <>
           <div className="mb-3 flex flex-wrap items-center justify-between gap-2 text-xs text-gray-600">
             <div className="flex gap-4">
-              <span className="flex items-center gap-1.5">
-                <span className="h-3 w-3 rounded-sm bg-un-blue" /> Governments
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span className="h-3 w-3 rounded-sm bg-emerald-700" /> Other
-                contributors
-              </span>
+              {(Object.keys(GROUP_STYLES) as ContributorGroup[]).map((key) => (
+                <span key={key} className="flex items-center gap-1.5">
+                  <span
+                    className="h-3 w-3 rounded-sm"
+                    style={{ backgroundColor: GROUP_STYLES[key].color }}
+                  />
+                  {GROUP_STYLES[key].label}
+                </span>
+              ))}
             </div>
             <span>
               {currency(current.meta.contributor_total_usd, true)} named net ·{" "}
@@ -218,79 +225,51 @@ export function TrustFundContributorsTreemap() {
             </span>
           </div>
 
-          <div className="relative h-[560px] w-full bg-gray-100 sm:h-[680px] lg:h-[780px]">
-            {groupRectangles.map((rectangle) => {
-              const style = GROUP_STYLES[rectangle.data.key];
-              return (
-                <div
-                  key={`label-${rectangle.data.key}`}
-                  className="pointer-events-none absolute z-20 max-w-[60%] truncate bg-white/90 px-1.5 py-1 text-[10px] font-bold shadow-sm sm:text-xs"
-                  style={{
-                    left: `${rectangle.x}%`,
-                    top: `${rectangle.y}%`,
-                    color: style.color,
-                  }}
-                >
-                  {style.label}
-                </div>
-              );
-            })}
-            {rectangles.length > 0 ? (
-              rectangles.map((rectangle) => {
-                const contributor = rectangle.data;
-                const group = groupOf(contributor);
-                const showName = rectangle.width > 4.5 && rectangle.height > 3;
-                const showAmount = rectangle.width > 7 && rectangle.height > 5;
-                return (
-                  <Tooltip key={contributor.name} delayDuration={60}>
-                    <TooltipTrigger asChild>
-                      <button
-                        type="button"
-                        onClick={() => open(contributor)}
-                        className={`absolute overflow-hidden text-left shadow-[inset_0_0_0_0.5px_rgba(255,255,255,0.75)] transition-[left,top,width,height,filter] duration-700 hover:z-10 hover:brightness-110 focus-visible:z-20 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none focus-visible:ring-inset ${GROUP_STYLES[group].tile}`}
-                        style={{
-                          left: `${rectangle.x}%`,
-                          top: `${rectangle.y}%`,
-                          width: `${rectangle.width}%`,
-                          height: `${rectangle.height}%`,
-                        }}
-                        aria-label={`${contributor.name}: ${currency(contributor.amount_usd)}`}
-                      >
-                        {showName && (
-                          <span className="absolute inset-0 block overflow-hidden p-1.5 sm:p-2">
-                            <span className="block truncate text-[10px] leading-tight font-semibold sm:text-xs">
-                              {contributor.name}
-                            </span>
-                            {showAmount && (
-                              <span className="mt-0.5 block truncate text-[10px] opacity-90 sm:text-xs">
-                                {currency(contributor.amount_usd, true)}
-                              </span>
-                            )}
-                          </span>
-                        )}
-                      </button>
-                    </TooltipTrigger>
-                    <TooltipContent className="max-w-xs border border-slate-200 bg-white text-slate-800 shadow-lg">
-                      <p className="text-sm font-semibold">
-                        {contributor.name}
-                      </p>
-                      <p className="text-xs">
-                        {currency(contributor.amount_usd)} net recognized
-                      </p>
-                      <p className="text-xs text-slate-500">
-                        {contributor.destinations.length} destination fund
-                        {contributor.destinations.length === 1 ? "" : "s"}
-                      </p>
-                    </TooltipContent>
-                  </Tooltip>
-                );
-              })
-            ) : (
+          <GroupedTreemap<
+            ContributorGroup,
+            never,
+            TrustFundContributor,
+            never
+          >
+            rows={rows}
+            search={{
+              value: query,
+              onChange: setQuery,
+              label: "Search contributors",
+              placeholder: "Search contributors...",
+              predicate: (leafLabel, _subgroupLabel, _rowLabel, needle) =>
+                matchesQuery(leafLabel, needle),
+            }}
+            summaries={[
+              {
+                key: "visible-total",
+                label: query ? "Matching positive total" : "Positive total",
+                value: currency(visibleTotal, true),
+              },
+            ]}
+            totalLabel="Total"
+            plotClassName="h-[560px] sm:h-[680px] lg:h-[780px]"
+            formatValue={(value) => currency(value, true)}
+            formatAccessibleValue={(value) => currency(value)}
+            renderTooltip={(context) => (
+              <ContributorTooltip context={context} />
+            )}
+            emptyContent={
               <div className="flex h-full items-center justify-center text-sm text-gray-500">
                 No positive contributors match your search.
               </div>
-            )}
-          </div>
+            }
+            sources={[
+              {
+                key: "financial-statements",
+                label: current.meta.source.symbol,
+                href: current.meta.source.url,
+                openInNewTab: true,
+                newTabLabel: "opens in a new tab",
+              },
+            ]}
+            sourceHeading="Source:"
+          />
 
           <div className="mt-4 space-y-2 text-xs leading-relaxed text-gray-500">
             <p>
@@ -316,15 +295,6 @@ export function TrustFundContributorsTreemap() {
               {current.meta.unresolved_entity_amount_usd !== 0 &&
                 ` ${currency(current.meta.unresolved_entity_amount_usd)} of named contributions goes to funds whose entity mapping remains unresolved.`}
             </p>
-            <a
-              href={current.meta.source.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-un-blue hover:underline"
-            >
-              {current.meta.source.symbol}
-              <ExternalLink className="h-3 w-3" />
-            </a>
           </div>
         </>
       )}

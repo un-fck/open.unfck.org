@@ -1,5 +1,10 @@
 "use client";
 
+import {
+  GroupedTreemap,
+  type GroupedTreemapRow,
+  type GroupedTreemapTooltipContext,
+} from "@un-eosg/ui/components/grouped-treemap";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { DotDensityMap } from "@undp/data-viz/DotDensityMap";
 import { PeacekeepingMissionSidebar } from "@/components/PeacekeepingMissionSidebar";
@@ -17,7 +22,6 @@ import {
 } from "@/hooks/useDeepLink";
 import { loadStaticData, loadYearData } from "@/lib/data";
 import { formatBudget } from "@/lib/entities";
-import { layoutGroups, squarifyDense } from "@/lib/treemapLayout";
 import {
   COST_CLASS_BAND_COLORS,
   COST_CLASS_KEYS,
@@ -97,6 +101,11 @@ interface MissionRow {
   classes: Record<CostClassKey, number | null>;
   items: Record<CostClassKey, CostItem[]>;
   source: BudgetNode["source"];
+}
+
+interface MissionCostClassLeaf {
+  mission: MissionRow;
+  costClass: CostClassKey;
 }
 
 function buildRows(data: BudgetData, entities: SecretariatEntitiesData) {
@@ -279,24 +288,93 @@ function DistributionBar({
   );
 }
 
+function MissionCostClassTooltip({
+  context,
+}: {
+  context: GroupedTreemapTooltipContext<
+    MissionRow,
+    never,
+    MissionCostClassLeaf,
+    never
+  >;
+}) {
+  const leaf = context.leaf.data;
+  if (!leaf) return null;
+  const missing = COST_CLASS_KEYS.filter(
+    (key) => leaf.mission.classes[key] === null,
+  );
+  const zero = COST_CLASS_KEYS.filter(
+    (key) => leaf.mission.classes[key] === 0,
+  );
+  return (
+    <div className="space-y-1">
+      <p className="font-semibold">
+        {leaf.mission.code} · {leaf.mission.name}
+      </p>
+      <p>
+        {COST_CLASS_SHORT[leaf.costClass] ?? leaf.costClass}: {formatBudget(
+          context.leaf.value,
+        )}
+      </p>
+      {missing.length > 0 && (
+        <p className="opacity-75">
+          Not published: {missing
+            .map((key) => COST_CLASS_SHORT[key] ?? key)
+            .join(", ")}
+        </p>
+      )}
+      {zero.length > 0 && (
+        <p className="opacity-75">
+          Published as $0: {zero
+            .map((key) => COST_CLASS_SHORT[key] ?? key)
+            .join(", ")}
+        </p>
+      )}
+      <p className="opacity-75">Click for mission details</p>
+    </div>
+  );
+}
+
 function MissionCostClassTreemap({
   rows,
-  fiscalYear,
+  source,
   onOpen,
 }: {
   rows: MissionRow[];
-  fiscalYear: string;
+  source: BudgetData["meta"]["source"];
   onOpen: (code: string) => void;
 }) {
-  const groups = layoutGroups(
-    rows
-      .filter((row) => row.total > 0)
-      .map((row) => ({ key: row.code, total: row.total })),
-    100,
-    100,
-    0.4,
-    5,
-  );
+  const treemapRows = rows.flatMap((mission) => {
+    if (mission.total <= 0) return [];
+    const leaves = COST_CLASS_KEYS.flatMap((costClass) => {
+      const amount = mission.classes[costClass];
+      if (amount === null || amount <= 0) return [];
+      return [
+        {
+          key: costClass,
+          label: COST_CLASS_SHORT[costClass] ?? costClass,
+          value: amount,
+          color: COST_CLASS_BAND_COLORS[costClass]?.bg ?? "#6b7280",
+          data: { mission, costClass },
+          onActivate: () => onOpen(mission.code),
+        },
+      ];
+    });
+    return [
+      {
+        key: mission.code,
+        label: mission.code,
+        color: mission.kind === "support" ? SUPPORT_COLOR : FIELD_COLOR,
+        data: mission,
+        leaves,
+      } satisfies GroupedTreemapRow<
+        MissionRow,
+        never,
+        MissionCostClassLeaf,
+        never
+      >,
+    ];
+  });
 
   return (
     <div>
@@ -314,112 +392,32 @@ function MissionCostClassTreemap({
           </span>
         ))}
       </div>
-      <div
-        className="relative h-[34rem] w-full overflow-hidden bg-gray-100 sm:h-[42rem] lg:h-[48rem]"
-        aria-label={`Treemap of peacekeeping mission expenditure by cost class for ${fiscalYear}`}
+      <GroupedTreemap<
+        MissionRow,
+        never,
+        MissionCostClassLeaf,
+        never
       >
-        {groups.map((group) => {
-          const row = rows.find((candidate) => candidate.code === group.key)!;
-          const missingKeys = COST_CLASS_KEYS.filter(
-            (key) => row.classes[key] === null,
-          );
-          const zeroKeys = COST_CLASS_KEYS.filter(
-            (key) => row.classes[key] === 0,
-          );
-          const statusLabel = [
-            missingKeys.length > 0
-              ? `not published: ${missingKeys.map((key) => COST_CLASS_SHORT[key] ?? key).join(", ")}`
-              : null,
-            zeroKeys.length > 0
-              ? `published as zero: ${zeroKeys.map((key) => COST_CLASS_SHORT[key] ?? key).join(", ")}`
-              : null,
-          ]
-            .filter(Boolean)
-            .join("; ");
-          const classTiles = squarifyDense(
-            COST_CLASS_KEYS.flatMap((key) => {
-              const amount = row.classes[key];
-              return amount !== null && amount > 0
-                ? [{ value: amount, data: { key, amount } }]
-                : [];
-            }),
-            0,
-            0,
-            100,
-            100,
-          );
-          return (
-            <div
-              key={row.code}
-              className="absolute overflow-hidden ring-1 ring-white/80 ring-inset"
-              style={{
-                left: `${group.x}%`,
-                top: `${group.y}%`,
-                width: `${group.width}%`,
-                height: `${group.height}%`,
-              }}
-              role="group"
-              aria-label={`${row.code}, ${row.name}, ${formatBudget(row.total)}${statusLabel ? `; ${statusLabel}` : ""}`}
-            >
-              <button
-                type="button"
-                className="absolute top-0 left-0 z-10 max-w-[80%] truncate bg-white/90 px-1.5 py-1 text-left text-[10px] font-bold text-gray-900 shadow-sm sm:text-xs"
-                onClick={() => onOpen(row.code)}
-                title={`${row.code} — ${row.name}`}
-              >
-                {row.code} · {formatBudget(row.total)}
-              </button>
-              {(missingKeys.length > 0 || zeroKeys.length > 0) && (
-                <div className="pointer-events-none absolute top-0 right-0 z-10 flex max-w-[55%] flex-col items-end gap-0.5 p-1 text-[9px] leading-tight text-gray-700">
-                  {missingKeys.length > 0 && (
-                    <span
-                      className="bg-white/90 px-1 py-0.5 shadow-sm"
-                      title={`Not published: ${missingKeys.map((key) => COST_CLASS_SHORT[key] ?? key).join(", ")}`}
-                    >
-                      {missingKeys.length} not published
-                    </span>
-                  )}
-                  {zeroKeys.length > 0 && (
-                    <span
-                      className="bg-white/90 px-1 py-0.5 shadow-sm"
-                      title={`Published as $0: ${zeroKeys.map((key) => COST_CLASS_SHORT[key] ?? key).join(", ")}`}
-                    >
-                      {zeroKeys.length} published $0
-                    </span>
-                  )}
-                </div>
-              )}
-              {classTiles.map((tile) => {
-                const label = COST_CLASS_SHORT[tile.data.key] ?? tile.data.key;
-                return (
-                  <button
-                    key={`${row.code}-${tile.data.key}`}
-                    type="button"
-                    className="absolute overflow-hidden text-left text-white ring-1 ring-white/70 transition-[filter] ring-inset hover:brightness-90 focus:z-20 focus:outline-2 focus:outline-offset-[-2px] focus:outline-white"
-                    style={{
-                      left: `${tile.x}%`,
-                      top: `${tile.y}%`,
-                      width: `${tile.width}%`,
-                      height: `${tile.height}%`,
-                      backgroundColor:
-                        COST_CLASS_BAND_COLORS[tile.data.key]?.bg ?? "#6b7280",
-                    }}
-                    onClick={() => onOpen(row.code)}
-                    aria-label={`${row.code}, ${label}, ${formatBudget(tile.data.amount)}`}
-                    title={`${row.code} · ${label} · ${formatBudget(tile.data.amount)}`}
-                  >
-                    {tile.width > 18 && tile.height > 16 && (
-                      <span className="absolute right-1.5 bottom-1.5 left-1.5 truncate text-[10px] font-medium sm:text-xs">
-                        {label}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          );
-        })}
-      </div>
+        rows={treemapRows}
+        totalLabel="Total"
+        plotClassName="h-[34rem] sm:h-[42rem] lg:h-[48rem]"
+        formatValue={(value) => formatBudget(value)}
+        formatAccessibleValue={(value) => formatBudget(value)}
+        showLeafValues
+        renderTooltip={(context) => (
+          <MissionCostClassTooltip context={context} />
+        )}
+        sources={[
+          {
+            key: source.release,
+            label: `${source.repo} · ${source.release}`,
+            href: source.url,
+            openInNewTab: true,
+            newTabLabel: "opens in a new tab",
+          },
+        ]}
+        sourceHeading="Source:"
+      />
       <p className="mt-2 max-w-3xl text-xs leading-relaxed text-gray-500">
         Mission area represents total expenditure; each mission is subdivided by
         published cost class. A missing class is not treated as zero, and
@@ -537,7 +535,7 @@ export function PeacekeepingBudgetView() {
         </h3>
         <MissionCostClassTreemap
           rows={rows}
-          fiscalYear={current.meta.fiscalYear}
+          source={current.meta.source}
           onOpen={openMission}
         />
         <ClickHint text="Click a mission or cost class for details" />

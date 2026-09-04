@@ -11,6 +11,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import type { LabelProps } from "recharts";
 import type { RegularBudgetContributorsData } from "@/types";
 
 interface TimelinePoint {
@@ -35,6 +36,23 @@ function dateLabel(timestamp: number): string {
     day: "numeric",
     timeZone: "UTC",
   }).format(new Date(timestamp));
+}
+
+function PaymentDeadlineLabel({ viewBox }: LabelProps) {
+  if (!viewBox || !("x" in viewBox) || !("y" in viewBox)) return null;
+  const height = "height" in viewBox ? viewBox.height : 0;
+  return (
+    <text
+      x={viewBox.x + 6}
+      y={viewBox.y + height * 0.25}
+      fill="#004987"
+      fontSize={11}
+      textAnchor="start"
+      dominantBaseline="middle"
+    >
+      Payment deadline
+    </text>
+  );
 }
 
 export function RegularBudgetPaymentTimeline({
@@ -90,18 +108,7 @@ export function RegularBudgetPaymentTimeline({
   const finalPoint = points.at(-1);
 
   return (
-    <div
-      id="regular-budget-payment-timing"
-      className="mt-8 border-t border-gray-200 pt-4"
-    >
-      <h3 className="mb-4 text-lg font-medium text-gray-900">
-        When were programme-budget assessments paid in full?
-      </h3>
-      <p className="mb-4 max-w-3xl text-sm leading-relaxed text-gray-600">
-        The curve adds a Member State&apos;s full assessment on the date it
-        appears as paid in full. Partial payments are not available from the
-        honour roll and are therefore not estimated.
-      </p>
+    <div id="regular-budget-payment-timing">
       <div
         className="h-80 w-full"
         role="img"
@@ -165,12 +172,7 @@ export function RegularBudgetPaymentTimeline({
               x={dueDate}
               stroke="#004987"
               strokeDasharray="5 4"
-              label={{
-                value: "Payment deadline",
-                position: "insideTopRight",
-                fill: "#004987",
-                fontSize: 11,
-              }}
+              label={{ content: PaymentDeadlineLabel }}
             />
             <ReferenceLine
               y={100}

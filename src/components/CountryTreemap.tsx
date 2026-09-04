@@ -1,13 +1,13 @@
 "use client";
 
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+  GroupedTreemap,
+  type GroupedTreemapRow,
+  type GroupedTreemapTooltipContext,
+} from "@un-eosg/ui/components/grouped-treemap";
 import { ClickHint } from "@/components/ui/ClickHint";
 import { formatBudget } from "@/lib/entities";
-import { getRegionStyle, regionStyles } from "@/lib/regionGroupings";
+import { getRegionStyle } from "@/lib/regionGroupings";
 
 interface CountryExpense {
   iso3: string;
@@ -19,221 +19,137 @@ interface CountryExpense {
   entities: Record<string, number>;
 }
 
-interface Rect {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}
-
-interface TreemapItem {
-  value: number;
-  data: CountryExpense;
-}
-
-interface RegionTreemapItem {
-  value: number;
-  region: string;
-  countries: TreemapItem[];
-}
-
-const GAP = 0.15;
-
-function squarify(
-  items: { value: number }[],
-  x: number,
-  y: number,
-  width: number,
-  height: number
-): Rect[] {
-  const total = items.reduce((sum, item) => sum + item.value, 0);
-  if (total === 0 || items.length === 0) return [];
-
-  const normalized = items.map((item) => ({
-    ...item,
-    normalizedValue: (item.value / total) * width * height,
-  }));
-
-  return slice(normalized, x, y, width, height);
-}
-
-function slice(
-  items: { normalizedValue: number }[],
-  x: number,
-  y: number,
-  width: number,
-  height: number
-): Rect[] {
-  if (items.length === 0) return [];
-  if (items.length === 1) {
-    return [{ x, y, width, height }];
-  }
-
-  const total = items.reduce((sum, item) => sum + item.normalizedValue, 0);
-
-  let sum = 0;
-  let splitIndex = 0;
-  for (let i = 0; i < items.length; i++) {
-    sum += items[i].normalizedValue;
-    if (sum >= total / 2) {
-      splitIndex = i + 1;
-      break;
-    }
-  }
-  splitIndex = Math.max(1, Math.min(splitIndex, items.length - 1));
-
-  const leftItems = items.slice(0, splitIndex);
-  const rightItems = items.slice(splitIndex);
-
-  const leftSum = leftItems.reduce(
-    (sum, item) => sum + item.normalizedValue,
-    0
-  );
-
-  if (width >= height) {
-    const leftWidth = width * (leftSum / total) - GAP / 2;
-    return [
-      ...slice(leftItems, x, y, leftWidth, height),
-      ...slice(
-        rightItems,
-        x + leftWidth + GAP,
-        y,
-        width - leftWidth - GAP,
-        height
-      ),
-    ];
-  } else {
-    const leftHeight = height * (leftSum / total) - GAP / 2;
-    return [
-      ...slice(leftItems, x, y, width, leftHeight),
-      ...slice(
-        rightItems,
-        x,
-        y + leftHeight + GAP,
-        width,
-        height - leftHeight - GAP
-      ),
-    ];
-  }
-}
-
 interface CountryTreemapProps {
   data: CountryExpense[];
+  searchQuery: string;
+  onSearchChange: (value: string) => void;
   onCountryClick: (country: CountryExpense) => void;
 }
 
-export function CountryTreemap({ data, onCountryClick }: CountryTreemapProps) {
-  // Group countries by region
-  const regionGroups = data.reduce(
-    (acc, country) => {
-      const region = country.region || "Unknown";
-      if (!acc[region]) {
-        acc[region] = [];
-      }
-      acc[region].push({ value: country.total, data: country });
-      return acc;
-    },
-    {} as Record<string, TreemapItem[]>
+function matchesCountry(country: CountryExpense, query: string): boolean {
+  const term = query.trim().toLocaleLowerCase();
+  return (
+    !term ||
+    country.name.toLocaleLowerCase().includes(term) ||
+    country.region.toLocaleLowerCase().includes(term) ||
+    country.iso3.toLocaleLowerCase().includes(term)
   );
+}
 
-  // Create region items with totals
-  const regionItems: RegionTreemapItem[] = Object.entries(regionGroups)
-    .map(([region, countries]) => ({
-      region,
-      value: countries.reduce((sum, c) => sum + c.value, 0),
-      countries: countries.sort((a, b) => b.value - a.value),
-    }))
-    .sort((a, b) => {
-      const orderA = getRegionStyle(a.region).order;
-      const orderB = getRegionStyle(b.region).order;
-      return orderA - orderB;
-    });
+function formatAccessibleBudget(value: number): string {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(value);
+}
 
-  // Calculate region rectangles
-  const regionRects = squarify(regionItems, 0, 0, 100, 100);
+function CountryTooltip({
+  context,
+}: {
+  context: GroupedTreemapTooltipContext<string, never, CountryExpense, never>;
+}) {
+  const country = context.leaf.data;
+  if (!country) return null;
+  const region = getRegionStyle(country.region || "Unknown");
 
   return (
-    <div className="relative h-[650px] w-full bg-gray-100">
-      {regionItems.map((regionItem, regionIndex) => {
-        const regionRect = regionRects[regionIndex];
-        if (!regionRect) return null;
-
-        const styles = getRegionStyle(regionItem.region);
-
-        // Calculate country rectangles within this region
-        const countryRects = squarify(
-          regionItem.countries,
-          regionRect.x,
-          regionRect.y,
-          regionRect.width,
-          regionRect.height
-        );
-
-        return regionItem.countries.map((countryItem, countryIndex) => {
-          const countryRect = countryRects[countryIndex];
-          if (!countryRect) return null;
-
-          const showLabel = countryRect.width > 4 && countryRect.height > 3;
-
-          return (
-            <Tooltip
-              key={countryItem.data.iso3}
-              delayDuration={50}
-              disableHoverableContent
-            >
-              <TooltipTrigger asChild>
-                <div
-                  className={`absolute cursor-pointer transition-[left,top,width,height] duration-[1400ms] ease-in-out hover:ring-2 hover:ring-white/60 hover:brightness-110 ${styles.bgColor} ${styles.textColor}`}
-                  style={{
-                    left: `${countryRect.x}%`,
-                    top: `${countryRect.y}%`,
-                    width: `${countryRect.width}%`,
-                    height: `${countryRect.height}%`,
-                  }}
-                  onClick={() => onCountryClick(countryItem.data)}
-                >
-                  {showLabel && (
-                    <div className="h-full overflow-hidden p-1">
-                      <div className="truncate text-xs font-medium leading-tight">
-                        {countryItem.data.name}
-                      </div>
-                      <div className="truncate text-xs leading-tight opacity-70">
-                        {formatBudget(countryItem.data.total)}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </TooltipTrigger>
-              <TooltipContent
-                side="top"
-                sideOffset={8}
-                className="max-w-xs border border-slate-200 bg-white text-slate-800 shadow-lg sm:max-w-sm"
-                hideWhenDetached
-                avoidCollisions={true}
-                collisionPadding={12}
-              >
-                <div className="max-w-xs p-1 text-center sm:max-w-sm">
-                  <p className="text-xs font-medium leading-tight sm:text-sm">
-                    {countryItem.data.name}
-                  </p>
-                  <div className="mt-1 flex items-center justify-center gap-1.5">
-                    <div
-                      className={`h-2 w-2 rounded-full ${styles.bgColor}`}
-                    />
-                    <span className="text-xs text-slate-500">
-                      {styles.label}
-                    </span>
-                  </div>
-                  <p className="mt-1 text-xs font-semibold text-slate-600">
-                    {formatBudget(countryItem.data.total)}
-                  </p>
-                  <ClickHint />
-                </div>
-              </TooltipContent>
-            </Tooltip>
-          );
-        });
-      })}
+    <div className="space-y-1 text-center">
+      <p className="text-sm font-semibold">{country.name}</p>
+      <div className="flex items-center justify-center gap-1.5 text-xs opacity-75">
+        <span
+          className="h-2 w-2 rounded-full"
+          style={{ backgroundColor: region.color }}
+        />
+        <span>{region.label}</span>
+      </div>
+      <p className="text-xs font-semibold">
+        {formatAccessibleBudget(country.total)}
+      </p>
+      <ClickHint />
     </div>
+  );
+}
+
+export function CountryTreemap({
+  data,
+  searchQuery,
+  onSearchChange,
+  onCountryClick,
+}: CountryTreemapProps) {
+  const positiveCountries = data.filter(
+    (country) => Number.isFinite(country.total) && country.total > 0,
+  );
+  const countriesByName = new Map(
+    positiveCountries.map((country) => [country.name, country]),
+  );
+  const regionGroups = positiveCountries.reduce<
+    Record<string, CountryExpense[]>
+  >((groups, country) => {
+    const region = country.region || "Unknown";
+    (groups[region] ??= []).push(country);
+    return groups;
+  }, {});
+  const rows = Object.entries(regionGroups)
+    .sort(([regionA], [regionB]) => {
+      const orderDifference =
+        getRegionStyle(regionA).order - getRegionStyle(regionB).order;
+      return orderDifference || regionA.localeCompare(regionB);
+    })
+    .map(([region, countries]) => {
+      const style = getRegionStyle(region);
+      return {
+        key: region,
+        label: style.label,
+        color: style.color,
+        data: region,
+        leaves: countries
+          .sort((a, b) => b.total - a.total || a.name.localeCompare(b.name))
+          .map((country) => ({
+            key: country.iso3,
+            label: country.name,
+            value: country.total,
+            color: style.color,
+            data: country,
+            onActivate: () => onCountryClick(country),
+          })),
+      } satisfies GroupedTreemapRow<string, never, CountryExpense, never>;
+    });
+  const visibleTotal = positiveCountries
+    .filter((country) => matchesCountry(country, searchQuery))
+    .reduce((sum, country) => sum + country.total, 0);
+
+  return (
+    <GroupedTreemap<string, never, CountryExpense, never>
+      rows={rows}
+      search={{
+        value: searchQuery,
+        onChange: onSearchChange,
+        label: "Search countries",
+        placeholder: "Search by country or region...",
+        predicate: (leafLabel, _subgroupLabel, _rowLabel, query) => {
+          const country = countriesByName.get(leafLabel);
+          return country ? matchesCountry(country, query) : false;
+        },
+      }}
+      summaries={[
+        {
+          key: "visible-total",
+          label: searchQuery.trim() ? "Matching total" : "Total",
+          value: formatBudget(visibleTotal),
+        },
+      ]}
+      totalLabel="Total"
+      layout={{ rowOrder: "input" }}
+      plotClassName="h-[650px]"
+      formatValue={formatBudget}
+      formatAccessibleValue={formatAccessibleBudget}
+      renderTooltip={(context) => <CountryTooltip context={context} />}
+      emptyContent={
+        <div className="flex h-full items-center justify-center text-lg text-gray-500">
+          No countries match the search criteria
+        </div>
+      }
+    />
   );
 }

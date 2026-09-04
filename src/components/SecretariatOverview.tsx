@@ -1,12 +1,16 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import {
+  GroupedTreemap,
+  type GroupedTreemapLeaf,
+  type GroupedTreemapRow,
+} from "@un-eosg/ui/components/grouped-treemap";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   FundingSourcePills,
   toggleFundingSource,
 } from "@/components/FundingSourcePills";
 import { SecretariatEntitySidebar } from "@/components/SecretariatEntitySidebar";
-import { ChartSearchInput } from "@/components/ui/chart-search-input";
 import { YearSlider } from "@/components/YearSlider";
 import {
   clearSidebarHash,
@@ -16,14 +20,13 @@ import {
 import { formatBudget } from "@/lib/entities";
 import {
   BUDGET_FUNDING_SOURCES,
-  FUNDING_SOURCES,
   type BudgetFundingSource,
 } from "@/lib/budgetGroupings";
 import { SecretariatOverviewTrends } from "@/components/SecretariatOverviewTrends";
 import { priorityAreaColor } from "@/lib/secretariatGroupings";
-import { layoutGroups, squarifyDense } from "@/lib/treemapLayout";
 import { useYearRanges } from "@/lib/useYearRanges";
 import type {
+  SecretariatGroup,
   SecretariatOverviewCell,
   SecretariatOverviewData,
   SecretariatOverviewEntity,
@@ -97,13 +100,15 @@ export function SecretariatOverview() {
   }, [current, pending, setPending]);
 
   const fundingSet = useMemo(() => new Set(activeFunding), [activeFunding]);
+  const openEntity = useCallback((entity: SecretariatOverviewEntity) => {
+    setSelectedCode(entity.code);
+    replaceToSidebar("secretariat-entity", entity.code);
+  }, []);
 
   const tiles = useMemo<OverviewTile[]>(() => {
     if (!current) return [];
-    const needle = query.trim().toLocaleLowerCase();
     const built: OverviewTile[] = [];
     for (const entity of current.entities) {
-      if (needle && !entity.code.toLocaleLowerCase().includes(needle)) continue;
       const baseCells = entity.cells.filter((cell) =>
         fundingSet.has(cell.funding_source),
       );
@@ -134,35 +139,84 @@ export function SecretariatOverview() {
       }
     }
     return built;
-  }, [current, fundingSet, query]);
+  }, [current, fundingSet]);
 
-  const groups = useMemo(() => {
+  const rows = useMemo(() => {
     if (!current) return [];
+    const builtRows: GroupedTreemapRow<
+      string,
+      SecretariatGroup,
+      OverviewTile,
+      never
+    >[] = [];
     const grouped = new Map<string, OverviewTile[]>();
     for (const tile of tiles) {
       const list = grouped.get(tile.placement) ?? [];
       list.push(tile);
       grouped.set(tile.placement, list);
     }
-    return current.meta.priorities
-      .map((name) => {
-        const groupTiles = grouped.get(name) ?? [];
-        return {
-          name,
-          tiles: groupTiles,
-          total: groupTiles.reduce((sum, tile) => sum + tile.value, 0),
-        };
-      })
-      .filter((item) => item.total > 0)
-      .sort((a, b) => b.total - a.total || a.name.localeCompare(b.name));
-  }, [current, tiles]);
+    for (const name of current.meta.priorities) {
+      const groupTiles = grouped.get(name) ?? [];
+      if (groupTiles.length === 0) continue;
+      const sortedTiles = [...groupTiles].sort(
+        (a, b) => b.value - a.value || a.id.localeCompare(b.id),
+      );
+      const toLeaf = (
+        tile: OverviewTile,
+      ): GroupedTreemapLeaf<OverviewTile, never> => ({
+        key: tile.id,
+        label: tile.entity.code === "STA" ? "Staff Assessment" : tile.entity.code,
+        value: tile.value,
+        data: tile,
+        onActivate: () => openEntity(tile.entity),
+      });
+      const base = {
+        key: name,
+        label: name,
+        color: priorityAreaColor(name),
+        data: name,
+      };
 
-  const groupRects = layoutGroups(
-    groups.map((item) => ({ key: item.name, total: item.total })),
-    100,
-    100,
-    0.4,
-    5,
+      if (name !== PEACE_AND_SECURITY_PRIORITY) {
+        builtRows.push({ ...base, leaves: sortedTiles.map(toLeaf) });
+        continue;
+      }
+
+      const subgroupOrder: SecretariatGroup[] = ["pko", "spm", "other"];
+      builtRows.push({
+        ...base,
+        subgroups: subgroupOrder.flatMap((key) => {
+          const subgroupTiles = sortedTiles.filter((tile) =>
+            key === "other"
+              ? tile.entity.group !== "pko" && tile.entity.group !== "spm"
+              : tile.entity.group === key,
+          );
+          return subgroupTiles.length > 0
+            ? [{
+                key,
+                label:
+                  key === "other"
+                    ? "Other peace and security entities"
+                    : current.meta.groups[key].label,
+                data: key,
+                labelVisibility: "tooltip-only" as const,
+                leaves: subgroupTiles.map(toLeaf),
+              }]
+            : [];
+        }),
+      });
+    }
+    return builtRows;
+  }, [current, openEntity, tiles]);
+  const entityCodeByLabel = useMemo(
+    () =>
+      new Map(
+        tiles.map((tile) => [
+          tile.entity.code === "STA" ? "Staff Assessment" : tile.entity.code,
+          tile.entity.code,
+        ]),
+      ),
+    [tiles],
   );
 
   if (!current && !error) {
@@ -200,158 +254,28 @@ export function SecretariatOverview() {
         />
       </div>
 
-      <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-        <ChartSearchInput
-          value={query}
-          onChange={setQuery}
-          placeholder="Search entities..."
-        />
-        <span className="text-xs text-gray-600">
-          {tiles.length} tile{tiles.length === 1 ? "" : "s"} · tile area uses
-          entity total
-          {activeFunding.length < BUDGET_FUNDING_SOURCES.length
-            ? ` for ${activeFunding.map((source) => FUNDING_SOURCES[source].label).join(", ")}`
-            : ""}
-        </span>
-      </div>
-
-      <div className="relative h-[720px] w-full overflow-hidden bg-gray-100">
-        {groupRects.map((groupRect) => {
-          const priorityGroup = groups.find(
-            (item) => item.name === groupRect.key,
-          )!;
-          const sortedTiles = [...priorityGroup.tiles].sort(
-            (a, b) => b.value - a.value || a.id.localeCompare(b.id),
-          );
-          const peaceSubgroups =
-            priorityGroup.name === PEACE_AND_SECURITY_PRIORITY
-              ? (["pko", "spm", "other"] as const)
-                  .map((key) => {
-                    const subgroupTiles = sortedTiles.filter((tile) =>
-                      key === "other"
-                        ? tile.entity.group !== "pko" &&
-                          tile.entity.group !== "spm"
-                        : tile.entity.group === key,
-                    );
-                    return {
-                      key,
-                      tiles: subgroupTiles,
-                      total: subgroupTiles.reduce(
-                        (sum, tile) => sum + tile.value,
-                        0,
-                      ),
-                    };
-                  })
-                  .filter((subgroup) => subgroup.total > 0)
-              : [];
-          const subgroupRects = squarifyDense(
-            peaceSubgroups.map((subgroup) => ({
-              value: subgroup.total,
-              data: subgroup,
-            })),
-            groupRect.x,
-            groupRect.y,
-            groupRect.width,
-            groupRect.height,
-          );
-          const rects =
-            subgroupRects.length > 0
-              ? subgroupRects.flatMap((subgroupRect) =>
-                  squarifyDense(
-                    subgroupRect.data.tiles.map((tile) => ({
-                      value: tile.value,
-                      data: tile,
-                    })),
-                    subgroupRect.x,
-                    subgroupRect.y,
-                    subgroupRect.width,
-                    subgroupRect.height,
-                  ),
-                )
-              : squarifyDense(
-                  sortedTiles.map((tile) => ({
-                    value: tile.value,
-                    data: tile,
-                  })),
-                  groupRect.x,
-                  groupRect.y,
-                  groupRect.width,
-                  groupRect.height,
-                );
-          const color = priorityAreaColor(priorityGroup.name);
-          return (
-            <div key={priorityGroup.name}>
-              <div
-                className="pointer-events-none absolute z-20 max-w-[60%] truncate bg-white/90 px-1.5 py-1 text-[10px] font-bold shadow-sm sm:text-xs"
-                style={{
-                  left: `${groupRect.x}%`,
-                  top: `${groupRect.y}%`,
-                  color,
-                }}
-              >
-                {priorityGroup.name}
-              </div>
-              {rects.map((rect) => {
-                const tile = rect.data;
-                const showName = rect.width > 4 && rect.height > 3;
-                const title = `${tile.entity.code}: ${formatBudget(tile.value)}`;
-                return (
-                  <button
-                    key={tile.id}
-                    type="button"
-                    title={title}
-                    aria-label={title}
-                    onClick={() => {
-                      setSelectedCode(tile.entity.code);
-                      replaceToSidebar("secretariat-entity", tile.entity.code);
-                    }}
-                    className="absolute overflow-hidden text-left text-white transition-[filter] hover:z-10 hover:brightness-90 focus-visible:z-20 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none focus-visible:ring-inset"
-                    style={{
-                      left: `${rect.x}%`,
-                      top: `${rect.y}%`,
-                      width: `${rect.width}%`,
-                      height: `${rect.height}%`,
-                      backgroundColor: color,
-                    }}
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="pointer-events-none absolute inset-0 z-[1] shadow-[inset_0_0_0_0.5px_rgba(255,255,255,0.8)]"
-                    />
-                    {showName && (
-                      <span className="relative z-[2] flex h-full items-end overflow-hidden p-1.5 text-[10px] leading-tight drop-shadow-sm sm:p-2 sm:text-xs">
-                        <span className="block truncate font-semibold">
-                          {tile.entity.code === "STA"
-                            ? "Staff Assessment"
-                            : tile.entity.code}
-                        </span>
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-              {subgroupRects.map((subgroupRect) => (
-                <div
-                  key={`${priorityGroup.name}-${subgroupRect.data.key}`}
-                  aria-hidden="true"
-                  className="pointer-events-none absolute z-[5] shadow-[inset_0_0_0_1.5px_rgba(255,255,255,0.95)]"
-                  style={{
-                    left: `${subgroupRect.x}%`,
-                    top: `${subgroupRect.y}%`,
-                    width: `${subgroupRect.width}%`,
-                    height: `${subgroupRect.height}%`,
-                  }}
-                />
-              ))}
-            </div>
-          );
-        })}
-        {tiles.length === 0 && (
+      <GroupedTreemap<string, SecretariatGroup, OverviewTile, never>
+        rows={rows}
+        search={{
+          value: query,
+          onChange: setQuery,
+          label: "Search entities",
+          placeholder: "Search entities...",
+          predicate: (leafLabel, _subgroupLabel, _rowLabel, needle) =>
+            (entityCodeByLabel.get(leafLabel) ?? leafLabel)
+              .toLocaleLowerCase()
+              .includes(needle.trim().toLocaleLowerCase()),
+        }}
+        totalLabel="Total"
+        height={720}
+        formatValue={formatBudget}
+        formatAccessibleValue={formatBudget}
+        emptyContent={
           <div className="flex h-full items-center justify-center text-sm text-gray-500">
             No entities match the active filters.
           </div>
-        )}
-      </div>
+        }
+      />
 
       <div className="mt-4 space-y-1 text-xs leading-relaxed text-gray-500">
         <p>
@@ -376,6 +300,7 @@ export function SecretariatOverview() {
           entity={selectedEntity}
           year={year}
           groupLabel={current.meta.groups[selectedEntity.group].label}
+          source={current.meta.source}
           selectedPriority={null}
           onClose={() => {
             setSelectedCode(null);

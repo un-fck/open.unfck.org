@@ -6,43 +6,51 @@ import organizationTaxonomies from "../../data/organization-taxonomies.json";
 export interface RegionStyle {
   bgColor: string;
   textColor: string;
+  color: string;
   order: number;
   label: string;
 }
 
 const regionVisuals: Record<
   string,
-  Pick<RegionStyle, "bgColor" | "textColor">
+  Pick<RegionStyle, "bgColor" | "textColor" | "color">
 > = {
   Africa: {
     bgColor: "bg-camouflage-green",
     textColor: "text-white",
+    color: "#7d8471",
   },
   Asia: {
     bgColor: "bg-au-chico",
     textColor: "text-white",
+    color: "#a0665c",
   },
   Americas: {
     bgColor: "bg-smoky",
     textColor: "text-white",
+    color: "#6c5b7b",
   },
   Europe: {
     bgColor: "bg-shuttle-gray",
     textColor: "text-white",
+    color: "#5a6c7d",
   },
   Oceania: {
     bgColor: "bg-trout",
     textColor: "text-white",
+    color: "#495057",
   },
   "Global and Interregional": {
     bgColor: "bg-gray-500",
     textColor: "text-white",
+    color: "#6b7280",
   },
 };
 
 const fallbackVisual = {
   bgColor: "bg-gray-400",
   textColor: "text-white",
+  color: "#9ca3af",
 };
 
 export const regionStyles: Record<string, RegionStyle> = Object.fromEntries(
@@ -61,6 +69,7 @@ export function getRegionStyle(region: string): RegionStyle {
     regionStyles[region] || {
       bgColor: "bg-gray-400",
       textColor: "text-white",
+      color: "#9ca3af",
       order: 999,
       label: region,
     }

@@ -4,7 +4,10 @@ import { ExternalLink } from "lucide-react";
 import { SidebarControls } from "@/components/SidebarControls";
 import { useCallback, useEffect, useState } from "react";
 import { Entity, Impact, EntityRevenue, CountryExpense, EntitySpendingBreakdown } from "@/types";
-import { getSystemGroupingStyle } from "@/lib/systemGroupings";
+import {
+  getPrincipalOrganBadgeColor,
+  normalizePrincipalOrgans,
+} from "@/lib/principalOrgans";
 import { formatBudget } from "@/lib/entities";
 import { getContributionTypeBgColor, getContributionTypeOrder } from "@/lib/contributors";
 import { FinancingInstrumentLabel } from "@/components/FinancingInstrumentLabel";
@@ -230,7 +233,7 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
 
   if (!entity) return null;
 
-  const groupingStyle = getSystemGroupingStyle(entity.system_grouping || "");
+  const principalOrgans = normalizePrincipalOrgans(entity.un_principal_organ);
   const description = entity.entity_description || entity.entity_long || "";
 
   // Process revenue breakdown by financing instrument (use year-specific data)
@@ -296,18 +299,23 @@ export function EntitySidebar({ entity, spending, revenue, initialYear, onClose 
                 {loadingYear && <span className="text-xs text-gray-400">Loading...</span>}
               </div>
             </div>
-            <div>
-              <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
-                System Grouping
-              </span>
-              <div className="mt-0.5">
-                <span
-                  className={`inline-block rounded-full px-3 py-1 text-sm font-medium ${groupingStyle.bgColor} ${groupingStyle.textColor}`}
-                >
-                  {groupingStyle.label}
+            {principalOrgans.length > 0 && (
+              <div>
+                <span className="text-sm font-normal uppercase tracking-wide text-gray-600">
+                  UN Principal Organ
                 </span>
+                <div className="mt-0.5 flex flex-wrap gap-1.5">
+                  {principalOrgans.map((principalOrgan) => (
+                    <span
+                      key={principalOrgan}
+                      className={`inline-block rounded-full px-3 py-1 text-sm font-medium text-black ${getPrincipalOrganBadgeColor(principalOrgan)}`}
+                    >
+                      {principalOrgan}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {description && (
               <div className="mt-3">

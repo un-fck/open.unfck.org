@@ -19,7 +19,10 @@ import {
   HierarchicalGroup as SingleSelectGroup,
 } from "@/components/ui/hierarchical-single-select";
 import { formatBudget } from "@/lib/entities";
-import { getSystemGroupingStyle } from "@/lib/systemGroupings";
+import {
+  getSortedSystemGroupings,
+  getSystemGroupingStyle,
+} from "@/lib/systemGroupings";
 
 // Colors for the revenue vs expenses chart
 const METRIC_COLORS = {
@@ -29,20 +32,6 @@ const METRIC_COLORS = {
 
 // UN Blue for "all entities"
 const UN_BLUE = "#009edb";
-
-// Color palette for compare lines - designed for good contrast
-const LINE_COLORS = [
-  "#009edb", // UN blue
-  "#2d6a7e", // UN blue dark
-  "#4a7c7e", // faded jade
-  "#7d8471", // camouflage green
-  "#9b7c6b", // au chico
-  "#3d5a6c", // UN blue slate
-  "#4a90a4", // UN blue muted
-  "#6b7280", // gray
-  "#1e3a5f", // navy
-  "#5c8a4d", // forest green
-];
 
 // Type for entity trends data
 interface EntityYearData {
@@ -75,6 +64,51 @@ export function EntityTrendsChart() {
   const [hasSetDefaultSelection, setHasSetDefaultSelection] =
     React.useState(false);
 
+  // Only expose categories that contain entities in this CEB dataset. Keep the
+  // shared taxonomy order so the treemap, selectors, and legends read alike.
+  const availableSystemGroups = React.useMemo(() => {
+    if (!data) return [];
+
+    const presentGroups = new Set(
+      Object.entries(data.meta.entitiesByGroup)
+        .filter(([, entities]) => entities.length > 0)
+        .map(([group]) => group),
+    );
+    const orderedGroups = getSortedSystemGroupings()
+      .map(([group]) => group)
+      .filter((group) => presentGroups.delete(group));
+    const additionalGroups = [...presentGroups].sort((a, b) =>
+      a.localeCompare(b),
+    );
+
+    return [...orderedGroups, ...additionalGroups];
+  }, [data]);
+
+  const getItemSystemGroup = React.useCallback(
+    (id: string): string | null => {
+      if (!data || id === "all") return null;
+      if (availableSystemGroups.includes(id)) return id;
+
+      return (
+        availableSystemGroups.find((group) =>
+          data.meta.entitiesByGroup[group]?.includes(id),
+        ) ?? null
+      );
+    },
+    [availableSystemGroups, data],
+  );
+
+  const getItemCategoryColor = React.useCallback(
+    (id: string) => {
+      if (id === "all") return UN_BLUE;
+      const group = getItemSystemGroup(id);
+      return group
+        ? (getSystemGroupingStyle(group).hexColor ?? "#6b7280")
+        : "#6b7280";
+    },
+    [getItemSystemGroup],
+  );
+
   // Load data on mount
   React.useEffect(() => {
     async function loadData() {
@@ -106,7 +140,7 @@ export function EntityTrendsChart() {
       // Calculate total expenses for each system group (sum of latest year or all years)
       const groupExpenses: Array<{ group: string; total: number }> = [];
 
-      for (const group of data.meta.systemGroups) {
+      for (const group of availableSystemGroups) {
         if (excludeFromDefault.has(group)) continue;
 
         const groupData = data.aggregates[group];
@@ -127,7 +161,7 @@ export function EntityTrendsChart() {
       setCompareSelected(new Set(top4));
       setHasSetDefaultSelection(true);
     }
-  }, [data, hasSetDefaultSelection]);
+  }, [availableSystemGroups, data, hasSetDefaultSelection]);
 
   // Build hierarchical groups for left chart (single select)
   const singleSelectGroups: SingleSelectGroup[] = React.useMemo(() => {
@@ -144,23 +178,29 @@ export function EntityTrendsChart() {
     ];
 
     // System groups with their entities as children
-    data.meta.systemGroups.forEach((group) => {
+    availableSystemGroups.forEach((group) => {
       result.push({
         id: group,
-        label: group,
+        label: getSystemGroupingStyle(group).label,
         children: data.meta.entitiesByGroup[group] || [],
         color: getSystemGroupingStyle(group).hexColor ?? "#6b7280",
       });
     });
 
     return result;
-  }, [data]);
+  }, [availableSystemGroups, data]);
 
   // Get label for selected entity
-  const getSelectedLabel = React.useCallback((id: string) => {
-    if (id === "all") return "All entities";
-    return id;
-  }, []);
+  const getSelectedLabel = React.useCallback(
+    (id: string) => {
+      if (id === "all") return "All entities";
+      if (availableSystemGroups.includes(id)) {
+        return getSystemGroupingStyle(id).label;
+      }
+      return id;
+    },
+    [availableSystemGroups],
+  );
 
   // Build hierarchical groups for right chart (multi-select)
   const compareGroups: HierarchicalGroup[] = React.useMemo(() => {
@@ -177,25 +217,24 @@ export function EntityTrendsChart() {
     ];
 
     // System groups with their entities as children
-    data.meta.systemGroups.forEach((group) => {
+    availableSystemGroups.forEach((group) => {
       result.push({
         id: group,
-        label: group,
+        label: getSystemGroupingStyle(group).label,
         bgColor: getSystemGroupingStyle(group).bgColor,
         children: data.meta.entitiesByGroup[group] || [],
       });
     });
 
     return result;
-  }, [data]);
+  }, [availableSystemGroups, data]);
 
   // Data for left chart (revenue vs expenses for selected entity)
   const revenueExpensesData = React.useMemo(() => {
     if (!data) return [];
 
     const entityData =
-      selectedEntity === "all" ||
-      data.meta.systemGroups.includes(selectedEntity)
+      selectedEntity === "all" || availableSystemGroups.includes(selectedEntity)
         ? data.aggregates[selectedEntity]
         : data.entities[selectedEntity];
 
@@ -206,7 +245,7 @@ export function EntityTrendsChart() {
       Revenue: item.revenue,
       Expenses: item.expenses,
     }));
-  }, [data, selectedEntity]);
+  }, [availableSystemGroups, data, selectedEntity]);
 
   // Data for right chart (compare expenses)
   const compareData = React.useMemo(() => {
@@ -220,41 +259,38 @@ export function EntityTrendsChart() {
       Array.from(compareSelected).forEach((id) => {
         // Get the year data
         const entityData =
-          id === "all" || data.meta.systemGroups.includes(id)
+          id === "all" || availableSystemGroups.includes(id)
             ? data.aggregates[id]
             : data.entities[id];
 
         if (entityData) {
           const yearData = entityData.find((d) => d.year === year);
-          const displayName = id === "all" ? "All entities" : id;
+          const displayName = getSelectedLabel(id);
           point[displayName] = yearData?.expenses ?? null;
         }
       });
 
       return point;
     });
-  }, [data, compareSelected]);
+  }, [availableSystemGroups, data, compareSelected, getSelectedLabel]);
 
   // Get line configurations for compare chart
   const { compareLines, colorMap } = React.useMemo(() => {
     const result: { dataKey: string; color: string }[] = [];
     const colors: Record<string, string> = {};
-    let colorIdx = 0;
-
     Array.from(compareSelected).forEach((id) => {
-      const displayName = id === "all" ? "All entities" : id;
-      const color = LINE_COLORS[colorIdx % LINE_COLORS.length];
+      const displayName = getSelectedLabel(id);
+      const color = getItemCategoryColor(id);
       colors[id] = color;
 
       result.push({
         dataKey: displayName,
         color,
       });
-      colorIdx++;
     });
 
     return { compareLines: result, colorMap: colors };
-  }, [compareSelected]);
+  }, [compareSelected, getItemCategoryColor, getSelectedLabel]);
 
   // Get color for a selected item (for legend chips)
   const getItemColor = React.useCallback(

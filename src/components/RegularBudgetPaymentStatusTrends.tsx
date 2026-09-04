@@ -31,6 +31,21 @@ const STATUS_SERIES: Array<{
   },
 ];
 
+function coversFullCalendarYear(row: RegularBudgetContributorsData): boolean {
+  const coverageEnd = Date.parse(`${row.meta.as_of}T00:00:00Z`);
+  const yearEnd = Date.UTC(row.meta.year, 11, 31);
+  return Number.isFinite(coverageEnd) && coverageEnd >= yearEnd;
+}
+
+function completedRows(
+  rows: RegularBudgetContributorsData[],
+): RegularBudgetContributorsData[] {
+  const latestYear = Math.max(...rows.map((row) => row.meta.year));
+  return rows.filter(
+    (row) => row.meta.year !== latestYear || coversFullCalendarYear(row),
+  );
+}
+
 export function RegularBudgetPaymentStatusTrends() {
   const years = useYearRanges().regularBudgetContributors.years;
   const [rows, setRows] = useState<RegularBudgetContributorsData[] | null>(
@@ -61,7 +76,7 @@ export function RegularBudgetPaymentStatusTrends() {
 
   const chartData = useMemo(() => {
     if (!rows) return [];
-    return rows.map((row) => {
+    return completedRows(rows).map((row) => {
       const amounts: Record<RegularBudgetPaymentStatus, number> = {
         paid_on_time: 0,
         paid_late: 0,
@@ -79,23 +94,33 @@ export function RegularBudgetPaymentStatusTrends() {
 
   if (rows === null) {
     return (
-      <div className="mt-8 h-[280px] text-sm text-gray-500">
-        Loading payment-status trends…
-      </div>
+      <section className="min-w-0">
+        <h3 className="mb-3 text-lg font-medium text-gray-900">
+          Payment status over the years
+        </h3>
+        <div className="flex h-[280px] items-center justify-center text-sm text-gray-500">
+          Loading payment status…
+        </div>
+      </section>
     );
   }
-  if (chartData.length === 0) return null;
 
   return (
-    <div className="mt-8">
+    <section className="min-w-0">
       <h3 className="mb-3 text-lg font-medium text-gray-900">
-        Payment status over time
+        Payment status over the years
       </h3>
-      <p className="mb-4 max-w-3xl text-xs leading-relaxed text-gray-500">
-        Stacked area is assessed dollars, grouped by honour-roll status at the
-        close of each year.
+      <p className="mb-4 text-xs leading-relaxed text-gray-500">
+        Stacked area is assessed dollars in each annual honour-roll snapshot.
+        An incomplete latest year is omitted.
       </p>
-      <FinancingInstrumentChart data={chartData} series={STATUS_SERIES} />
-    </div>
+      {chartData.length > 0 ? (
+        <FinancingInstrumentChart data={chartData} series={STATUS_SERIES} />
+      ) : (
+        <div className="flex h-[280px] items-center justify-center text-center text-sm text-gray-500">
+          No complete calendar years are available.
+        </div>
+      )}
+    </section>
   );
 }
